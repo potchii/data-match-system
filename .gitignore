@@ -31,3 +31,9 @@ yarn-error.log
 
 # markdown files
 SETUP_SUMMARY.md
+COMMIT_SUMMARY.md
+.kiro
+
+# AI/Development tool configurations
+.mcp.json
+boost.json
