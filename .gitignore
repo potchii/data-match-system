@@ -37,3 +37,5 @@ COMMIT_SUMMARY.md
 # AI/Development tool configurations
 .mcp.json
 boost.json
+
+/storage/framework/views/*
