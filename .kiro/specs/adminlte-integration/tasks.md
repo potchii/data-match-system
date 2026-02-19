@@ -193,8 +193,8 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Test with no results displays empty state
     - _Requirements: 5.1, 5.4, 5.5, 5.6_
 
-- [ ] 8. Implement Batch History page
-  - [ ] 8.1 Create BatchController
+- [x] 8. Implement Batch History page
+  - [x] 8.1 Create BatchController
     - Create app/Http/Controllers/BatchController.php
     - Implement index() method
     - Query all UploadBatch records ordered by uploaded_at desc
@@ -202,7 +202,7 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Return view with batches
     - _Requirements: 6.1, 6.5_
   
-  - [ ] 8.2 Create batches view template
+  - [x] 8.2 Create batches view template
     - Create resources/views/pages/batches.blade.php
     - Extend layouts.admin layout
     - Display batches in table with columns: Batch ID, File Name, Uploaded By, Upload Date, Status, Actions
