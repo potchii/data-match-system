@@ -12,7 +12,8 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- Uncomment these when routes are implemented --}}
+                {{-- <li class="nav-item">
                     <a href="{{ route('upload.index') }}" class="nav-link {{ request()->routeIs('upload.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-upload"></i>
                         <p>Upload</p>
@@ -29,7 +30,7 @@
                         <i class="nav-icon fas fa-history"></i>
                         <p>Batch History</p>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
     </div>

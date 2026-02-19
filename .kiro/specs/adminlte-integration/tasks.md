@@ -66,8 +66,8 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Add basic footer content
     - _Requirements: 1.2_
 
-- [ ] 4. Implement Dashboard page
-  - [ ] 4.1 Create DashboardController
+- [x] 4. Implement Dashboard page
+  - [x] 4.1 Create DashboardController
     - Create app/Http/Controllers/DashboardController.php
     - Implement index() method to calculate statistics
     - Query total batches count from UploadBatch model
@@ -78,7 +78,7 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Return view with all statistics data
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
   
-  - [ ] 4.2 Create dashboard view template
+  - [x] 4.2 Create dashboard view template
     - Create resources/views/pages/dashboard.blade.php
     - Extend layouts.admin layout
     - Display statistics in AdminLTE small-box components (info, success, primary, warning)
