@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class MatchResult extends Model
 {
     protected $table = 'match_results';
+
     protected $guarded = [];
-    
+
     protected $fillable = [
-        'batch_id', 'uploaded_record_id', 'matched_system_id', 
-        'match_status', 'confidence_score'
+        'batch_id', 'uploaded_record_id', 'matched_system_id',
+        'match_status', 'confidence_score',
     ];
 
     // Get the batch info for this result

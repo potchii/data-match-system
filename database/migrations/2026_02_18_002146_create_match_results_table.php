@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('match_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('batch_id')->constrained('upload_batches'); 
-            $table->string('uploaded_record_id'); 
+            $table->foreignId('batch_id')->constrained('upload_batches');
+            $table->string('uploaded_record_id');
             $table->foreignId('matched_system_id')->nullable()->constrained('main_system');
-            $table->string('match_status'); 
+            $table->string('match_status');
             $table->integer('confidence_score');
             $table->timestamps();
         });

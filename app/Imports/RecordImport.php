@@ -6,23 +6,24 @@ use App\Models\MainSystem;
 use App\Models\MatchResult;
 use App\Services\DataMappingService;
 use App\Services\DataMatchService;
-use Maatwebsite\Excel\Concerns\ToCollection;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class RecordImport implements ToCollection, WithHeadingRow
 {
     private $batchId;
 
-    public function __construct($batchId) {
+    public function __construct($batchId)
+    {
         $this->batchId = $batchId;
     }
 
     public function collection(Collection $rows)
     {
-        $mapping = new DataMappingService();
-        $matcher = new DataMatchService();
+        $mapping = new DataMappingService;
+        $matcher = new DataMatchService;
 
         if ($rows->isEmpty()) {
             throw new \Exception('Uploaded file is empty.');
@@ -33,18 +34,18 @@ class RecordImport implements ToCollection, WithHeadingRow
         $firstRow = $rows->first()->toArray();
 
         foreach ($requiredColumns as $column) {
-            if (!array_key_exists($column, $firstRow)) {
+            if (! array_key_exists($column, $firstRow)) {
                 throw new \Exception("Missing required column: {$column}. Please check your Excel headers.");
             }
         }
-    
+
         DB::transaction(function () use ($rows, $mapping, $matcher) {
             foreach ($rows as $row) {
                 $data = $mapping->map($row->toArray());
-                
-                // Generate UID BEFORE matching so wehave reference 
+
+                // Generate UID BEFORE matching so wehave reference
                 if (empty($data['uid'])) {
-                    $data['uid'] = 'SYS-' . strtoupper(uniqid());
+                    $data['uid'] = 'SYS-'.strtoupper(uniqid());
                 }
 
                 $match = $matcher->checkMatch($data);
@@ -60,11 +61,11 @@ class RecordImport implements ToCollection, WithHeadingRow
 
                 // Save result for Ernest's frontend
                 MatchResult::create([
-                    'batch_id'           => $this->batchId,
+                    'batch_id' => $this->batchId,
                     'uploaded_record_id' => $data['uid'],
-                    'matched_system_id'  => $systemId,
-                    'match_status'       => $match['status'],
-                    'confidence_score'   => $match['score'],
+                    'matched_system_id' => $systemId,
+                    'match_status' => $match['status'],
+                    'confidence_score' => $match['score'],
                 ]);
             }
         });

@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
-use App\Http\Controllers\UploadController; // Added this import
+use Laravel\Fortify\Features; // Added this import
 
 // The Standard Landing Page (Inertia)
 Route::get('/', function () {
@@ -15,7 +15,7 @@ Route::get('/', function () {
 // MASON'S TEST ROUTE (Simple Blade Bypass) -- views for uploading excel -> db
 // This lets you see the form we created without needing Vue/Inertia knowledge
 Route::get('/test-upload', function () {
-    return view('welcome'); 
+    return view('welcome');
 });
 
 Route::get('dashboard', function () {

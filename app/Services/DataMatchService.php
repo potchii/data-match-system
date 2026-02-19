@@ -9,7 +9,7 @@ class DataMatchService
     public function checkMatch($data)
     {
         // UID first (Immediate 100%)
-        if (!empty($data['uid'])) {
+        if (! empty($data['uid'])) {
             $byUid = MainSystem::where('uid', $data['uid'])->first();
             if ($byUid) {
                 return ['status' => 'MATCHED', 'record' => $byUid, 'score' => 100];
@@ -56,7 +56,7 @@ class DataMatchService
         foreach ($candidates as $record) {
             similar_text($data['first_name'], $record->first_name, $percent);
 
-            if ($percent >= 85) { 
+            if ($percent >= 85) {
                 return ['status' => 'POSSIBLE DUPLICATE', 'record' => $record, 'score' => 75];
             }
             if ($percent >= 70) {
@@ -68,4 +68,3 @@ class DataMatchService
         return ['status' => 'NEW RECORD', 'record' => null, 'score' => 0];
     }
 }
-    

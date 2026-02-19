@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('upload_batches', function (Blueprint $table) {
             $table->id();
             $table->string('file_name');
-            $table->string('uploaded_by'); 
-            $table->timestamp('uploaded_at'); 
-            $table->string('status'); 
-            $table->timestamps(); 
+            $table->string('uploaded_by');
+            $table->timestamp('uploaded_at');
+            $table->string('status');
+            $table->timestamps();
         });
     }
 
