@@ -1,4 +1,4 @@
-# 📌 PROJECT: Data Match System
+# PROJECT: Data Match System
 
 ## Objective
 * Match uploaded records (Excel/File) with existing database records.
