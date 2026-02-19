@@ -231,8 +231,8 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Test with no batches displays empty state
     - _Requirements: 6.1, 6.5_
 
-- [ ] 9. Update routing configuration
-  - [ ] 9.1 Update web.php routes
+- [x] 9. Update routing configuration
+  - [x] 9.1 Update web.php routes
     - Remove Inertia::render() calls
     - Add route for dashboard: GET /dashboard → DashboardController@index
     - Add route for upload page: GET /upload → UploadController@index
