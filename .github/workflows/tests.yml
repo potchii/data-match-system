@@ -48,6 +48,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
 
       - name: Install Node Dependencies
         run: npm ci
@@ -70,9 +71,6 @@ jobs:
           DB_DATABASE: data_match_system
           DB_USERNAME: root
           DB_PASSWORD: password
-
-      - name: Build Assets
-        run: npm run build
 
       - name: Run Tests
         run: php artisan test
