@@ -12,14 +12,14 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                {{-- Uncomment these when routes are implemented --}}
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ route('upload.index') }}" class="nav-link {{ request()->routeIs('upload.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-upload"></i>
                         <p>Upload</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- Uncomment these when routes are implemented --}}
+                {{-- <li class="nav-item">
                     <a href="{{ route('results.index') }}" class="nav-link {{ request()->routeIs('results.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>Match Results</p>

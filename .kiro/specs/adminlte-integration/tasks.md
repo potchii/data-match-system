@@ -100,15 +100,15 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Test with empty database (no batches or results)
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
 
-- [ ] 5. Implement Upload page
-  - [ ] 5.1 Update UploadController
+- [x] 5. Implement Upload page
+  - [x] 5.1 Update UploadController
     - Add index() method to display upload form
     - Update store() method to use auth()->user()->name for uploaded_by
     - Update redirect to use route('upload.index') instead of back()
     - Ensure validation rules are present: required|mimes:xlsx,xls,csv|max:10240
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 8.4_
   
-  - [ ] 5.2 Create upload view template
+  - [x] 5.2 Create upload view template
     - Create resources/views/pages/upload.blade.php
     - Extend layouts.admin layout
     - Create form with file input using AdminLTE custom-file styling
@@ -117,7 +117,7 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Add help text about accepted formats and max size
     - _Requirements: 4.1, 4.8_
   
-  - [ ] 5.3 Add client-side validation JavaScript
+  - [x] 5.3 Add client-side validation JavaScript
     - Add JavaScript to update file label with selected filename
     - Add form submit handler to validate file type and size
     - Show loading state on submit button during processing
