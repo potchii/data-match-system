@@ -9,17 +9,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class ProfileController extends Controller
 {
     /**
      * Show the user's profile settings page.
      */
-    public function edit(Request $request): Response
+    public function edit(Request $request)
     {
-        return Inertia::render('settings/profile', [
+        return view('settings.profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => $request->session()->get('status'),
         ]);
