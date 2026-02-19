@@ -144,11 +144,11 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Test store method with missing columns throws exception
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6_
 
-- [ ] 6. Checkpoint - Ensure upload functionality works
+- [x] 6. Checkpoint - Ensure upload functionality works
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 7. Implement Match Results page
-  - [ ] 7.1 Create ResultsController
+- [x] 7. Implement Match Results page
+  - [x] 7.1 Create ResultsController
     - Create app/Http/Controllers/ResultsController.php
     - Implement index() method with filtering and pagination
     - Accept batch_id and status query parameters
@@ -160,7 +160,7 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Return view with results and batches
     - _Requirements: 5.1, 5.4, 5.5, 5.6_
   
-  - [ ] 7.2 Create results view template
+  - [x] 7.2 Create results view template
     - Create resources/views/pages/results.blade.php
     - Extend layouts.admin layout
     - Add filter form with batch_id and status dropdowns
