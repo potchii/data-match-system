@@ -1,4 +1,4 @@
-# 📌 PROJECT: Data Match System
+# PROJECT: Data Match System (1-2 Weeks)
 
 ## Objective
 * Match uploaded records (Excel/File) with existing database records.
@@ -118,3 +118,224 @@ app/
  │    └── DataMatchService.php
  └── Imports/
       └── UploadImport.php
+```
+
+---
+
+## 🛠️ INSTALLATION GUIDE
+
+### Prerequisites
+- PHP 8.2 or higher
+- Composer
+- Node.js 18+ and npm
+- MySQL/MariaDB
+- XAMPP (recommended for Windows) or similar local server
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/your-username/data-match-system.git
+cd data-match-system
+```
+
+### Step 2: Install PHP Dependencies
+```bash
+composer install
+```
+
+**Note:** If you encounter missing PHP extensions (like `ext-gd` or `ext-zip`), you need to enable them in your `php.ini` file:
+1. Open `C:\xampp\php\php.ini` (or your PHP config path)
+2. Find and uncomment these lines (remove the `;`):
+   ```ini
+   extension=gd
+   extension=zip
+   ```
+3. Restart your web server
+
+### Step 3: Install Frontend Dependencies
+```bash
+npm install
+```
+
+### Step 4: Environment Configuration
+```bash
+# Copy the example environment file
+copy .env.example .env
+
+# Generate application key
+php artisan key:generate
+```
+
+### Step 5: Configure Database
+1. Create a MySQL database named `data_match_system` in phpMyAdmin
+2. Update your `.env` file with database credentials:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=data_match_system
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+### Step 6: Run Migrations
+```bash
+php artisan migrate
+```
+
+### Step 7: Build Frontend Assets
+```bash
+npm run build
+```
+
+### Step 8: Start Development Server
+```bash
+# Option 1: Use Laravel's built-in server
+php artisan serve
+
+# Option 2: Use the dev script (runs server + queue + vite)
+composer dev
+```
+
+Visit `http://localhost:8000` in your browser.
+
+---
+
+## 🧪 DEVELOPMENT WORKFLOW
+
+### Code Quality & Linting
+
+Before committing code, ensure it passes all quality checks:
+
+#### PHP Code Style (Laravel Pint)
+```bash
+# Fix PHP code style automatically
+composer lint
+
+# Or manually
+./vendor/bin/pint
+```
+
+#### Frontend Formatting (Prettier)
+```bash
+# Format all frontend code
+npm run format
+
+# Check formatting without fixing
+npm run format:check
+```
+
+#### Frontend Linting (ESLint)
+```bash
+# Lint and auto-fix JavaScript/TypeScript
+npm run lint
+```
+
+#### TypeScript Type Checking
+```bash
+# Check types without building
+npm run types
+```
+
+#### Run Tests
+```bash
+# Run PHP tests
+composer test
+
+# Or directly
+./vendor/bin/phpunit
+```
+
+### Pre-Commit Checklist
+Run these commands before committing:
+```bash
+composer lint
+npm run format
+npm run lint
+npm run types
+```
+
+### CI/CD (GitHub Actions)
+
+The project uses GitHub Actions for automated testing and linting:
+
+- **`lint.yml`**: Runs on push/PR to check code style (PHP Pint, Prettier, ESLint)
+- **`tests.yml`**: Runs PHPUnit tests on multiple PHP versions (8.4, 8.5)
+
+These workflows automatically run when you:
+- Push to `main`, `master`, `develop`, or `workos` branches
+- Create a pull request to these branches
+
+---
+
+## 📝 AVAILABLE COMMANDS
+
+| Command | Description |
+|---------|-------------|
+| `composer install` | Install PHP dependencies |
+| `composer lint` | Fix PHP code style with Pint |
+| `composer test` | Run PHPUnit tests |
+| `npm install` | Install frontend dependencies |
+| `npm run dev` | Start Vite dev server (hot reload) |
+| `npm run build` | Build production assets |
+| `npm run format` | Format frontend code with Prettier |
+| `npm run lint` | Lint and fix JS/TS with ESLint |
+| `npm run types` | Check TypeScript types |
+| `php artisan serve` | Start Laravel development server |
+| `php artisan migrate` | Run database migrations |
+| `php artisan migrate:fresh` | Drop all tables and re-run migrations |
+
+---
+
+## 🐛 TROUBLESHOOTING
+
+### Composer Install Fails (Missing Extensions)
+If you see errors about missing `ext-gd` or `ext-zip`:
+1. Open `php.ini` (usually at `C:\xampp\php\php.ini`)
+2. Uncomment these lines:
+   ```ini
+   extension=gd
+   extension=zip
+   ```
+3. Restart Apache/web server
+
+### Database Connection Error
+- Ensure MySQL is running in XAMPP
+- Verify database name exists in phpMyAdmin
+- Check `.env` credentials match your MySQL setup
+
+### Port Already in Use
+If port 8000 is taken:
+```bash
+php artisan serve --port=8001
+```
+
+### Node/NPM Issues
+Clear cache and reinstall:
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+---
+
+## 🤝 CONTRIBUTING
+
+### Branch Strategy
+- `main` - Production-ready code
+- `develop` - Development branch
+- `feature/*` - New features
+- `bugfix/*` - Bug fixes
+
+### Pull Request Process
+1. Create a feature branch from `develop`
+2. Make your changes
+3. Run linting and tests locally
+4. Push and create a PR to `develop`
+5. Wait for CI checks to pass
+6. Request review from team members
+
+---
+
+## 📄 LICENSE
+
+This project is private and proprietary

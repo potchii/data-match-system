@@ -3,22 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class UploadBatch extends Model
 {
-    protected $fillable = [
-        'file_name',
-        'uploaded_by',
-        'uploaded_at',
-        'status',
-    ];
+    protected $table = 'upload_batches';
 
-    protected $casts = [
-        'uploaded_at' => 'datetime',
-    ];
+    protected $fillable = ['file_name', 'uploaded_by', 'uploaded_at', 'status'];
 
-    public function matchResults(): HasMany
+    // Get all matching results for this specific file
+    public function results()
     {
         return $this->hasMany(MatchResult::class, 'batch_id');
     }

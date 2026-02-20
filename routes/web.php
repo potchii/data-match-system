@@ -1,19 +1,21 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Features;
 
+// The Standard Landing Page
 Route::get('/', function () {
-    return redirect()->route('dashboard');
-})->middleware('auth');
+    return view('welcome', [
+        'canRegister' => Features::enabled(Features::registration()),
+    ]);
+})->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('upload', [UploadController::class, 'index'])->name('upload.index');
-    Route::post('upload-process', [UploadController::class, 'store'])->name('upload.store');
-    Route::get('results', [ResultsController::class, 'index'])->name('results.index');
-});
+Route::get('dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/settings.php';
+
+// nakalimutan ko kung para san to, basta UI
+Route::post('/upload-process', [UploadController::class, 'store'])->name('upload.store');
