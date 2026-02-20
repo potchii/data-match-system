@@ -49,7 +49,7 @@ jobs:
           node-version: '22'
 
       - name: Install Node Dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps --ignore-scripts
 
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
