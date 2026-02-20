@@ -231,8 +231,8 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Test with no batches displays empty state
     - _Requirements: 6.1, 6.5_
 
-- [ ] 9. Update routing configuration
-  - [ ] 9.1 Update web.php routes
+- [x] 9. Update routing configuration
+  - [x] 9.1 Update web.php routes
     - Remove Inertia::render() calls
     - Add route for dashboard: GET /dashboard → DashboardController@index
     - Add route for upload page: GET /upload → UploadController@index
@@ -251,7 +251,7 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Test /upload-process route exists and accepts POST
     - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5, 11.6_
 
-- [ ] 10. Implement authentication integration
+- [x] 10. Implement authentication integration
   - [ ]* 10.1 Write property test for authentication protection
     - **Property 16: Authentication protection**
     - **Validates: Requirements 10.1, 10.2**
@@ -269,7 +269,7 @@ This implementation plan outlines the step-by-step approach to refactor the Data
     - Test logout functionality works correctly
     - _Requirements: 10.1, 10.2, 10.3, 10.4_
 
-- [ ] 11. Implement form validation
+- [x] 11. Implement form validation
   - [ ]* 11.1 Write property test for form validation error display
     - **Property 15: Form validation error display**
     - **Validates: Requirements 7.1, 7.2, 7.6**
