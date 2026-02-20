@@ -30,6 +30,12 @@
                         <p>Batch History</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('main-system.index') }}" class="nav-link {{ request()->routeIs('main-system.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>Main System</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

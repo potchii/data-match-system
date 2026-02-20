@@ -52,6 +52,18 @@ $('#file').on('change', function() {
     $(this).next('.custom-file-label').html(fileName);
 });
 
+// Make upload button trigger file browser if no file selected
+$('#submitBtn').on('click', function(e) {
+    const fileInput = $('#file')[0];
+    
+    // If no file selected, trigger file browser instead of submitting
+    if (!fileInput.files || fileInput.files.length === 0) {
+        e.preventDefault();
+        $('#file').click();
+        return false;
+    }
+});
+
 // Client-side validation
 $('#uploadForm').on('submit', function(e) {
     const fileInput = $('#file')[0];

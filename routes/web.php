@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MainSystemController;
 use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/upload-process', [UploadController::class, 'store'])->name('upload.store');
     Route::get('/results', [ResultsController::class, 'index'])->name('results.index');
     Route::get('/batches', [BatchController::class, 'index'])->name('batches.index');
+    Route::get('/main-system', [MainSystemController::class, 'index'])->name('main-system.index');
 });
 
 require __DIR__.'/settings.php';
