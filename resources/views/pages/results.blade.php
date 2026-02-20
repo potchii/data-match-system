@@ -95,8 +95,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        {{ $results->links() }}
+                    <div class="card-footer clearfix">
+                        <div class="float-right">
+                            {{ $results->appends(request()->query())->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
