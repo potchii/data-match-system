@@ -1,4 +1,2 @@
-import './bootstrap';
-
-// AdminLTE initialization
-import 'admin-lte/dist/js/adminlte.min.js';
+// Placeholder file for Laravel Vite plugin
+// AdminLTE is loaded via CDN in Blade templates
