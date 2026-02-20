@@ -10,6 +10,9 @@ class MatchResult extends Model
     protected $fillable = [
         'batch_id',
         'uploaded_record_id',
+        'uploaded_last_name',
+        'uploaded_first_name',
+        'uploaded_middle_name',
         'match_status',
         'confidence_score',
         'matched_system_id',
@@ -22,5 +25,10 @@ class MatchResult extends Model
     public function batch(): BelongsTo
     {
         return $this->belongsTo(UploadBatch::class, 'batch_id');
+    }
+
+    public function matchedRecord(): BelongsTo
+    {
+        return $this->belongsTo(MainSystem::class, 'matched_system_id', 'uid');
     }
 }

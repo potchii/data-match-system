@@ -44,18 +44,24 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Batch ID</th>
-                                    <th>Uploaded Record ID</th>
+                                    <th>Uploaded Record</th>
                                     <th>Match Status</th>
-                                    <th>Confidence Score</th>
-                                    <th>Matched System ID</th>
+                                    <th>Confidence</th>
+                                    <th>Matched With</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($results as $result)
                                 <tr>
+                                    <td>{{ $result->id }}</td>
                                     <td>{{ $result->batch_id }}</td>
-                                    <td>{{ $result->uploaded_record_id }}</td>
+                                    <td>
+                                        <strong>{{ $result->uploaded_first_name }} {{ $result->uploaded_middle_name }} {{ $result->uploaded_last_name }}</strong>
+                                        <br>
+                                        <small class="text-muted">ID: {{ $result->uploaded_record_id }}</small>
+                                    </td>
                                     <td>
                                         @if($result->match_status === 'MATCHED')
                                             <span class="badge badge-success">{{ $result->match_status }}</span>
@@ -65,12 +71,25 @@
                                             <span class="badge badge-info">{{ $result->match_status }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $result->confidence_score }}%</td>
-                                    <td>{{ $result->matched_system_id ?? 'N/A' }}</td>
+                                    <td>{{ number_format($result->confidence_score, 1) }}%</td>
+                                    <td>
+                                        @if($result->matchedRecord)
+                                            <strong>{{ $result->matchedRecord->first_name }} {{ $result->matchedRecord->middle_name }} {{ $result->matchedRecord->last_name }}</strong>
+                                            <br>
+                                            <small class="text-muted">
+                                                Row ID: {{ $result->matchedRecord->origin_match_result_id ?? $result->matchedRecord->id }}
+                                                @if($result->matchedRecord->originBatch)
+                                                    (From Batch #{{ $result->matchedRecord->origin_batch_id }}: {{ $result->matchedRecord->originBatch->file_name }})
+                                                @endif
+                                            </small>
+                                        @else
+                                            <span class="text-muted">N/A</span>
+                                        @endif
+                                    </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No results found</td>
+                                    <td colspan="6" class="text-center">No results found</td>
                                 </tr>
                                 @endforelse
                             </tbody>

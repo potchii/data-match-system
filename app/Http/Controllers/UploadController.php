@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\RecordImport;
 use App\Models\UploadBatch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UploadController extends Controller
 {
@@ -33,13 +35,13 @@ class UploadController extends Controller
                 'status' => 'PROCESSING',
             ]);
 
-            // TODO: Integrate with Excel import and matching service
-            // Excel::import(new RecordImport($batch->id), $request->file('file'));
+            // Import and process the Excel file
+            Excel::import(new RecordImport($batch->id), $request->file('file'));
 
             $batch->update(['status' => 'COMPLETED']);
 
-            return redirect()->route('upload.index')
-                ->with('success', "Batch #{$batch->id} (File: {$batch->file_name}) processed successfully.");
+            return redirect()->route('results.index', ['batch_id' => $batch->id])
+                ->with('success', "Batch #{$batch->id} (File: {$batch->file_name}) processed successfully. Showing match results below.");
 
         } catch (\Exception $e) {
             if (isset($batch)) {

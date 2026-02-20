@@ -10,7 +10,7 @@ class ResultsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = MatchResult::query()->with('batch');
+        $query = MatchResult::query()->with(['batch', 'matchedRecord.originBatch']);
         
         if ($request->filled('batch_id')) {
             $query->where('batch_id', $request->batch_id);

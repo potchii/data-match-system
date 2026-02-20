@@ -116,5 +116,56 @@ app/
  ├── Services/
  │    ├── DataMappingService.php
  │    └── DataMatchService.php
- └── Imports/
-      └── UploadImport.php
+ ├── Imports/
+ │    └── RecordImport.php
+ └── Console/Commands/
+      └── BackfillOriginBatchData.php
+```
+
+---
+
+## 🛠️ ARTISAN COMMANDS
+
+### Data Management Commands
+
+#### Backfill Origin Batch Data
+Backfills `origin_batch_id` and `origin_match_result_id` for existing main_system records. This command is useful when you need to retroactively link existing records to their source batch files.
+
+```bash
+php artisan data:backfill-origin-batch
+```
+
+**What it does:**
+- Finds all main_system records without origin batch information
+- Locates the first match result where each record was created (status = NEW RECORD)
+- Updates records with their origin batch ID and match result ID
+- Displays progress and summary of updated records
+
+**When to use:**
+- After adding origin tracking to existing data
+- When migrating from a system without batch tracking
+- To restore batch lineage after data imports
+
+---
+
+## 📊 FEATURES IMPLEMENTED
+
+### Match Results Tracking
+- Each match result stores uploaded record details (name fields)
+- Displays full name and origin information for matched records
+- Shows batch source and row ID for complete data lineage
+- Format: `Name (Row ID: X from Batch #Y: filename.xlsx)`
+
+### Date of Birth Field Variations
+The matching algorithm supports multiple DOB field name variations:
+- `birthday`, `dob`, `DOB`
+- `date_of_birth`, `dateOfBirth`, `DateOfBirth`, `dateofbirth`
+- `birthdate`, `BirthDate`, `birth_date`, `Birthday`, `Birthdate`
+
+All variations are automatically normalized to `Y-m-d` format before matching.
+
+### Origin Batch Tracking
+- Main system records track which batch file originally created them
+- Links back to the specific match result row
+- Enables full audit trail of data sources
+- Supports data lineage and compliance requirements
