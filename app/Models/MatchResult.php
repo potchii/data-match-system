@@ -23,4 +23,9 @@ class MatchResult extends Model
     {
         return $this->belongsTo(UploadBatch::class, 'batch_id');
     }
+
+    public function systemRecord(): BelongsTo
+    {
+        return $this->belongsTo(MainSystem::class, 'matched_system_id');
+    }
 }

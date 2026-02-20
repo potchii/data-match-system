@@ -6,6 +6,7 @@ use App\Models\UploadBatch;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 
 class UploadTest extends TestCase
@@ -33,6 +34,8 @@ class UploadTest extends TestCase
 
     public function test_valid_file_can_be_uploaded()
     {
+        Excel::fake();
+
         $user = User::factory()->create();
 
         $file = UploadedFile::fake()->create('test.xlsx', 100);

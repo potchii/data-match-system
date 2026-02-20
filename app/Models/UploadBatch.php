@@ -22,4 +22,9 @@ class UploadBatch extends Model
     {
         return $this->hasMany(MatchResult::class, 'batch_id');
     }
+
+    public function results(): HasMany
+    {
+        return $this->hasMany(MatchResult::class, 'batch_id');
+    }
 }
