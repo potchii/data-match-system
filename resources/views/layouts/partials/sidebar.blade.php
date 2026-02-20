@@ -18,7 +18,8 @@
                         <p>Upload</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- Uncomment these when routes are implemented --}}
+                {{-- <li class="nav-item">
                     <a href="{{ route('results.index') }}" class="nav-link {{ request()->routeIs('results.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>Match Results</p>
@@ -29,7 +30,7 @@
                         <i class="nav-icon fas fa-history"></i>
                         <p>Batch History</p>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
     </div>
