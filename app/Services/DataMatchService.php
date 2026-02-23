@@ -57,9 +57,9 @@ class DataMatchService
     {
         $normalized = $this->normalizeRecord($uploadedData);
         
-        // Always reload candidates to include records from previous batches
-        // and newly inserted records from current batch
-        $this->loadCandidates(collect([$normalized]));
+        // Reload candidates from database to include cross-batch records
+        // but preserve newly inserted records from current batch
+        $this->refreshCandidates(collect([$normalized]));
         
         return $this->findMatchFromCache($normalized);
     }
@@ -115,6 +115,37 @@ class DataMatchService
                 $query->orWhereIn('first_name_normalized', $firstNames);
             }
         })->get();
+    }
+    
+    /**
+     * Refresh candidates from database while preserving newly inserted records
+     * This ensures cross-batch matching works while keeping within-batch inserts
+     */
+    protected function refreshCandidates(Collection $normalizedRecords): void
+    {
+        // Extract unique normalized names for efficient querying
+        $lastNames = $normalizedRecords->pluck('last_name_normalized')->unique()->filter();
+        $firstNames = $normalizedRecords->pluck('first_name_normalized')->unique()->filter();
+        
+        if ($lastNames->isEmpty() && $firstNames->isEmpty()) {
+            return;
+        }
+        
+        // Fetch fresh records from database
+        $dbCandidates = MainSystem::where(function ($query) use ($lastNames, $firstNames) {
+            if ($lastNames->isNotEmpty()) {
+                $query->whereIn('last_name_normalized', $lastNames);
+            }
+            if ($firstNames->isNotEmpty()) {
+                $query->orWhereIn('first_name_normalized', $firstNames);
+            }
+        })->get();
+        
+        // Merge with existing cache, removing duplicates by UID
+        $this->candidateCache = $this->candidateCache
+            ->merge($dbCandidates)
+            ->unique('uid')
+            ->values();
     }
     
     /**
