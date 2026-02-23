@@ -57,10 +57,9 @@ class DataMatchService
     {
         $normalized = $this->normalizeRecord($uploadedData);
         
-        // Load candidates if not cached
-        if ($this->candidateCache->isEmpty()) {
-            $this->loadCandidates(collect([$normalized]));
-        }
+        // Always reload candidates to include records from previous batches
+        // and newly inserted records from current batch
+        $this->loadCandidates(collect([$normalized]));
         
         return $this->findMatchFromCache($normalized);
     }
@@ -214,7 +213,12 @@ class DataMatchService
         $data['first_name_normalized'] = $this->normalizeString($data['first_name'] ?? '');
         $data['middle_name_normalized'] = $this->normalizeString($data['middle_name'] ?? '');
 
-        return MainSystem::create($data);
+        $newRecord = MainSystem::create($data);
+        
+        // Add newly created record to cache to prevent duplicates within same batch
+        $this->candidateCache->push($newRecord);
+        
+        return $newRecord;
     }
     
     /**
