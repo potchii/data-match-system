@@ -28,9 +28,14 @@ class PartialMatchWithDobRule extends MatchRule
         }
         
         $match = $candidates->first(function ($candidate) use ($normalizedData) {
+            // Convert birthday to string for comparison if it's a Carbon instance
+            $candidateBirthday = ($candidate->birthday instanceof \Carbon\Carbon || $candidate->birthday instanceof \Carbon\CarbonImmutable)
+                ? $candidate->birthday->format('Y-m-d') 
+                : $candidate->birthday;
+            
             return $candidate->last_name_normalized === $normalizedData['last_name_normalized']
                 && $candidate->first_name_normalized === $normalizedData['first_name_normalized']
-                && $candidate->birthday === $normalizedData['birthday'];
+                && $candidateBirthday === $normalizedData['birthday'];
         });
         
         return $match ? ['record' => $match, 'rule' => $this->name()] : null;
