@@ -100,15 +100,21 @@ class DataMatchService
         $lastNames = $normalizedRecords->pluck('last_name_normalized')->unique()->filter();
         $firstNames = $normalizedRecords->pluck('first_name_normalized')->unique()->filter();
         
-        if ($lastNames->isEmpty() || $firstNames->isEmpty()) {
+        if ($lastNames->isEmpty() && $firstNames->isEmpty()) {
             $this->candidateCache = collect();
             return;
         }
         
-        // Single query to fetch all potential matches
-        $this->candidateCache = MainSystem::whereIn('last_name_normalized', $lastNames)
-            ->orWhereIn('first_name_normalized', $firstNames)
-            ->get();
+        // Fetch all records that match any of the last names or first names
+        // This casts a wide net for the matching rules to filter
+        $this->candidateCache = MainSystem::where(function ($query) use ($lastNames, $firstNames) {
+            if ($lastNames->isNotEmpty()) {
+                $query->whereIn('last_name_normalized', $lastNames);
+            }
+            if ($firstNames->isNotEmpty()) {
+                $query->orWhereIn('first_name_normalized', $firstNames);
+            }
+        })->get();
     }
     
     /**
