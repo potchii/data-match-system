@@ -3,163 +3,225 @@
 namespace App\Services;
 
 use App\Models\MainSystem;
+use App\Services\MatchingRules\ExactMatchRule;
+use App\Services\MatchingRules\PartialMatchWithDobRule;
+use App\Services\MatchingRules\FullNameMatchRule;
+use App\Services\MatchingRules\FuzzyNameMatchRule;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class DataMatchService
 {
+    protected array $rules;
+    protected Collection $candidateCache;
+    
+    public function __construct()
+    {
+        // Initialize matching rules in priority order
+        $this->rules = [
+            new ExactMatchRule(),           // 100% - Full name + DOB
+            new PartialMatchWithDobRule(),  // 90%  - First + Last + DOB
+            new FullNameMatchRule(),        // 80%  - Full name only (no DOB)
+            new FuzzyNameMatchRule(),       // 70%  - Similar name (fuzzy)
+        ];
+        
+        $this->candidateCache = collect();
+    }
+    
     /**
-     * Find match for uploaded record
+     * Batch process multiple records for matching
+     * Returns: Collection of match results
+     */
+    public function batchFindMatches(Collection $uploadedRecords): Collection
+    {
+        // Normalize all uploaded records
+        $normalizedRecords = $uploadedRecords->map(function ($record) {
+            return $this->normalizeRecord($record);
+        });
+        
+        // Load all potential candidates in one query
+        $this->loadCandidates($normalizedRecords);
+        
+        // Match each record against cached candidates
+        return $normalizedRecords->map(function ($normalized) {
+            return $this->findMatchFromCache($normalized);
+        });
+    }
+    
+    /**
+     * Find match for single uploaded record (legacy support)
      * Returns: ['status' => string, 'confidence' => float, 'matched_id' => ?string]
      */
     public function findMatch(array $uploadedData): array
     {
-        // Step 1: Exact match (last_name + first_name + middle_name + birthday)
-        $exactMatch = $this->findExactMatch($uploadedData);
-        if ($exactMatch) {
-            return [
-                'status' => 'MATCHED',
-                'confidence' => 100.0,
-                'matched_id' => $exactMatch->uid,
-            ];
+        $normalized = $this->normalizeRecord($uploadedData);
+        
+        // Load candidates if not cached
+        if ($this->candidateCache->isEmpty()) {
+            $this->loadCandidates(collect([$normalized]));
         }
-
-        // Step 2: Partial match with DOB (last_name + first_name + birthday)
-        $partialMatchWithDob = $this->findPartialMatchWithDob($uploadedData);
-        if ($partialMatchWithDob) {
-            return [
-                'status' => 'MATCHED',
-                'confidence' => 90.0,
-                'matched_id' => $partialMatchWithDob->uid,
-            ];
+        
+        return $this->findMatchFromCache($normalized);
+    }
+    
+    /**
+     * Find match from cached candidates using rule chain
+     */
+    protected function findMatchFromCache(array $normalized): array
+    {
+        foreach ($this->rules as $rule) {
+            $result = $rule->match($normalized, $this->candidateCache);
+            
+            if ($result) {
+                return [
+                    'status' => $rule->status(),
+                    'confidence' => $rule->confidence(),
+                    'matched_id' => $result['record']->uid,
+                    'rule' => $result['rule'],
+                ];
+            }
         }
-
-        // Step 3: Name only match (last_name + first_name)
-        $nameOnlyMatch = $this->findNameOnlyMatch($uploadedData);
-        if ($nameOnlyMatch) {
-            return [
-                'status' => 'POSSIBLE DUPLICATE',
-                'confidence' => 80.0,
-                'matched_id' => $nameOnlyMatch->uid,
-            ];
-        }
-
-        // Step 4: No match found
+        
+        // No match found
         return [
             'status' => 'NEW RECORD',
             'confidence' => 0.0,
             'matched_id' => null,
+            'rule' => 'no_match',
         ];
     }
-
+    
     /**
-     * Find exact match: last_name + first_name + middle_name + birthday
+     * Load all potential candidate records in one query
      */
-    protected function findExactMatch(array $data): ?MainSystem
+    protected function loadCandidates(Collection $normalizedRecords): void
     {
-        $birthday = $this->extractBirthday($data);
+        // Extract unique normalized names for efficient querying
+        $lastNames = $normalizedRecords->pluck('last_name_normalized')->unique()->filter();
+        $firstNames = $normalizedRecords->pluck('first_name_normalized')->unique()->filter();
         
-        if (!$birthday) {
-            return null;
+        if ($lastNames->isEmpty() || $firstNames->isEmpty()) {
+            $this->candidateCache = collect();
+            return;
         }
-
-        return MainSystem::where('last_name', $data['last_name'])
-            ->where('first_name', $data['first_name'])
-            ->where('middle_name', $data['middle_name'])
-            ->where('birthday', $birthday)
-            ->first();
-    }
-
-    /**
-     * Find partial match with DOB: last_name + first_name + birthday
-     */
-    protected function findPartialMatchWithDob(array $data): ?MainSystem
-    {
-        $birthday = $this->extractBirthday($data);
         
-        if (!$birthday) {
-            return null;
-        }
-
-        return MainSystem::where('last_name', $data['last_name'])
-            ->where('first_name', $data['first_name'])
-            ->where('birthday', $birthday)
-            ->first();
+        // Single query to fetch all potential matches
+        $this->candidateCache = MainSystem::whereIn('last_name_normalized', $lastNames)
+            ->orWhereIn('first_name_normalized', $firstNames)
+            ->get();
     }
-
+    
     /**
-     * Find name only match: last_name + first_name
+     * Normalize record for matching
      */
-    protected function findNameOnlyMatch(array $data): ?MainSystem
+    protected function normalizeRecord(array $data): array
     {
-        return MainSystem::where('last_name', $data['last_name'])
-            ->where('first_name', $data['first_name'])
-            ->first();
+        return [
+            'last_name' => $data['last_name'] ?? '',
+            'first_name' => $data['first_name'] ?? '',
+            'middle_name' => $data['middle_name'] ?? '',
+            'last_name_normalized' => $this->normalizeString($data['last_name'] ?? ''),
+            'first_name_normalized' => $this->normalizeString($data['first_name'] ?? ''),
+            'middle_name_normalized' => $this->normalizeString($data['middle_name'] ?? ''),
+            'birthday' => $this->extractAndNormalizeBirthday($data),
+            'original_data' => $data,
+        ];
     }
-
+    
     /**
-     * Insert new record into main system
+     * Normalize string for case-insensitive comparison
      */
-    public function insertNewRecord(array $data): MainSystem
+    protected function normalizeString(string $value): string
     {
-        // Generate unique UID
-        $data['uid'] = $this->generateUid();
-
-        return MainSystem::create($data);
+        return mb_strtolower(trim($value), 'UTF-8');
     }
-
+    
     /**
-     * Generate unique UID
+     * Extract and normalize birthday with robust parsing
      */
-    protected function generateUid(): string
-    {
-        do {
-            $uid = 'UID-' . strtoupper(uniqid());
-        } while (MainSystem::where('uid', $uid)->exists());
-
-        return $uid;
-    }
-
-    /**
-     * Extract birthday from data with support for multiple field name variations
-     */
-    protected function extractBirthday(array $data): ?string
+    protected function extractAndNormalizeBirthday(array $data): ?string
     {
         $birthdayFields = [
-            'birthday',
-            'dob',
-            'DOB',
-            'date_of_birth',
-            'dateOfBirth',
-            'DateOfBirth',
-            'dateofbirth',
-            'birthdate',
-            'BirthDate',
-            'birth_date',
-            'Birthday',
-            'Birthdate',
+            'birthday', 'dob', 'DOB', 'date_of_birth', 'dateOfBirth',
+            'DateOfBirth', 'dateofbirth', 'birthdate', 'BirthDate',
+            'birth_date', 'Birthday', 'Birthdate',
         ];
 
         foreach ($birthdayFields as $field) {
             if (!empty($data[$field])) {
-                return $this->normalizeDate($data[$field]);
+                $normalized = $this->parseDate($data[$field]);
+                if ($normalized) {
+                    return $normalized;
+                }
             }
         }
 
         return null;
     }
-
+    
     /**
-     * Normalize date format
+     * Robust date parsing with multiple format support
      */
-    protected function normalizeDate(?string $date): ?string
+    protected function parseDate($date): ?string
     {
         if (empty($date)) {
             return null;
         }
-
+        
+        // Try common formats explicitly
+        $formats = [
+            'Y-m-d',      // 2023-01-15
+            'd/m/Y',      // 15/01/2023
+            'm/d/Y',      // 01/15/2023
+            'd-m-Y',      // 15-01-2023
+            'm-d-Y',      // 01-15-2023
+            'Y/m/d',      // 2023/01/15
+            'd.m.Y',      // 15.01.2023
+        ];
+        
+        foreach ($formats as $format) {
+            try {
+                $parsed = Carbon::createFromFormat($format, $date);
+                if ($parsed && $parsed->year >= 1900 && $parsed->year <= now()->year) {
+                    return $parsed->format('Y-m-d');
+                }
+            } catch (\Exception $e) {
+                continue;
+            }
+        }
+        
+        // Fallback to Carbon's flexible parsing
         try {
-            return date('Y-m-d', strtotime($date));
+            $parsed = Carbon::parse($date);
+            if ($parsed->year >= 1900 && $parsed->year <= now()->year) {
+                return $parsed->format('Y-m-d');
+            }
         } catch (\Exception $e) {
             return null;
         }
+        
+        return null;
+    }
+    
+    /**
+     * Insert new record into main system
+     */
+    public function insertNewRecord(array $data): MainSystem
+    {
+        $data['uid'] = $this->generateUid();
+        $data['last_name_normalized'] = $this->normalizeString($data['last_name'] ?? '');
+        $data['first_name_normalized'] = $this->normalizeString($data['first_name'] ?? '');
+        $data['middle_name_normalized'] = $this->normalizeString($data['middle_name'] ?? '');
+
+        return MainSystem::create($data);
+    }
+    
+    /**
+     * Generate unique UID using UUID
+     */
+    protected function generateUid(): string
+    {
+        return 'UID-' . strtoupper(Str::ulid());
     }
 }
