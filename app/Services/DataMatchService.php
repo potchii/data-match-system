@@ -57,10 +57,9 @@ class DataMatchService
     {
         $normalized = $this->normalizeRecord($uploadedData);
         
-        // Load candidates if not cached
-        if ($this->candidateCache->isEmpty()) {
-            $this->loadCandidates(collect([$normalized]));
-        }
+        // Always reload candidates to include records from previous batches
+        // and newly inserted records from current batch
+        $this->loadCandidates(collect([$normalized]));
         
         return $this->findMatchFromCache($normalized);
     }
@@ -101,15 +100,21 @@ class DataMatchService
         $lastNames = $normalizedRecords->pluck('last_name_normalized')->unique()->filter();
         $firstNames = $normalizedRecords->pluck('first_name_normalized')->unique()->filter();
         
-        if ($lastNames->isEmpty() || $firstNames->isEmpty()) {
+        if ($lastNames->isEmpty() && $firstNames->isEmpty()) {
             $this->candidateCache = collect();
             return;
         }
         
-        // Single query to fetch all potential matches
-        $this->candidateCache = MainSystem::whereIn('last_name_normalized', $lastNames)
-            ->orWhereIn('first_name_normalized', $firstNames)
-            ->get();
+        // Fetch all records that match any of the last names or first names
+        // This casts a wide net for the matching rules to filter
+        $this->candidateCache = MainSystem::where(function ($query) use ($lastNames, $firstNames) {
+            if ($lastNames->isNotEmpty()) {
+                $query->whereIn('last_name_normalized', $lastNames);
+            }
+            if ($firstNames->isNotEmpty()) {
+                $query->orWhereIn('first_name_normalized', $firstNames);
+            }
+        })->get();
     }
     
     /**
@@ -214,7 +219,12 @@ class DataMatchService
         $data['first_name_normalized'] = $this->normalizeString($data['first_name'] ?? '');
         $data['middle_name_normalized'] = $this->normalizeString($data['middle_name'] ?? '');
 
-        return MainSystem::create($data);
+        $newRecord = MainSystem::create($data);
+        
+        // Add newly created record to cache to prevent duplicates within same batch
+        $this->candidateCache->push($newRecord);
+        
+        return $newRecord;
     }
     
     /**
