@@ -146,6 +146,50 @@ php artisan data:backfill-origin-batch
 - When migrating from a system without batch tracking
 - To restore batch lineage after data imports
 
+#### Remove Duplicate Records
+Identifies and removes duplicate records from the main_system table based on name and date of birth, keeping only the oldest record in each duplicate group.
+
+```bash
+# Preview duplicates without deleting (dry run)
+php artisan duplicates:remove --dry-run
+
+# Actually remove duplicates
+php artisan duplicates:remove
+```
+
+**What it does:**
+- Finds duplicate groups by matching: last_name, first_name, middle_name, and birthday
+- Keeps the oldest record (lowest ID) in each group
+- Deletes all newer duplicates
+- Shows detailed output of what will be/was deleted
+
+**When to use:**
+- After discovering duplicate records in the system
+- When cleaning up data quality issues
+- Before running reports that require unique records
+
+#### Purge Database Data
+Clears all data from the database while preserving the table structure. Useful for testing and development.
+
+```bash
+# Purge all data including user accounts
+php artisan data:purge
+
+# Purge data but keep user accounts
+php artisan data:purge --keep-users
+```
+
+**What it does:**
+- Truncates match_results, upload_batches, and main_system tables
+- Optionally preserves user accounts and authentication data
+- Safely handles foreign key constraints
+- Provides confirmation prompt before deletion
+
+**When to use:**
+- Resetting test environment
+- Clearing development data
+- Starting fresh without re-running migrations
+
 ---
 
 ## 📊 FEATURES IMPLEMENTED
