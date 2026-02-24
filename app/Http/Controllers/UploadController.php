@@ -36,12 +36,28 @@ class UploadController extends Controller
             ]);
 
             // Import and process the Excel file
-            Excel::import(new RecordImport($batch->id), $request->file('file'));
+            $import = new RecordImport($batch->id);
+            Excel::import($import, $request->file('file'));
+
+            // Get column mapping summary from the import
+            $mappingSummary = $import->getColumnMappingSummary();
 
             $batch->update(['status' => 'COMPLETED']);
 
+            // If this is an API request, return JSON response with mapping summary
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'batch_id' => $batch->id,
+                    'file_name' => $batch->file_name,
+                    'column_mapping' => $mappingSummary,
+                ]);
+            }
+
+            // For web requests, redirect with mapping summary in session
             return redirect()->route('results.index', ['batch_id' => $batch->id])
-                ->with('success', "Batch #{$batch->id} (File: {$batch->file_name}) processed successfully. Showing match results below.");
+                ->with('success', "Batch #{$batch->id} (File: {$batch->file_name}) processed successfully. Showing match results below.")
+                ->with('column_mapping', $mappingSummary);
 
         } catch (\Exception $e) {
             if (isset($batch)) {
@@ -52,6 +68,13 @@ class UploadController extends Controller
                 'error' => $e->getMessage(),
                 'user' => auth()->user()->name,
             ]);
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
 
             return redirect()->route('upload.index')
                 ->with('error', 'Error processing file: ' . $e->getMessage());
