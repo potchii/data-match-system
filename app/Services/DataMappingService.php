@@ -5,40 +5,154 @@ namespace App\Services;
 class DataMappingService
 {
     /**
+     * Core field mappings (column name variations → system field)
+     */
+    protected const CORE_FIELD_MAPPINGS = [
+        // UID / Registration Number
+        'regsno' => 'uid',
+        'RegsNo' => 'uid',
+        'regsnumber' => 'uid',
+        'registration_no' => 'uid',
+        
+        // Last Name / Surname
+        'surname' => 'last_name',
+        'Surname' => 'last_name',
+        'lastname' => 'last_name',
+        'LastName' => 'last_name',
+        'last_name' => 'last_name',
+        
+        // First Name
+        'firstname' => 'first_name',
+        'FirstName' => 'first_name',
+        'first_name' => 'first_name',
+        'fname' => 'first_name',
+        
+        // Second Name (part of compound first name)
+        'secondname' => 'second_name',
+        'SecondName' => 'second_name',
+        'second_name' => 'second_name',
+        
+        // Middle Name
+        'middlename' => 'middle_name',
+        'MiddleName' => 'middle_name',
+        'middle_name' => 'middle_name',
+        'mname' => 'middle_name',
+        
+        // Suffix / Extension
+        'extension' => 'suffix',
+        'Extension' => 'suffix',
+        'suffix' => 'suffix',
+        'Suffix' => 'suffix',
+        'ext' => 'suffix',
+        
+        // Birthday / Date of Birth
+        'dob' => 'birthday',
+        'DOB' => 'birthday',
+        'birthday' => 'birthday',
+        'Birthday' => 'birthday',
+        'birthdate' => 'birthday',
+        'BirthDate' => 'birthday',
+        'birth_date' => 'birthday',
+        'date_of_birth' => 'birthday',
+        'DateOfBirth' => 'birthday',
+        'dateofbirth' => 'birthday',
+        
+        // Gender / Sex
+        'sex' => 'gender',
+        'Sex' => 'gender',
+        'gender' => 'gender',
+        'Gender' => 'gender',
+        
+        // Civil Status
+        'status' => 'civil_status',
+        'Status' => 'civil_status',
+        'civilstatus' => 'civil_status',
+        'CivilStatus' => 'civil_status',
+        'civil_status' => 'civil_status',
+        
+        // Address / Street
+        'address' => 'street',
+        'Address' => 'street',
+        'street' => 'street',
+        'Street' => 'street',
+        
+        // City
+        'city' => 'city',
+        'City' => 'city',
+        
+        // Barangay
+        'brgydescription' => 'barangay',
+        'BrgyDescription' => 'barangay',
+        'barangay' => 'barangay',
+        'Barangay' => 'barangay',
+    ];
+
+    /**
      * Map uploaded Excel columns to system database columns
+     * Returns: ['core_fields' => [...], 'dynamic_fields' => [...]]
      */
     public function mapUploadedData(array $row): array
     {
-        // Handle compound first names (Philippine naming convention)
-        // If first_name and middle_name are both provided, check if middle_name
-        // is actually part of the given name (not mother's maiden name)
+        $coreFields = [];
+        $dynamicFields = [];
+        $processedKeys = [];
+
+        // Process compound first name (Philippine naming convention)
         $firstName = $this->buildCompoundFirstName($row);
         $middleName = $this->extractMiddleName($row);
-        
+
+        if ($firstName !== null) {
+            $coreFields['first_name'] = $firstName;
+        }
+        if ($middleName !== null) {
+            $coreFields['middle_name'] = $middleName;
+        }
+
+        // Mark compound name fields as processed
+        $processedKeys = array_merge($processedKeys, [
+            'firstname', 'FirstName', 'first_name', 'fname',
+            'secondname', 'SecondName', 'second_name',
+            'middlename', 'MiddleName', 'middle_name', 'mname'
+        ]);
+
+        // Map all other fields
+        foreach ($row as $key => $value) {
+            // Skip already processed compound name fields
+            if (in_array($key, $processedKeys)) {
+                continue;
+            }
+
+            // Skip empty values
+            if ($value === null || $value === '') {
+                continue;
+            }
+
+            // Check if this is a known core field
+            if (isset(self::CORE_FIELD_MAPPINGS[$key])) {
+                $systemField = self::CORE_FIELD_MAPPINGS[$key];
+                
+                // Apply normalization based on field type
+                $normalizedValue = $this->normalizeFieldValue($systemField, $value);
+                
+                // Only add non-null values
+                if ($normalizedValue !== null) {
+                    $coreFields[$systemField] = $normalizedValue;
+                }
+            } else {
+                // Unknown field → dynamic attribute
+                $normalizedKey = $this->normalizeDynamicKey($key);
+                $dynamicFields[$normalizedKey] = $this->sanitizeDynamicValue($value);
+            }
+        }
+
+        // Validate JSON size
+        if (!empty($dynamicFields)) {
+            $this->validateJsonSize($dynamicFields);
+        }
+
         return [
-            'uid' => $this->normalizeString($row['regsno'] ?? $row['RegsNo'] ?? $row['regsnumber'] ?? $row['registration_no'] ?? null),
-            'last_name' => $this->normalizeString($row['surname'] ?? $row['Surname'] ?? $row['lastname'] ?? $row['LastName'] ?? $row['last_name'] ?? null),
-            'first_name' => $firstName,
-            'middle_name' => $middleName,
-            'suffix' => $this->normalizeString($row['extension'] ?? $row['Extension'] ?? $row['suffix'] ?? $row['Suffix'] ?? $row['ext'] ?? null),
-            'birthday' => $this->normalizeDate(
-                $row['dob'] ?? 
-                $row['DOB'] ?? 
-                $row['birthday'] ?? 
-                $row['Birthday'] ?? 
-                $row['birthdate'] ?? 
-                $row['BirthDate'] ?? 
-                $row['birth_date'] ?? 
-                $row['date_of_birth'] ?? 
-                $row['DateOfBirth'] ?? 
-                $row['dateofbirth'] ?? 
-                null
-            ),
-            'gender' => $this->normalizeGender($row['sex'] ?? $row['Sex'] ?? $row['gender'] ?? $row['Gender'] ?? null),
-            'civil_status' => $this->normalizeString($row['status'] ?? $row['Status'] ?? $row['civilstatus'] ?? $row['CivilStatus'] ?? $row['civil_status'] ?? null),
-            'street' => $this->normalizeString($row['address'] ?? $row['Address'] ?? $row['street'] ?? $row['Street'] ?? null),
-            'city' => $this->normalizeString($row['brgydescription'] ?? $row['BrgyDescription'] ?? $row['city'] ?? $row['City'] ?? null),
-            'barangay' => $this->normalizeString($row['brgydescription'] ?? $row['BrgyDescription'] ?? $row['barangay'] ?? $row['Barangay'] ?? null),
+            'core_fields' => $coreFields,
+            'dynamic_fields' => $dynamicFields,
         ];
     }
     
@@ -115,5 +229,90 @@ class DataMappingService
         }
 
         return $gender;
+    }
+
+    /**
+     * Normalize field value based on field type
+     */
+    protected function normalizeFieldValue(string $field, $value)
+    {
+        return match($field) {
+            'birthday' => $this->normalizeDate($value),
+            'gender' => $this->normalizeGender($value),
+            'uid', 'last_name', 'first_name', 'middle_name', 'suffix',
+            'civil_status', 'street', 'city', 'barangay' => $this->normalizeString($value),
+            default => $value,
+        };
+    }
+
+    /**
+     * Normalize dynamic attribute key to snake_case
+     */
+    protected function normalizeDynamicKey(string $key): string
+    {
+        // First, insert underscores before capital letters (for camelCase/PascalCase)
+        $key = preg_replace('/([a-z])([A-Z])/', '$1_$2', $key);
+        
+        // Convert to lowercase
+        $normalized = strtolower($key);
+        
+        // Replace non-alphanumeric characters with underscores
+        $normalized = preg_replace('/[^a-z0-9_]/', '_', $normalized);
+        
+        // Replace multiple underscores with single underscore
+        $normalized = preg_replace('/_+/', '_', $normalized);
+        
+        // Trim underscores from start and end
+        return trim($normalized, '_');
+    }
+
+    /**
+     * Sanitize dynamic attribute value
+     */
+    protected function sanitizeDynamicValue($value)
+    {
+        // Ensure value is JSON-serializable
+        if (is_object($value)) {
+            // Handle DateTime objects
+            if ($value instanceof \DateTimeInterface) {
+                return $value->format('Y-m-d H:i:s');
+            }
+            
+            // Try to convert to string if __toString exists
+            if (method_exists($value, '__toString')) {
+                return (string) $value;
+            }
+            
+            // For other objects, use json_encode or serialize
+            $encoded = json_encode($value);
+            if ($encoded !== false) {
+                return $encoded;
+            }
+            
+            // Last resort: return class name
+            return get_class($value);
+        }
+        
+        if (is_array($value)) {
+            return array_map([$this, 'sanitizeDynamicValue'], $value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Validate JSON size doesn't exceed database limits
+     */
+    protected function validateJsonSize(array $data): void
+    {
+        $json = json_encode($data);
+        $size = strlen($json);
+        
+        // MySQL TEXT type limit: 65,535 bytes
+        if ($size > 65535) {
+            throw new \InvalidArgumentException(
+                "Dynamic attributes exceed maximum size (65KB). Current size: {$size} bytes"
+            );
+        }
     }
 }

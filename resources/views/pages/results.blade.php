@@ -11,6 +11,102 @@
 
 <section class="content">
     <div class="container-fluid">
+        @if(session('column_mapping'))
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-info collapsed-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-columns"></i> Column Mapping Summary
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5 class="text-success">
+                                    <i class="fas fa-check-circle"></i> Core Fields Mapped
+                                </h5>
+                                <div class="mb-3">
+                                    @if(count(session('column_mapping')['core_fields_mapped']) > 0)
+                                        @foreach(session('column_mapping')['core_fields_mapped'] as $field)
+                                            <span class="badge badge-success mr-1 mb-1">{{ $field }}</span>
+                                        @endforeach
+                                    @else
+                                        <span class="text-muted">None</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 class="text-info">
+                                    <i class="fas fa-plus-circle"></i> Dynamic Fields Captured
+                                </h5>
+                                <div class="mb-3">
+                                    @if(count(session('column_mapping')['dynamic_fields_captured']) > 0)
+                                        @foreach(session('column_mapping')['dynamic_fields_captured'] as $field)
+                                            <span class="badge badge-info mr-1 mb-1">{{ $field }}</span>
+                                        @endforeach
+                                    @else
+                                        <span class="text-muted">None</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 class="text-secondary">
+                                    <i class="fas fa-minus-circle"></i> Skipped Columns
+                                </h5>
+                                <div class="mb-3">
+                                    @if(count(session('column_mapping')['skipped_columns']) > 0)
+                                        @foreach(session('column_mapping')['skipped_columns'] as $field)
+                                            <span class="badge badge-secondary mr-1 mb-1">{{ $field }}</span>
+                                        @endforeach
+                                    @else
+                                        <span class="text-muted">None</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mb-2">
+                                    <strong>Total Columns:</strong> 
+                                    {{ count(session('column_mapping')['core_fields_mapped']) + count(session('column_mapping')['dynamic_fields_captured']) + count(session('column_mapping')['skipped_columns']) }}
+                                    <span class="ml-3">
+                                        <strong>Core:</strong> {{ count(session('column_mapping')['core_fields_mapped']) }}
+                                    </span>
+                                    <span class="ml-3">
+                                        <strong>Dynamic:</strong> {{ count(session('column_mapping')['dynamic_fields_captured']) }}
+                                    </span>
+                                    <span class="ml-3">
+                                        <strong>Skipped:</strong> {{ count(session('column_mapping')['skipped_columns']) }}
+                                    </span>
+                                </p>
+                                @if($batchStats)
+                                <p class="mb-0">
+                                    <strong>Total Rows Processed:</strong> {{ $batchStats['total_rows'] }}
+                                    <span class="ml-3">
+                                        <strong>New Records:</strong> <span class="text-info">{{ $batchStats['new_records'] }}</span>
+                                    </span>
+                                    <span class="ml-3">
+                                        <strong>Matched:</strong> <span class="text-success">{{ $batchStats['matched'] }}</span>
+                                    </span>
+                                    <span class="ml-3">
+                                        <strong>Possible Duplicates:</strong> <span class="text-warning">{{ $batchStats['possible_duplicates'] }}</span>
+                                    </span>
+                                </p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="col-12">
                 <div class="card">

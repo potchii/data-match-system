@@ -23,6 +23,18 @@ class ResultsController extends Controller
         $results = $query->orderBy('created_at', 'desc')->paginate(20);
         $batches = UploadBatch::orderBy('id', 'desc')->get();
         
-        return view('pages.results', compact('results', 'batches'));
+        // Calculate statistics for the current batch if filtering by batch_id
+        $batchStats = null;
+        if ($request->filled('batch_id')) {
+            $batchId = $request->batch_id;
+            $batchStats = [
+                'total_rows' => MatchResult::where('batch_id', $batchId)->count(),
+                'new_records' => MatchResult::where('batch_id', $batchId)->where('match_status', 'NEW RECORD')->count(),
+                'matched' => MatchResult::where('batch_id', $batchId)->where('match_status', 'MATCHED')->count(),
+                'possible_duplicates' => MatchResult::where('batch_id', $batchId)->where('match_status', 'POSSIBLE DUPLICATE')->count(),
+            ];
+        }
+        
+        return view('pages.results', compact('results', 'batches', 'batchStats'));
     }
 }

@@ -55,12 +55,20 @@ class DataMatchService
      */
     public function findMatch(array $uploadedData): array
     {
-        $normalized = $this->normalizeRecord($uploadedData);
-        
+        // Support both old format (flat array) and new format (structured)
+        if (isset($uploadedData['core_fields'])) {
+            $coreData = $uploadedData['core_fields'];
+        } else {
+            // Backward compatibility: treat entire array as core data
+            $coreData = $uploadedData;
+        }
+
+        $normalized = $this->normalizeRecord($coreData);
+
         // Reload candidates from database to include cross-batch records
         // but preserve newly inserted records from current batch
         $this->refreshCandidates(collect([$normalized]));
-        
+
         return $this->findMatchFromCache($normalized);
     }
     
@@ -243,20 +251,39 @@ class DataMatchService
     /**
      * Insert new record into main system
      */
-    public function insertNewRecord(array $data): MainSystem
-    {
-        $data['uid'] = $this->generateUid();
-        $data['last_name_normalized'] = $this->normalizeString($data['last_name'] ?? '');
-        $data['first_name_normalized'] = $this->normalizeString($data['first_name'] ?? '');
-        $data['middle_name_normalized'] = $this->normalizeString($data['middle_name'] ?? '');
+    /**
+         * Insert new record into main system
+         * Now accepts dynamic_fields and stores them in additional_attributes
+         */
+        public function insertNewRecord(array $data): MainSystem
+        {
+            // Support both old format and new format
+            if (isset($data['core_fields'])) {
+                $coreFields = $data['core_fields'];
+                $dynamicFields = $data['dynamic_fields'] ?? [];
+            } else {
+                // Backward compatibility
+                $coreFields = $data;
+                $dynamicFields = [];
+            }
 
-        $newRecord = MainSystem::create($data);
-        
-        // Add newly created record to cache to prevent duplicates within same batch
-        $this->candidateCache->push($newRecord);
-        
-        return $newRecord;
-    }
+            $coreFields['uid'] = $this->generateUid();
+            $coreFields['last_name_normalized'] = $this->normalizeString($coreFields['last_name'] ?? '');
+            $coreFields['first_name_normalized'] = $this->normalizeString($coreFields['first_name'] ?? '');
+            $coreFields['middle_name_normalized'] = $this->normalizeString($coreFields['middle_name'] ?? '');
+
+            // Add dynamic fields to the data
+            if (!empty($dynamicFields)) {
+                $coreFields['additional_attributes'] = $dynamicFields;
+            }
+
+            $newRecord = MainSystem::create($coreFields);
+
+            // Add newly created record to cache to prevent duplicates within same batch
+            $this->candidateCache->push($newRecord);
+
+            return $newRecord;
+        }
     
     /**
      * Generate unique UID using UUID

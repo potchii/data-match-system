@@ -1,0 +1,629 @@
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_core_field_identification(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_dynamic_field_identification(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_dynamic_key_normalization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_core_field_priority(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_json_size_validation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_structured_mapping_output(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_empty_value_exclusion(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_key_sanitization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   PASS  Tests\Unit\DataMappingServicePropertyTest
+  ✓ property core field identification with data set "iteration 0…  0.24s  
+  ✓ property core field identification with data set "iteration 1…  0.02s  
+  ✓ property core field identification with data set "iteration 2…  0.02s  
+  ✓ property core field identification with data set "iteration 3…  0.02s  
+  ✓ property core field identification with data set "iteration 4…  0.02s  
+  ✓ property core field identification with data set "iteration 5…  0.02s  
+  ✓ property core field identification with data set "iteration 6…  0.02s  
+  ✓ property core field identification with data set "iteration 7…  0.02s  
+  ✓ property core field identification with data set "iteration 8…  0.02s  
+  ✓ property core field identification with data set "iteration 9…  0.02s  
+  ✓ property core field identification with data set "iteration 10… 0.02s  
+  ✓ property core field identification with data set "iteration 11… 0.02s  
+  ✓ property core field identification with data set "iteration 12… 0.02s  
+  ✓ property core field identification with data set "iteration 13… 0.02s  
+  ✓ property core field identification with data set "iteration 14… 0.02s  
+  ✓ property core field identification with data set "iteration 15… 0.02s  
+  ✓ property core field identification with data set "iteration 16… 0.02s  
+  ✓ property core field identification with data set "iteration 17… 0.02s  
+  ✓ property core field identification with data set "iteration 18… 0.02s  
+  ✓ property core field identification with data set "iteration 19… 0.02s  
+  ✓ property core field identification with data set "iteration 20… 0.03s  
+  ✓ property core field identification with data set "iteration 21… 0.02s  
+  ✓ property core field identification with data set "iteration 22… 0.02s  
+  ✓ property core field identification with data set "iteration 23… 0.02s  
+  ✓ property core field identification with data set "iteration 24… 0.02s  
+  ✓ property core field identification with data set "iteration 25… 0.02s  
+  ✓ property core field identification with data set "iteration 26… 0.02s  
+  ✓ property core field identification with data set "iteration 27… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.03s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.03s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.03s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic field identification with data set "iteration… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 0"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 1"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 2"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 3"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 4"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 5"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 6"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 7"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 8"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 9"  0.02s  
+  ✓ property dynamic key normalization with data set "iteration 10… 0.03s  
+  ✓ property dynamic key normalization with data set "iteration 11… 0.03s  
+  ✓ property dynamic key normalization with data set "iteration 12… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 13… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 14… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 15… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 16… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 17… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 18… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 19… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 20… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 21… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 22… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 23… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 24… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 25… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 26… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 27… 0.03s  
+  ✓ property dynamic key normalization with data set "iteration 28… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 29… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 30… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 31… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 32… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 33… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 34… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 35… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 36… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 37… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 38… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 39… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 40… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 41… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 42… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 43… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 44… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 45… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 46… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 47… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 48… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 49… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 50… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 51… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 52… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 53… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 54… 0.03s  
+  ✓ property dynamic key normalization with data set "iteration 55… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 56… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 57… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 58… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 59… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 60… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 61… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 62… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 63… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 64… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 65… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 66… 0.03s  
+  ✓ property dynamic key normalization with data set "iteration 67… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 68… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 69… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 70… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 71… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 72… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 73… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 74… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 75… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 76… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 77… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 78… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 79… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 80… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 81… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 82… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 83… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 84… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 85… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 86… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 87… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 88… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 89… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 90… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 91… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 92… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 93… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 94… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 95… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 96… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 97… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 98… 0.02s  
+  ✓ property dynamic key normalization with data set "iteration 99… 0.02s  
+  ✓ property core field priority with data set "iteration 0 surnam… 0.02s  
+  ✓ property core field priority with data set "iteration 1 surnam… 0.02s  
+  ✓ property core field priority with data set "iteration 2 lastna… 0.02s  
+  ✓ property core field priority with data set "iteration 3 firstn… 0.02s  
+  ✓ property core field priority with data set "iteration 4 first…  0.02s  
+  ✓ property core field priority with data set "iteration 5 dob"    0.03s  
+  ✓ property core field priority with data set "iteration 6 d o b"  0.02s  
+  ✓ property core field priority with data set "iteration 7 birthd… 0.02s  
+  ✓ property core field priority with data set "iteration 8 sex"    0.02s  
+  ✓ property core field priority with data set "iteration 9 gender… 0.02s  
+  ✓ property core field priority with data set "iteration 10 statu… 0.02s  
+  ✓ property core field priority with data set "iteration 11 addre… 0.02s  
+  ✓ property core field priority with data set "iteration 12 city"  0.02s  
+  ✓ property core field priority with data set "iteration 13 baran… 0.02s  
+  ✓ property json size validation with data set "pass iteration 0"  0.02s  
+  ✓ property json size validation with data set "pass iteration 1"  0.02s  
+  ✓ property json size validation with data set "pass iteration 2"  0.02s  
+  ✓ property json size validation with data set "pass iteration 3"  0.02s  
+  ✓ property json size validation with data set "pass iteration 4"  0.02s  
+  ✓ property json size validation with data set "pass iteration 5"  0.02s  
+  ✓ property json size validation with data set "pass iteration 6"  0.02s  
+  ✓ property json size validation with data set "pass iteration 7"  0.02s  
+  ✓ property json size validation with data set "pass iteration 8"  0.02s  
+  ✓ property json size validation with data set "pass iteration 9"  0.03s  
+  ✓ property json size validation with data set "pass iteration 10… 0.05s  
+  ✓ property json size validation with data set "pass iteration 11… 0.03s  
+  ✓ property json size validation with data set "pass iteration 12… 0.04s  
+  ✓ property json size validation with data set "pass iteration 13… 0.04s  
+  ✓ property json size validation with data set "pass iteration 14… 0.03s  
+  ✓ property json size validation with data set "pass iteration 15… 0.03s  
+  ✓ property json size validation with data set "pass iteration 16… 0.02s  
+  ✓ property json size validation with data set "pass iteration 17… 0.03s  
+  ✓ property json size validation with data set "pass iteration 18… 0.07s  
+  ✓ property json size validation with data set "pass iteration 19… 0.02s  
+  ✓ property json size validation with data set "pass iteration 20… 0.03s  
+  ✓ property json size validation with data set "pass iteration 21… 0.03s  
+  ✓ property json size validation with data set "pass iteration 22… 0.02s  
+  ✓ property json size validation with data set "pass iteration 23… 0.02s  
+  ✓ property json size validation with data set "pass iteration 24… 0.02s  
+  ✓ property json size validation with data set "pass iteration 25… 0.02s  
+  ✓ property json size validation with data set "pass iteration 26… 0.02s  
+  ✓ property json size validation with data set "pass iteration 27… 0.02s  
+  ✓ property json size validation with data set "pass iteration 28… 0.02s  
+  ✓ property json size validation with data set "pass iteration 29… 0.02s  
+  ✓ property json size validation with data set "pass iteration 30… 0.03s  
+  ✓ property json size validation with data set "pass iteration 31… 0.02s  
+  ✓ property json size validation with data set "pass iteration 32… 0.02s  
+  ✓ property json size validation with data set "pass iteration 33… 0.02s  
+  ✓ property json size validation with data set "pass iteration 34… 0.02s  
+  ✓ property json size validation with data set "pass iteration 35… 0.02s  
+  ✓ property json size validation with data set "pass iteration 36… 0.02s  
+  ✓ property json size validation with data set "pass iteration 37… 0.02s  
+  ✓ property json size validation with data set "pass iteration 38… 0.02s  
+  ✓ property json size validation with data set "pass iteration 39… 0.02s  
+  ✓ property json size validation with data set "pass iteration 40… 0.02s  
+  ✓ property json size validation with data set "pass iteration 41… 0.02s  
+  ✓ property json size validation with data set "pass iteration 42… 0.02s  
+  ✓ property json size validation with data set "pass iteration 43… 0.03s  
+  ✓ property json size validation with data set "pass iteration 44… 0.02s  
+  ✓ property json size validation with data set "pass iteration 45… 0.02s  
+  ✓ property json size validation with data set "pass iteration 46… 0.02s  
+  ✓ property json size validation with data set "pass iteration 47… 0.02s  
+  ✓ property json size validation with data set "pass iteration 48… 0.02s  
+  ✓ property json size validation with data set "pass iteration 49… 0.02s  
+  ✓ property json size validation with data set "fail iteration 0"  0.03s  
+  ✓ property json size validation with data set "fail iteration 1"  0.03s  
+  ✓ property json size validation with data set "fail iteration 2"  0.03s  
+  ✓ property json size validation with data set "fail iteration 3"  0.03s  
+  ✓ property json size validation with data set "fail iteration 4"  0.03s  
+  ✓ property json size validation with data set "fail iteration 5"  0.03s  
+  ✓ property json size validation with data set "fail iteration 6"  0.03s  
+  ✓ property json size validation with data set "fail iteration 7"  0.03s  
+  ✓ property json size validation with data set "fail iteration 8"  0.03s  
+  ✓ property json size validation with data set "fail iteration 9"  0.03s  
+  ✓ property json size validation with data set "fail iteration 10… 0.03s  
+  ✓ property json size validation with data set "fail iteration 11… 0.03s  
+  ✓ property json size validation with data set "fail iteration 12… 0.03s  
+  ✓ property json size validation with data set "fail iteration 13… 0.03s  
+  ✓ property json size validation with data set "fail iteration 14… 0.03s  
+  ✓ property json size validation with data set "fail iteration 15… 0.03s  
+  ✓ property json size validation with data set "fail iteration 16… 0.03s  
+  ✓ property json size validation with data set "fail iteration 17… 0.03s  
+  ✓ property json size validation with data set "fail iteration 18… 0.03s  
+  ✓ property json size validation with data set "fail iteration 19… 0.04s  
+  ✓ property json size validation with data set "fail iteration 20… 0.03s  
+  ✓ property json size validation with data set "fail iteration 21… 0.03s  
+  ✓ property json size validation with data set "fail iteration 22… 0.03s  
+  ✓ property json size validation with data set "fail iteration 23… 0.03s  
+  ✓ property json size validation with data set "fail iteration 24… 0.03s  
+  ✓ property json size validation with data set "fail iteration 25… 0.03s  
+  ✓ property json size validation with data set "fail iteration 26… 0.03s  
+  ✓ property json size validation with data set "fail iteration 27… 0.03s  
+  ✓ property json size validation with data set "fail iteration 28… 0.03s  
+  ✓ property json size validation with data set "fail iteration 29… 0.03s  
+  ✓ property json size validation with data set "fail iteration 30… 0.03s  
+  ✓ property json size validation with data set "fail iteration 31… 0.03s  
+  ✓ property json size validation with data set "fail iteration 32… 0.03s  
+  ✓ property json size validation with data set "fail iteration 33… 0.03s  
+  ✓ property json size validation with data set "fail iteration 34… 0.03s  
+  ✓ property json size validation with data set "fail iteration 35… 0.03s  
+  ✓ property json size validation with data set "fail iteration 36… 0.03s  
+  ✓ property json size validation with data set "fail iteration 37… 0.03s  
+  ✓ property json size validation with data set "fail iteration 38… 0.03s  
+  ✓ property json size validation with data set "fail iteration 39… 0.03s  
+  ✓ property json size validation with data set "fail iteration 40… 0.03s  
+  ✓ property json size validation with data set "fail iteration 41… 0.03s  
+  ✓ property json size validation with data set "fail iteration 42… 0.03s  
+  ✓ property json size validation with data set "fail iteration 43… 0.03s  
+  ✓ property json size validation with data set "fail iteration 44… 0.03s  
+  ✓ property json size validation with data set "fail iteration 45… 0.03s  
+  ✓ property json size validation with data set "fail iteration 46… 0.03s  
+  ✓ property json size validation with data set "fail iteration 47… 0.03s  
+  ✓ property json size validation with data set "fail iteration 48… 0.04s  
+  ✓ property json size validation with data set "fail iteration 49… 0.04s  
+  ✓ property structured mapping output with data set "iteration 0"  0.02s  
+  ✓ property structured mapping output with data set "iteration 1"  0.02s  
+  ✓ property structured mapping output with data set "iteration 2"  0.02s  
+  ✓ property structured mapping output with data set "iteration 3"  0.02s  
+  ✓ property structured mapping output with data set "iteration 4"  0.02s  
+  ✓ property structured mapping output with data set "iteration 5"  0.02s  
+  ✓ property structured mapping output with data set "iteration 6"  0.02s  
+  ✓ property structured mapping output with data set "iteration 7"  0.03s  
+  ✓ property structured mapping output with data set "iteration 8"  0.02s  
+  ✓ property structured mapping output with data set "iteration 9"  0.02s  
+  ✓ property structured mapping output with data set "iteration 10… 0.02s  
+  ✓ property structured mapping output with data set "iteration 11… 0.02s  
+  ✓ property structured mapping output with data set "iteration 12… 0.02s  
+  ✓ property structured mapping output with data set "iteration 13… 0.02s  
+  ✓ property structured mapping output with data set "iteration 14… 0.02s  
+  ✓ property structured mapping output with data set "iteration 15… 0.02s  
+  ✓ property structured mapping output with data set "iteration 16… 0.02s  
+  ✓ property structured mapping output with data set "iteration 17… 0.02s  
+  ✓ property structured mapping output with data set "iteration 18… 0.02s  
+  ✓ property structured mapping output with data set "iteration 19… 0.02s  
+  ✓ property structured mapping output with data set "iteration 20… 0.02s  
+  ✓ property structured mapping output with data set "iteration 21… 0.02s  
+  ✓ property structured mapping output with data set "iteration 22… 0.02s  
+  ✓ property structured mapping output with data set "iteration 23… 0.02s  
+  ✓ property structured mapping output with data set "iteration 24… 0.02s  
+  ✓ property structured mapping output with data set "iteration 25… 0.02s  
+  ✓ property structured mapping output with data set "iteration 26… 0.02s  
+  ✓ property structured mapping output with data set "iteration 27… 0.02s  
+  ✓ property structured mapping output with data set "iteration 28… 0.02s  
+  ✓ property structured mapping output with data set "iteration 29… 0.02s  
+  ✓ property structured mapping output with data set "iteration 30… 0.02s  
+  ✓ property structured mapping output with data set "iteration 31… 0.02s  
+  ✓ property structured mapping output with data set "iteration 32… 0.02s  
+  ✓ property structured mapping output with data set "iteration 33… 0.02s  
+  ✓ property structured mapping output with data set "iteration 34… 0.02s  
+  ✓ property structured mapping output with data set "iteration 35… 0.02s  
+  ✓ property structured mapping output with data set "iteration 36… 0.02s  
+  ✓ property structured mapping output with data set "iteration 37… 0.02s  
+  ✓ property structured mapping output with data set "iteration 38… 0.02s  
+  ✓ property structured mapping output with data set "iteration 39… 0.02s  
+  ✓ property structured mapping output with data set "iteration 40… 0.02s  
+  ✓ property structured mapping output with data set "iteration 41… 0.02s  
+  ✓ property structured mapping output with data set "iteration 42… 0.02s  
+  ✓ property structured mapping output with data set "iteration 43… 0.02s  
+  ✓ property structured mapping output with data set "iteration 44… 0.02s  
+  ✓ property structured mapping output with data set "iteration 45… 0.02s  
+  ✓ property structured mapping output with data set "iteration 46… 0.03s  
+  ✓ property structured mapping output with data set "iteration 47… 0.02s  
+  ✓ property structured mapping output with data set "iteration 48… 0.02s  
+  ✓ property structured mapping output with data set "iteration 49… 0.02s  
+  ✓ property structured mapping output with data set "iteration 50… 0.02s  
+  ✓ property structured mapping output with data set "iteration 51… 0.02s  
+  ✓ property structured mapping output with data set "iteration 52… 0.02s  
+  ✓ property structured mapping output with data set "iteration 53… 0.02s  
+  ✓ property structured mapping output with data set "iteration 54… 0.02s  
+  ✓ property structured mapping output with data set "iteration 55… 0.02s  
+  ✓ property structured mapping output with data set "iteration 56… 0.02s  
+  ✓ property structured mapping output with data set "iteration 57… 0.02s  
+  ✓ property structured mapping output with data set "iteration 58… 0.02s  
+  ✓ property structured mapping output with data set "iteration 59… 0.02s  
+  ✓ property structured mapping output with data set "iteration 60… 0.02s  
+  ✓ property structured mapping output with data set "iteration 61… 0.02s  
+  ✓ property structured mapping output with data set "iteration 62… 0.02s  
+  ✓ property structured mapping output with data set "iteration 63… 0.02s  
+  ✓ property structured mapping output with data set "iteration 64… 0.02s  
+  ✓ property structured mapping output with data set "iteration 65… 0.02s  
+  ✓ property structured mapping output with data set "iteration 66… 0.02s  
+  ✓ property structured mapping output with data set "iteration 67… 0.02s  
+  ✓ property structured mapping output with data set "iteration 68… 0.02s  
+  ✓ property structured mapping output with data set "iteration 69… 0.02s  
+  ✓ property structured mapping output with data set "iteration 70… 0.02s  
+  ✓ property structured mapping output with data set "iteration 71… 0.02s  
+  ✓ property structured mapping output with data set "iteration 72… 0.02s  
+  ✓ property structured mapping output with data set "iteration 73… 0.02s  
+  ✓ property structured mapping output with data set "iteration 74… 0.02s  
+  ✓ property structured mapping output with data set "iteration 75… 0.02s  
+  ✓ property structured mapping output with data set "iteration 76… 0.02s  
+  ✓ property structured mapping output with data set "iteration 77… 0.02s  
+  ✓ property structured mapping output with data set "iteration 78… 0.02s  
+  ✓ property structured mapping output with data set "iteration 79… 0.02s  
+  ✓ property structured mapping output with data set "iteration 80… 0.02s  
+  ✓ property structured mapping output with data set "iteration 81… 0.02s  
+  ✓ property structured mapping output with data set "iteration 82… 0.02s  
+  ✓ property structured mapping output with data set "iteration 83… 0.02s  
+  ✓ property structured mapping output with data set "iteration 84… 0.02s  
+  ✓ property structured mapping output with data set "iteration 85… 0.03s  
+  ✓ property structured mapping output with data set "iteration 86… 0.02s  
+  ✓ property structured mapping output with data set "iteration 87… 0.02s  
+  ✓ property structured mapping output with data set "iteration 88… 0.02s  
+  ✓ property structured mapping output with data set "iteration 89… 0.02s  
+  ✓ property structured mapping output with data set "iteration 90… 0.02s  
+  ✓ property structured mapping output with data set "iteration 91… 0.02s  
+  ✓ property structured mapping output with data set "iteration 92… 0.02s  
+  ✓ property structured mapping output with data set "iteration 93… 0.02s  
+  ✓ property structured mapping output with data set "iteration 94… 0.02s  
+  ✓ property structured mapping output with data set "iteration 95… 0.02s  
+  ✓ property structured mapping output with data set "iteration 96… 0.02s  
+  ✓ property structured mapping output with data set "iteration 97… 0.02s  
+  ✓ property structured mapping output with data set "iteration 98… 0.02s  
+  ✓ property structured mapping output with data set "iteration 99… 0.02s  
+  ✓ property empty value exclusion with data set "iteration 0"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 1"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 2"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 3"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 4"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 5"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 6"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 7"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 8"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 9"      0.02s  
+  ✓ property empty value exclusion with data set "iteration 10"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 11"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 12"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 13"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 14"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 15"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 16"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 17"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 18"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 19"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 20"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 21"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 22"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 23"     0.03s  
+  ✓ property empty value exclusion with data set "iteration 24"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 25"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 26"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 27"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 28"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 29"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 30"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 31"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 32"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 33"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 34"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 35"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 36"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 37"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 38"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 39"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 40"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 41"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 42"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 43"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 44"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 45"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 46"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 47"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 48"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 49"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 50"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 51"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 52"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 53"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 54"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 55"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 56"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 57"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 58"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 59"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 60"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 61"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 62"     0.03s  
+  ✓ property empty value exclusion with data set "iteration 63"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 64"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 65"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 66"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 67"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 68"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 69"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 70"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 71"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 72"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 73"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 74"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 75"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 76"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 77"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 78"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 79"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 80"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 81"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 82"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 83"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 84"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 85"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 86"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 87"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 88"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 89"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 90"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 91"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 92"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 93"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 94"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 95"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 96"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 97"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 98"     0.02s  
+  ✓ property empty value exclusion with data set "iteration 99"     0.02s  
+  ✓ property key sanitization with data set "iteration 0 d84c26b1"  0.03s  
+  ✓ property key sanitization with data set "iteration 1 e8f0e31a"  0.02s  
+  ✓ property key sanitization with data set "iteration 2 111cdebc"  0.02s  
+  ✓ property key sanitization with data set "iteration 3 acc437c6"  0.02s  
+  ✓ property key sanitization with data set "iteration 4 1df37c15"  0.02s  
+  ✓ property key sanitization with data set "iteration 5 119acf87"  0.02s  
+  ✓ property key sanitization with data set "iteration 6 3c816354"  0.02s  
+  ✓ property key sanitization with data set "iteration 7 f1142cdb"  0.02s  
+  ✓ property key sanitization with data set "iteration 8 c1bb456e"  0.02s  
+  ✓ property key sanitization with data set "iteration 9 12292a91"  0.02s  
+  ✓ property key sanitization with data set "iteration 10 07a10727… 0.02s  
+  ✓ property key sanitization with data set "iteration 11 cf97b06c… 0.02s  
+  ✓ property key sanitization with data set "iteration 12 0ae03d28… 0.02s  
+  ✓ property key sanitization with data set "iteration 13 c7ff9067… 0.02s  
+  ✓ property key sanitization with data set "iteration 14 5bca0bba… 0.02s  
+  ✓ property key sanitization with data set "random iteration 0"    0.02s  
+  ✓ property key sanitization with data set "random iteration 1"    0.02s  
+  ✓ property key sanitization with data set "random iteration 2"    0.02s  
+  ✓ property key sanitization with data set "random iteration 3"    0.02s  
+  ✓ property key sanitization with data set "random iteration 4"    0.02s  
+  ✓ property key sanitization with data set "random iteration 5"    0.02s  
+  ✓ property key sanitization with data set "random iteration 6"    0.02s  
+  ✓ property key sanitization with data set "random iteration 7"    0.02s  
+  ✓ property key sanitization with data set "random iteration 8"    0.02s  
+  ✓ property key sanitization with data set "random iteration 9"    0.02s  
+  ✓ property key sanitization with data set "random iteration 10"   0.02s  
+  ✓ property key sanitization with data set "random iteration 11"   0.02s  
+  ✓ property key sanitization with data set "random iteration 12"   0.02s  
+  ✓ property key sanitization with data set "random iteration 13"   0.02s  
+  ✓ property key sanitization with data set "random iteration 14"   0.02s  
+  ✓ property key sanitization with data set "random iteration 15"   0.02s  
+  ✓ property key sanitization with data set "random iteration 16"   0.03s  
+  ✓ property key sanitization with data set "random iteration 17"   0.02s  
+  ✓ property key sanitization with data set "random iteration 18"   0.03s  
+  ✓ property key sanitization with data set "random iteration 19"   0.02s  
+  ✓ property key sanitization with data set "random iteration 20"   0.03s  
+  ✓ property key sanitization with data set "random iteration 21"   0.02s  
+  ✓ property key sanitization with data set "random iteration 22"   0.02s  
+  ✓ property key sanitization with data set "random iteration 23"   0.02s  
+  ✓ property key sanitization with data set "random iteration 24"   0.03s  
+  ✓ property key sanitization with data set "random iteration 25"   0.02s  
+  ✓ property key sanitization with data set "random iteration 26"   0.02s  
+  ✓ property key sanitization with data set "random iteration 27"   0.02s  
+  ✓ property key sanitization with data set "random iteration 28"   0.02s  
+  ✓ property key sanitization with data set "random iteration 29"   0.02s  
+  ✓ property key sanitization with data set "random iteration 30"   0.02s  
+  ✓ property key sanitization with data set "random iteration 31"   0.02s  
+  ✓ property key sanitization with data set "random iteration 32"   0.02s  
+  ✓ property key sanitization with data set "random iteration 33"   0.02s  
+  ✓ property key sanitization with data set "random iteration 34"   0.02s  
+  ✓ property key sanitization with data set "random iteration 35"   0.02s  
+  ✓ property key sanitization with data set "random iteration 36"   0.02s  
+  ✓ property key sanitization with data set "random iteration 37"   0.02s  
+  ✓ property key sanitization with data set "random iteration 38"   0.02s  
+  ✓ property key sanitization with data set "random iteration 39"   0.02s  
+  ✓ property key sanitization with data set "random iteration 40"   0.02s  
+  ✓ property key sanitization with data set "random iteration 41"   0.02s  
+  ✓ property key sanitization with data set "random iteration 42"   0.02s  
+  ✓ property key sanitization with data set "random iteration 43"   0.02s  
+  ✓ property key sanitization with data set "random iteration 44"   0.02s  
+  ✓ property key sanitization with data set "random iteration 45"   0.02s  
+  ✓ property key sanitization with data set "random iteration 46"   0.02s  
+  ✓ property key sanitization with data set "random iteration 47"   0.02s  
+  ✓ property key sanitization with data set "random iteration 48"   0.02s  
+  ✓ property key sanitization with data set "random iteration 49"   0.02s  
+
+  Tests:    607 passed (6557 assertions)
+  Duration: 17.54s
+
