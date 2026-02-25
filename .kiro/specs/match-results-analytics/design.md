@@ -485,3 +485,474 @@ After analyzing all acceptance criteria, I identified the following redundancies
 
 **Validates: Requirements 8.7**
 
+
+## Error Handling
+
+### Backend Error Scenarios
+
+#### Missing or Invalid Batch Data
+
+**Scenario**: Analytics requested for non-existent or invalid batch ID
+
+**Handling**:
+- Return 404 JSON response with error message
+- Log warning with batch ID for debugging
+- Frontend displays user-friendly message in analytics card
+
+```php
+public function getBatchAnalytics(int $batchId): JsonResponse
+{
+    $batch = UploadBatch::find($batchId);
+    
+    if (!$batch) {
+        Log::warning('Analytics requested for non-existent batch', ['batch_id' => $batchId]);
+        return response()->json([
+            'error' => 'Batch not found',
+            'message' => 'The requested batch does not exist.'
+        ], 404);
+    }
+    
+    // Continue with analytics calculation
+}
+```
+
+#### Database Query Failures
+
+**Scenario**: Database connection issues or query timeouts during statistics calculation
+
+**Handling**:
+- Catch database exceptions
+- Return 500 JSON response with generic error message
+- Log full exception details for debugging
+- Frontend displays retry option
+
+```php
+try {
+    $statistics = $this->matchAnalyticsService->calculateBatchStatistics($batchId);
+} catch (\Illuminate\Database\QueryException $e) {
+    Log::error('Database error calculating batch statistics', [
+        'batch_id' => $batchId,
+        'error' => $e->getMessage()
+    ]);
+    
+    return response()->json([
+        'error' => 'Database error',
+        'message' => 'Unable to calculate statistics. Please try again.'
+    ], 500);
+}
+```
+
+#### Missing Template Field Data
+
+**Scenario**: Template fields referenced but template or fields no longer exist
+
+**Handling**:
+- Gracefully skip missing template fields
+- Log warning about missing template
+- Display only available fields in breakdown
+- Show informational message to user
+
+```php
+protected function getTemplateFields(?int $templateId): array
+{
+    if (!$templateId) {
+        return [];
+    }
+    
+    $template = ColumnMappingTemplate::with('fields')->find($templateId);
+    
+    if (!$template) {
+        Log::warning('Template not found for field breakdown', ['template_id' => $templateId]);
+        return [];
+    }
+    
+    return $template->fields->toArray();
+}
+```
+
+#### Large Dataset Performance Issues
+
+**Scenario**: Batch with >10,000 records causes timeout or memory issues
+
+**Handling**:
+- Implement query chunking for large batches
+- Set reasonable timeout limits
+- Return partial results with warning if timeout approaching
+- Cache results to avoid recalculation
+
+```php
+public function calculateFieldPopulationRates(int $batchId): array
+{
+    $totalRecords = MatchResult::where('batch_id', $batchId)->count();
+    
+    if ($totalRecords > 10000) {
+        // Use chunking for large datasets
+        return $this->calculateFieldPopulationRatesChunked($batchId, $totalRecords);
+    }
+    
+    // Standard calculation for smaller datasets
+    return $this->calculateFieldPopulationRatesStandard($batchId, $totalRecords);
+}
+```
+
+### Frontend Error Scenarios
+
+#### AJAX Request Failures
+
+**Scenario**: Network error or server unavailable when loading analytics
+
+**Handling**:
+- Display error message in analytics card
+- Provide retry button
+- Log error to browser console
+- Maintain UI in usable state
+
+```javascript
+async loadBatchAnalytics(batchId) {
+    try {
+        const response = await fetch(`/api/batch-analytics/${batchId}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        this.renderAnalytics(data);
+    } catch (error) {
+        console.error('Failed to load batch analytics:', error);
+        this.showError('Unable to load analytics. Please try again.', true);
+    }
+}
+
+showError(message, showRetry = false) {
+    const errorHtml = `
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> ${message}
+            ${showRetry ? '<button class="btn btn-sm btn-primary ml-3" onclick="retryLoad()">Retry</button>' : ''}
+        </div>
+    `;
+    document.getElementById('analytics-container').innerHTML = errorHtml;
+}
+```
+
+#### Chart Rendering Failures
+
+**Scenario**: Chart.js fails to render due to invalid data or library error
+
+**Handling**:
+- Catch rendering exceptions
+- Display fallback table view of data
+- Log error details
+- Show message about chart unavailability
+
+```javascript
+renderChart(chartData) {
+    try {
+        const ctx = document.getElementById('mappingChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: chartData,
+            options: this.chartOptions
+        });
+    } catch (error) {
+        console.error('Chart rendering failed:', error);
+        this.renderFallbackTable(chartData);
+        this.showWarning('Chart visualization unavailable. Displaying data in table format.');
+    }
+}
+```
+
+#### CSV Export Failures
+
+**Scenario**: Browser blocks download or CSV generation fails
+
+**Handling**:
+- Catch export exceptions
+- Display error message
+- Offer alternative (copy to clipboard)
+- Log error for debugging
+
+```javascript
+exportToCSV() {
+    try {
+        const csv = this.generateCSV();
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = this.getFilename();
+        link.click();
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('CSV export failed:', error);
+        alert('Export failed. Please try copying the data manually.');
+        this.showCopyOption();
+    }
+}
+```
+
+#### Empty or Invalid Data
+
+**Scenario**: Field breakdown data is empty or malformed
+
+**Handling**:
+- Validate data structure before rendering
+- Display appropriate "no data" message
+- Provide context about why data might be missing
+- Disable export button when no data available
+
+```javascript
+renderFieldBreakdown(data) {
+    if (!data || !data.fields || Object.keys(data.fields).length === 0) {
+        this.showEmptyState('No field comparison data available for this match result.');
+        document.getElementById('export-btn').disabled = true;
+        return;
+    }
+    
+    // Validate data structure
+    if (!this.isValidBreakdownData(data)) {
+        console.error('Invalid field breakdown data structure:', data);
+        this.showError('Field breakdown data is malformed. Please contact support.');
+        return;
+    }
+    
+    // Proceed with rendering
+    this.renderFieldTable(data.fields);
+}
+```
+
+## Testing Strategy
+
+### Dual Testing Approach
+
+This feature requires both unit testing and property-based testing to ensure comprehensive coverage:
+
+- **Unit Tests**: Verify specific examples, edge cases, UI rendering, and integration points
+- **Property Tests**: Verify universal properties across randomized inputs (calculations, data transformations)
+
+### Backend Testing
+
+#### Unit Tests (PHPUnit)
+
+**MatchAnalyticsService Tests**:
+- Test batch statistics calculation with known dataset
+- Test field population rate calculation with various field combinations
+- Test chart data generation with different column mappings
+- Test quality score calculation for each quality level threshold
+- Test handling of batches with no records
+- Test handling of batches with only NEW RECORD entries
+- Test template field inclusion when template exists
+- Test graceful handling when template is deleted
+
+**ConfidenceScoreService Tests**:
+- Test enhanced breakdown includes template fields
+- Test normalized values included when available
+- Test field category property set correctly
+- Test backward compatibility with existing consumers
+- Test field confidence score calculation
+- Test handling of null/empty values
+- Test handling of different field types (string, date, integer, decimal)
+
+**MatchResultsController Tests**:
+- Test getBatchAnalytics returns correct JSON structure
+- Test getBatchAnalytics returns 404 for invalid batch
+- Test getFieldBreakdown returns correct data
+- Test exportFieldBreakdown generates valid CSV
+- Test exportFieldBreakdown includes all required columns
+- Test authentication/authorization for endpoints
+
+#### Property-Based Tests (PHPUnit with appropriate library)
+
+**Property Test Configuration**: Minimum 100 iterations per test
+
+**Property 1: Column Mapping Percentages**
+```php
+/**
+ * Feature: match-results-analytics, Property 2: Column Mapping Percentage Calculation
+ * For any set of columns, mapped % + skipped % = 100%
+ */
+public function test_column_mapping_percentages_sum_to_100()
+{
+    $this->forAll(
+        Generator::arrayOf(Generator::string(), Generator::between(1, 50)),
+        Generator::arrayOf(Generator::string(), Generator::between(0, 50))
+    )->then(function ($mapped, $skipped) {
+        $service = new MatchAnalyticsService();
+        $result = $service->calculateColumnMappingPercentages($mapped, $skipped);
+        
+        $this->assertEquals(100.0, $result['mapped_percentage'] + $result['skipped_percentage'], '', 0.1);
+    });
+}
+```
+
+**Property 2: Field Population Rate**
+```php
+/**
+ * Feature: match-results-analytics, Property 3: Field Population Rate Calculation
+ * For any field, population % = (non-empty count / total) × 100
+ */
+public function test_field_population_rate_calculation()
+{
+    $this->forAll(
+        Generator::arrayOf(Generator::oneOf(Generator::string(), Generator::null()), Generator::between(10, 100))
+    )->then(function ($fieldValues) {
+        $nonEmptyCount = count(array_filter($fieldValues, fn($v) => $v !== null && $v !== ''));
+        $total = count($fieldValues);
+        $expected = ($nonEmptyCount / $total) * 100;
+        
+        $service = new MatchAnalyticsService();
+        $result = $service->calculateFieldPopulationRate($fieldValues);
+        
+        $this->assertEquals($expected, $result, '', 0.1);
+    });
+}
+```
+
+**Property 3: Average Confidence Calculation**
+```php
+/**
+ * Feature: match-results-analytics, Property 8: Batch Average Confidence Calculation
+ * For any batch, average confidence = sum(scores) / count (excluding NEW RECORD)
+ */
+public function test_average_confidence_excludes_new_records()
+{
+    $this->forAll(
+        Generator::arrayOf(
+            Generator::tuple(
+                Generator::float(0, 100),
+                Generator::oneOf(Generator::constant('MATCHED'), Generator::constant('POSSIBLE DUPLICATE'), Generator::constant('NEW RECORD'))
+            ),
+            Generator::between(5, 50)
+        )
+    )->then(function ($results) {
+        $filtered = array_filter($results, fn($r) => $r[1] !== 'NEW RECORD');
+        $expected = count($filtered) > 0 ? array_sum(array_column($filtered, 0)) / count($filtered) : 0;
+        
+        $service = new MatchAnalyticsService();
+        $result = $service->calculateAverageConfidence($results);
+        
+        $this->assertEquals($expected, $result, '', 0.1);
+    });
+}
+```
+
+**Property 4: Quality Score Mapping**
+```php
+/**
+ * Feature: match-results-analytics, Property 11: Quality Score Mapping
+ * For any confidence score, quality level should match defined thresholds
+ */
+public function test_quality_score_mapping_consistency()
+{
+    $this->forAll(
+        Generator::float(0, 100)
+    )->then(function ($confidence) {
+        $service = new MatchAnalyticsService();
+        $result = $service->calculateQualityScore(['average_confidence' => $confidence]);
+        
+        if ($confidence >= 90) {
+            $this->assertEquals('excellent', $result['level']);
+        } elseif ($confidence >= 75) {
+            $this->assertEquals('good', $result['level']);
+        } elseif ($confidence >= 60) {
+            $this->assertEquals('fair', $result['level']);
+        } else {
+            $this->assertEquals('poor', $result['level']);
+        }
+    });
+}
+```
+
+**Property 5: CSV Special Character Escaping**
+```php
+/**
+ * Feature: match-results-analytics, Property 15: CSV Special Character Escaping
+ * For any field value with special characters, CSV should escape properly
+ */
+public function test_csv_escapes_special_characters()
+{
+    $this->forAll(
+        Generator::string()->withSpecialChars([',', '"', "\n", "\r"])
+    )->then(function ($fieldValue) {
+        $service = new MatchAnalyticsService();
+        $csv = $service->generateCSVRow(['field' => $fieldValue]);
+        
+        // Parse CSV back
+        $parsed = str_getcsv($csv);
+        
+        // Original value should be preserved
+        $this->assertEquals($fieldValue, $parsed[0]);
+    });
+}
+```
+
+### Frontend Testing
+
+#### Unit Tests (Jest + Testing Library)
+
+**ColumnMappingAnalytics Tests**:
+- Test analytics initialization on card expansion
+- Test chart rendering with valid data
+- Test statistics display updates
+- Test error handling for failed AJAX requests
+- Test loading indicator display
+- Test lazy loading behavior
+- Test cache utilization
+
+**FieldBreakdownModal Tests**:
+- Test modal opens with correct data
+- Test field table rendering
+- Test filter button functionality
+- Test filter count badges update
+- Test category grouping (core vs template)
+- Test normalized value display
+- Test confidence score display
+- Test export button functionality
+- Test CSV generation
+- Test empty state display
+- Test error handling
+
+**Accessibility Tests**:
+- Test keyboard navigation (Tab, Enter, Escape)
+- Test ARIA labels on charts
+- Test ARIA labels on quality indicators
+- Test filter button state announcements
+- Test semantic HTML structure
+- Test color-blind friendly indicators
+- Test screen reader announcements
+
+#### Integration Tests (Laravel Dusk)
+
+**End-to-End Workflows**:
+- Test complete flow: upload → view results → expand analytics → view breakdown
+- Test filter application and field display
+- Test CSV export download
+- Test chart interactions
+- Test responsive behavior at different screen sizes
+- Test performance with large batches (1000+ records)
+
+### Test Coverage Goals
+
+- **Backend**: Minimum 80% code coverage, 100% for calculation logic
+- **Frontend**: Minimum 75% code coverage for JavaScript modules
+- **Property Tests**: 100 iterations minimum per property
+- **Integration Tests**: Cover all critical user workflows
+
+### Testing Tools
+
+- **Backend**: PHPUnit for unit tests, consider using `eris/eris` or similar for property-based testing in PHP
+- **Frontend**: Jest for unit tests, React Testing Library for component tests, fast-check for property-based testing
+- **Integration**: Laravel Dusk for browser automation
+- **Accessibility**: axe-core for automated accessibility testing
+- **Performance**: Laravel Telescope for backend profiling, Chrome DevTools for frontend profiling
+
+### Continuous Integration
+
+All tests must pass before merge:
+1. Run PHPUnit tests (unit + property)
+2. Run Jest tests
+3. Run Dusk integration tests
+4. Run accessibility audit
+5. Check code coverage thresholds
+6. Verify no console errors in browser tests
+
