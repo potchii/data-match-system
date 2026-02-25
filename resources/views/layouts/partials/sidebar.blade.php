@@ -19,6 +19,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('templates.index') }}" class="nav-link {{ request()->routeIs('templates.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>Templates</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('results.index') }}" class="nav-link {{ request()->routeIs('results.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>Match Results</p>

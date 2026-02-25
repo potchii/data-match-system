@@ -2,29 +2,36 @@
 
 namespace App\Imports;
 
+use App\Helpers\CoreFieldMappings;
 use App\Models\MatchResult;
 use App\Services\DataMappingService;
 use App\Services\DataMatchService;
+use App\Services\ConfidenceScoreService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class RecordImport implements ToCollection, WithHeadingRow
 {
     protected $batchId;
+    protected $template;
     protected $mappingService;
     protected $matchService;
     protected $columnMappingSummary = null;
 
-    public function __construct($batchId)
+    public function __construct($batchId, $template = null)
     {
         $this->batchId = $batchId;
+        $this->template = $template;
         $this->mappingService = new DataMappingService();
-        $this->matchService = new DataMatchService();
+        $this->matchService = new DataMatchService(new ConfidenceScoreService());
     }
 
     /**
      * Get column mapping summary from the first row
+     *
+     * @return array|null
      */
     public function getColumnMappingSummary(): ?array
     {
@@ -33,15 +40,33 @@ class RecordImport implements ToCollection, WithHeadingRow
 
     /**
      * Process each row from the Excel file
+     *
+     * @param Collection $rows
+     * @return void
      */
     public function collection(Collection $rows)
     {
         $isFirstRow = true;
         $allOriginalColumns = [];
+        $processedCount = 0;
+        $skippedCount = 0;
+        $newRecordCount = 0;
+        $matchedRecordCount = 0;
+        
+        Log::info('Starting record import', [
+            'batch_id' => $this->batchId,
+            'template' => $this->template ? $this->template->name : 'none',
+            'row_count' => $rows->count(),
+        ]);
         
         foreach ($rows as $index => $row) {
             // Convert row to array (handle both object and array inputs)
             $rowData = is_array($row) ? $row : $row->toArray();
+            
+            // Apply template if provided
+            if ($this->template) {
+                $rowData = $this->template->applyTo($rowData);
+            }
             
             // Capture original column names from first row for mapping summary
             if ($isFirstRow) {
@@ -62,6 +87,13 @@ class RecordImport implements ToCollection, WithHeadingRow
             
             // Skip if essential data is missing
             if (empty($coreFields['last_name']) || empty($coreFields['first_name'])) {
+                $skippedCount++;
+                Log::warning('Skipping row with missing required fields', [
+                    'batch_id' => $this->batchId,
+                    'row_index' => $index + 1,
+                    'has_last_name' => !empty($coreFields['last_name']),
+                    'has_first_name' => !empty($coreFields['first_name']),
+                ]);
                 continue;
             }
             
@@ -72,14 +104,17 @@ class RecordImport implements ToCollection, WithHeadingRow
             if ($matchResult['status'] === 'NEW RECORD') {
                 $coreFields['origin_batch_id'] = $this->batchId;
                 
-                // Reconstruct full data for insertion
-                $insertData = [
-                    'core_fields' => $coreFields,
-                    'dynamic_fields' => $mappedData['dynamic_fields'] ?? [],
-                ];
-                
-                $newRecord = $this->matchService->insertNewRecord($insertData);
+                $newRecord = $this->matchService->insertNewRecord(['core_fields' => $coreFields]);
                 $matchResult['matched_id'] = $newRecord->uid;
+                
+                $newRecordCount++;
+                
+                Log::info('New record created', [
+                    'batch_id' => $this->batchId,
+                    'record_id' => $newRecord->uid,
+                    'last_name' => $coreFields['last_name'],
+                    'first_name' => $coreFields['first_name'],
+                ]);
                 
                 // Create match result record first
                 $matchResultRecord = MatchResult::create([
@@ -96,6 +131,11 @@ class RecordImport implements ToCollection, WithHeadingRow
                 // Update the main system record with the match result ID
                 $newRecord->update(['origin_match_result_id' => $matchResultRecord->id]);
             } else {
+                // Extract field breakdown from match result
+                $fieldBreakdown = $matchResult['field_breakdown'] ?? null;
+                
+                $matchedRecordCount++;
+                
                 // Create match result record for existing matches
                 MatchResult::create([
                     'batch_id' => $this->batchId,
@@ -106,23 +146,37 @@ class RecordImport implements ToCollection, WithHeadingRow
                     'match_status' => $matchResult['status'],
                     'confidence_score' => $matchResult['confidence'],
                     'matched_system_id' => $matchResult['matched_id'],
+                    'field_breakdown' => $fieldBreakdown,
                 ]);
             }
+            
+            $processedCount++;
         }
+        
+        Log::info('Record import completed', [
+            'batch_id' => $this->batchId,
+            'total_rows' => $rows->count(),
+            'processed' => $processedCount,
+            'skipped' => $skippedCount,
+            'new_records' => $newRecordCount,
+            'matched_records' => $matchedRecordCount,
+        ]);
     }
 
     /**
      * Generate column mapping summary from first row analysis
+     *
+     * @param array $originalColumns
+     * @param array $mappedData
+     * @return array
      */
     protected function generateMappingSummary(array $originalColumns, array $mappedData): array
     {
         $coreFieldsMapped = [];
-        $dynamicFieldsCaptured = [];
         $skippedColumns = [];
         
         // Get the reverse mapping to find original column names
         $coreFields = $mappedData['core_fields'];
-        $dynamicFields = $mappedData['dynamic_fields'];
         
         // Track which original columns were mapped
         $mappedOriginalColumns = [];
@@ -137,16 +191,6 @@ class RecordImport implements ToCollection, WithHeadingRow
             }
         }
         
-        // Identify dynamic fields captured
-        foreach ($dynamicFields as $normalizedKey => $value) {
-            // Find original column name that became this dynamic field
-            $originalColumn = $this->findOriginalColumnForDynamicField($originalColumns, $normalizedKey, $mappedOriginalColumns);
-            if ($originalColumn) {
-                $dynamicFieldsCaptured[] = $originalColumn;
-                $mappedOriginalColumns[] = $originalColumn;
-            }
-        }
-        
         // Identify skipped columns (empty or processed as compound names)
         foreach ($originalColumns as $column) {
             if (!in_array($column, $mappedOriginalColumns)) {
@@ -156,74 +200,27 @@ class RecordImport implements ToCollection, WithHeadingRow
         
         return [
             'core_fields_mapped' => $coreFieldsMapped,
-            'dynamic_fields_captured' => $dynamicFieldsCaptured,
             'skipped_columns' => $skippedColumns,
         ];
     }
     
     /**
      * Find original column name that mapped to a core field
+     *
+     * @param array $originalColumns
+     * @param string $systemField
+     * @return string|null
      */
     protected function findOriginalColumnForCoreField(array $originalColumns, string $systemField): ?string
     {
-        // Get core field mappings from DataMappingService
-        $mappings = [
-            'uid' => ['regsno', 'RegsNo', 'regsnumber', 'registration_no'],
-            'last_name' => ['surname', 'Surname', 'lastname', 'LastName', 'last_name'],
-            'first_name' => ['firstname', 'FirstName', 'first_name', 'fname'],
-            'middle_name' => ['middlename', 'MiddleName', 'middle_name', 'mname'],
-            'suffix' => ['extension', 'Extension', 'suffix', 'Suffix', 'ext'],
-            'birthday' => ['dob', 'DOB', 'birthday', 'Birthday', 'birthdate', 'BirthDate', 'birth_date', 'date_of_birth', 'DateOfBirth', 'dateofbirth'],
-            'gender' => ['sex', 'Sex', 'gender', 'Gender'],
-            'civil_status' => ['status', 'Status', 'civilstatus', 'CivilStatus', 'civil_status'],
-            'street' => ['address', 'Address', 'street', 'Street'],
-            'city' => ['city', 'City'],
-            'barangay' => ['brgydescription', 'BrgyDescription', 'barangay', 'Barangay'],
-        ];
+        $variations = CoreFieldMappings::getVariations($systemField);
         
-        if (!isset($mappings[$systemField])) {
-            return null;
-        }
-        
-        foreach ($mappings[$systemField] as $variation) {
+        foreach ($variations as $variation) {
             if (in_array($variation, $originalColumns)) {
                 return $variation;
             }
         }
         
         return null;
-    }
-    
-    /**
-     * Find original column name that became a dynamic field
-     */
-    protected function findOriginalColumnForDynamicField(array $originalColumns, string $normalizedKey, array $alreadyMapped): ?string
-    {
-        // Try to find a column that normalizes to this key
-        foreach ($originalColumns as $column) {
-            if (in_array($column, $alreadyMapped)) {
-                continue;
-            }
-            
-            // Normalize the column name the same way DataMappingService does
-            $normalized = $this->normalizeDynamicKey($column);
-            if ($normalized === $normalizedKey) {
-                return $column;
-            }
-        }
-        
-        return null;
-    }
-    
-    /**
-     * Normalize dynamic key (same logic as DataMappingService)
-     */
-    protected function normalizeDynamicKey(string $key): string
-    {
-        $key = preg_replace('/([a-z])([A-Z])/', '$1_$2', $key);
-        $normalized = strtolower($key);
-        $normalized = preg_replace('/[^a-z0-9_]/', '_', $normalized);
-        $normalized = preg_replace('/_+/', '_', $normalized);
-        return trim($normalized, '_');
     }
 }

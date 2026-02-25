@@ -18,10 +18,12 @@ class MatchResult extends Model
         'match_status',
         'confidence_score',
         'matched_system_id',
+        'field_breakdown',
     ];
 
     protected $casts = [
         'confidence_score' => 'float',
+        'field_breakdown' => 'array',
     ];
 
     public function batch(): BelongsTo

@@ -143,38 +143,25 @@ class DataMappingServiceTest extends TestCase
     }
 
     /** @test */
-    public function it_maps_address_variations_to_street()
+    public function it_maps_address_variations_to_address()
     {
         $variations = [
             'address' => '123 Main St',
             'Address' => '456 Oak Ave',
             'street' => '789 Pine Rd',
             'Street' => '321 Elm Blvd',
-        ];
-
-        foreach ($variations as $columnName => $value) {
-            $result = $this->service->mapUploadedData([$columnName => $value]);
-            
-            $this->assertArrayHasKey('street', $result['core_fields'],
-                "Column '$columnName' should map to street");
-            $this->assertEquals($value, $result['core_fields']['street']);
-        }
-    }
-
-    /** @test */
-    public function it_maps_city_variations_to_city()
-    {
-        $variations = [
             'city' => 'Manila',
             'City' => 'Quezon City',
+            'province' => 'Metro Manila',
+            'Province' => 'Rizal',
         ];
 
         foreach ($variations as $columnName => $value) {
             $result = $this->service->mapUploadedData([$columnName => $value]);
             
-            $this->assertArrayHasKey('city', $result['core_fields'],
-                "Column '$columnName' should map to city");
-            $this->assertEquals($value, $result['core_fields']['city']);
+            $this->assertArrayHasKey('address', $result['core_fields'],
+                "Column '$columnName' should map to address");
+            $this->assertEquals($value, $result['core_fields']['address']);
         }
     }
 
@@ -261,8 +248,7 @@ class DataMappingServiceTest extends TestCase
             'DOB' => '1990-05-15',
             'Sex' => 'M',
             'status' => 'Single',
-            'address' => '123 Main St',
-            'city' => 'Manila',
+            'address' => '123 Main St, Manila, Metro Manila',
             'barangay' => 'Barangay 1',
         ];
 
@@ -274,8 +260,7 @@ class DataMappingServiceTest extends TestCase
         $this->assertArrayHasKey('birthday', $result['core_fields']);
         $this->assertArrayHasKey('gender', $result['core_fields']);
         $this->assertArrayHasKey('civil_status', $result['core_fields']);
-        $this->assertArrayHasKey('street', $result['core_fields']);
-        $this->assertArrayHasKey('city', $result['core_fields']);
+        $this->assertArrayHasKey('address', $result['core_fields']);
         $this->assertArrayHasKey('barangay', $result['core_fields']);
 
         $this->assertEquals('Dela Cruz', $result['core_fields']['last_name']);
@@ -284,8 +269,7 @@ class DataMappingServiceTest extends TestCase
         $this->assertEquals('1990-05-15', $result['core_fields']['birthday']);
         $this->assertEquals('Male', $result['core_fields']['gender']);
         $this->assertEquals('Single', $result['core_fields']['civil_status']);
-        $this->assertEquals('123 Main St', $result['core_fields']['street']);
-        $this->assertEquals('Manila', $result['core_fields']['city']);
+        $this->assertEquals('123 Main St, Manila, Metro Manila', $result['core_fields']['address']);
         $this->assertEquals('Barangay 1', $result['core_fields']['barangay']);
     }
 
@@ -527,100 +511,16 @@ class DataMappingServiceTest extends TestCase
             'DOB' => '1990-01-01',
             'Sex' => 'M',
             'status' => 'Single',
-            'address' => '123 St',
-            'city' => 'Manila',
+            'address' => '123 St, Manila, Metro Manila',
             'barangay' => 'Brgy 1',
         ];
 
         $result = $this->service->mapUploadedData($row);
 
-        // All should be core fields
-        $this->assertCount(11, $result['core_fields']);
+        // All should be core fields (10 fields total)
+        $this->assertCount(10, $result['core_fields']);
         $this->assertEmpty($result['dynamic_fields']);
     }
 
-    // ========================================================================
-    // Test JSON size validation throws error
-    // Requirements: 3.7
-    // ========================================================================
 
-    /** @test */
-    public function it_throws_exception_when_json_exceeds_size_limit()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Dynamic attributes exceed maximum size');
-
-        // Generate data that exceeds 65KB
-        $largeData = [
-            'surname' => 'Test',
-            'firstname' => 'User',
-        ];
-
-        // Add many large fields to exceed the limit (65,535 bytes)
-        for ($i = 0; $i < 1000; $i++) {
-            $largeData["large_field_$i"] = str_repeat('A', 100);
-        }
-
-        $this->service->mapUploadedData($largeData);
-    }
-
-    /** @test */
-    public function it_accepts_data_within_json_size_limit()
-    {
-        $row = [
-            'surname' => 'Test',
-            'firstname' => 'User',
-        ];
-
-        // Add reasonable amount of dynamic fields (well within 65KB)
-        for ($i = 0; $i < 100; $i++) {
-            $row["field_$i"] = "value_$i";
-        }
-
-        $result = $this->service->mapUploadedData($row);
-
-        $this->assertIsArray($result);
-        $this->assertArrayHasKey('core_fields', $result);
-        $this->assertArrayHasKey('dynamic_fields', $result);
-        $this->assertCount(100, $result['dynamic_fields']);
-    }
-
-    /** @test */
-    public function it_validates_json_size_only_for_dynamic_fields()
-    {
-        // Core fields should not count toward JSON size limit
-        $row = [
-            'surname' => str_repeat('A', 1000),
-            'firstname' => str_repeat('B', 1000),
-            'middlename' => str_repeat('C', 1000),
-            'address' => str_repeat('D', 1000),
-            'small_dynamic' => 'value',
-        ];
-
-        // Should not throw exception because only dynamic fields count
-        $result = $this->service->mapUploadedData($row);
-
-        $this->assertIsArray($result);
-        $this->assertArrayHasKey('small_dynamic', $result['dynamic_fields']);
-    }
-
-    /** @test */
-    public function it_includes_size_in_error_message()
-    {
-        try {
-            $largeData = ['surname' => 'Test'];
-            
-            // Generate exactly 70KB of dynamic data
-            for ($i = 0; $i < 1100; $i++) {
-                $largeData["field_$i"] = str_repeat('X', 100);
-            }
-            
-            $this->service->mapUploadedData($largeData);
-            
-            $this->fail('Expected InvalidArgumentException was not thrown');
-        } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Dynamic attributes exceed maximum size', $e->getMessage());
-            $this->assertStringContainsString('bytes', $e->getMessage());
-        }
-    }
 }

@@ -41,21 +41,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <h5 class="text-info">
-                                    <i class="fas fa-plus-circle"></i> Dynamic Fields Captured
-                                </h5>
-                                <div class="mb-3">
-                                    @if(count(session('column_mapping')['dynamic_fields_captured']) > 0)
-                                        @foreach(session('column_mapping')['dynamic_fields_captured'] as $field)
-                                            <span class="badge badge-info mr-1 mb-1">{{ $field }}</span>
-                                        @endforeach
-                                    @else
-                                        <span class="text-muted">None</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <h5 class="text-secondary">
                                     <i class="fas fa-minus-circle"></i> Skipped Columns
                                 </h5>
@@ -75,12 +61,9 @@
                             <div class="col-md-12">
                                 <p class="mb-2">
                                     <strong>Total Columns:</strong> 
-                                    {{ count(session('column_mapping')['core_fields_mapped']) + count(session('column_mapping')['dynamic_fields_captured']) + count(session('column_mapping')['skipped_columns']) }}
+                                    {{ count(session('column_mapping')['core_fields_mapped']) + count(session('column_mapping')['skipped_columns']) }}
                                     <span class="ml-3">
                                         <strong>Core:</strong> {{ count(session('column_mapping')['core_fields_mapped']) }}
-                                    </span>
-                                    <span class="ml-3">
-                                        <strong>Dynamic:</strong> {{ count(session('column_mapping')['dynamic_fields_captured']) }}
                                     </span>
                                     <span class="ml-3">
                                         <strong>Skipped:</strong> {{ count(session('column_mapping')['skipped_columns']) }}
@@ -146,6 +129,7 @@
                                     <th>Match Status</th>
                                     <th>Confidence</th>
                                     <th>Matched With</th>
+                                    <th>Details</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -167,7 +151,15 @@
                                             <span class="badge badge-info">{{ $result->match_status }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ number_format($result->confidence_score, 1) }}%</td>
+                                    <td>
+                                        <strong>{{ number_format($result->confidence_score, 1) }}%</strong>
+                                        @if($result->field_breakdown)
+                                            <br>
+                                            <small class="text-muted">
+                                                {{ $result->field_breakdown['matched_fields'] ?? 0 }}/{{ $result->field_breakdown['total_fields'] ?? 0 }} fields
+                                            </small>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if($result->matchedRecord)
                                             <strong>{{ $result->matchedRecord->first_name }} {{ $result->matchedRecord->middle_name }} {{ $result->matchedRecord->last_name }}</strong>
@@ -182,10 +174,19 @@
                                             <span class="text-muted">N/A</span>
                                         @endif
                                     </td>
+                                    <td>
+                                        @if($result->field_breakdown && $result->match_status !== 'NEW RECORD')
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#breakdownModal{{ $result->id }}">
+                                                <i class="fas fa-eye"></i> View Breakdown
+                                            </button>
+                                        @else
+                                            <span class="text-muted">N/A</span>
+                                        @endif
+                                    </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">No results found</td>
+                                    <td colspan="7" class="text-center">No results found</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -201,4 +202,84 @@
         </div>
     </div>
 </section>
+
+<!-- Field Breakdown Modals -->
+@foreach($results as $result)
+    @if($result->field_breakdown && $result->match_status !== 'NEW RECORD')
+    <div class="modal fade" id="breakdownModal{{ $result->id }}" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Field Breakdown - Match Result #{{ $result->id }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <h6>Match Summary</h6>
+                            <p>
+                                <strong>Confidence Score:</strong> 
+                                <span class="badge badge-primary">{{ number_format($result->confidence_score, 1) }}%</span>
+                                <span class="ml-3">
+                                    <strong>Matched Fields:</strong> {{ $result->field_breakdown['matched_fields'] ?? 0 }}
+                                </span>
+                                <span class="ml-3">
+                                    <strong>Total Fields:</strong> {{ $result->field_breakdown['total_fields'] ?? 0 }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    @if(isset($result->field_breakdown['core_fields']) && count($result->field_breakdown['core_fields']) > 0)
+                    <div class="mb-4">
+                        <h6><i class="fas fa-database"></i> Core Fields</h6>
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Status</th>
+                                    <th>Uploaded Value</th>
+                                    <th>Existing Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($result->field_breakdown['core_fields'] as $fieldName => $fieldData)
+                                <tr>
+                                    <td><strong>{{ $fieldName }}</strong></td>
+                                    <td>
+                                        @if($fieldData['status'] === 'match')
+                                            <span class="badge badge-success"><i class="fas fa-check"></i> Match</span>
+                                        @elseif($fieldData['status'] === 'mismatch')
+                                            <span class="badge badge-danger"><i class="fas fa-times"></i> Mismatch</span>
+                                        @else
+                                            <span class="badge badge-info"><i class="fas fa-plus"></i> New</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span class="{{ $fieldData['status'] === 'match' ? 'text-success' : ($fieldData['status'] === 'mismatch' ? 'text-danger' : 'text-info') }}">
+                                            {{ $fieldData['uploaded'] ?? 'N/A' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="{{ $fieldData['status'] === 'match' ? 'text-success' : 'text-muted' }}">
+                                            {{ $fieldData['existing'] ?? 'N/A' }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+@endforeach
 @endsection

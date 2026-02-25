@@ -49,4 +49,12 @@ class User extends Authenticatable
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+
+    /**
+     * Get the column mapping templates for the user
+     */
+    public function columnMappingTemplates()
+    {
+        return $this->hasMany(ColumnMappingTemplate::class);
+    }
 }
