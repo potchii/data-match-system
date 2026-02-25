@@ -2,99 +2,18 @@
 
 namespace App\Services;
 
+use App\Helpers\CoreFieldMappings;
+
 class DataMappingService
 {
-    /**
-     * Core field mappings (column name variations → system field)
-     */
-    protected const CORE_FIELD_MAPPINGS = [
-        // UID / Registration Number
-        'regsno' => 'uid',
-        'RegsNo' => 'uid',
-        'regsnumber' => 'uid',
-        'registration_no' => 'uid',
-        
-        // Last Name / Surname
-        'surname' => 'last_name',
-        'Surname' => 'last_name',
-        'lastname' => 'last_name',
-        'LastName' => 'last_name',
-        'last_name' => 'last_name',
-        
-        // First Name
-        'firstname' => 'first_name',
-        'FirstName' => 'first_name',
-        'first_name' => 'first_name',
-        'fname' => 'first_name',
-        
-        // Second Name (part of compound first name)
-        'secondname' => 'second_name',
-        'SecondName' => 'second_name',
-        'second_name' => 'second_name',
-        
-        // Middle Name
-        'middlename' => 'middle_name',
-        'MiddleName' => 'middle_name',
-        'middle_name' => 'middle_name',
-        'mname' => 'middle_name',
-        
-        // Suffix / Extension
-        'extension' => 'suffix',
-        'Extension' => 'suffix',
-        'suffix' => 'suffix',
-        'Suffix' => 'suffix',
-        'ext' => 'suffix',
-        
-        // Birthday / Date of Birth
-        'dob' => 'birthday',
-        'DOB' => 'birthday',
-        'birthday' => 'birthday',
-        'Birthday' => 'birthday',
-        'birthdate' => 'birthday',
-        'BirthDate' => 'birthday',
-        'birth_date' => 'birthday',
-        'date_of_birth' => 'birthday',
-        'DateOfBirth' => 'birthday',
-        'dateofbirth' => 'birthday',
-        
-        // Gender / Sex
-        'sex' => 'gender',
-        'Sex' => 'gender',
-        'gender' => 'gender',
-        'Gender' => 'gender',
-        
-        // Civil Status
-        'status' => 'civil_status',
-        'Status' => 'civil_status',
-        'civilstatus' => 'civil_status',
-        'CivilStatus' => 'civil_status',
-        'civil_status' => 'civil_status',
-        
-        // Address / Street
-        'address' => 'street',
-        'Address' => 'street',
-        'street' => 'street',
-        'Street' => 'street',
-        
-        // City
-        'city' => 'city',
-        'City' => 'city',
-        
-        // Barangay
-        'brgydescription' => 'barangay',
-        'BrgyDescription' => 'barangay',
-        'barangay' => 'barangay',
-        'Barangay' => 'barangay',
-    ];
 
     /**
      * Map uploaded Excel columns to system database columns
-     * Returns: ['core_fields' => [...], 'dynamic_fields' => [...]]
+     * Returns: ['core_fields' => [...]]
      */
     public function mapUploadedData(array $row): array
     {
         $coreFields = [];
-        $dynamicFields = [];
         $processedKeys = [];
 
         // Process compound first name (Philippine naming convention)
@@ -128,8 +47,8 @@ class DataMappingService
             }
 
             // Check if this is a known core field
-            if (isset(self::CORE_FIELD_MAPPINGS[$key])) {
-                $systemField = self::CORE_FIELD_MAPPINGS[$key];
+            if (CoreFieldMappings::isCoreField($key)) {
+                $systemField = CoreFieldMappings::getSystemField($key);
                 
                 // Apply normalization based on field type
                 $normalizedValue = $this->normalizeFieldValue($systemField, $value);
@@ -138,23 +57,103 @@ class DataMappingService
                 if ($normalizedValue !== null) {
                     $coreFields[$systemField] = $normalizedValue;
                 }
-            } else {
-                // Unknown field → dynamic attribute
-                $normalizedKey = $this->normalizeDynamicKey($key);
-                $dynamicFields[$normalizedKey] = $this->sanitizeDynamicValue($value);
             }
-        }
-
-        // Validate JSON size
-        if (!empty($dynamicFields)) {
-            $this->validateJsonSize($dynamicFields);
+            // Unknown fields are ignored - strict validation ensures only expected columns exist
         }
 
         return [
             'core_fields' => $coreFields,
-            'dynamic_fields' => $dynamicFields,
         ];
     }
+    /**
+     * Apply a saved template to remap columns before processing
+     *
+     * @param array $row Raw Excel row
+     * @param \App\Models\ColumnMappingTemplate|null $template
+     * @return array Remapped row
+     */
+    public function applyTemplate(array $row, $template): array
+    {
+        // If no template provided, return row unchanged
+        if ($template === null) {
+            return $row;
+        }
+
+        // Apply template mappings
+        return $template->applyTo($row);
+    }
+
+    /**
+     * Generate template from current mapping
+     * Analyzes sample row and creates template-ready mapping structure
+     *
+     * @param array $sampleRow First row of upload
+     * @return array Template-ready mappings {"excel_column": "system_field"}
+     */
+    public function generateTemplateFromMapping(array $sampleRow): array
+    {
+        $mappings = [];
+
+        // Process compound first name fields
+        $firstName = $sampleRow['firstname'] ?? $sampleRow['FirstName'] ?? $sampleRow['first_name'] ?? $sampleRow['fname'] ?? null;
+        $secondName = $sampleRow['secondname'] ?? $sampleRow['SecondName'] ?? $sampleRow['second_name'] ?? null;
+        $middleName = $sampleRow['middlename'] ?? $sampleRow['MiddleName'] ?? $sampleRow['middle_name'] ?? $sampleRow['mname'] ?? null;
+
+        // Track which keys we've processed for compound names
+        $processedKeys = [];
+
+        // Map first name field
+        if ($firstName !== null) {
+            foreach (['firstname', 'FirstName', 'first_name', 'fname'] as $key) {
+                if (array_key_exists($key, $sampleRow)) {
+                    $mappings[$key] = 'first_name';
+                    $processedKeys[] = $key;
+                    break;
+                }
+            }
+        }
+
+        // Map second name field (if exists, it's part of compound first name)
+        if ($secondName !== null) {
+            foreach (['secondname', 'SecondName', 'second_name'] as $key) {
+                if (array_key_exists($key, $sampleRow)) {
+                    $mappings[$key] = 'second_name';
+                    $processedKeys[] = $key;
+                    break;
+                }
+            }
+        }
+
+        // Map middle name field
+        if ($middleName !== null) {
+            foreach (['middlename', 'MiddleName', 'middle_name', 'mname'] as $key) {
+                if (array_key_exists($key, $sampleRow)) {
+                    $mappings[$key] = 'middle_name';
+                    $processedKeys[] = $key;
+                    break;
+                }
+            }
+        }
+
+        // Map all other fields
+        foreach ($sampleRow as $key => $value) {
+            // Skip already processed compound name fields
+            if (in_array($key, $processedKeys)) {
+                continue;
+            }
+
+            // Check if this is a known core field
+            if (CoreFieldMappings::isCoreField($key)) {
+                $systemField = CoreFieldMappings::getSystemField($key);
+                $mappings[$key] = $systemField;
+            }
+            // Unknown fields are ignored - strict validation ensures only expected columns exist
+        }
+
+        return $mappings;
+    }
+
+
     
     /**
      * Build compound first name (Philippine naming convention)
@@ -240,79 +239,8 @@ class DataMappingService
             'birthday' => $this->normalizeDate($value),
             'gender' => $this->normalizeGender($value),
             'uid', 'last_name', 'first_name', 'middle_name', 'suffix',
-            'civil_status', 'street', 'city', 'barangay' => $this->normalizeString($value),
+            'civil_status', 'address', 'barangay' => $this->normalizeString($value),
             default => $value,
         };
-    }
-
-    /**
-     * Normalize dynamic attribute key to snake_case
-     */
-    protected function normalizeDynamicKey(string $key): string
-    {
-        // First, insert underscores before capital letters (for camelCase/PascalCase)
-        $key = preg_replace('/([a-z])([A-Z])/', '$1_$2', $key);
-        
-        // Convert to lowercase
-        $normalized = strtolower($key);
-        
-        // Replace non-alphanumeric characters with underscores
-        $normalized = preg_replace('/[^a-z0-9_]/', '_', $normalized);
-        
-        // Replace multiple underscores with single underscore
-        $normalized = preg_replace('/_+/', '_', $normalized);
-        
-        // Trim underscores from start and end
-        return trim($normalized, '_');
-    }
-
-    /**
-     * Sanitize dynamic attribute value
-     */
-    protected function sanitizeDynamicValue($value)
-    {
-        // Ensure value is JSON-serializable
-        if (is_object($value)) {
-            // Handle DateTime objects
-            if ($value instanceof \DateTimeInterface) {
-                return $value->format('Y-m-d H:i:s');
-            }
-            
-            // Try to convert to string if __toString exists
-            if (method_exists($value, '__toString')) {
-                return (string) $value;
-            }
-            
-            // For other objects, use json_encode or serialize
-            $encoded = json_encode($value);
-            if ($encoded !== false) {
-                return $encoded;
-            }
-            
-            // Last resort: return class name
-            return get_class($value);
-        }
-        
-        if (is_array($value)) {
-            return array_map([$this, 'sanitizeDynamicValue'], $value);
-        }
-
-        return $value;
-    }
-
-    /**
-     * Validate JSON size doesn't exceed database limits
-     */
-    protected function validateJsonSize(array $data): void
-    {
-        $json = json_encode($data);
-        $size = strlen($json);
-        
-        // MySQL TEXT type limit: 65,535 bytes
-        if ($size > 65535) {
-            throw new \InvalidArgumentException(
-                "Dynamic attributes exceed maximum size (65KB). Current size: {$size} bytes"
-            );
-        }
     }
 }

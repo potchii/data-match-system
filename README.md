@@ -124,6 +124,51 @@ app/
 
 ---
 
+## 📁 FILE UPLOAD REQUIREMENTS
+
+### Supported File Formats
+- Excel files: `.xlsx`, `.xls`
+- CSV files: `.csv`
+- Maximum file size: 10MB
+
+### Column Requirements
+
+#### Without Template (Core Fields Only)
+When uploading without a template, your file must contain these required columns:
+- **first_name** (or variations: FirstName, firstname, fname)
+- **last_name** (or variations: Surname, lastname, LastName)
+
+Optional core columns:
+- middle_name, suffix, birthday, gender, civil_status, address, barangay, uid
+
+#### With Template (Core + Custom Fields)
+When using a template, your file must contain:
+- All core fields mapped in the template
+- All custom fields defined in the template
+- No additional columns not defined in the template
+
+### Preparing Your File
+
+**Before uploading, ensure:**
+1. Column names match your template exactly (case-insensitive)
+2. All required columns are present
+3. No extra columns exist
+4. Data types match field definitions:
+   - Integers: No decimals or text (e.g., 12345)
+   - Decimals: Numeric values (e.g., 50000.50)
+   - Dates: Valid date format (YYYY-MM-DD recommended)
+   - Booleans: yes/no, true/false, or 1/0
+5. No empty rows or columns
+
+**Common Issues to Avoid:**
+- Misspelled column names
+- Extra blank columns in Excel
+- Mixed data types in a column
+- Missing required columns
+- Currency symbols or commas in number fields
+
+---
+
 ## 🛠️ ARTISAN COMMANDS
 
 ### Data Management Commands
@@ -213,3 +258,66 @@ All variations are automatically normalized to `Y-m-d` format before matching.
 - Links back to the specific match result row
 - Enables full audit trail of data sources
 - Supports data lineage and compliance requirements
+
+### Strict File Validation with Template Support
+The system enforces strict column validation to ensure data quality and consistency:
+
+#### Core Validation Rules
+- **Exact Column Matching**: Uploaded files must contain exactly the expected columns
+- **No Missing Columns**: All required columns must be present
+- **No Extra Columns**: Files cannot contain undefined columns
+- **Case-Insensitive Matching**: Column names are matched regardless of case
+
+#### Template-Based Custom Fields
+Templates allow you to define additional fields beyond the core system columns:
+
+**Creating Templates with Custom Fields:**
+1. Navigate to Templates → Create New Template
+2. Map core fields (first_name, last_name, birthday, etc.)
+3. Add custom fields with:
+   - **Field Name**: Column name in your file
+   - **Field Type**: string, integer, decimal, date, or boolean
+   - **Required**: Whether the field must have a value
+
+**Supported Field Types:**
+- **String**: Any text value (names, codes, descriptions)
+- **Integer**: Whole numbers only (employee IDs, counts)
+- **Decimal**: Numbers with decimals (salaries, scores)
+- **Date**: Date values (hire dates, renewal dates)
+- **Boolean**: True/false values (yes/no, 1/0, true/false)
+
+**Example Template Configuration:**
+```
+Core Fields:
+  first_name → FirstName
+  last_name → Surname
+  birthday → DOB
+
+Custom Fields:
+  employee_id (Integer, Required)
+  department (String, Required)
+  hire_date (Date, Optional)
+  is_active (Boolean, Required)
+```
+
+#### Upload Validation Process
+1. **Select Template** (optional): Choose a template or upload with core fields only
+2. **File Validation**: System checks column structure before processing
+3. **Error Reporting**: Clear messages identify missing, extra, or misnamed columns
+4. **Type Validation**: Custom field values are validated against their defined types
+
+**Validation Error Examples:**
+```
+Missing required column: employee_id
+Unexpected column: extra_field
+Field 'hire_date' must be a valid date
+Field 'employee_id' must be an integer
+```
+
+#### Benefits
+- **Data Quality**: Prevents incorrect or incomplete data from being imported
+- **Clear Feedback**: Detailed error messages help fix file issues quickly
+- **Flexibility**: Templates support organization-specific data requirements
+- **Consistency**: Ensures all uploads follow the same structure
+
+For detailed guidance on using templates and custom fields, see the [Template Fields User Guide](.kiro/specs/template-dynamic-fields/USER_GUIDE.md).

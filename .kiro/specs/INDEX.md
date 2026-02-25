@@ -11,6 +11,16 @@
 ### Main Specification
 - **SPECIFICATION_SUMMARY.md** - Executive summary of the entire specification
 
+### Feature Specification: Dynamic Attributes Enhancement
+**Location:** `.kiro/specs/dynamic-attributes-enhancement/`
+**Status:** ✅ Complete (with UX improvements)
+
+#### 📄 Documents
+1. **requirements.md** - Feature requirements and acceptance criteria
+2. **design.md** - Technical design and architecture
+3. **tasks.md** - Implementation task list (16 tasks completed)
+4. **UX_IMPROVEMENTS.md** - Post-implementation UX enhancements
+
 ### Feature Specification: Data Match System Frontend
 **Location:** `.kiro/specs/data-match-frontend/`
 

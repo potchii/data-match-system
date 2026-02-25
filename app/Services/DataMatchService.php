@@ -15,9 +15,12 @@ class DataMatchService
 {
     protected array $rules;
     protected Collection $candidateCache;
+    protected ConfidenceScoreService $confidenceScoreService;
     
-    public function __construct()
+    public function __construct(ConfidenceScoreService $confidenceScoreService)
     {
+        $this->confidenceScoreService = $confidenceScoreService;
+        
         // Initialize matching rules in priority order
         $this->rules = [
             new ExactMatchRule(),           // 100% - Full name + DOB
@@ -51,7 +54,7 @@ class DataMatchService
     
     /**
      * Find match for single uploaded record (legacy support)
-     * Returns: ['status' => string, 'confidence' => float, 'matched_id' => ?string]
+     * Returns: ['status' => string, 'confidence' => float, 'matched_id' => ?string, 'field_breakdown' => ?array]
      */
     public function findMatch(array $uploadedData): array
     {
@@ -69,23 +72,39 @@ class DataMatchService
         // but preserve newly inserted records from current batch
         $this->refreshCandidates(collect([$normalized]));
 
-        return $this->findMatchFromCache($normalized);
+        return $this->findMatchFromCache($normalized, $uploadedData);
     }
     
     /**
      * Find match from cached candidates using rule chain
+     * Now uses unified scoring with field breakdown
      */
-    protected function findMatchFromCache(array $normalized): array
+    protected function findMatchFromCache(array $normalized, array $uploadedData): array
     {
         foreach ($this->rules as $rule) {
             $result = $rule->match($normalized, $this->candidateCache);
             
             if ($result) {
+                // Use unified confidence score calculation
+                $matchedRecord = $result['record'];
+                
+                // Ensure uploadedData is in the correct format for scoring
+                $scoringData = $uploadedData;
+                if (!isset($uploadedData['core_fields'])) {
+                    // Convert flat format to structured format for scoring
+                    $scoringData = [
+                        'core_fields' => $uploadedData,
+                    ];
+                }
+                
+                $scoreResult = $this->confidenceScoreService->calculateUnifiedScore($scoringData, $matchedRecord);
+                
                 return [
                     'status' => $rule->status(),
-                    'confidence' => $rule->confidence(),
-                    'matched_id' => $result['record']->uid,
+                    'confidence' => $scoreResult['score'],
+                    'matched_id' => $matchedRecord->uid,
                     'rule' => $result['rule'],
+                    'field_breakdown' => $scoreResult['breakdown'],
                 ];
             }
         }
@@ -96,6 +115,7 @@ class DataMatchService
             'confidence' => 0.0,
             'matched_id' => null,
             'rule' => 'no_match',
+            'field_breakdown' => null,
         ];
     }
     
@@ -252,38 +272,30 @@ class DataMatchService
      * Insert new record into main system
      */
     /**
-         * Insert new record into main system
-         * Now accepts dynamic_fields and stores them in additional_attributes
-         */
-        public function insertNewRecord(array $data): MainSystem
-        {
-            // Support both old format and new format
-            if (isset($data['core_fields'])) {
-                $coreFields = $data['core_fields'];
-                $dynamicFields = $data['dynamic_fields'] ?? [];
-            } else {
-                // Backward compatibility
-                $coreFields = $data;
-                $dynamicFields = [];
-            }
-
-            $coreFields['uid'] = $this->generateUid();
-            $coreFields['last_name_normalized'] = $this->normalizeString($coreFields['last_name'] ?? '');
-            $coreFields['first_name_normalized'] = $this->normalizeString($coreFields['first_name'] ?? '');
-            $coreFields['middle_name_normalized'] = $this->normalizeString($coreFields['middle_name'] ?? '');
-
-            // Add dynamic fields to the data
-            if (!empty($dynamicFields)) {
-                $coreFields['additional_attributes'] = $dynamicFields;
-            }
-
-            $newRecord = MainSystem::create($coreFields);
-
-            // Add newly created record to cache to prevent duplicates within same batch
-            $this->candidateCache->push($newRecord);
-
-            return $newRecord;
+     * Insert new record into main system
+     */
+    public function insertNewRecord(array $data): MainSystem
+    {
+        // Support both old format and new format
+        if (isset($data['core_fields'])) {
+            $coreFields = $data['core_fields'];
+        } else {
+            // Backward compatibility
+            $coreFields = $data;
         }
+
+        $coreFields['uid'] = $this->generateUid();
+        $coreFields['last_name_normalized'] = $this->normalizeString($coreFields['last_name'] ?? '');
+        $coreFields['first_name_normalized'] = $this->normalizeString($coreFields['first_name'] ?? '');
+        $coreFields['middle_name_normalized'] = $this->normalizeString($coreFields['middle_name'] ?? '');
+
+        $newRecord = MainSystem::create($coreFields);
+
+        // Add newly created record to cache to prevent duplicates within same batch
+        $this->candidateCache->push($newRecord);
+
+        return $newRecord;
+    }
     
     /**
      * Generate unique UID using UUID
