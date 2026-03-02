@@ -6,11 +6,36 @@ use App\Models\UploadBatch;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Tests\TestCase;
 
 class UploadTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function createTestExcelFile(array $columns, array $data = []): UploadedFile
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        foreach ($columns as $index => $column) {
+            $sheet->setCellValueByColumnAndRow($index + 1, 1, $column);
+        }
+        
+        foreach ($data as $rowIndex => $row) {
+            foreach ($row as $colIndex => $value) {
+                $sheet->setCellValueByColumnAndRow($colIndex + 1, $rowIndex + 2, $value);
+            }
+        }
+        
+        $tempDir = sys_get_temp_dir();
+        $tempFile = $tempDir . DIRECTORY_SEPARATOR . 'test_excel_' . uniqid() . '.xlsx';
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFile);
+        
+        return new UploadedFile($tempFile, 'test.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', null, true);
+    }
 
     public function test_upload_page_can_be_rendered()
     {
@@ -35,7 +60,10 @@ class UploadTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['FirstName', 'LastName'],
+            [['John', 'Doe']]
+        );
 
         $response = $this
             ->actingAs($user)
@@ -43,8 +71,6 @@ class UploadTest extends TestCase
                 'file' => $file,
             ]);
 
-        // The upload may fail with fake file (Excel import error), so it redirects back to upload
-        // In a real scenario with valid Excel file, it would redirect to results
         $response->assertRedirect();
         
         // Check that a batch was created
