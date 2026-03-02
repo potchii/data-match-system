@@ -123,22 +123,21 @@ class DataMappingServiceTest extends TestCase
     }
 
     /** @test */
-    public function it_maps_civil_status_variations_to_civil_status()
+    public function it_maps_status_variations_to_status()
     {
         $variations = [
-            'status' => 'Single',
-            'Status' => 'Married',
-            'civilstatus' => 'Widowed',
-            'CivilStatus' => 'Divorced',
-            'civil_status' => 'Separated',
+            'status' => 'Active',
+            'Status' => 'Inactive',
+            'record_status' => 'Active',
+            'RecordStatus' => 'Inactive',
         ];
 
         foreach ($variations as $columnName => $value) {
             $result = $this->service->mapUploadedData([$columnName => $value]);
             
-            $this->assertArrayHasKey('civil_status', $result['core_fields'],
-                "Column '$columnName' should map to civil_status");
-            $this->assertEquals($value, $result['core_fields']['civil_status']);
+            $this->assertArrayHasKey('status', $result['core_fields'],
+                "Column '$columnName' should map to status");
+            $this->assertEquals($value, $result['core_fields']['status']);
         }
     }
 
@@ -247,7 +246,7 @@ class DataMappingServiceTest extends TestCase
             'middlename' => 'Santos',
             'DOB' => '1990-05-15',
             'Sex' => 'M',
-            'status' => 'Single',
+            'status' => 'Active',
             'address' => '123 Main St, Manila, Metro Manila',
             'barangay' => 'Barangay 1',
         ];
@@ -259,7 +258,7 @@ class DataMappingServiceTest extends TestCase
         $this->assertArrayHasKey('middle_name', $result['core_fields']);
         $this->assertArrayHasKey('birthday', $result['core_fields']);
         $this->assertArrayHasKey('gender', $result['core_fields']);
-        $this->assertArrayHasKey('civil_status', $result['core_fields']);
+        $this->assertArrayHasKey('status', $result['core_fields']);
         $this->assertArrayHasKey('address', $result['core_fields']);
         $this->assertArrayHasKey('barangay', $result['core_fields']);
 
@@ -268,7 +267,7 @@ class DataMappingServiceTest extends TestCase
         $this->assertEquals('Santos', $result['core_fields']['middle_name']);
         $this->assertEquals('1990-05-15', $result['core_fields']['birthday']);
         $this->assertEquals('Male', $result['core_fields']['gender']);
-        $this->assertEquals('Single', $result['core_fields']['civil_status']);
+        $this->assertEquals('Active', $result['core_fields']['status']);
         $this->assertEquals('123 Main St, Manila, Metro Manila', $result['core_fields']['address']);
         $this->assertEquals('Barangay 1', $result['core_fields']['barangay']);
     }

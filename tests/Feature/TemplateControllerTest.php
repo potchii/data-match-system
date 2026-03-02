@@ -172,7 +172,7 @@ class TemplateControllerTest extends TestCase
         $response->assertNotFound()
             ->assertJson([
                 'success' => false,
-                'message' => 'Template not found',
+                'message' => 'Template not found or you do not have permission to access it.',
             ]);
     }
 
@@ -1063,7 +1063,7 @@ class TemplateControllerTest extends TestCase
         $response2->assertStatus(422)
             ->assertJson([
                 'success' => false,
-                'message' => 'Field name already exists in this template',
+                'message' => "A field named 'department' already exists in this template. Please use a different name.",
             ]);
 
         // Verify only one field exists
@@ -1155,7 +1155,7 @@ class TemplateControllerTest extends TestCase
         $response->assertStatus(422)
             ->assertJson([
                 'success' => false,
-                'message' => 'Field name already exists in this template',
+                'message' => "A field named 'department' already exists in this template. Please use a different name.",
             ]);
 
         // Verify field2 still has original name

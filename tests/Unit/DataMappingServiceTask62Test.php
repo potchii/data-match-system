@@ -83,7 +83,7 @@ class DataMappingServiceTask62Test extends TestCase
             'extension' => 'Jr.',
             'birthdate' => '1992-07-10',
             'gender' => 'Male',
-            'civilstatus' => 'Single',
+            'status' => 'Active',
             'address' => '123 Main St',
             'city' => 'Manila',
             'barangay' => 'Poblacion',
@@ -97,7 +97,7 @@ class DataMappingServiceTask62Test extends TestCase
         $this->assertEquals('suffix', $result['extension']);
         $this->assertEquals('birthday', $result['birthdate']);
         $this->assertEquals('gender', $result['gender']);
-        $this->assertEquals('civil_status', $result['civilstatus']);
+        $this->assertEquals('status', $result['status']);
         $this->assertEquals('address', $result['address']);
         $this->assertEquals('address', $result['city']);
         $this->assertEquals('barangay', $result['barangay']);

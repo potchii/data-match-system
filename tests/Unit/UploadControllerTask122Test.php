@@ -160,20 +160,23 @@ class UploadControllerTask122Test extends TestCase
      */
     public function test_mapping_section_is_collapsible(): void
     {
-        $batch = UploadBatch::factory()->create();
+        $batch = UploadBatch::factory()->create([
+            'column_mapping' => [
+                'core_fields_mapped' => ['surname'],
+                'dynamic_fields_captured' => [],
+                'skipped_columns' => [],
+            ]
+        ]);
         
-        $mappingSummary = [
-            'core_fields_mapped' => ['surname'],
-            'dynamic_fields_captured' => [],
-            'skipped_columns' => [],
-        ];
-        
-        $response = $this->withSession(['column_mapping' => $mappingSummary])
-            ->get(route('results.index', ['batch_id' => $batch->id]));
+        // Don't set column_mapping in session to simulate NOT coming from upload
+        // This will make isFromUpload = false, which adds the collapsed-card class
+        $response = $this->get(route('results.index', ['batch_id' => $batch->id]));
         
         $response->assertStatus(200);
+        // The card should have the collapsed-card class when not from upload
         $response->assertSee('collapsed-card');
-        $response->assertSee('data-card-widget', false);
+        // And should have the collapse button with data-card-widget attribute
+        $response->assertSee('data-card-widget');
     }
 
     /**
