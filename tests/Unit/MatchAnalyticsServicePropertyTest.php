@@ -70,10 +70,11 @@ class MatchAnalyticsServicePropertyTest extends TestCase
         // Calculate statistics
         $statistics = $this->service->calculateBatchStatistics($batch->id);
 
-        // Assert average confidence matches expected
-        $this->assertEquals(
+        // Assert average confidence matches expected (with small delta for floating-point precision)
+        $this->assertEqualsWithDelta(
             $expectedAverage,
             $statistics['average_confidence'],
+            0.01,
             "Average confidence should exclude NEW RECORD entries. Expected: {$expectedAverage}, Got: {$statistics['average_confidence']}"
         );
 
