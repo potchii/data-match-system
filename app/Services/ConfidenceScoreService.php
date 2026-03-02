@@ -325,4 +325,193 @@ class ConfidenceScoreService
         // Cap at 99% for fuzzy matches (100% is reserved for exact matches)
         return min(99.0, max(0.0, $similarity));
     }
+
+    /**
+     * Calculate DOB match score
+     *
+     * @param string|null $uploadedDob DOB from uploaded record
+     * @param string|null $existingDob DOB from existing record
+     * @return array ['bonus' => int, 'penalty' => int, 'matched' => bool]
+     */
+    public function calculateDobScore(?string $uploadedDob, ?string $existingDob): array
+    {
+        // Both missing - no adjustment
+        if (($uploadedDob === null || $uploadedDob === '') && ($existingDob === null || $existingDob === '')) {
+            return ['bonus' => 0, 'penalty' => 0, 'matched' => false];
+        }
+
+        // One missing - apply penalty
+        if (($uploadedDob === null || $uploadedDob === '') || ($existingDob === null || $existingDob === '')) {
+            return ['bonus' => 0, 'penalty' => 5, 'matched' => false];
+        }
+
+        // Both present - check for match
+        if ($uploadedDob === $existingDob) {
+            return ['bonus' => 10, 'penalty' => 0, 'matched' => true];
+        }
+
+        return ['bonus' => 0, 'penalty' => 0, 'matched' => false];
+    }
+
+    /**
+     * Calculate gender match score
+     *
+     * @param string|null $uploadedGender Gender from uploaded record
+     * @param string|null $existingGender Gender from existing record
+     * @return array ['bonus' => int, 'penalty' => int, 'matched' => bool]
+     */
+    public function calculateGenderScore(?string $uploadedGender, ?string $existingGender): array
+    {
+        // Both missing - no adjustment
+        if (($uploadedGender === null || $uploadedGender === '') && ($existingGender === null || $existingGender === '')) {
+            return ['bonus' => 0, 'penalty' => 0, 'matched' => false];
+        }
+
+        // One missing - apply penalty
+        if (($uploadedGender === null || $uploadedGender === '') || ($existingGender === null || $existingGender === '')) {
+            return ['bonus' => 0, 'penalty' => 3, 'matched' => false];
+        }
+
+        // Both present - check for match
+        if ($uploadedGender === $existingGender) {
+            return ['bonus' => 5, 'penalty' => 0, 'matched' => true];
+        }
+
+        return ['bonus' => 0, 'penalty' => 0, 'matched' => false];
+    }
+
+    /**
+     * Calculate address/barangay match score
+     *
+     * @param string|null $uploadedAddress Address from uploaded record
+     * @param string|null $uploadedBarangay Barangay from uploaded record
+     * @param string|null $existingAddress Address from existing record
+     * @param string|null $existingBarangay Barangay from existing record
+     * @return array ['bonus' => int, 'penalty' => int, 'matched' => bool]
+     */
+    public function calculateAddressScore(
+        ?string $uploadedAddress,
+        ?string $uploadedBarangay,
+        ?string $existingAddress,
+        ?string $existingBarangay
+    ): array {
+        $totalBonus = 0;
+        $totalPenalty = 0;
+
+        // Barangay comparison
+        if (($uploadedBarangay === null || $uploadedBarangay === '') && ($existingBarangay === null || $existingBarangay === '')) {
+            // Both missing - no adjustment
+        } elseif (($uploadedBarangay === null || $uploadedBarangay === '') || ($existingBarangay === null || $existingBarangay === '')) {
+            // One missing - apply penalty
+            $totalPenalty += 5;
+        } elseif ($uploadedBarangay === $existingBarangay) {
+            // Exact match - apply bonus
+            $totalBonus += 5;
+        } else {
+            // Mismatch - apply penalty
+            $totalPenalty += 5;
+        }
+
+        // Address comparison
+        if (($uploadedAddress === null || $uploadedAddress === '') && ($existingAddress === null || $existingAddress === '')) {
+            // Both missing - no adjustment
+        } elseif (($uploadedAddress === null || $uploadedAddress === '') || ($existingAddress === null || $existingAddress === '')) {
+            // One missing - apply penalty
+            $totalPenalty += 5;
+        } elseif ($uploadedAddress === $existingAddress) {
+            // Exact match - apply bonus
+            $totalBonus += 5;
+        } else {
+            // No match - apply penalty
+            $totalPenalty += 5;
+        }
+
+        return [
+            'bonus' => $totalBonus,
+            'penalty' => $totalPenalty,
+            'matched' => $totalBonus > 0,
+        ];
+    }
+
+    /**
+     * Calculate template field match score
+     *
+     * @param array $uploadedFields Template fields from uploaded record
+     * @param MainSystem $existingRecord Existing record
+     * @param int $templateId Template ID
+     * @return array ['bonus' => int, 'penalty' => int, 'matchCount' => int]
+     */
+    public function calculateTemplateFieldScore(
+        array $uploadedFields,
+        MainSystem $existingRecord,
+        int $templateId
+    ): array {
+        if (empty($uploadedFields)) {
+            return ['bonus' => 0, 'penalty' => 0, 'matchCount' => 0];
+        }
+
+        $totalBonus = 0;
+        $totalPenalty = 0;
+        $matchCount = 0;
+
+        foreach ($uploadedFields as $fieldName => $uploadedValue) {
+            if ($uploadedValue === null || $uploadedValue === '') {
+                continue;
+            }
+
+            // For now, template field values are not stored in database
+            // This will be implemented when template field storage is added
+            $existingValue = null;
+
+            if ($existingValue === null || $existingValue === '') {
+                continue;
+            }
+
+            if ($uploadedValue === $existingValue) {
+                // Exact match
+                $totalBonus += 2;
+                $matchCount++;
+            } else {
+                // Fuzzy match or no match
+                $similarity = $this->calculateFuzzyMatchScore((string) $uploadedValue, (string) $existingValue);
+                if ($similarity >= 80) {
+                    // Fuzzy match
+                    $totalBonus += 1;
+                    $matchCount++;
+                } else {
+                    // No match
+                    $totalPenalty += 1;
+                }
+            }
+        }
+
+        // Apply caps
+        $totalBonus = min($totalBonus, 10);
+        $totalPenalty = min($totalPenalty, 5);
+
+        return [
+            'bonus' => $totalBonus,
+            'penalty' => $totalPenalty,
+            'matchCount' => $matchCount,
+        ];
+    }
+
+    /**
+     * Map confidence score to match status
+     *
+     * @param int $confidence Confidence score (0-100)
+     * @return string Match status (MATCHED, POSSIBLE_DUPLICATE, NEW_RECORD)
+     */
+    public function mapConfidenceToStatus(int $confidence): string
+    {
+        if ($confidence >= 70) {
+            return 'MATCHED';
+        }
+
+        if ($confidence >= 70) {
+            return 'POSSIBLE_DUPLICATE';
+        }
+
+        return 'NEW_RECORD';
+    }
 }

@@ -79,10 +79,15 @@ class DataMatchService
      * Find match from cached candidates using rule chain
      * Now uses unified scoring with field breakdown
      */
-    protected function findMatchFromCache(array $normalized, array $uploadedData, ?int $templateId = null): array
+    protected function findMatchFromCache(array $normalized, array $uploadedData = [], ?int $templateId = null): array
     {
         foreach ($this->rules as $rule) {
-            $result = $rule->match($normalized, $this->candidateCache);
+            // Pass template ID to FuzzyNameMatchRule
+            if ($rule instanceof FuzzyNameMatchRule) {
+                $result = $rule->match($normalized, $this->candidateCache, $templateId);
+            } else {
+                $result = $rule->match($normalized, $this->candidateCache);
+            }
             
             if ($result) {
                 // Use unified confidence score calculation
@@ -200,8 +205,114 @@ class DataMatchService
             'first_name_normalized' => $this->normalizeString($data['first_name'] ?? ''),
             'middle_name_normalized' => $this->normalizeString($data['middle_name'] ?? ''),
             'birthday' => $this->extractAndNormalizeBirthday($data),
+            'dob' => $this->extractDob($data),
+            'gender' => $this->extractGender($data),
+            'address' => $this->extractAddress($data),
+            'barangay' => $this->extractBarangay($data),
+            'template_fields' => $this->extractTemplateFields($data),
             'original_data' => $data,
         ];
+    }
+
+    /**
+     * Extract DOB from various field names
+     */
+    private function extractDob(array $data): ?string
+    {
+        $dobFields = [
+            'dob', 'DOB', 'date_of_birth', 'dateOfBirth',
+            'DateOfBirth', 'dateofbirth', 'birthdate', 'BirthDate',
+            'birth_date', 'Birthday', 'Birthdate', 'birthday',
+        ];
+
+        foreach ($dobFields as $field) {
+            if (!empty($data[$field])) {
+                return (string) $data[$field];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Extract gender from various field names
+     */
+    private function extractGender(array $data): ?string
+    {
+        $genderFields = [
+            'gender', 'Gender', 'sex', 'Sex', 'gender_code', 'genderCode',
+            'gender_id', 'genderId', 'gender_type', 'genderType',
+        ];
+
+        foreach ($genderFields as $field) {
+            if (!empty($data[$field])) {
+                return (string) $data[$field];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Extract address from various field names
+     */
+    private function extractAddress(array $data): ?string
+    {
+        $addressFields = [
+            'address', 'Address', 'street_address', 'streetAddress',
+            'street', 'Street', 'location', 'Location',
+        ];
+
+        foreach ($addressFields as $field) {
+            if (!empty($data[$field])) {
+                return (string) $data[$field];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Extract barangay from various field names
+     */
+    private function extractBarangay(array $data): ?string
+    {
+        $barangayFields = [
+            'barangay', 'Barangay', 'barangay_name', 'barangayName',
+            'barangay_code', 'barangayCode', 'brgy', 'Brgy',
+        ];
+
+        foreach ($barangayFields as $field) {
+            if (!empty($data[$field])) {
+                return (string) $data[$field];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Extract template fields from data
+     * Template fields are typically prefixed or in a specific structure
+     */
+    private function extractTemplateFields(array $data): array
+    {
+        $templateFields = [];
+
+        // Look for fields prefixed with 'template_' or in a 'template_fields' array
+        foreach ($data as $key => $value) {
+            if (strpos($key, 'template_') === 0) {
+                $fieldName = substr($key, strlen('template_'));
+                $templateFields[$fieldName] = $value;
+            }
+        }
+
+        // Also check for a 'template_fields' array
+        if (isset($data['template_fields']) && is_array($data['template_fields'])) {
+            $templateFields = array_merge($templateFields, $data['template_fields']);
+        }
+
+        return $templateFields;
     }
     
     /**
