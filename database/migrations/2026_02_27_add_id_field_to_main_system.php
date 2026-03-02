@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('main_system', function (Blueprint $table) {
-            $table->integer('id_field')->nullable()->after('category');
+            $table->integer('id_field')->nullable();
         });
     }
 
