@@ -61,17 +61,24 @@ class ColumnMappingTemplate extends Model
         // Create case-insensitive lookup for row keys
         $rowKeysLower = array_change_key_case($row, CASE_LOWER);
         
-        // Apply core field mappings from template
-        foreach ($this->mappings as $excelColumn => $systemField) {
-            $excelColumnLower = strtolower($excelColumn);
-            
-            // Try exact match first
-            if (array_key_exists($excelColumn, $row)) {
-                $remapped[$systemField] = $row[$excelColumn];
-            } 
-            // Try case-insensitive match
-            elseif (array_key_exists($excelColumnLower, $rowKeysLower)) {
-                $remapped[$systemField] = $rowKeysLower[$excelColumnLower];
+        // Apply core field mappings from template (if any)
+        if ($this->mappings && is_array($this->mappings)) {
+            foreach ($this->mappings as $excelColumn => $systemField) {
+                // Skip empty mappings
+                if (empty($excelColumn) || empty($systemField)) {
+                    continue;
+                }
+                
+                $excelColumnLower = strtolower($excelColumn);
+                
+                // Try exact match first
+                if (array_key_exists($excelColumn, $row)) {
+                    $remapped[$systemField] = $row[$excelColumn];
+                } 
+                // Try case-insensitive match
+                elseif (array_key_exists($excelColumnLower, $rowKeysLower)) {
+                    $remapped[$systemField] = $rowKeysLower[$excelColumnLower];
+                }
             }
         }
         
@@ -124,8 +131,8 @@ class ColumnMappingTemplate extends Model
 
         return [
             'name' => ['required', 'string', 'max:255', $uniqueRule],
-            'mappings' => ['required', 'array'],
-            'mappings.*' => ['required', 'string'],
+            'mappings' => ['nullable', 'array'],
+            'mappings.*' => ['nullable', 'string'],
         ];
     }
 
@@ -137,7 +144,13 @@ class ColumnMappingTemplate extends Model
     public function getExpectedColumns(): array
     {
         // Core field mappings (Excel column names from template)
-        $coreColumns = array_keys($this->mappings);
+        $coreColumns = [];
+        if ($this->mappings && is_array($this->mappings)) {
+            $coreColumns = array_filter(
+                array_keys($this->mappings),
+                fn($key) => !empty($this->mappings[$key])
+            );
+        }
         
         // Template field names
         $templateColumns = $this->fields->pluck('field_name')->toArray();

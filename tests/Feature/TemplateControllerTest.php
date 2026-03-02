@@ -94,7 +94,7 @@ class TemplateControllerTest extends TestCase
             ->postJson(route('api.templates.store'), []);
 
         $response->assertUnprocessable()
-            ->assertJsonValidationErrors(['name', 'mappings']);
+            ->assertJsonValidationErrors(['name']);
     }
 
     public function test_store_enforces_unique_name_per_user()
@@ -341,8 +341,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'HR Import with Custom Fields',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name'],
-            'system_fields' => ['uid', 'last_name', 'first_name'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['department', 'position', 'salary'],
             'field_types' => ['string', 'string', 'decimal'],
             'field_required' => [0, 1], // department and position are required
@@ -409,8 +409,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'Template with Duplicate Fields',
-            'excel_columns' => ['Employee No', 'Surname'],
-            'system_fields' => ['uid', 'last_name'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['department', 'department'], // Duplicate field name
             'field_types' => ['string', 'string'],
             'field_required' => [],
@@ -477,8 +477,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'Simple Template',
-            'excel_columns' => ['Employee No', 'Surname'],
-            'system_fields' => ['uid', 'last_name'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
         ];
 
         $response = $this
@@ -503,14 +503,14 @@ class TemplateControllerTest extends TestCase
         $template = ColumnMappingTemplate::factory()->create([
             'user_id' => $user->id,
             'name' => 'Original Template',
-            'mappings' => ['Employee No' => 'uid', 'Surname' => 'last_name'],
+            'mappings' => ['Employee No' => 'uid', 'Surname' => 'last_name', 'Given Name' => 'first_name', 'Birthday' => 'birthday', 'Gender' => 'gender', 'Address' => 'address', 'Barangay' => 'barangay'],
         ]);
 
         // Update template with new custom fields
         $updateData = [
             'name' => 'Updated Template',
-            'excel_columns' => ['Employee No', 'Surname'],
-            'system_fields' => ['uid', 'last_name'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['department', 'position', 'salary'],
             'field_types' => ['string', 'string', 'decimal'],
             'field_required' => [0, 2], // department and salary are required
@@ -561,7 +561,7 @@ class TemplateControllerTest extends TestCase
         $template = ColumnMappingTemplate::factory()->create([
             'user_id' => $user->id,
             'name' => 'Template with Fields',
-            'mappings' => ['Employee No' => 'uid'],
+            'mappings' => ['Employee No' => 'uid', 'Surname' => 'last_name', 'Given Name' => 'first_name', 'Birthday' => 'birthday', 'Gender' => 'gender', 'Address' => 'address', 'Barangay' => 'barangay'],
         ]);
 
         TemplateField::create([
@@ -581,8 +581,8 @@ class TemplateControllerTest extends TestCase
         // Update template with modified custom fields
         $updateData = [
             'name' => 'Template with Fields',
-            'excel_columns' => ['Employee No'],
-            'system_fields' => ['uid'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['department', 'salary'],
             'field_types' => ['string', 'decimal'], // Changed salary from integer to decimal
             'field_required' => [0, 1], // Both now required
@@ -617,7 +617,7 @@ class TemplateControllerTest extends TestCase
         $template = ColumnMappingTemplate::factory()->create([
             'user_id' => $user->id,
             'name' => 'Template with Fields',
-            'mappings' => ['Employee No' => 'uid'],
+            'mappings' => ['Employee No' => 'uid', 'Surname' => 'last_name', 'Given Name' => 'first_name', 'Birthday' => 'birthday', 'Gender' => 'gender', 'Address' => 'address', 'Barangay' => 'barangay'],
         ]);
 
         TemplateField::create([
@@ -644,8 +644,8 @@ class TemplateControllerTest extends TestCase
         // Update template with only one field (removing two fields)
         $updateData = [
             'name' => 'Template with Fields',
-            'excel_columns' => ['Employee No'],
-            'system_fields' => ['uid'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['department'], // Only keep department
             'field_types' => ['string'],
             'field_required' => [0],
@@ -686,7 +686,7 @@ class TemplateControllerTest extends TestCase
         $template = ColumnMappingTemplate::factory()->create([
             'user_id' => $user->id,
             'name' => 'Template with Fields',
-            'mappings' => ['Employee No' => 'uid'],
+            'mappings' => ['Employee No' => 'uid', 'Surname' => 'last_name', 'Given Name' => 'first_name', 'Birthday' => 'birthday', 'Gender' => 'gender', 'Address' => 'address', 'Barangay' => 'barangay'],
         ]);
 
         TemplateField::create([
@@ -706,8 +706,8 @@ class TemplateControllerTest extends TestCase
         // Update template without any custom fields
         $updateData = [
             'name' => 'Template with Fields',
-            'excel_columns' => ['Employee No'],
-            'system_fields' => ['uid'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             // No field_names, field_types, or field_required
         ];
 
@@ -734,14 +734,14 @@ class TemplateControllerTest extends TestCase
         $template = ColumnMappingTemplate::factory()->create([
             'user_id' => $user->id,
             'name' => 'Template',
-            'mappings' => ['Employee No' => 'uid'],
+            'mappings' => ['Employee No' => 'uid', 'Surname' => 'last_name', 'Given Name' => 'first_name', 'Birthday' => 'birthday', 'Gender' => 'gender', 'Address' => 'address', 'Barangay' => 'barangay'],
         ]);
 
         // Try to update with duplicate field names
         $updateData = [
             'name' => 'Template',
-            'excel_columns' => ['Employee No'],
-            'system_fields' => ['uid'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['department', 'department'], // Duplicate
             'field_types' => ['string', 'string'],
             'field_required' => [],
@@ -767,7 +767,7 @@ class TemplateControllerTest extends TestCase
         $template = ColumnMappingTemplate::factory()->create([
             'user_id' => $user->id,
             'name' => 'Template',
-            'mappings' => ['Employee No' => 'uid'],
+            'mappings' => ['Employee No' => 'uid', 'Surname' => 'last_name', 'Given Name' => 'first_name', 'Birthday' => 'birthday', 'Gender' => 'gender', 'Address' => 'address', 'Barangay' => 'barangay'],
         ]);
 
         TemplateField::create([
@@ -780,8 +780,8 @@ class TemplateControllerTest extends TestCase
         // Update with different attributes
         $updateData = [
             'name' => 'Template',
-            'excel_columns' => ['Employee No'],
-            'system_fields' => ['uid'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['status', 'active', 'score'],
             'field_types' => ['boolean', 'boolean', 'integer'], // Changed status to boolean, added new fields
             'field_required' => [0, 1], // status and active are required
@@ -996,8 +996,8 @@ class TemplateControllerTest extends TestCase
         // Attempt to create template with duplicate field names via web form
         $templateData = [
             'name' => 'Template with Duplicates',
-            'excel_columns' => ['Employee No', 'Surname'],
-            'system_fields' => ['uid', 'last_name'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['department', 'position', 'department', 'salary'], // 'department' appears twice
             'field_types' => ['string', 'string', 'string', 'decimal'],
             'field_required' => [0, 1], // department and position are required
@@ -1194,8 +1194,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'Template with All Valid Types',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'DOB', 'Gender'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Department', 'Employee Count', 'Hire Date', 'Is Active', 'Salary'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['department', 'employee_count', 'hire_date', 'is_active', 'salary'],
             'field_types' => $validTypes,
             'field_required' => [],
@@ -1321,13 +1321,13 @@ class TemplateControllerTest extends TestCase
         $template = ColumnMappingTemplate::factory()->create([
             'user_id' => $user->id,
             'name' => 'Test Template',
-            'mappings' => ['Employee No' => 'uid'],
+            'mappings' => ['Employee No' => 'uid', 'Surname' => 'last_name', 'Given Name' => 'first_name', 'Birthday' => 'birthday', 'Gender' => 'gender', 'Address' => 'address', 'Barangay' => 'barangay'],
         ]);
 
         $updateData = [
             'name' => 'Test Template',
-            'excel_columns' => ['Employee No'],
-            'system_fields' => ['uid'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
             'field_names' => ['text_field', 'int_field', 'date_field', 'bool_field', 'decimal_field'],
             'field_types' => ['string', 'integer', 'date', 'boolean', 'decimal'],
             'field_required' => [],
@@ -1460,5 +1460,153 @@ class TemplateControllerTest extends TestCase
 
         // Should reject because validation is case-sensitive
         $response->assertSessionHasErrors(['field_types.0', 'field_types.1', 'field_types.2']);
+    }
+
+    public function test_store_web_requires_all_required_core_fields()
+    {
+        $user = User::factory()->create();
+
+        // Missing 'gender' field
+        $templateData = [
+            'name' => 'Incomplete Template',
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'address', 'barangay'],
+            'field_names' => [],
+            'field_types' => [],
+            'field_required' => [],
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->post(route('templates.store'), $templateData);
+
+        $response->assertSessionHasErrors('mappings');
+        // Check that the error message contains the required field validation text
+        $this->assertStringContainsString('Missing required fields', session('errors')->get('mappings')[0]);
+    }
+
+    public function test_store_web_accepts_all_required_core_fields()
+    {
+        $user = User::factory()->create();
+
+        $templateData = [
+            'name' => 'Complete Template',
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'field_names' => [],
+            'field_types' => [],
+            'field_required' => [],
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->post(route('templates.store'), $templateData);
+
+        $response->assertRedirect(route('templates.index'));
+        $response->assertSessionHas('success');
+
+        $this->assertDatabaseHas('column_mapping_templates', [
+            'user_id' => $user->id,
+            'name' => 'Complete Template',
+        ]);
+    }
+
+    public function test_update_web_requires_all_required_core_fields()
+    {
+        $user = User::factory()->create();
+        $template = ColumnMappingTemplate::factory()->create([
+            'user_id' => $user->id,
+            'name' => 'Original Template',
+            'mappings' => [
+                'ID' => 'uid',
+                'Last Name' => 'last_name',
+                'First Name' => 'first_name',
+                'Birthday' => 'birthday',
+                'Gender' => 'gender',
+                'Address' => 'address',
+                'Barangay' => 'barangay',
+            ],
+        ]);
+
+        // Try to remove 'address' field
+        $templateData = [
+            'name' => 'Updated Template',
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'],
+            'field_names' => [],
+            'field_types' => [],
+            'field_required' => [],
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->put(route('templates.update', $template->id), $templateData);
+
+        $response->assertSessionHasErrors('mappings');
+        $this->assertStringContainsString('Missing required fields', session('errors')->get('mappings')[0]);
+    }
+
+    public function test_update_web_accepts_all_required_core_fields()
+    {
+        $user = User::factory()->create();
+        $template = ColumnMappingTemplate::factory()->create([
+            'user_id' => $user->id,
+            'name' => 'Original Template',
+            'mappings' => [
+                'ID' => 'uid',
+                'Last Name' => 'last_name',
+                'First Name' => 'first_name',
+                'Birthday' => 'birthday',
+                'Gender' => 'gender',
+                'Address' => 'address',
+                'Barangay' => 'barangay',
+            ],
+        ]);
+
+        $templateData = [
+            'name' => 'Updated Template',
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'field_names' => [],
+            'field_types' => [],
+            'field_required' => [],
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->put(route('templates.update', $template->id), $templateData);
+
+        $response->assertRedirect(route('templates.index'));
+        $response->assertSessionHas('success');
+
+        $template->refresh();
+        $this->assertEquals('Updated Template', $template->name);
+    }
+
+    public function test_store_web_allows_optional_core_fields_to_be_removed()
+    {
+        $user = User::factory()->create();
+
+        // Only required fields, no optional fields (middle_name, suffix)
+        $templateData = [
+            'name' => 'Template Without Optional Fields',
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'field_names' => [],
+            'field_types' => [],
+            'field_required' => [],
+        ];
+
+        $response = $this
+            ->actingAs($user)
+            ->post(route('templates.store'), $templateData);
+
+        $response->assertRedirect(route('templates.index'));
+        $response->assertSessionHas('success');
+
+        $this->assertDatabaseHas('column_mapping_templates', [
+            'user_id' => $user->id,
+            'name' => 'Template Without Optional Fields',
+        ]);
     }
 }
