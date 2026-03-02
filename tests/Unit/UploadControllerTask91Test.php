@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Tests\TestCase;
 
 class UploadControllerTask91Test extends TestCase
@@ -27,6 +29,33 @@ class UploadControllerTask91Test extends TestCase
         Storage::fake('local');
     }
 
+    protected function createTestExcelFile(array $columns, array $data = []): UploadedFile
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        foreach ($columns as $index => $column) {
+            $sheet->setCellValueByColumnAndRow($index + 1, 1, $column);
+        }
+        
+        foreach ($data as $rowIndex => $row) {
+            foreach ($row as $colIndex => $value) {
+                $sheet->setCellValueByColumnAndRow($colIndex + 1, $rowIndex + 2, $value);
+            }
+        }
+        
+        $tempDir = storage_path('app/temp');
+        if (!is_dir($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
+        
+        $tempFile = $tempDir . DIRECTORY_SEPARATOR . 'test_excel_' . uniqid() . '.xlsx';
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFile);
+        
+        return new UploadedFile($tempFile, 'test.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', null, false);
+    }
+
     /**
      * Test store() accepts optional template_id parameter
      * Validates: Requirement 3.4
@@ -39,7 +68,10 @@ class UploadControllerTask91Test extends TestCase
             'mappings' => ['Surname' => 'last_name', 'FirstName' => 'first_name'],
         ]);
 
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['Surname', 'FirstName'],
+            [['Doe', 'John']]
+        );
 
         $response = $this->actingAs($this->user)->post(route('upload.store'), [
             'file' => $file,
@@ -59,7 +91,10 @@ class UploadControllerTask91Test extends TestCase
      */
     public function test_store_works_without_template_id()
     {
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['FirstName', 'LastName'],
+            [['John', 'Doe']]
+        );
 
         $response = $this->actingAs($this->user)->post(route('upload.store'), [
             'file' => $file,
@@ -77,7 +112,10 @@ class UploadControllerTask91Test extends TestCase
      */
     public function test_store_validates_template_id_must_be_integer()
     {
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['FirstName', 'LastName'],
+            [['John', 'Doe']]
+        );
 
         $response = $this->actingAs($this->user)->post(route('upload.store'), [
             'file' => $file,
@@ -93,7 +131,10 @@ class UploadControllerTask91Test extends TestCase
      */
     public function test_store_validates_template_id_exists()
     {
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['FirstName', 'LastName'],
+            [['John', 'Doe']]
+        );
 
         $response = $this->actingAs($this->user)->post(route('upload.store'), [
             'file' => $file,
@@ -116,7 +157,10 @@ class UploadControllerTask91Test extends TestCase
             'mappings' => ['Surname' => 'last_name'],
         ]);
 
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['FirstName', 'LastName'],
+            [['John', 'Doe']]
+        );
 
         $response = $this->actingAs($this->user)->post(route('upload.store'), [
             'file' => $file,
@@ -140,7 +184,10 @@ class UploadControllerTask91Test extends TestCase
             'mappings' => ['Surname' => 'last_name'],
         ]);
 
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['FirstName', 'LastName'],
+            [['John', 'Doe']]
+        );
 
         $response = $this->actingAs($this->user)
             ->postJson(route('upload.store'), [
@@ -171,8 +218,10 @@ class UploadControllerTask91Test extends TestCase
             ],
         ]);
 
-        // Use a fake file - we're testing parameter passing, not full import
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['Surname', 'FirstName', 'MiddleName'],
+            [['Doe', 'John', 'Michael']]
+        );
 
         $response = $this->actingAs($this->user)->post(route('upload.store'), [
             'file' => $file,
@@ -192,9 +241,10 @@ class UploadControllerTask91Test extends TestCase
      */
     public function test_record_import_works_without_template()
     {
-        // This test verifies that the controller can handle uploads without template_id
-        // We're not testing the full import process here, just that the parameter is optional
-        $file = UploadedFile::fake()->create('test.xlsx', 100);
+        $file = $this->createTestExcelFile(
+            ['FirstName', 'LastName'],
+            [['John', 'Doe']]
+        );
 
         $response = $this->actingAs($this->user)->post(route('upload.store'), [
             'file' => $file,

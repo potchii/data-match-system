@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\ConflictResolutionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MainSystemController;
 use App\Http\Controllers\ResultsController;
@@ -20,6 +21,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/upload', [UploadController::class, 'index'])->name('upload.index');
     Route::post('/upload-process', [UploadController::class, 'store'])->name('upload.store');
     Route::get('/results', [ResultsController::class, 'index'])->name('results.index');
+    
+    // Conflict resolution routes
+    Route::get('/conflicts', [ConflictResolutionController::class, 'index'])->name('conflicts.index');
+    Route::post('/conflicts/{id}/resolve', [ConflictResolutionController::class, 'resolve'])->name('conflicts.resolve');
+    Route::post('/conflicts/bulk-resolve', [ConflictResolutionController::class, 'bulkResolve'])->name('conflicts.bulk-resolve');
+    
+    // Analytics API routes
+    Route::get('/api/batch-analytics/{batchId}', [ResultsController::class, 'getBatchAnalytics'])->name('api.batch-analytics');
+    Route::get('/api/field-breakdown/{resultId}', [ResultsController::class, 'getFieldBreakdown'])->name('api.field-breakdown');
+    Route::get('/api/field-breakdown/{resultId}/export', [ResultsController::class, 'exportFieldBreakdown'])->name('api.field-breakdown.export');
+    
     Route::get('/batches', [BatchController::class, 'index'])->name('batches.index');
     Route::get('/main-system', [MainSystemController::class, 'index'])->name('main-system.index');
     

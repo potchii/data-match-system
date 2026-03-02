@@ -53,8 +53,8 @@ class UploadController extends Controller
         try {
             // Load template with fields relationship if provided
             $template = null;
-            if ($request->has('template_id')) {
-                $template = $this->findAuthorizedTemplate($request->template_id, true);
+            if ($request->has('template_id') && $request->template_id !== null) {
+                $template = $this->findAuthorizedTemplate((int) $request->template_id, true);
                 
                 if (!$template) {
                     if ($request->expectsJson()) {
@@ -84,14 +84,14 @@ class UploadController extends Controller
                 if ($request->expectsJson()) {
                     return response()->json([
                         'success' => false,
-                        'error' => 'File validation failed. Please check the errors below and correct your file.',
+                        'error' => 'File validation failed',
                         'validation_errors' => $validation['errors'],
                         'validation_info' => $validation['info'],
                     ], 422);
                 }
                 
                 return redirect()->route('upload.index')
-                    ->with('error', 'File validation failed. Please check the errors below and correct your file.')
+                    ->with('error', 'File validation failed')
                     ->with('validation_errors', $validation['errors'])
                     ->with('validation_info', $validation['info']);
             }
@@ -123,7 +123,10 @@ class UploadController extends Controller
             // Get column mapping summary from the import
             $mappingSummary = $import->getColumnMappingSummary();
 
-            $batch->update(['status' => 'COMPLETED']);
+            $batch->update([
+                'status' => 'COMPLETED',
+                'column_mapping' => $mappingSummary,
+            ]);
 
             Log::info('Upload batch completed', [
                 'batch_id' => $batch->id,

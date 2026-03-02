@@ -14,10 +14,12 @@ class UploadBatch extends Model
         'uploaded_by',
         'uploaded_at',
         'status',
+        'column_mapping',
     ];
 
     protected $casts = [
         'uploaded_at' => 'datetime',
+        'column_mapping' => 'array',
     ];
 
     public function matchResults(): HasMany

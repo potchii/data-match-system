@@ -26,6 +26,11 @@ class MainSystemFactory extends Factory
 
         return [
             'uid' => 'UID-' . strtoupper(Str::random(10)),
+            'regs_no' => 'REG-' . strtoupper(Str::random(8)),
+            'registration_date' => fake()->date('Y-m-d', '-5 years'),
+            'status' => fake()->randomElement(['active', 'inactive', 'archived']),
+            'category' => fake()->randomElement(['Resident', 'Non-Resident', 'Temporary']),
+            'id_field' => fake()->numberBetween(1000, 9999),
             'origin_batch_id' => null,
             'origin_match_result_id' => null,
             'last_name' => $lastName,

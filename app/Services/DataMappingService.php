@@ -9,11 +9,18 @@ class DataMappingService
 
     /**
      * Map uploaded Excel columns to system database columns
-     * Returns: ['core_fields' => [...]]
+     * Separates core fields from template fields
+     * Returns: ['core_fields' => [...], 'template_fields' => [...], 'dynamic_fields' => [...]]
+     *
+     * @param array $row Raw row data
+     * @param array|null $templateFieldNames Optional list of template field names to extract
+     * @return array Structure with 'core_fields', 'template_fields', and 'dynamic_fields'
      */
-    public function mapUploadedData(array $row): array
+    public function mapUploadedData(array $row, ?array $templateFieldNames = null): array
     {
         $coreFields = [];
+        $templateFields = [];
+        $dynamicFields = [];
         $processedKeys = [];
 
         // Process compound first name (Philippine naming convention)
@@ -46,6 +53,13 @@ class DataMappingService
                 continue;
             }
 
+            // Check if this is a template field
+            if ($templateFieldNames && in_array($key, $templateFieldNames)) {
+                // Preserve template field data types from uploaded file
+                $templateFields[$key] = $value;
+                continue;
+            }
+
             // Check if this is a known core field
             if (CoreFieldMappings::isCoreField($key)) {
                 $systemField = CoreFieldMappings::getSystemField($key);
@@ -57,12 +71,17 @@ class DataMappingService
                 if ($normalizedValue !== null) {
                     $coreFields[$systemField] = $normalizedValue;
                 }
+            } else {
+                // Unknown fields become dynamic fields (normalized to snake_case)
+                $snakeCaseKey = $this->toSnakeCase($key);
+                $dynamicFields[$snakeCaseKey] = $value;
             }
-            // Unknown fields are ignored - strict validation ensures only expected columns exist
         }
 
         return [
             'core_fields' => $coreFields,
+            'template_fields' => $templateFields,
+            'dynamic_fields' => $dynamicFields,
         ];
     }
     /**
@@ -86,6 +105,7 @@ class DataMappingService
     /**
      * Generate template from current mapping
      * Analyzes sample row and creates template-ready mapping structure
+     * Generates mappings for all columns (core fields map to system fields, unknown fields map to themselves)
      *
      * @param array $sampleRow First row of upload
      * @return array Template-ready mappings {"excel_column": "system_field"}
@@ -146,8 +166,10 @@ class DataMappingService
             if (CoreFieldMappings::isCoreField($key)) {
                 $systemField = CoreFieldMappings::getSystemField($key);
                 $mappings[$key] = $systemField;
+            } else {
+                // Unknown fields map to themselves (will become template fields)
+                $mappings[$key] = $key;
             }
-            // Unknown fields are ignored - strict validation ensures only expected columns exist
         }
 
         return $mappings;
@@ -236,11 +258,26 @@ class DataMappingService
     protected function normalizeFieldValue(string $field, $value)
     {
         return match($field) {
-            'birthday' => $this->normalizeDate($value),
+            'birthday', 'registration_date' => $this->normalizeDate($value),
             'gender' => $this->normalizeGender($value),
             'uid', 'last_name', 'first_name', 'middle_name', 'suffix',
-            'civil_status', 'address', 'barangay' => $this->normalizeString($value),
+            'civil_status', 'address', 'barangay', 'regs_no', 'id_type', 'status', 'category' => $this->normalizeString($value),
             default => $value,
         };
+    }
+
+    /**
+     * Convert string to snake_case
+     */
+    protected function toSnakeCase(string $str): string
+    {
+        // Replace spaces and hyphens with underscores
+        $str = str_replace([' ', '-'], '_', $str);
+        
+        // Insert underscores before uppercase letters (camelCase to snake_case)
+        $str = preg_replace('/([a-z])([A-Z])/', '$1_$2', $str);
+        
+        // Convert to lowercase
+        return strtolower($str);
     }
 }

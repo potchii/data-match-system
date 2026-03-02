@@ -31,6 +31,15 @@ class PurgeData extends Command
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         // Truncate data tables
+        DB::table('template_field_values')->truncate();
+        $this->line('✓ Cleared template_field_values');
+        
+        DB::table('template_fields')->truncate();
+        $this->line('✓ Cleared template_fields');
+        
+        DB::table('column_mapping_templates')->truncate();
+        $this->line('✓ Cleared column_mapping_templates');
+        
         DB::table('match_results')->truncate();
         $this->line('✓ Cleared match_results');
         

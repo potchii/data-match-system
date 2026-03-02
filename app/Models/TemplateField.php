@@ -39,7 +39,7 @@ class TemplateField extends Model
             if ($this->is_required) {
                 return [
                     'valid' => false,
-                    'error' => "The field '{$this->field_name}' is required and cannot be empty. Please provide a value.",
+                    'error' => "Field '{$this->field_name}' is required",
                 ];
             }
             return ['valid' => true, 'error' => null];
@@ -51,7 +51,7 @@ class TemplateField extends Model
             'decimal' => $this->validateDecimal($value),
             'date' => $this->validateDate($value),
             'boolean' => $this->validateBoolean($value),
-            default => ['valid' => false, 'error' => "Field type '{$this->field_type}' is not recognized. Please contact support."],
+            default => ['valid' => false, 'error' => "Field type '{$this->field_type}' is not recognized"],
         };
     }
 
@@ -66,7 +66,7 @@ class TemplateField extends Model
         if (!is_numeric($value) || strpos((string) $value, '.') !== false) {
             return [
                 'valid' => false,
-                'error' => "The field '{$this->field_name}' must be a whole number (e.g., 1, 42, 100). Decimal values are not allowed.",
+                'error' => "Field '{$this->field_name}' must be an integer",
             ];
         }
         return ['valid' => true, 'error' => null];
@@ -83,7 +83,7 @@ class TemplateField extends Model
         if (!is_numeric($value)) {
             return [
                 'valid' => false,
-                'error' => "The field '{$this->field_name}' must be a number (e.g., 3.14, 42, 0.5). Please enter a valid numeric value.",
+                'error' => "Field '{$this->field_name}' must be a number",
             ];
         }
         return ['valid' => true, 'error' => null];
@@ -106,7 +106,7 @@ class TemplateField extends Model
         } catch (\Exception $e) {
             return [
                 'valid' => false,
-                'error' => "The field '{$this->field_name}' must be a valid date (e.g., 2024-01-15, 01/15/2024, or January 15, 2024). The value '{$value}' could not be recognized as a date.",
+                'error' => "Field '{$this->field_name}' must be a valid date",
             ];
         }
     }
@@ -127,7 +127,7 @@ class TemplateField extends Model
 
         return [
             'valid' => false,
-            'error' => "The field '{$this->field_name}' must be a yes/no value. Accepted values: 'true', 'false', 'yes', 'no', '1', '0', 'y', or 'n'.",
+            'error' => "Field '{$this->field_name}' must be true/false, yes/no, or 1/0",
         ];
     }
 

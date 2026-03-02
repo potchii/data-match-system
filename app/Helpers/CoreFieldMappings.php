@@ -14,11 +14,40 @@ class CoreFieldMappings
      * Core field mappings (column name variations → system field)
      */
     public const FIELD_MAPPINGS = [
-        // UID / Registration Number
+        // UID / Registration Number (kept for backward compatibility, not shown to users)
         'regsno' => 'uid',
         'RegsNo' => 'uid',
         'regsnumber' => 'uid',
         'registration_no' => 'uid',
+        
+        // Registration Number (separate field)
+        'regs_no' => 'regs_no',
+        'registration_number' => 'regs_no',
+        'RegistrationNumber' => 'regs_no',
+        
+        // Registration Date
+        'registration_date' => 'registration_date',
+        'RegistrationDate' => 'registration_date',
+        'reg_date' => 'registration_date',
+        'RegDate' => 'registration_date',
+        
+        // ID (integer identifier)
+        'id' => 'id_field',
+        'ID' => 'id_field',
+        'identifier' => 'id_field',
+        'Identifier' => 'id_field',
+        
+        // Status (record status, not civil status)
+        'record_status' => 'status',
+        'RecordStatus' => 'status',
+        'status' => 'status',
+        'Status' => 'status',
+        
+        // Category
+        'category' => 'category',
+        'Category' => 'category',
+        'record_category' => 'category',
+        'RecordCategory' => 'category',
         
         // Last Name / Surname
         'surname' => 'last_name',
@@ -68,13 +97,6 @@ class CoreFieldMappings
         'Sex' => 'gender',
         'gender' => 'gender',
         'Gender' => 'gender',
-        
-        // Civil Status
-        'status' => 'civil_status',
-        'Status' => 'civil_status',
-        'civilstatus' => 'civil_status',
-        'CivilStatus' => 'civil_status',
-        'civil_status' => 'civil_status',
         
         // Address (consolidated field)
         'address' => 'address',

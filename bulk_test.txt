@@ -1,0 +1,49 @@
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_new_record_creates_template_values(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_template_field_type_validation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_matched_record_creates_new_values(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_matched_record_updates_empty_values(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_matched_record_preserves_history(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_matched_record_idempotence(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_possible_duplicate_flags_for_review(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_possible_duplicate_links_conflicts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_persistence_service_transaction_atomicity(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_bulk_insert_performance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_template_field_definition_caching(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   FAIL  Tests\Unit\TemplateFieldPersistenceServicePropertyTest
+  ⨯ bulk insert performance                                      1.16s  
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\TemplateFi…  UniqueConstraintViolationException   
+  SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: template_fields.template_id, template_fields.field_name (Connection: sqlite, Database: :memory:, SQL: insert into "template_fields" ("template_id", "field_name", "field_type", "is_required", "updated_at", "created_at") values (1, field_4274, string, 0, 2026-02-27 02:52:11, 2026-02-27 02:52:11))
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:838
+    834▕             $exceptionType = $this->isUniqueConstraintError($e)
+    835▕                 ? UniqueConstraintViolationException::class
+    836▕                 : QueryException::class;
+    837▕ 
+  ➜ 838▕             throw new $exceptionType(
+    839▕                 $this->getNameWithReadWriteType(),
+    840▕                 $query,
+    841▕                 $this->prepareBindings($bindings),
+    842▕                 $e,
+
+  1   vendor\laravel\framework\src\Illuminate\Database\Connection.php:838
+
+  2   vendor\laravel\framework\src\Illuminate\Database\Connection.php:584
+      NunoMaduro\Collision\Exceptions\TestException::("SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: template_fields.template_id, template_fields.field_name")
+
+
+  Tests:    1 failed (28 assertions)
+  Duration: 1.35s
+

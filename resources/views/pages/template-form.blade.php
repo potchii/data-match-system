@@ -52,14 +52,17 @@
                                 <div id="mappings-container">
                                     @php
                                         $coreFields = [
-                                            'uid',
+                                            'regs_no',
+                                            'registration_date',
+                                            'id_field',
+                                            'status',
+                                            'category',
                                             'last_name',
                                             'first_name',
                                             'middle_name',
                                             'suffix',
                                             'birthday',
                                             'gender',
-                                            'civil_status',
                                             'address',
                                             'barangay',
                                         ];

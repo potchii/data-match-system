@@ -37,8 +37,10 @@ class FileStorageMigrationTest extends TestCase
         // First verify columns exist
         $this->assertTrue(Schema::hasColumn('upload_batches', 'file_hash'));
         
-        // Run the down migration
-        $this->artisan('migrate:rollback', ['--step' => 1]);
+        // Get the migration instance
+        $migrationPath = database_path('migrations/2026_02_24_100000_add_file_storage_to_upload_batches.php');
+        $migration = require $migrationPath;
+        $migration->down();
         
         // Verify columns are removed
         $this->assertFalse(Schema::hasColumn('upload_batches', 'file_hash'));
@@ -54,7 +56,7 @@ class FileStorageMigrationTest extends TestCase
         $this->assertFalse($fileHashIndexExists, 'file_hash index should be removed');
         
         // Re-run migration for other tests
-        $this->artisan('migrate');
+        $migration->up();
     }
 
     /**
