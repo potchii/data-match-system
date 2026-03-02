@@ -23,10 +23,10 @@ class DataMatchService
         
         // Initialize matching rules in priority order
         $this->rules = [
-            new ExactMatchRule(),           // 100% - Full name + DOB
-            new PartialMatchWithDobRule(),  // 90%  - First + Last + DOB
-            new FullNameMatchRule(),        // 80%  - Full name only (no DOB)
-            new FuzzyNameMatchRule(),       // 70%  - Similar name (fuzzy)
+            new ExactMatchRule(),           // 100% - First + Last + Middle + DOB
+            new PartialMatchWithDobRule(),  // 90%  - First + Last + DOB (no middle name)
+            new FullNameMatchRule(),        // 80%  - First + Last + Middle (no DOB required)
+            new FuzzyNameMatchRule(),       // 70%  - Similar name (fuzzy matching)
         ];
         
         $this->candidateCache = collect();
@@ -43,18 +43,23 @@ class DataMatchService
             return $this->normalizeRecord($record);
         });
         
-        // Load all potential candidates in one query
-        $this->loadCandidates($normalizedRecords);
+        // Load candidates from database only (exclude current batch)
+        $this->loadCandidatesExcludingBatch($normalizedRecords);
         
-        // Match each record against cached candidates
-        return $normalizedRecords->map(function ($normalized) {
-            return $this->findMatchFromCache($normalized);
+        // Match each record against cached candidates (database records only)
+        return $normalizedRecords->map(function ($normalized, $index) use ($uploadedRecords) {
+            // Get the original uploaded data for this record
+            $uploadedData = $uploadedRecords->get($index);
+            return $this->findMatchFromCache($normalized, $uploadedData);
         });
     }
     
     /**
      * Find match for single uploaded record (legacy support)
      * Returns: ['status' => string, 'confidence' => float, 'matched_id' => ?string, 'field_breakdown' => ?array]
+     * 
+     * NOTE: This method is deprecated. Use batchFindMatches() instead for batch processing.
+     * This method does NOT refresh candidates - it uses the current cache state.
      */
     public function findMatch(array $uploadedData, ?int $templateId = null): array
     {
@@ -68,10 +73,8 @@ class DataMatchService
 
         $normalized = $this->normalizeRecord($coreData);
 
-        // Reload candidates from database to include cross-batch records
-        // but preserve newly inserted records from current batch
-        $this->refreshCandidates(collect([$normalized]));
-
+        // Use current cache state without refreshing
+        // This prevents matching records within the same batch against each other
         return $this->findMatchFromCache($normalized, $uploadedData, $templateId);
     }
     
@@ -160,6 +163,33 @@ class DataMatchService
             }
         })->get();
     }
+
+    /**
+     * Load candidates from database only, excluding records from current batch.
+     * This prevents matching records within the same Excel file against each other.
+     */
+    protected function loadCandidatesExcludingBatch(Collection $normalizedRecords): void
+    {
+        // Extract unique normalized names for efficient querying
+        $lastNames = $normalizedRecords->pluck('last_name_normalized')->unique()->filter();
+        $firstNames = $normalizedRecords->pluck('first_name_normalized')->unique()->filter();
+        
+        if ($lastNames->isEmpty() && $firstNames->isEmpty()) {
+            $this->candidateCache = collect();
+            return;
+        }
+        
+        // Fetch records from database only (not from current batch)
+        // This ensures we only match against existing database records
+        $this->candidateCache = MainSystem::where(function ($query) use ($lastNames, $firstNames) {
+            if ($lastNames->isNotEmpty()) {
+                $query->whereIn('last_name_normalized', $lastNames);
+            }
+            if ($firstNames->isNotEmpty()) {
+                $query->orWhereIn('first_name_normalized', $firstNames);
+            }
+        })->get();
+    }
     
     /**
      * Refresh candidates from database while preserving newly inserted records
@@ -175,8 +205,9 @@ class DataMatchService
             return;
         }
         
-        // Fetch fresh records from database
-        $dbCandidates = MainSystem::where(function ($query) use ($lastNames, $firstNames) {
+        // Fetch fresh records from database only (not from current batch)
+        // This prevents records inserted during this batch from being matched against later records
+        $this->candidateCache = MainSystem::where(function ($query) use ($lastNames, $firstNames) {
             if ($lastNames->isNotEmpty()) {
                 $query->whereIn('last_name_normalized', $lastNames);
             }
@@ -184,12 +215,6 @@ class DataMatchService
                 $query->orWhereIn('first_name_normalized', $firstNames);
             }
         })->get();
-        
-        // Merge with existing cache, removing duplicates by UID
-        $this->candidateCache = $this->candidateCache
-            ->merge($dbCandidates)
-            ->unique('uid')
-            ->values();
     }
     
     /**

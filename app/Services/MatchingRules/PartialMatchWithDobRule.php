@@ -18,7 +18,7 @@ class PartialMatchWithDobRule extends MatchRule
     
     public function status(): string
     {
-        return 'MATCHED';
+        return 'POSSIBLE DUPLICATE';
     }
     
     public function match(array $normalizedData, Collection $candidates): ?array

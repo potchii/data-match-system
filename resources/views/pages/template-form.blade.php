@@ -52,37 +52,35 @@
                                 <div id="mappings-container">
                                     @php
                                         $coreFields = [
-                                            'regs_no',
-                                            'registration_date',
-                                            'id_field',
-                                            'status',
-                                            'category',
-                                            'last_name',
-                                            'first_name',
-                                            'middle_name',
-                                            'suffix',
-                                            'birthday',
-                                            'gender',
-                                            'address',
-                                            'barangay',
+                                            'uid' => 'uid',
+                                            'last_name' => 'last_name',
+                                            'first_name' => 'first_name',
+                                            'middle_name' => 'middle_name',
+                                            'suffix' => 'suffix',
+                                            'birthday' => 'birthday',
+                                            'gender' => 'gender',
+                                            'address' => 'address',
+                                            'barangay' => 'barangay',
+                                            'registration_date' => 'registration_date',
+                                            'id_field' => 'id_field',
+                                            'status' => 'status',
                                         ];
+                                        
+                                        $requiredFields = ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
                                         
                                         if(isset($template) && $template->mappings) {
                                             $mappings = $template->mappings;
                                         } else {
                                             // Pre-populate with core fields for new templates
-                                            $mappings = [];
-                                            foreach($coreFields as $field) {
-                                                $mappings[$field] = $field;
-                                            }
+                                            $mappings = $coreFields;
                                         }
                                     @endphp
                                     
                                     @foreach($mappings as $excelColumn => $systemField)
                                         @php
-                                            $isCoreField = in_array($systemField, $coreFields);
+                                            $isRequired = in_array($systemField, $requiredFields);
                                         @endphp
-                                        <div class="mapping-row mb-2" data-core-field="{{ $isCoreField ? 'true' : 'false' }}">
+                                        <div class="mapping-row mb-2" data-required="{{ $isRequired ? 'true' : 'false' }}">
                                             <div class="row">
                                                 <div class="col-md-5">
                                                     <input type="text" class="form-control" 
@@ -101,13 +99,15 @@
                                                            readonly
                                                            style="background-color: #f4f6f9;"
                                                            required>
-                                                    @if($isCoreField)
-                                                        <small class="text-muted"><i class="fas fa-lock"></i> Core Field</small>
+                                                    @if($isRequired)
+                                                        <small class="text-danger"><i class="fas fa-asterisk"></i> Required</small>
+                                                    @else
+                                                        <small class="text-muted"><i class="fas fa-database"></i> Optional</small>
                                                     @endif
                                                 </div>
                                                 <div class="col-md-1">
-                                                    @if($isCoreField)
-                                                        <button type="button" class="btn btn-secondary btn-sm" disabled title="Core fields cannot be removed">
+                                                    @if($isRequired)
+                                                        <button type="button" class="btn btn-secondary btn-sm" disabled title="Required fields cannot be removed">
                                                             <i class="fas fa-lock"></i>
                                                         </button>
                                                     @else
@@ -121,7 +121,7 @@
                                     @endforeach
                                 </div>
                                 <small class="form-text text-muted">
-                                    Core fields are pre-populated. Just enter your Excel column names on the left.
+                                    Core fields are pre-populated. Required fields (uid, name, birthday, gender, address, barangay) cannot be removed. Optional fields can be removed if not needed.
                                 </small>
                             </div>
 
@@ -237,15 +237,28 @@ $(document).ready(function() {
                     <div class="col-md-5">
                         <input type="text" class="form-control" 
                                name="excel_columns[]" 
-                               placeholder="Excel Column Name (e.g., Department)" required>
+                               placeholder="Excel Column Name (e.g., Department)">
                     </div>
                     <div class="col-md-1 text-center pt-2">
                         <i class="fas fa-arrow-right"></i>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" 
-                               name="system_fields[]" 
-                               placeholder="Dynamic Field Name (e.g., department)" required>
+                        <select name="system_fields[]" class="form-control system-field-select">
+                            <option value="">-- Select Field --</option>
+                            <option value="regs_no">regs_no</option>
+                            <option value="registration_date">registration_date</option>
+                            <option value="id_field">id_field</option>
+                            <option value="status">status</option>
+                            <option value="category">category</option>
+                            <option value="last_name">last_name</option>
+                            <option value="first_name">first_name</option>
+                            <option value="middle_name">middle_name</option>
+                            <option value="suffix">suffix</option>
+                            <option value="birthday">birthday</option>
+                            <option value="gender">gender</option>
+                            <option value="address">address</option>
+                            <option value="barangay">barangay</option>
+                        </select>
                     </div>
                     <div class="col-md-1">
                         <button type="button" class="btn btn-danger btn-sm remove-mapping">
@@ -260,11 +273,7 @@ $(document).ready(function() {
 
     // Remove mapping row
     $(document).on('click', '.remove-mapping', function() {
-        if ($('.mapping-row').length > 1) {
-            $(this).closest('.mapping-row').remove();
-        } else {
-            alert('At least one mapping is required');
-        }
+        $(this).closest('.mapping-row').remove();
     });
 
     // Add custom field
@@ -331,22 +340,41 @@ $(document).ready(function() {
 
     // Form validation
     $('#templateForm').on('submit', function(e) {
-        const excelColumns = $('input[name="excel_columns[]"]').map(function() {
-            return $(this).val().trim();
-        }).get();
+        const requiredFields = ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
         
-        const systemFields = $('input[name="system_fields[]"]').map(function() {
-            return $(this).val().trim();
-        }).get();
+        // Get all system fields that are mapped
+        const mappedSystemFields = [];
+        $('input[name="system_fields[]"]').each(function() {
+            const value = $(this).val().trim();
+            if (value) {
+                mappedSystemFields.push(value);
+            }
+        });
 
-        // Check for empty values
-        if (excelColumns.some(col => !col) || systemFields.some(field => !field)) {
+        // Check that all required fields are mapped
+        const missingRequired = requiredFields.filter(field => !mappedSystemFields.includes(field));
+        if (missingRequired.length > 0) {
             e.preventDefault();
-            alert('All mapping fields must be filled');
+            alert('Missing required fields: ' + missingRequired.join(', ') + '\n\nAll required fields must be mapped to Excel columns.');
             return false;
         }
 
-        // Check for duplicate Excel columns
+        const excelColumns = $('input[name="excel_columns[]"]').map(function() {
+            return $(this).val().trim();
+        }).get().filter(col => col !== '');
+        
+        const systemFields = $('input[name="system_fields[]"]').map(function() {
+            return $(this).val().trim();
+        }).get().filter(field => field !== '');
+
+        // Check that we have at least one mapping
+        if (excelColumns.length === 0 && systemFields.length === 0) {
+            e.preventDefault();
+            alert('Please add at least one column mapping or custom field');
+            return false;
+        }
+
+        // Check for duplicate Excel columns (only non-empty ones)
         const duplicates = excelColumns.filter((item, index) => excelColumns.indexOf(item) !== index);
         if (duplicates.length > 0) {
             e.preventDefault();

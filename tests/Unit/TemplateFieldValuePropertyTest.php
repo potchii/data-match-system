@@ -236,16 +236,20 @@ class TemplateFieldValuePropertyTest extends TestCase
 
     protected function runHistoryRetrievalTest(): void
     {
+        $timestamp = microtime(true) * 10000;
+        $fieldName1 = 'field_' . $timestamp . '_1';
+        $fieldName2 = 'field_' . $timestamp . '_2';
+
         $templateField = TemplateField::create([
             'template_id' => $this->template->id,
-            'field_name' => 'field_' . rand(1, 1000),
+            'field_name' => $fieldName1,
             'field_type' => 'string',
             'is_required' => false,
         ]);
 
         $templateField2 = TemplateField::create([
             'template_id' => $this->template->id,
-            'field_name' => 'field_' . rand(1, 1000),
+            'field_name' => $fieldName2,
             'field_type' => 'string',
             'is_required' => false,
         ]);

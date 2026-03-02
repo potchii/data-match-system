@@ -7,18 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class PurgeData extends Command
 {
-    protected $signature = 'data:purge {--keep-users : Keep user accounts}';
+    protected $signature = 'data:purge {--keep-users : Keep user accounts} {--keep-templates : Keep templates and custom fields}';
     protected $description = 'Purge all data from the database while keeping structure';
 
     public function handle()
     {
         $keepUsers = $this->option('keep-users');
+        $keepTemplates = $this->option('keep-templates');
         
-        if (!$keepUsers) {
-            $this->warn('⚠️  This will delete ALL data including user accounts!');
-        } else {
-            $this->warn('⚠️  This will delete all data except user accounts!');
-        }
+        $this->displayWarning($keepUsers, $keepTemplates);
         
         if (!$this->confirm('Are you sure you want to continue?')) {
             $this->info('Operation cancelled.');
@@ -34,11 +31,16 @@ class PurgeData extends Command
         DB::table('template_field_values')->truncate();
         $this->line('✓ Cleared template_field_values');
         
-        DB::table('template_fields')->truncate();
-        $this->line('✓ Cleared template_fields');
-        
-        DB::table('column_mapping_templates')->truncate();
-        $this->line('✓ Cleared column_mapping_templates');
+        if (!$keepTemplates) {
+            DB::table('template_fields')->truncate();
+            $this->line('✓ Cleared template_fields');
+            
+            DB::table('column_mapping_templates')->truncate();
+            $this->line('✓ Cleared column_mapping_templates');
+        } else {
+            $this->line('⊘ Keeping template_fields');
+            $this->line('⊘ Keeping column_mapping_templates');
+        }
         
         DB::table('match_results')->truncate();
         $this->line('✓ Cleared match_results');
@@ -71,5 +73,27 @@ class PurgeData extends Command
         }
 
         return 0;
+    }
+
+    /**
+     * Display warning message based on options
+     */
+    private function displayWarning(bool $keepUsers, bool $keepTemplates): void
+    {
+        $items = [];
+        
+        if (!$keepUsers) {
+            $items[] = 'user accounts';
+        }
+        
+        if (!$keepTemplates) {
+            $items[] = 'templates and custom fields';
+        }
+        
+        if (empty($items)) {
+            $this->warn('⚠️  This will delete all data except user accounts and templates!');
+        } else {
+            $this->warn('⚠️  This will delete ALL data including ' . implode(' and ', $items) . '!');
+        }
     }
 }

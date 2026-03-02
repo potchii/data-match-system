@@ -83,10 +83,10 @@ class TemplateController extends Controller
         
         $request->validate([
             'name' => 'required|string|max:255|unique:column_mapping_templates,name,NULL,id,user_id,' . $userId,
-            'excel_columns' => 'required|array|min:1',
-            'excel_columns.*' => 'required|string',
-            'system_fields' => 'required|array|min:1',
-            'system_fields.*' => 'required|string',
+            'excel_columns' => 'nullable|array',
+            'excel_columns.*' => 'nullable|string',
+            'system_fields' => 'nullable|array',
+            'system_fields.*' => 'nullable|string',
             'field_names' => 'nullable|array',
             'field_names.*' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9_]+$/i'],
             'field_types' => 'nullable|array',
@@ -95,27 +95,48 @@ class TemplateController extends Controller
         ], [
             'name.required' => 'Template name is required.',
             'name.unique' => 'You already have a template with this name. Please choose a different name.',
-            'excel_columns.required' => 'At least one column mapping is required.',
-            'excel_columns.min' => 'At least one column mapping is required.',
             'field_names.*.regex' => 'Field names can only contain letters, numbers, and underscores (e.g., customer_age, order_total).',
             'field_types.*.in' => 'Field type must be one of: string, integer, date, boolean, or decimal.',
         ]);
 
-        // Build mappings object from arrays
+        // Build mappings object from arrays (only include non-empty mappings)
         $mappings = [];
-        $excelColumns = $request->input('excel_columns');
-        $systemFields = $request->input('system_fields');
+        $excelColumns = $request->input('excel_columns', []);
+        $systemFields = $request->input('system_fields', []);
         
         foreach ($excelColumns as $index => $excelColumn) {
-            if (isset($systemFields[$index])) {
-                $mappings[$excelColumn] = $systemFields[$index];
+            $excelColumn = trim($excelColumn ?? '');
+            $systemField = trim($systemFields[$index] ?? '');
+            
+            // Only add mapping if both excel column and system field are provided
+            if (!empty($excelColumn) && !empty($systemField)) {
+                $mappings[$excelColumn] = $systemField;
             }
+        }
+
+        // Validate required core fields are present
+        $requiredFields = ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
+        $mappedSystemFields = array_values($mappings);
+        $missingRequired = array_diff($requiredFields, $mappedSystemFields);
+        
+        if (!empty($missingRequired)) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['mappings' => 'Missing required fields: ' . implode(', ', $missingRequired) . '. All required fields must be mapped.']);
+        }
+
+        // Ensure at least one mapping or custom field exists
+        $fieldNames = array_filter(array_map('trim', $request->input('field_names', [])));
+        if (empty($mappings) && empty($fieldNames)) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['mappings' => 'Please add at least one column mapping or custom field.']);
         }
 
         $template = ColumnMappingTemplate::create([
             'user_id' => $userId,
             'name' => $request->input('name'),
-            'mappings' => $mappings,
+            'mappings' => $mappings ?: null,
         ]);
 
         // Handle custom fields
@@ -125,6 +146,7 @@ class TemplateController extends Controller
             'template_id' => $template->id,
             'template_name' => $template->name,
             'user' => Auth::user()->name,
+            'mapping_count' => count($mappings),
             'field_count' => $template->fields()->count(),
         ]);
 
@@ -205,10 +227,10 @@ class TemplateController extends Controller
         
         $request->validate([
             'name' => 'required|string|max:255|unique:column_mapping_templates,name,' . $id . ',id,user_id,' . $userId,
-            'excel_columns' => 'required|array|min:1',
-            'excel_columns.*' => 'required|string',
-            'system_fields' => 'required|array|min:1',
-            'system_fields.*' => 'required|string',
+            'excel_columns' => 'nullable|array',
+            'excel_columns.*' => 'nullable|string',
+            'system_fields' => 'nullable|array',
+            'system_fields.*' => 'nullable|string',
             'field_names' => 'nullable|array',
             'field_names.*' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9_]+$/i'],
             'field_types' => 'nullable|array',
@@ -217,26 +239,47 @@ class TemplateController extends Controller
         ], [
             'name.required' => 'Template name is required.',
             'name.unique' => 'You already have a template with this name. Please choose a different name.',
-            'excel_columns.required' => 'At least one column mapping is required.',
-            'excel_columns.min' => 'At least one column mapping is required.',
             'field_names.*.regex' => 'Field names can only contain letters, numbers, and underscores (e.g., customer_age, order_total).',
             'field_types.*.in' => 'Field type must be one of: string, integer, date, boolean, or decimal.',
         ]);
 
-        // Build mappings object from arrays
+        // Build mappings object from arrays (only include non-empty mappings)
         $mappings = [];
-        $excelColumns = $request->input('excel_columns');
-        $systemFields = $request->input('system_fields');
+        $excelColumns = $request->input('excel_columns', []);
+        $systemFields = $request->input('system_fields', []);
         
         foreach ($excelColumns as $index => $excelColumn) {
-            if (isset($systemFields[$index])) {
-                $mappings[$excelColumn] = $systemFields[$index];
+            $excelColumn = trim($excelColumn ?? '');
+            $systemField = trim($systemFields[$index] ?? '');
+            
+            // Only add mapping if both excel column and system field are provided
+            if (!empty($excelColumn) && !empty($systemField)) {
+                $mappings[$excelColumn] = $systemField;
             }
+        }
+
+        // Validate required core fields are present
+        $requiredFields = ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
+        $mappedSystemFields = array_values($mappings);
+        $missingRequired = array_diff($requiredFields, $mappedSystemFields);
+        
+        if (!empty($missingRequired)) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['mappings' => 'Missing required fields: ' . implode(', ', $missingRequired) . '. All required fields must be mapped.']);
+        }
+
+        // Ensure at least one mapping or custom field exists
+        $fieldNames = array_filter(array_map('trim', $request->input('field_names', [])));
+        if (empty($mappings) && empty($fieldNames)) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['mappings' => 'Please add at least one column mapping or custom field.']);
         }
 
         $template->update([
             'name' => $request->input('name'),
-            'mappings' => $mappings,
+            'mappings' => $mappings ?: null,
         ]);
 
         // Handle custom fields
@@ -246,6 +289,7 @@ class TemplateController extends Controller
             'template_id' => $template->id,
             'template_name' => $template->name,
             'user' => Auth::user()->name,
+            'mapping_count' => count($mappings),
             'field_count' => $template->fields()->count(),
         ]);
 
