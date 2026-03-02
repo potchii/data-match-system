@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class FuzzyNameMatchRule extends MatchRule
 {
-    protected float $threshold = 88.0;
+    protected float $threshold = 85.0;
     private FuzzyMatchingConfig $config;
 
     public function __construct(FuzzyMatchingConfig $config = null)
@@ -58,12 +58,11 @@ class FuzzyNameMatchRule extends MatchRule
                 continue;
             }
 
-            // Reject if both middle names are present but don't match
+            // Reject if both middle names are present but conflict
             $uploadedMiddle = $normalizedData['middle_name_normalized'] ?? null;
             $candidateMiddle = $candidate->middle_name_normalized ?? null;
             
-            // Check if both have middle names (not null/empty) but they differ
-            if ($uploadedMiddle && $candidateMiddle && $uploadedMiddle !== $candidateMiddle) {
+            if ($this->middleNamesConflict($uploadedMiddle, $candidateMiddle)) {
                 Log::debug('Candidate rejected due to middle name mismatch', [
                     'candidate_id' => $candidate->id,
                     'uploaded_middle' => $uploadedMiddle,
@@ -248,6 +247,32 @@ class FuzzyNameMatchRule extends MatchRule
             'candidate_dob' => $normalizedCandidate,
         ]);
         return ['valid' => true, 'bonus' => 0, 'penalty' => 0, 'matched' => false];
+    }
+
+    /**
+     * Check if two middle names conflict (both present but incompatible)
+     * Allows single-letter initials to match full names starting with that letter
+     *
+     * @param string|null $mn1 First middle name (normalized)
+     * @param string|null $mn2 Second middle name (normalized)
+     * @return bool True if middle names conflict and should reject match
+     */
+    private function middleNamesConflict(?string $mn1, ?string $mn2): bool
+    {
+        // Only reject if BOTH are present and they conflict
+        if (!$mn1 || !$mn2) {
+            return false;
+        }
+        
+        // Allow if one is a single-letter initial of the other
+        if (strlen($mn1) === 1 && str_starts_with($mn2, $mn1)) {
+            return false;
+        }
+        if (strlen($mn2) === 1 && str_starts_with($mn1, $mn2)) {
+            return false;
+        }
+        
+        return $mn1 !== $mn2;
     }
 
     /**
