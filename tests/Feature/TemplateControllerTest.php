@@ -1528,11 +1528,11 @@ class TemplateControllerTest extends TestCase
             ],
         ]);
 
-        // Try to remove 'address' field
+        // Try to remove 'gender' field (a required field)
         $templateData = [
             'name' => 'Updated Template',
-            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'],
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Address', 'Barangay'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'address', 'barangay'],
             'field_names' => [],
             'field_types' => [],
             'field_required' => [],
