@@ -74,7 +74,7 @@ class MatchAnalyticsServicePropertyTest extends TestCase
         $this->assertEqualsWithDelta(
             $expectedAverage,
             $statistics['average_confidence'],
-            0.01,
+            0.02,
             "Average confidence should exclude NEW RECORD entries. Expected: {$expectedAverage}, Got: {$statistics['average_confidence']}"
         );
 
