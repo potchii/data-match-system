@@ -62,6 +62,10 @@ class RecordImport implements ToCollection, WithHeadingRow
             'row_count' => $rows->count(),
         ]);
         
+        // First pass: map and validate all rows
+        $mappedRows = [];
+        $rowMetadata = [];
+        
         foreach ($rows as $index => $row) {
             // Convert row to array (handle both object and array inputs)
             $rowData = is_array($row) ? $row : $row->toArray();
@@ -112,104 +116,121 @@ class RecordImport implements ToCollection, WithHeadingRow
                 }
             }
             
-            // Find match in main system (pass structured data)
-            $matchResult = $this->matchService->findMatch($mappedData, $this->template?->id);
+            // Store mapped data and metadata for batch processing
+            $mappedRows[] = $coreFields;
+            $rowMetadata[] = [
+                'index' => $index,
+                'coreFields' => $coreFields,
+                'templateFields' => $templateFields,
+            ];
             
-            // If NEW RECORD, insert into main system
-            if ($matchResult['status'] === 'NEW RECORD') {
-                $coreFields['origin_batch_id'] = $this->batchId;
+            $processedCount++;
+        }
+        
+        // Second pass: batch match all records against database only (not within batch)
+        if (!empty($mappedRows)) {
+            $matchResults = $this->matchService->batchFindMatches(collect($mappedRows));
+            
+            // Third pass: process results and insert/update records
+            foreach ($matchResults as $resultIndex => $matchResult) {
+                $metadata = $rowMetadata[$resultIndex];
+                $coreFields = $metadata['coreFields'];
+                $templateFields = $metadata['templateFields'];
                 
-                $newRecord = $this->matchService->insertNewRecord(['core_fields' => $coreFields]);
-                $matchResult['matched_id'] = $newRecord->uid;
-                
-                $newRecordCount++;
-                
-                Log::info('New record created', [
-                    'batch_id' => $this->batchId,
-                    'record_id' => $newRecord->uid,
-                    'last_name' => $coreFields['last_name'],
-                    'first_name' => $coreFields['first_name'],
-                ]);
-                
-                // Extract field breakdown from match result
-                $fieldBreakdown = $matchResult['field_breakdown'] ?? null;
-                
-                // Create match result record first
-                $matchResultRecord = MatchResult::create([
-                    'batch_id' => $this->batchId,
-                    'uploaded_record_id' => $coreFields['uid'] ?? 'ROW-' . ($index + 1),
-                    'uploaded_last_name' => $coreFields['last_name'],
-                    'uploaded_first_name' => $coreFields['first_name'],
-                    'uploaded_middle_name' => $coreFields['middle_name'] ?? null,
-                    'match_status' => $matchResult['status'],
-                    'confidence_score' => $matchResult['confidence'],
-                    'matched_system_id' => $matchResult['matched_id'],
-                    'field_breakdown' => $fieldBreakdown,
-                ]);
-                
-                // Update the main system record with the match result ID
-                $newRecord->update(['origin_match_result_id' => $matchResultRecord->id]);
-                
-                // Persist template fields after MainSystem record is saved
-                if (!empty($templateFields) && $this->template) {
-                    try {
-                        $this->persistenceService->persistTemplateFields(
-                            (int) $newRecord->id,
-                            $templateFields,
-                            $this->batchId,
-                            $matchResult['confidence'],
-                            $this->template->id
-                        );
-                    } catch (\Exception $e) {
-                        Log::error('Template field persistence failed', [
-                            'batch_id' => $this->batchId,
-                            'row_index' => $index + 1,
-                            'main_system_id' => $newRecord->id,
-                            'error' => $e->getMessage(),
-                        ]);
+                // If NEW RECORD, insert into main system
+                if ($matchResult['status'] === 'NEW RECORD') {
+                    $coreFields['origin_batch_id'] = $this->batchId;
+                    
+                    $newRecord = $this->matchService->insertNewRecord(['core_fields' => $coreFields]);
+                    $matchResult['matched_id'] = $newRecord->uid;
+                    
+                    $newRecordCount++;
+                    
+                    Log::info('New record created', [
+                        'batch_id' => $this->batchId,
+                        'record_id' => $newRecord->uid,
+                        'last_name' => $coreFields['last_name'],
+                        'first_name' => $coreFields['first_name'],
+                    ]);
+                    
+                    // Extract field breakdown from match result
+                    $fieldBreakdown = $matchResult['field_breakdown'] ?? null;
+                    
+                    // Create match result record first
+                    $matchResultRecord = MatchResult::create([
+                        'batch_id' => $this->batchId,
+                        'uploaded_record_id' => $coreFields['uid'] ?? 'ROW-' . ($metadata['index'] + 1),
+                        'uploaded_last_name' => $coreFields['last_name'],
+                        'uploaded_first_name' => $coreFields['first_name'],
+                        'uploaded_middle_name' => $coreFields['middle_name'] ?? null,
+                        'match_status' => $matchResult['status'],
+                        'confidence_score' => $matchResult['confidence'],
+                        'matched_system_id' => $matchResult['matched_id'],
+                        'field_breakdown' => $fieldBreakdown,
+                    ]);
+                    
+                    // Update the main system record with the match result ID
+                    $newRecord->update(['origin_match_result_id' => $matchResultRecord->id]);
+                    
+                    // Persist template fields after MainSystem record is saved
+                    if (!empty($templateFields) && $this->template) {
+                        try {
+                            $this->persistenceService->persistTemplateFields(
+                                (int) $newRecord->id,
+                                $templateFields,
+                                $this->batchId,
+                                $matchResult['confidence'],
+                                $this->template->id
+                            );
+                        } catch (\Exception $e) {
+                            Log::error('Template field persistence failed', [
+                                'batch_id' => $this->batchId,
+                                'row_index' => $metadata['index'] + 1,
+                                'main_system_id' => $newRecord->id,
+                                'error' => $e->getMessage(),
+                            ]);
+                        }
                     }
-                }
-            } else {
-                // Extract field breakdown from match result
-                $fieldBreakdown = $matchResult['field_breakdown'] ?? null;
-                
-                $matchedRecordCount++;
-                
-                // Create match result record for existing matches
-                $matchResultRecord = MatchResult::create([
-                    'batch_id' => $this->batchId,
-                    'uploaded_record_id' => $coreFields['uid'] ?? 'ROW-' . ($index + 1),
-                    'uploaded_last_name' => $coreFields['last_name'],
-                    'uploaded_first_name' => $coreFields['first_name'],
-                    'uploaded_middle_name' => $coreFields['middle_name'] ?? null,
-                    'match_status' => $matchResult['status'],
-                    'confidence_score' => $matchResult['confidence'],
-                    'matched_system_id' => $matchResult['matched_id'],
-                    'field_breakdown' => $fieldBreakdown,
-                ]);
-                
-                // Persist template fields after MainSystem record is saved
-                if (!empty($templateFields) && $this->template) {
-                    try {
-                        $this->persistenceService->persistTemplateFields(
-                            (int) $matchResult['matched_id'],
-                            $templateFields,
-                            $this->batchId,
-                            $matchResult['confidence'],
-                            $this->template->id
-                        );
-                    } catch (\Exception $e) {
-                        Log::error('Template field persistence failed', [
-                            'batch_id' => $this->batchId,
-                            'row_index' => $index + 1,
-                            'main_system_id' => $matchResult['matched_id'],
-                            'error' => $e->getMessage(),
-                        ]);
+                } else {
+                    // Extract field breakdown from match result
+                    $fieldBreakdown = $matchResult['field_breakdown'] ?? null;
+                    
+                    $matchedRecordCount++;
+                    
+                    // Create match result record for existing matches
+                    $matchResultRecord = MatchResult::create([
+                        'batch_id' => $this->batchId,
+                        'uploaded_record_id' => $coreFields['uid'] ?? 'ROW-' . ($metadata['index'] + 1),
+                        'uploaded_last_name' => $coreFields['last_name'],
+                        'uploaded_first_name' => $coreFields['first_name'],
+                        'uploaded_middle_name' => $coreFields['middle_name'] ?? null,
+                        'match_status' => $matchResult['status'],
+                        'confidence_score' => $matchResult['confidence'],
+                        'matched_system_id' => $matchResult['matched_id'],
+                        'field_breakdown' => $fieldBreakdown,
+                    ]);
+                    
+                    // Persist template fields after MainSystem record is saved
+                    if (!empty($templateFields) && $this->template) {
+                        try {
+                            $this->persistenceService->persistTemplateFields(
+                                (int) $matchResult['matched_id'],
+                                $templateFields,
+                                $this->batchId,
+                                $matchResult['confidence'],
+                                $this->template->id
+                            );
+                        } catch (\Exception $e) {
+                            Log::error('Template field persistence failed', [
+                                'batch_id' => $this->batchId,
+                                'row_index' => $metadata['index'] + 1,
+                                'main_system_id' => $matchResult['matched_id'],
+                                'error' => $e->getMessage(),
+                            ]);
+                        }
                     }
                 }
             }
-            
-            $processedCount++;
         }
         
         Log::info('Record import completed', [

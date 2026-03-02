@@ -282,197 +282,197 @@
    WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldValuePropertyTest::test_history_retrieval(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
    PASS  Tests\Unit\ColumnMappingTemplateTest
-  ✓ template has fillable fields                                 0.73s  
-  ✓ mappings are cast to array                                   0.03s  
-  ✓ template belongs to user                                     0.03s  
-  ✓ for user returns only user templates                         0.03s  
+  ✓ template has fillable fields                                 0.87s  
+  ✓ mappings are cast to array                                   0.04s  
+  ✓ template belongs to user                                     0.04s  
+  ✓ for user returns only user templates                         0.04s  
   ✓ apply to remaps columns correctly                            0.04s  
-  ✓ apply to ignores missing columns                             0.03s  
-  ✓ validate mappings returns true for valid structure           0.07s  
-  ✓ validate mappings returns false for non array                0.05s  
-  ✓ validate mappings returns false for non string values        0.04s  
-  ✓ validation rules enforce unique name per user                0.04s  
-  ✓ validation rules allow same name for different users         0.07s  
-  ✓ validation rules exclude current template on update          0.18s  
-  ✓ user has column mapping templates relationship               0.05s  
-  ✓ template has fields relationship                             0.25s  
-  ✓ get expected columns returns core columns only               0.32s  
-  ✓ get expected columns includes template fields                0.20s  
+  ✓ apply to ignores missing columns                             0.04s  
+  ✓ validate mappings returns true for valid structure           0.03s  
+  ✓ validate mappings returns false for non array                0.04s  
+  ✓ validate mappings returns false for non string values        0.03s  
+  ✓ validation rules enforce unique name per user                0.10s  
+  ✓ validation rules allow same name for different users         0.12s  
+  ✓ validation rules exclude current template on update          0.04s  
+  ✓ user has column mapping templates relationship               0.04s  
+  ✓ template has fields relationship                             0.04s  
+  ✓ get expected columns returns core columns only               0.04s  
+  ✓ get expected columns includes template fields                0.05s  
   ✓ get expected columns with empty mappings                     0.04s  
-  ✓ get expected columns with empty mappings but template field… 0.03s  
-  ✓ get expected columns merges core and template correctly      0.03s  
-  ✓ validate file columns passes with exact match                0.03s  
-  ✓ validate file columns detects missing columns                0.03s  
+  ✓ get expected columns with empty mappings but template field… 0.04s  
+  ✓ get expected columns merges core and template correctly      0.04s  
+  ✓ validate file columns passes with exact match                0.04s  
+  ✓ validate file columns detects missing columns                0.04s  
   ✓ validate file columns detects extra columns                  0.03s  
-  ✓ validate file columns is case insensitive                    0.02s  
+  ✓ validate file columns is case insensitive                    0.04s  
   ✓ validate file columns with template fields                   0.04s  
-  ✓ validate file columns detects missing template field         0.03s  
+  ✓ validate file columns detects missing template field         0.04s  
   ✓ validate file columns returns all errors                     0.04s  
-  ✓ validate file columns with empty array                       0.03s  
-  ✓ validate file columns returns correct structure              0.03s  
+  ✓ validate file columns with empty array                       0.04s  
+  ✓ validate file columns returns correct structure              0.04s  
 
    PASS  Tests\Unit\ConfidenceScoreServiceTask4Test
-  ✓ it includes template fields in breakdown                     0.13s  
-  ✓ it sets category property for core fields                    0.04s  
-  ✓ it sets category property for template fields                0.05s  
-  ✓ it includes normalized values for name fields                0.08s  
-  ✓ it only includes normalized values when available            0.08s  
-  ✓ it calculates confidence score for exact match               0.11s  
-  ✓ it calculates confidence score for fuzzy match               0.12s  
-  ✓ it returns null confidence for new fields                    0.09s  
-  ✓ it maintains backward compatibility with fields key          0.05s  
-  ✓ it handles different field types for confidence calculation  0.08s  
-  ✓ it returns zero confidence for non string mismatch           0.07s  
+  ✓ it includes template fields in breakdown                     0.16s  
+  ✓ it sets category property for core fields                    0.07s  
+  ✓ it sets category property for template fields                0.07s  
+  ✓ it includes normalized values for name fields                0.04s  
+  ✓ it only includes normalized values when available            0.03s  
+  ✓ it calculates confidence score for exact match               0.04s  
+  ✓ it calculates confidence score for fuzzy match               0.04s  
+  ✓ it returns null confidence for new fields                    0.04s  
+  ✓ it maintains backward compatibility with fields key          0.03s  
+  ✓ it handles different field types for confidence calculation  0.05s  
+  ✓ it returns zero confidence for non string mismatch           0.05s  
   ✓ it handles missing template gracefully                       0.06s  
-  ✓ it includes field type for template fields                   0.03s  
+  ✓ it includes field type for template fields                   0.07s  
 
    PASS  Tests\Unit\DataMappingServiceTask42Test
-  ✓ it returns structured array with core and dynamic fields     0.04s  
-  ✓ it maps known columns to core fields                         0.03s  
-  ✓ it maps unknown columns to dynamic fields                    0.02s  
-  ✓ it processes compound first names first                      0.03s  
-  ✓ it skips empty and null values for dynamic fields            0.03s  
-  ✓ it normalizes dynamic keys to snake case                     0.13s  
-  ✓ it does not add null core fields                             0.07s  
+  ✓ it returns structured array with core and dynamic fields     0.12s  
+  ✓ it maps known columns to core fields                         0.04s  
+  ✓ it maps unknown columns to dynamic fields                    0.06s  
+  ✓ it processes compound first names first                      0.05s  
+  ✓ it skips empty and null values for dynamic fields            0.21s  
+  ✓ it normalizes dynamic keys to snake case                     0.14s  
+  ✓ it does not add null core fields                             0.05s  
 
    PASS  Tests\Unit\DataMappingServiceTask61Test
-  ✓ it returns row unchanged when no template provided           0.04s  
-  ✓ it accepts template and applies mappings                     0.03s  
-  ✓ it remaps all columns present in template                    0.03s  
-  ✓ it remaps only columns that exist in row                     0.04s  
+  ✓ it returns row unchanged when no template provided           0.06s  
+  ✓ it accepts template and applies mappings                     0.05s  
+  ✓ it remaps all columns present in template                    0.05s  
+  ✓ it remaps only columns that exist in row                     0.06s  
   ✓ it ignores template mappings for missing columns             0.05s  
   ✓ it handles empty row gracefully                              0.04s  
-  ✓ it handles row with no matching columns                      0.04s  
-  ✓ it preserves null values in remapped columns                 0.05s  
-  ✓ it preserves empty string values in remapped columns         0.04s  
-  ✓ it works with map uploaded data after template application   0.03s  
+  ✓ it handles row with no matching columns                      0.08s  
+  ✓ it preserves null values in remapped columns                 0.07s  
+  ✓ it preserves empty string values in remapped columns         0.07s  
+  ✓ it works with map uploaded data after template application   0.06s  
 
    PASS  Tests\Unit\DataMappingServiceTask62PropertyTest
-  ✓ preserves template field values and data types               0.20s  
-  ✓ handles no template fields gracefully                        0.03s  
-  ✓ excludes empty template field values                         0.03s  
-  ✓ preserves zero and false template field values               0.02s  
+  ✓ preserves template field values and data types               0.69s  
+  ✓ handles no template fields gracefully                        0.04s  
+  ✓ excludes empty template field values                         0.05s  
+  ✓ preserves zero and false template field values               0.05s  
 
    PASS  Tests\Unit\DataMappingServiceTask62Test
-  ✓ it generates mappings for core fields                        0.03s  
-  ✓ it maps various column name variations                       0.02s  
-  ✓ it handles all core field types                              0.02s  
-  ✓ it handles compound first name fields                        0.02s  
-  ✓ it handles first name without second name                    0.02s  
-  ✓ it handles various name field variations                     0.02s  
-  ✓ it returns array with excel column to system field format    0.03s  
-  ✓ it generates mappings for all columns in sample row          0.04s  
-  ✓ it handles empty sample row                                  0.05s  
-  ✓ it preserves original excel column names as keys             0.03s  
-  ✓ it generates mappings compatible with column mapping templa… 0.03s  
-  ✓ it handles null values in sample row                         0.02s  
-  ✓ it handles empty string values in sample row                 0.02s  
+  ✓ it generates mappings for core fields                        0.06s  
+  ✓ it maps various column name variations                       0.05s  
+  ✓ it handles all core field types                              0.06s  
+  ✓ it handles compound first name fields                        0.05s  
+  ✓ it handles first name without second name                    0.05s  
+  ✓ it handles various name field variations                     0.04s  
+  ✓ it returns array with excel column to system field format    0.04s  
+  ✓ it generates mappings for all columns in sample row          0.17s  
+  ✓ it handles empty sample row                                  0.17s  
+  ✓ it preserves original excel column names as keys             0.07s  
+  ✓ it generates mappings compatible with column mapping templa… 0.06s  
+  ✓ it handles null values in sample row                         0.04s  
+  ✓ it handles empty string values in sample row                 0.05s  
 
    PASS  Tests\Unit\DataMappingServiceTest
-  ✓ it maps surname variations to last name                      0.04s  
-  ✓ it maps firstname variations to first name                   0.02s  
-  ✓ it maps birthday variations to birthday                      0.02s  
-  ✓ it maps gender variations to gender                          0.02s  
-  ✓ it maps status variations to status                          0.02s  
-  ✓ it maps address variations to address                        0.02s  
-  ✓ it maps barangay variations to barangay                      0.03s  
-  ✓ it maps uid variations to uid                                0.03s  
-  ✓ it maps suffix variations to suffix                          0.03s  
-  ✓ it maps multiple core fields in single row                   0.02s  
-  ✓ it maps unknown columns to dynamic fields                    0.02s  
-  ✓ it handles row with only dynamic fields                      0.02s  
-  ✓ it handles row with only core fields                         0.03s  
-  ✓ it handles mixed core and dynamic fields                     0.02s  
-  ✓ it excludes empty string from dynamic fields                 0.03s  
-  ✓ it excludes null from dynamic fields                         0.02s  
-  ✓ it excludes multiple empty values from dynamic fields        0.03s  
-  ✓ it preserves zero and false values in dynamic fields         0.03s  
-  ✓ it prioritizes core field mapping over dynamic               0.03s  
-  ✓ it does not duplicate core fields in dynamic fields          0.04s  
-  ✓ it handles all core field mappings correctly                 0.03s  
+  ✓ it maps surname variations to last name                      0.08s  
+  ✓ it maps firstname variations to first name                   0.04s  
+  ✓ it maps birthday variations to birthday                      0.04s  
+  ✓ it maps gender variations to gender                          0.03s  
+  ✓ it maps status variations to status                          0.05s  
+  ✓ it maps address variations to address                        0.13s  
+  ✓ it maps barangay variations to barangay                      0.06s  
+  ✓ it maps uid variations to uid                                0.25s  
+  ✓ it maps suffix variations to suffix                          0.16s  
+  ✓ it maps multiple core fields in single row                   0.12s  
+  ✓ it maps unknown columns to dynamic fields                    0.10s  
+  ✓ it handles row with only dynamic fields                      0.10s  
+  ✓ it handles row with only core fields                         0.18s  
+  ✓ it handles mixed core and dynamic fields                     0.12s  
+  ✓ it excludes empty string from dynamic fields                 0.07s  
+  ✓ it excludes null from dynamic fields                         0.07s  
+  ✓ it excludes multiple empty values from dynamic fields        0.06s  
+  ✓ it preserves zero and false values in dynamic fields         0.13s  
+  ✓ it prioritizes core field mapping over dynamic               0.12s  
+  ✓ it does not duplicate core fields in dynamic fields          0.14s  
+  ✓ it handles all core field mappings correctly                 0.10s  
 
    PASS  Tests\Unit\ExampleTest
-  ✓ that true is true                                            0.07s  
+  ✓ that true is true                                            0.17s  
 
    PASS  Tests\Unit\FileHashIndexTest
-  ✓ file hash column exists                                      0.03s  
-  ✓ file hash column has index                                   0.02s  
-  ✓ stored file path column exists                               0.02s  
-  ✓ file size column exists                                      0.02s  
+  ✓ file hash column exists                                      0.08s  
+  ✓ file hash column has index                                   0.12s  
+  ✓ stored file path column exists                               0.07s  
+  ✓ file size column exists                                      0.07s  
 
    PASS  Tests\Unit\FileStorageMigrationTest
-  ✓ migration adds columns and index                             0.03s  
-  ✓ migration down removes columns and index                     0.04s  
-  ✓ columns are nullable                                         0.04s  
+  ✓ migration adds columns and index                             0.05s  
+  ✓ migration down removes columns and index                     0.06s  
+  ✓ columns are nullable                                         0.08s  
 
    PASS  Tests\Unit\FileStorageSchemaTest
-  ✓ file hash column exists                                      0.04s  
-  ✓ stored file path column exists                               0.04s  
+  ✓ file hash column exists                                      0.09s  
+  ✓ stored file path column exists                               0.07s  
   ✓ file size column exists                                      0.06s  
-  ✓ file hash has index                                          0.02s  
-  ✓ column order is correct                                      0.02s  
-  ✓ existing columns preserved                                   0.03s  
+  ✓ file hash has index                                          0.04s  
+  ✓ column order is correct                                      0.05s  
+  ✓ existing columns preserved                                   0.05s  
 
-   PASS  Tests\Unit\FileValidationServicePerformanceTest
-  ✓ column validation completes quickly for typical file         0.16s  
-  ✓ column validation with template completes quickly            0.08s  
-  ✓ template field lookup uses indexed query                     0.04s  
-  ✓ handles moderately large file efficiently                    0.24s  
-  ✓ column validation only reads headers not entire file         0.28s  
-  ✓ validation with multiple columns performs well               0.09s  
-  ✓ template with many fields validates efficiently              0.16s  
-  ✓ validation memory usage remains reasonable                   0.32s  
-  ✓ multiple validations perform consistently                    0.21s  
+   FAIL  Tests\Unit\FileValidationServicePerformanceTest
+  ✓ column validation completes quickly for typical file         0.34s  
+  ✓ column validation with template completes quickly            0.24s  
+  ✓ template field lookup uses indexed query                     0.10s  
+  ✓ handles moderately large file efficiently                    0.74s  
+  ⨯ column validation only reads headers not entire file         0.88s  
+  ✓ validation with multiple columns performs well               0.24s  
+  ✓ template with many fields validates efficiently              0.60s  
+  ✓ validation memory usage remains reasonable                   0.96s  
+  ✓ multiple validations perform consistently                    0.41s  
 
    PASS  Tests\Unit\FileValidationServiceTask6Test
-  ✓ it validates file with valid core fields only                0.07s  
-  ✓ it detects missing required first name column                0.08s  
-  ✓ it detects missing required last name column                 0.08s  
-  ✓ it detects extra columns not in core fields                  0.09s  
-  ✓ it accepts various first name variations                     0.18s  
-  ✓ it accepts various last name variations                      0.27s  
-  ✓ it accepts optional core fields                              0.43s  
+  ✓ it validates file with valid core fields only                0.17s  
+  ✓ it detects missing required first name column                0.15s  
+  ✓ it detects missing required last name column                 0.10s  
+  ✓ it detects extra columns not in core fields                  0.14s  
+  ✓ it accepts various first name variations                     0.16s  
+  ✓ it accepts various last name variations                      0.19s  
+  ✓ it accepts optional core fields                              0.27s  
   ✓ it validates file with template successfully                 0.11s  
-  ✓ it returns structured validation result                      0.13s  
+  ✓ it returns structured validation result                      0.07s  
   ✓ it handles file reading errors gracefully                    0.11s  
-  ✓ it accepts all birthday field variations                     0.21s  
-  ✓ it accepts all gender field variations                       0.22s  
-  ✓ it accepts all address field variations                      0.26s  
-  ✓ it reports all validation errors at once                     0.07s  
-  ✓ it trims whitespace from headers                             0.07s  
-  ✓ it ignores empty header cells                                0.07s  
+  ✓ it accepts all birthday field variations                     0.22s  
+  ✓ it accepts all gender field variations                       0.17s  
+  ✓ it accepts all address field variations                      0.48s  
+  ✓ it reports all validation errors at once                     0.10s  
+  ✓ it trims whitespace from headers                             0.09s  
+  ✓ it ignores empty header cells                                0.15s  
 
    PASS  Tests\Unit\MainSystemTemplateFieldPropertyTest
-  ✓ main system template field access                            1.08s  
-  ✓ main system all template fields retrieval                    0.62s  
-  ✓ main system conflict filtering                               0.53s  
+  ✓ main system template field access                            3.35s  
+  ✓ main system all template fields retrieval                    1.22s  
+  ✓ main system conflict filtering                               1.19s  
 
    PASS  Tests\Unit\MatchAnalyticsServicePropertyTest
-  ✓ average confidence excludes new records                      2.57s  
-  ✓ match status distribution sums to 100 percent                4.11s  
-  ✓ field population rate calculation                            5.28s  
+  ✓ average confidence excludes new records                      6.20s  
+  ✓ match status distribution sums to 100 percent               21.77s  
+  ✓ field population rate calculation                            8.75s  
   ✓ quality score mapping consistency                            0.03s  
-  ✓ field ranking by population rate                             3.81s  
+  ✓ field ranking by population rate                             6.31s  
 
    PASS  Tests\Unit\RecordImportFieldBreakdownTest
-  ✓ it saves field breakdown for new records                     0.04s  
-  ✓ it saves field breakdown for matched records                 0.02s  
+  ✓ it saves field breakdown for new records                     0.05s  
+  ✓ it saves field breakdown for matched records                 0.03s  
   ✓ field breakdown contains field details                       0.03s  
 
    PASS  Tests\Unit\RecordImportNoTemplateTest
-  ✓ it processes records without template                        0.03s  
+  ✓ it processes records without template                        0.04s  
   ✓ it skips validation when no template                         0.03s  
-  ✓ it handles missing optional core fields without template     0.03s  
+  ✓ it handles missing optional core fields without template     0.04s  
 
    PASS  Tests\Unit\RecordImportRequiredFieldValidationTest
-  ✓ it throws error when required custom field is empty          0.04s  
+  ✓ it throws error when required custom field is empty          0.06s  
   ✓ it throws error with multiple missing required fields        0.03s  
-  ✓ it allows empty optional custom fields                       0.03s  
-  ✓ it includes row number in error message                      0.03s  
+  ✓ it allows empty optional custom fields                       0.04s  
+  ✓ it includes row number in error message                      0.05s  
   ✓ it provides descriptive error message                        0.03s  
 
    PASS  Tests\Unit\RecordImportRequiredFieldsComprehensiveTest
-  ✓ it validates only required fields not optional               0.04s  
+  ✓ it validates only required fields not optional               0.05s  
   ✓ it validates multiple required fields independently          0.04s  
   ✓ it fails when one of multiple required fields is empty       0.03s  
   ✓ it provides clear error when multiple required fields are e… 0.03s  
@@ -480,335 +480,353 @@
    PASS  Tests\Unit\RecordImportTask84Test
   ✓ it imports records with core fields only                     0.04s  
   ✓ it creates match result for new records                      0.03s  
-  ✓ it handles existing record matches without dynamic updates   0.03s  
-  ✓ it generates mapping summary                                 0.03s  
-  ✓ it works with template when provided                         0.03s  
+  ✓ it handles existing record matches without dynamic updates   0.04s  
+  ✓ it generates mapping summary                                 0.04s  
+  ✓ it works with template when provided                         0.04s  
   ✓ it skips rows with missing required fields                   0.03s  
-  ✓ it handles compound first names correctly                    0.03s  
-  ✓ it normalizes field values correctly                         0.03s  
-  ✓ it links new records to match results                        0.03s  
+  ✓ it handles compound first names correctly                    0.04s  
+  ✓ it normalizes field values correctly                         0.04s  
+  ✓ it links new records to match results                        0.04s  
 
    PASS  Tests\Unit\ResultsControllerTest
-  ✓ get batch analytics returns correct json structure           0.05s  
-  ✓ get batch analytics returns 404 for invalid batch            0.03s  
-  ✓ get batch analytics handles database errors                  0.03s  
-  ✓ get field breakdown returns correct data                     0.02s  
-  ✓ get field breakdown returns 404 for non existent result      0.02s  
+  ✓ get batch analytics returns correct json structure           0.07s  
+  ✓ get batch analytics returns 404 for invalid batch            0.04s  
+  ✓ get batch analytics handles database errors                  0.05s  
+  ✓ get field breakdown returns correct data                     0.03s  
+  ✓ get field breakdown returns 404 for non existent result      0.03s  
   ✓ get field breakdown returns 404 for empty breakdown          0.03s  
   ✓ export field breakdown generates valid csv                   0.03s  
   ✓ export field breakdown includes all columns                  0.03s  
-  ✓ export field breakdown handles missing result                0.04s  
-  ✓ export field breakdown handles empty breakdown               0.03s  
-  ✓ csv escapes special characters property                      0.23s  
+  ✓ export field breakdown handles missing result                0.03s  
+  ✓ export field breakdown handles empty breakdown               0.04s  
+  ✓ csv escapes special characters property                      0.28s  
 
    PASS  Tests\Unit\TemplateFieldPersistenceServicePropertyTest
-  ✓ new record creates template values                           0.26s  
-  ✓ template field type validation                               0.20s  
-  ✓ matched record creates new values                            0.14s  
-  ✓ matched record updates empty values                          0.08s  
-  ✓ matched record preserves history                             0.18s  
-  ✓ matched record idempotence                                   0.16s  
+  ✓ new record creates template values                           0.34s  
+  ✓ template field type validation                               0.22s  
+  ✓ matched record creates new values                            0.19s  
+  ✓ matched record updates empty values                          0.12s  
+  ✓ matched record preserves history                             0.24s  
+  ✓ matched record idempotence                                   0.36s  
   ✓ possible duplicate flags for review                          0.19s  
-  ✓ possible duplicate links conflicts                           0.18s  
-  ✓ persistence service transaction atomicity                    0.11s  
-  ✓ bulk insert performance                                      1.32s  
-  ✓ template field definition caching                            0.13s  
+  ✓ possible duplicate links conflicts                           0.22s  
+  ✓ persistence service transaction atomicity                    0.13s  
+  ✓ bulk insert performance                                      1.21s  
+  ✓ template field definition caching                            0.10s  
 
    PASS  Tests\Unit\TemplateFieldTest
-  ✓ template field has fillable fields                           0.16s  
-  ✓ is required is cast to boolean                               0.13s  
-  ✓ template field belongs to template                           0.07s  
-  ✓ validate value accepts valid string                          0.06s  
-  ✓ validate value accepts valid integer                         0.05s  
-  ✓ validate value rejects decimal for integer                   0.04s  
-  ✓ validate value accepts valid decimal                         0.04s  
+  ✓ template field has fillable fields                           0.06s  
+  ✓ is required is cast to boolean                               0.03s  
+  ✓ template field belongs to template                           0.03s  
+  ✓ validate value accepts valid string                          0.03s  
+  ✓ validate value accepts valid integer                         0.04s  
+  ✓ validate value rejects decimal for integer                   0.03s  
+  ✓ validate value accepts valid decimal                         0.03s  
   ✓ validate value rejects non numeric decimal                   0.04s  
-  ✓ validate value accepts valid date                            0.03s  
-  ✓ validate value rejects invalid date                          0.03s  
-  ✓ validate value accepts boolean true variations               0.03s  
-  ✓ validate value accepts boolean false variations              0.03s  
-  ✓ validate value rejects invalid boolean                       0.02s  
-  ✓ validate value allows empty for optional field               0.03s  
-  ✓ validate value rejects empty for required field              0.02s  
-  ✓ validate value allows null for optional field                0.03s  
-  ✓ is valid field name accepts lowercase                        0.02s  
-  ✓ is valid field name accepts uppercase                        0.02s  
-  ✓ is valid field name accepts mixed case                       0.02s  
-  ✓ is valid field name accepts with underscores                 0.02s  
-  ✓ is valid field name accepts with numbers                     0.02s  
+  ✓ validate value accepts valid date                            0.04s  
+  ✓ validate value rejects invalid date                          0.04s  
+  ✓ validate value accepts boolean true variations               0.04s  
+  ✓ validate value accepts boolean false variations              0.04s  
+  ✓ validate value rejects invalid boolean                       0.04s  
+  ✓ validate value allows empty for optional field               0.04s  
+  ✓ validate value rejects empty for required field              0.04s  
+  ✓ validate value allows null for optional field                0.04s  
+  ✓ is valid field name accepts lowercase                        0.03s  
+  ✓ is valid field name accepts uppercase                        0.03s  
+  ✓ is valid field name accepts mixed case                       0.03s  
+  ✓ is valid field name accepts with underscores                 0.03s  
+  ✓ is valid field name accepts with numbers                     0.03s  
   ✓ is valid field name rejects spaces                           0.03s  
-  ✓ is valid field name rejects hyphens                          0.07s  
-  ✓ is valid field name rejects special characters               0.04s  
-  ✓ is valid field name rejects empty string                     0.02s  
-  ✓ is valid field name accepts single character                 0.02s  
-  ✓ is valid field name accepts very long names                  0.02s  
-  ✓ is valid field name rejects unicode characters               0.02s  
-  ✓ is valid field name rejects newlines and tabs                0.02s  
+  ✓ is valid field name rejects hyphens                          0.05s  
+  ✓ is valid field name rejects special characters               0.03s  
+  ✓ is valid field name rejects empty string                     0.03s  
+  ✓ is valid field name accepts single character                 0.03s  
+  ✓ is valid field name accepts very long names                  0.03s  
+  ✓ is valid field name rejects unicode characters               0.03s  
+  ✓ is valid field name rejects newlines and tabs                0.03s  
   ✓ template field cascade deletes with template                 0.03s  
   ✓ unique constraint on template id and field name              0.03s  
-  ✓ same field name allowed for different templates              0.02s  
+  ✓ same field name allowed for different templates              0.04s  
   ✓ validate value string accepts empty string for optional      0.03s  
-  ✓ validate value string accepts special characters             0.02s  
-  ✓ validate value string accepts numbers                        0.02s  
-  ✓ validate value integer accepts zero                          0.02s  
+  ✓ validate value string accepts special characters             0.03s  
+  ✓ validate value string accepts numbers                        0.03s  
+  ✓ validate value integer accepts zero                          0.03s  
   ✓ validate value integer accepts negative                      0.03s  
   ✓ validate value integer rejects non numeric                   0.03s  
-  ✓ validate value decimal accepts integer                       0.03s  
-  ✓ validate value decimal accepts zero                          0.04s  
-  ✓ validate value decimal accepts negative                      0.04s  
-  ✓ validate value date accepts various formats                  0.03s  
+  ✓ validate value decimal accepts integer                       0.06s  
+  ✓ validate value decimal accepts zero                          0.03s  
+  ✓ validate value decimal accepts negative                      0.03s  
+  ✓ validate value date accepts various formats                  0.04s  
   ✓ validate value date accepts edge dates                       0.03s  
   ✓ validate value date rejects invalid dates                    0.03s  
   ✓ validate value boolean accepts with whitespace               0.03s  
   ✓ validate value boolean rejects partial matches               0.03s  
   ✓ validate value required field rejects null                   0.03s  
   ✓ validate value required integer rejects empty                0.03s  
-  ✓ validate value required date rejects empty                   0.03s  
-  ✓ validate value required boolean rejects empty                0.04s  
-  ✓ validate value optional fields accept null for all types     0.03s  
+  ✓ validate value required date rejects empty                   0.04s  
+  ✓ validate value required boolean rejects empty                0.05s  
+  ✓ validate value optional fields accept null for all types     0.05s  
 
    PASS  Tests\Unit\TemplateFieldValuePropertyTest
-  ✓ model relationship integrity                                 0.43s  
-  ✓ type casting correctness                                     0.16s  
-  ✓ conflict detection                                           0.30s  
-  ✓ history retrieval                                            0.35s  
+  ✓ model relationship integrity                                 1.22s  
+  ✓ type casting correctness                                     0.47s  
+  ✓ conflict detection                                           0.79s  
+  ✓ history retrieval                                            1.40s  
 
    PASS  Tests\Unit\TemplateFieldValueTest
-  ✓ template field value belongs to main system                  0.04s  
-  ✓ template field value belongs to template field               0.03s  
-  ✓ template field value belongs to batch                        0.03s  
-  ✓ template field value belongs to conflicting value            0.04s  
-  ✓ template field value batch relationship returns null when b… 0.03s  
-  ✓ needs review is cast to boolean                              0.03s  
-  ✓ needs review false is cast to boolean                        0.03s  
-  ✓ created at is cast to datetime                               0.03s  
-  ✓ updated at is cast to datetime                               0.03s  
-  ✓ has conflict returns true when conflict with is set          0.03s  
-  ✓ has conflict returns false when conflict with is null        0.04s  
-  ✓ get history returns current value                            0.03s  
-  ✓ get history returns previous value when set                  0.03s  
-  ✓ get history does not include previous when null              0.03s  
-  ✓ resolve conflict with keep existing deletes conflicting rec… 0.03s  
-  ✓ resolve conflict with use new updates existing record        0.03s  
-  ✓ resolve conflict with edit manually updates with custom val… 0.03s  
-  ✓ resolve conflict with invalid resolution throws exception    0.03s  
-  ✓ resolve conflict with edit manually without custom value th… 0.03s  
-  ✓ resolve conflict with invalid custom value throws exception  0.03s  
-  ✓ template field value has fillable fields                     0.05s  
-  ✓ template field value table name is correct                   0.05s  
+  ✓ template field value belongs to main system                  0.06s  
+  ✓ template field value belongs to template field               0.05s  
+  ✓ template field value belongs to batch                        0.08s  
+  ✓ template field value belongs to conflicting value            0.05s  
+  ✓ template field value batch relationship returns null when b… 0.05s  
+  ✓ needs review is cast to boolean                              0.05s  
+  ✓ needs review false is cast to boolean                        0.07s  
+  ✓ created at is cast to datetime                               0.07s  
+  ✓ updated at is cast to datetime                               0.09s  
+  ✓ has conflict returns true when conflict with is set          0.08s  
+  ✓ has conflict returns false when conflict with is null        0.09s  
+  ✓ get history returns current value                            0.06s  
+  ✓ get history returns previous value when set                  0.07s  
+  ✓ get history does not include previous when null              0.06s  
+  ✓ resolve conflict with keep existing deletes conflicting rec… 0.04s  
+  ✓ resolve conflict with use new updates existing record        0.07s  
+  ✓ resolve conflict with edit manually updates with custom val… 0.08s  
+  ✓ resolve conflict with invalid resolution throws exception    0.06s  
+  ✓ resolve conflict with edit manually without custom value th… 0.10s  
+  ✓ resolve conflict with invalid custom value throws exception  0.08s  
+  ✓ template field value has fillable fields                     0.07s  
+  ✓ template field value table name is correct                   0.08s  
 
    PASS  Tests\Unit\TemplateFieldValuesMigrationTest
-  ✓ migration creates table with all columns                     0.07s  
-  ✓ foreign key constraints exist                                0.06s  
+  ✓ migration creates table with all columns                     0.10s  
+  ✓ foreign key constraints exist                                0.03s  
   ✓ unique constraint exists                                     0.03s  
   ✓ required indexes exist                                       0.03s  
-  ✓ column types are correct                                     0.03s  
-  ✓ migration is reversible                                      0.05s  
-  ✓ needs review has correct default                             0.07s  
+  ✓ column types are correct                                     0.04s  
+  ✓ migration is reversible                                      0.06s  
+  ✓ needs review has correct default                             0.05s  
 
    WARN  Tests\Unit\UploadControllerTask121Test
-  - upload returns column mapping summary for json request → Ex… 0.09s  
-  ✓ column mapping identifies core fields                        0.04s  
+  - upload returns column mapping summary for json request → Ex… 0.08s  
+  ✓ column mapping identifies core fields                        0.05s  
   ✓ column mapping identifies dynamic fields                     0.04s  
   ✓ column mapping identifies skipped columns                    0.04s  
-  ✓ complete upload flow with mapping summary                    0.06s  
+  ✓ complete upload flow with mapping summary                    0.07s  
 
    PASS  Tests\Unit\UploadControllerTask122Test
-  ✓ results view displays column mapping section                 0.11s  
-  ✓ core fields displayed with success badges                    0.09s  
-  ✓ dynamic fields displayed with info badges                    0.06s  
+  ✓ results view displays column mapping section                 0.14s  
+  ✓ core fields displayed with success badges                    0.07s  
+  ✓ dynamic fields displayed with info badges                    0.05s  
   ✓ skipped columns displayed with secondary badges              0.06s  
-  ✓ batch statistics displayed                                   0.06s  
+  ✓ batch statistics displayed                                   0.07s  
   ✓ mapping section is collapsible                               0.05s  
-  ✓ mapping section hidden without session data                  0.04s  
+  ✓ mapping section hidden without session data                  0.05s  
   ✓ complete mapping feedback display                            0.06s  
 
    PASS  Tests\Unit\UploadControllerTask91Test
-  ✓ store accepts optional template id parameter                 0.24s  
-  ✓ store works without template id                              0.14s  
-  ✓ store validates template id must be integer                  0.07s  
-  ✓ store validates template id exists                           0.06s  
-  ✓ store rejects template from another user                     0.08s  
-  ✓ store returns json error for unauthorized template api       0.07s  
-  ✓ record import receives template                              0.08s  
-  ✓ record import works without template                         0.10s  
+  ✓ store accepts optional template id parameter                 0.12s  
+  ✓ store works without template id                              0.08s  
+  ✓ store validates template id must be integer                  0.05s  
+  ✓ store validates template id exists                           0.04s  
+  ✓ store rejects template from another user                     0.04s  
+  ✓ store returns json error for unauthorized template api       0.04s  
+  ✓ record import receives template                              0.07s  
+  ✓ record import works without template                         0.07s  
 
    PASS  Tests\Feature\Auth\AuthenticationTest
-  ✓ login screen can be rendered                                 0.11s  
-  ✓ users can authenticate using the login screen                0.11s  
-  ✓ users with two factor enabled are redirected to two factor…  0.05s  
-  ✓ users can not authenticate with invalid password             0.05s  
-  ✓ users can logout                                             0.04s  
+  ✓ login screen can be rendered                                 0.05s  
+  ✓ users can authenticate using the login screen                0.06s  
+  ✓ users with two factor enabled are redirected to two factor…  0.04s  
+  ✓ users can not authenticate with invalid password             0.04s  
+  ✓ users can logout                                             0.05s  
   ✓ users are rate limited                                       0.05s  
 
    PASS  Tests\Feature\Auth\EmailVerificationTest
-  ✓ email verification screen can be rendered                    0.04s  
-  ✓ email can be verified                                        0.04s  
-  ✓ email is not verified with invalid hash                      0.05s  
+  ✓ email verification screen can be rendered                    0.05s  
+  ✓ email can be verified                                        0.05s  
+  ✓ email is not verified with invalid hash                      0.04s  
   ✓ email is not verified with invalid user id                   0.05s  
   ✓ verified user is redirected to dashboard from verification…  0.04s  
-  ✓ already verified user visiting verification link is redirec… 0.03s  
+  ✓ already verified user visiting verification link is redirec… 0.05s  
 
    PASS  Tests\Feature\Auth\PasswordConfirmationTest
-  ✓ confirm password screen can be rendered                      0.06s  
+  ✓ confirm password screen can be rendered                      0.04s  
   ✓ password confirmation requires authentication                0.03s  
 
    PASS  Tests\Feature\Auth\PasswordResetTest
   ✓ reset password link screen can be rendered                   0.04s  
-  ✓ reset password link can be requested                         0.31s  
-  ✓ reset password screen can be rendered                        0.24s  
-  ✓ password can be reset with valid token                       0.24s  
+  ✓ reset password link can be requested                         0.27s  
+  ✓ reset password screen can be rendered                        0.25s  
+  ✓ password can be reset with valid token                       0.25s  
   ✓ password cannot be reset with invalid token                  0.24s  
 
    PASS  Tests\Feature\Auth\RegistrationTest
-  ✓ registration screen can be rendered                          0.03s  
-  ✓ new users can register                                       0.03s  
+  ✓ registration screen can be rendered                          0.04s  
+  ✓ new users can register                                       0.04s  
 
    PASS  Tests\Feature\Auth\TwoFactorChallengeTest
-  ✓ two factor challenge redirects to login when not authentica… 0.03s  
-  ✓ two factor challenge can be rendered                         0.03s  
+  ✓ two factor challenge redirects to login when not authentica… 0.04s  
+  ✓ two factor challenge can be rendered                         0.04s  
 
    PASS  Tests\Feature\Auth\VerificationNotificationTest
-  ✓ sends verification notification                              0.03s  
-  ✓ does not send verification notification if email is verifie… 0.02s  
+  ✓ sends verification notification                              0.04s  
+  ✓ does not send verification notification if email is verifie… 0.04s  
 
    PASS  Tests\Feature\ColumnMappingPersistenceTest
-  ✓ column mapping is saved to batch                             0.03s  
-  ✓ results view shows column mapping from batch                 0.03s  
-  ✓ column mapping card is collapsed when not from upload        0.03s  
-  ✓ column mapping card is expanded when from upload             0.05s  
+  ✓ column mapping is saved to batch                             0.04s  
+  ✓ results view shows column mapping from batch                 0.05s  
+  ✓ column mapping card is collapsed when not from upload        0.04s  
+  ✓ column mapping card is expanded when from upload             0.06s  
 
    PASS  Tests\Feature\DashboardTest
-  ✓ guests are redirected to the login page                      0.03s  
-  ✓ authenticated users can visit the dashboard                  0.03s  
+  ✓ guests are redirected to the login page                      0.04s  
+  ✓ authenticated users can visit the dashboard                  0.04s  
 
    PASS  Tests\Feature\ExampleTest
   ✓ returns a successful response                                0.03s  
 
    PASS  Tests\Feature\Settings\PasswordUpdateTest
-  ✓ password update page is displayed                            0.03s  
-  ✓ password can be updated                                      0.03s  
-  ✓ correct password must be provided to update password         0.03s  
+  ✓ password update page is displayed                            0.04s  
+  ✓ password can be updated                                      0.04s  
+  ✓ correct password must be provided to update password         0.04s  
 
    PASS  Tests\Feature\Settings\ProfileUpdateTest
-  ✓ profile page is displayed                                    0.03s  
-  ✓ profile information can be updated                           0.03s  
-  ✓ email verification status is unchanged when the email addre… 0.03s  
-  ✓ user can delete their account                                0.03s  
-  ✓ correct password must be provided to delete account          0.03s  
+  ✓ profile page is displayed                                    0.05s  
+  ✓ profile information can be updated                           0.04s  
+  ✓ email verification status is unchanged when the email addre… 0.17s  
+  ✓ user can delete their account                                0.11s  
+  ✓ correct password must be provided to delete account          0.07s  
 
    PASS  Tests\Feature\Settings\TwoFactorAuthenticationTest
-  ✓ two factor settings page can be rendered                     0.04s  
-  ✓ two factor settings page requires password confirmation whe… 0.04s  
-  ✓ two factor settings page does not requires password confirm… 0.03s  
-  ✓ two factor settings page returns forbidden response when tw… 0.03s  
+  ✓ two factor settings page can be rendered                     0.09s  
+  ✓ two factor settings page requires password confirmation whe… 0.11s  
+  ✓ two factor settings page does not requires password confirm… 0.10s  
+  ✓ two factor settings page returns forbidden response when tw… 0.10s  
 
    PASS  Tests\Feature\TemplateControllerTest
-  ✓ index returns user templates                                 0.04s  
-  ✓ index requires authentication                                0.03s  
-  ✓ store creates template                                       0.03s  
-  ✓ store validates required fields                              0.03s  
-  ✓ store enforces unique name per user                          0.03s  
-  ✓ store allows same name for different users                   0.03s  
-  ✓ show returns template details                                0.03s  
-  ✓ show returns 404 for nonexistent template                    0.03s  
-  ✓ show prevents access to other users templates                0.03s  
-  ✓ update modifies template                                     0.03s  
-  ✓ update returns 404 for nonexistent template                  0.04s  
-  ✓ update prevents modifying other users templates              0.03s  
-  ✓ update enforces unique name per user                         0.03s  
-  ✓ destroy deletes template                                     0.03s  
-  ✓ destroy returns 404 for nonexistent template                 0.03s  
-  ✓ destroy prevents deleting other users templates              0.03s  
-  ✓ store web creates template with custom fields                0.03s  
-  ✓ store web validates field name uniqueness                    0.03s  
-  ✓ store web validates field name format                        0.03s  
-  ✓ store web validates field type                               0.03s  
-  ✓ store web creates template without custom fields             0.03s  
-  ✓ update web with new custom fields added                      0.03s  
-  ✓ update web with existing custom fields modified              0.03s  
-  ✓ update web with custom fields removed                        0.03s  
-  ✓ update web removes all custom fields                         0.03s  
-  ✓ update web validates field name uniqueness during update     0.03s  
-  ✓ update web verifies field attributes are updated properly    0.03s  
-  ✓ deleting template cascades to fields                         0.04s  
-  ✓ database constraint prevents duplicate field names in same…  0.02s  
-  ✓ same field name allowed in different templates               0.03s  
-  ✓ web form handles duplicate field names gracefully            0.04s  
-  ✓ api endpoint rejects duplicate field names                   0.03s  
+  ✓ index returns user templates                                 0.09s  
+  ✓ index requires authentication                                0.07s  
+  ✓ store creates template                                       0.06s  
+  ✓ store validates required fields                              0.07s  
+  ✓ store enforces unique name per user                          0.07s  
+  ✓ store allows same name for different users                   0.08s  
+  ✓ show returns template details                                0.06s  
+  ✓ show returns 404 for nonexistent template                    0.07s  
+  ✓ show prevents access to other users templates                0.11s  
+  ✓ update modifies template                                     0.05s  
+  ✓ update returns 404 for nonexistent template                  0.07s  
+  ✓ update prevents modifying other users templates              0.08s  
+  ✓ update enforces unique name per user                         0.07s  
+  ✓ destroy deletes template                                     0.06s  
+  ✓ destroy returns 404 for nonexistent template                 0.06s  
+  ✓ destroy prevents deleting other users templates              0.06s  
+  ✓ store web creates template with custom fields                0.07s  
+  ✓ store web validates field name uniqueness                    0.23s  
+  ✓ store web validates field name format                        0.12s  
+  ✓ store web validates field type                               0.05s  
+  ✓ store web creates template without custom fields             0.04s  
+  ✓ update web with new custom fields added                      0.05s  
+  ✓ update web with existing custom fields modified              0.05s  
+  ✓ update web with custom fields removed                        0.05s  
+  ✓ update web removes all custom fields                         0.06s  
+  ✓ update web validates field name uniqueness during update     0.06s  
+  ✓ update web verifies field attributes are updated properly    0.05s  
+  ✓ deleting template cascades to fields                         0.07s  
+  ✓ database constraint prevents duplicate field names in same…  0.04s  
+  ✓ same field name allowed in different templates               0.04s  
+  ✓ web form handles duplicate field names gracefully            0.05s  
+  ✓ api endpoint rejects duplicate field names                   0.06s  
   ✓ case sensitivity in field name uniqueness                    0.03s  
-  ✓ update field name to existing name in same template fails    0.03s  
-  ✓ store web rejects invalid field type                         0.03s  
+  ✓ update field name to existing name in same template fails    0.04s  
+  ✓ store web rejects invalid field type                         0.04s  
   ✓ store web accepts all valid field types                      0.04s  
-  ✓ store web rejects multiple invalid field types               0.03s  
-  ✓ store web rejects mixed valid and invalid field types        0.03s  
-  ✓ update web rejects invalid field type                        0.03s  
-  ✓ update web accepts all valid field types                     0.03s  
-  ✓ api endpoint rejects invalid field type                      0.03s  
-  ✓ api endpoint accepts all valid field types                   0.05s  
-  ✓ api endpoint update rejects invalid field type               0.03s  
-  ✓ field type case sensitivity                                  0.03s  
-  ✓ store web requires all required core fields                  0.03s  
-  ✓ store web accepts all required core fields                   0.05s  
-  ✓ update web requires all required core fields                 0.03s  
+  ✓ store web rejects multiple invalid field types               0.04s  
+  ✓ store web rejects mixed valid and invalid field types        0.04s  
+  ✓ update web rejects invalid field type                        0.04s  
+  ✓ update web accepts all valid field types                     0.04s  
+  ✓ api endpoint rejects invalid field type                      0.05s  
+  ✓ api endpoint accepts all valid field types                   0.06s  
+  ✓ api endpoint update rejects invalid field type               0.05s  
+  ✓ field type case sensitivity                                  0.04s  
+  ✓ store web requires all required core fields                  0.04s  
+  ✓ store web accepts all required core fields                   0.06s  
+  ✓ update web requires all required core fields                 0.04s  
   ✓ update web accepts all required core fields                  0.04s  
   ✓ store web allows optional core fields to be removed          0.04s  
 
    PASS  Tests\Feature\TemplateFieldControllerTest
-  ✓ index returns template fields                                0.10s  
+  ✓ index returns template fields                                0.11s  
   ✓ index returns 404 for nonexistent template                   0.04s  
-  ✓ index denies access to other users template                  0.03s  
-  ✓ store creates template field                                 0.03s  
-  ✓ store validates field name format                            0.03s  
-  ✓ store validates field type                                   0.03s  
-  ✓ store prevents duplicate field names                         0.03s  
-  ✓ store denies access to other users template                  0.04s  
-  ✓ update modifies template field                               0.03s  
-  ✓ update prevents duplicate field names                        0.03s  
-  ✓ update returns 404 for nonexistent field                     0.03s  
-  ✓ destroy deletes template field                               0.03s  
-  ✓ destroy returns 404 for nonexistent field                    0.03s  
-  ✓ destroy denies access to other users template                0.03s  
-  ✓ requires authentication                                      0.03s  
+  ✓ index denies access to other users template                  0.04s  
+  ✓ store creates template field                                 0.04s  
+  ✓ store validates field name format                            0.04s  
+  ✓ store validates field type                                   0.04s  
+  ✓ store prevents duplicate field names                         0.04s  
+  ✓ store denies access to other users template                  0.06s  
+  ✓ update modifies template field                               0.04s  
+  ✓ update prevents duplicate field names                        0.04s  
+  ✓ update returns 404 for nonexistent field                     0.04s  
+  ✓ destroy deletes template field                               0.04s  
+  ✓ destroy returns 404 for nonexistent field                    0.04s  
+  ✓ destroy denies access to other users template                0.04s  
+  ✓ requires authentication                                      0.05s  
 
    PASS  Tests\Feature\UploadTest
-  ✓ upload page can be rendered                                  0.04s  
-  ✓ file upload requires authentication                          0.02s  
-  ✓ valid file can be uploaded                                   0.05s  
-  ✓ upload validates file is required                            0.03s  
-  ✓ upload validates file type                                   0.03s  
+  ✓ upload page can be rendered                                  0.07s  
+  ✓ file upload requires authentication                          0.03s  
+  ✓ valid file can be uploaded                                   0.07s  
+  ✓ upload validates file is required                            0.05s  
+  ✓ upload validates file type                                   0.04s  
   ✓ upload validates file size                                   0.05s  
 
    PASS  Tests\Feature\UploadValidationTest
   ✓ upload without template accepts valid core fields            0.08s  
-  ✓ upload without template rejects missing required field       0.05s  
+  ✓ upload without template rejects missing required field       0.06s  
   ✓ upload without template rejects extra columns                0.05s  
-  ✓ upload without template with extra column fails validation   0.04s  
-  ✓ upload with template validates against template columns      0.06s  
-  ✓ upload with template rejects missing template field          0.05s  
-  ✓ upload with template rejects extra columns not in template   0.04s  
-  ✓ validation errors are logged                                 0.04s  
-  ✓ validation info is passed to view                            0.05s  
-  ✓ template not found returns error                             0.04s  
-  ✓ user cannot use another users template                       0.04s  
-  ✓ api upload returns json validation errors                    0.04s  
-  ✓ template with fields relationship is loaded                  0.05s  
-  ✓ upload with template valid data processes successfully       0.08s  
-  ✓ upload with template with extra column fails validation      0.05s  
-  ✓ upload with template type mismatch validates field types     0.08s  
-  ✓ complete workflow create template add fields upload file     0.08s  
-  ✓ error handling missing columns displays clear errors         0.04s  
-  ✓ error handling extra columns displays clear errors           0.05s  
-  ✓ error handling misnamed columns displays clear errors        0.04s  
-  ✓ error handling template missing fields displays clear error… 0.05s  
-  ✓ error handling template extra columns displays clear errors  0.04s  
-  ✓ error handling returns all validation errors at once         0.04s  
-  ✓ error handling without template validates core fields only   0.04s  
-  ✓ error handling provides actionable error messages            0.04s  
-  ✓ backward compatibility legacy template without custom field… 0.06s  
-  ✓ backward compatibility legacy template rejects extra column… 0.05s  
+  ✓ upload without template with extra column fails validation   0.06s  
+  ✓ upload with template validates against template columns      0.08s  
+  ✓ upload with template rejects missing template field          0.07s  
+  ✓ upload with template rejects extra columns not in template   0.05s  
+  ✓ validation errors are logged                                 0.05s  
+  ✓ validation info is passed to view                            0.07s  
+  ✓ template not found returns error                             0.05s  
+  ✓ user cannot use another users template                       0.06s  
+  ✓ api upload returns json validation errors                    0.05s  
+  ✓ template with fields relationship is loaded                  0.07s  
+  ✓ upload with template valid data processes successfully       0.11s  
+  ✓ upload with template with extra column fails validation      0.07s  
+  ✓ upload with template type mismatch validates field types     0.10s  
+  ✓ complete workflow create template add fields upload file     0.12s  
+  ✓ error handling missing columns displays clear errors         0.06s  
+  ✓ error handling extra columns displays clear errors           0.07s  
+  ✓ error handling misnamed columns displays clear errors        0.05s  
+  ✓ error handling template missing fields displays clear error… 0.06s  
+  ✓ error handling template extra columns displays clear errors  0.05s  
+  ✓ error handling returns all validation errors at once         0.06s  
+  ✓ error handling without template validates core fields only   0.05s  
+  ✓ error handling provides actionable error messages            0.05s  
+  ✓ backward compatibility legacy template without custom field… 0.09s  
+  ✓ backward compatibility legacy template rejects extra column… 0.06s  
   ✓ backward compatibility legacy template rejects missing colu… 0.05s  
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\FileValidationServicePerformanceTest > column…    
+  Validation time should not scale linearly with row count (100 rows: 34.649848937988ms, 500 rows: 200.35910606384ms)
+Failed asserting that 200.35910606384277 is less than 173.2492446899414.
 
-  Tests:    1 skipped, 435 passed (14546 assertions)
-  Duration: 45.60s
+  at tests\Unit\FileValidationServicePerformanceTest.php:171
+    167▕         $this->assertTrue($result2['valid']);
+    168▕ 
+    169▕         // Time difference should be minimal since we only read headers
+    170▕         // Allow 10x difference for file I/O overhead (file size affects loading time)
+  ➜ 171▕         $this->assertLessThan($time1 * 10, $time2, 
+    172▕             "Validation time should not scale linearly with row count (100 rows: {$time1}ms, 500 rows: {$time2}ms)");
+    173▕     }
+    174▕ 
+    175▕     /** @test */
+
+  1   tests\Unit\FileValidationServicePerformanceTest.php:171
+
+
+  Tests:    1 failed, 1 skipped, 434 passed (14646 assertions)
+  Duration: 89.44s
 

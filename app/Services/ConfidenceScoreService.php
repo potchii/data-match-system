@@ -504,14 +504,17 @@ class ConfidenceScoreService
      */
     public function mapConfidenceToStatus(int $confidence): string
     {
-        if ($confidence >= 70) {
+        // Only 100% confidence = MATCHED
+        if ($confidence === 100) {
             return 'MATCHED';
         }
 
-        if ($confidence >= 70) {
+        // 1-99% confidence = POSSIBLE_DUPLICATE
+        if ($confidence > 0) {
             return 'POSSIBLE_DUPLICATE';
         }
 
+        // 0% confidence = NEW_RECORD
         return 'NEW_RECORD';
     }
 }
