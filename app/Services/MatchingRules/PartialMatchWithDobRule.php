@@ -38,7 +38,11 @@ class PartialMatchWithDobRule extends MatchRule
                 && $candidateBirthday === $normalizedData['birthday'];
         });
         
-        return $match ? ['record' => $match, 'rule' => $this->name()] : null;
+        return $match ? [
+            'record' => $match,
+            'rule' => $this->name(),
+            'confidence' => $this->confidence(),
+        ] : null;
     }
 }
 

@@ -80,7 +80,7 @@ class DataMatchService
     
     /**
      * Find match from cached candidates using rule chain
-     * Now uses unified scoring with field breakdown
+     * Uses rule-based confidence levels as per matching algorithm specification
      */
     protected function findMatchFromCache(array $normalized, array $uploadedData = [], ?int $templateId = null): array
     {
@@ -93,13 +93,19 @@ class DataMatchService
             }
             
             if ($result) {
-                // Use unified confidence score calculation
                 $matchedRecord = $result['record'];
                 
-                // Ensure uploadedData is in the correct format for scoring
+                // Use rule-based confidence (not unified scoring)
+                // FuzzyNameMatchRule returns its own calculated confidence
+                // Other rules return their fixed confidence levels
+                $confidence = $result['confidence'] ?? $rule->confidence();
+                
+                // Map confidence to status
+                $status = $this->confidenceScoreService->mapConfidenceToStatus((int) $confidence);
+                
+                // Generate field breakdown for display purposes only
                 $scoringData = $uploadedData;
                 if (!isset($uploadedData['core_fields'])) {
-                    // Convert flat format to structured format for scoring
                     $scoringData = [
                         'core_fields' => $uploadedData,
                     ];
@@ -108,33 +114,22 @@ class DataMatchService
                 $scoreResult = $this->confidenceScoreService->calculateUnifiedScore($scoringData, $matchedRecord, $templateId);
                 
                 return [
-                    'status' => $rule->status(),
-                    'confidence' => $scoreResult['score'],
+                    'status' => $status,
+                    'confidence' => $confidence,
                     'matched_id' => $matchedRecord->uid,
                     'rule' => $result['rule'],
-                    'field_breakdown' => $scoreResult['breakdown'],
+                    'field_breakdown' => $result['field_breakdown'] ?? $scoreResult['breakdown'],
                 ];
             }
         }
         
-        // No match found - generate field breakdown for NEW RECORD
-        $scoringData = $uploadedData;
-        if (!isset($uploadedData['core_fields'])) {
-            $scoringData = [
-                'core_fields' => $uploadedData,
-            ];
-        }
-        
-        // Create a temporary MainSystem record to generate breakdown
-        $tempRecord = new MainSystem();
-        $breakdown = $this->confidenceScoreService->generateBreakdown($scoringData, $tempRecord, $templateId);
-        
+        // No match found - NEW RECORD has no comparison data
         return [
             'status' => 'NEW RECORD',
             'confidence' => 0.0,
             'matched_id' => null,
             'rule' => 'no_match',
-            'field_breakdown' => $breakdown,
+            'field_breakdown' => null, // No existing record to compare against
         ];
     }
     
@@ -342,10 +337,18 @@ class DataMatchService
     
     /**
      * Normalize string for case-insensitive comparison
+     * Strips trailing periods from single-letter initials (e.g., "D." → "d")
      */
     protected function normalizeString(string $value): string
     {
-        return mb_strtolower(trim($value), 'UTF-8');
+        $normalized = mb_strtolower(trim($value), 'UTF-8');
+        
+        // Strip trailing period from initials (e.g., "d." → "d", "c." → "c")
+        if (preg_match('/^[a-z]\.?$/', $normalized)) {
+            $normalized = rtrim($normalized, '.');
+        }
+        
+        return $normalized;
     }
     
     /**

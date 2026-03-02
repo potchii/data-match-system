@@ -23,11 +23,21 @@ class ExactMatchRule extends MatchRule
     
     public function match(array $normalizedData, Collection $candidates): ?array
     {
+        // Require middle name to be present for exact match
+        if (empty($normalizedData['middle_name_normalized'])) {
+            return null;
+        }
+        
         $match = $candidates->first(function ($candidate) use ($normalizedData) {
             // Convert birthday to string for comparison if it's a Carbon instance
             $candidateBirthday = ($candidate->birthday instanceof \Carbon\Carbon || $candidate->birthday instanceof \Carbon\CarbonImmutable)
                 ? $candidate->birthday->format('Y-m-d') 
                 : $candidate->birthday;
+            
+            // Require candidate to also have middle name
+            if (empty($candidate->middle_name_normalized)) {
+                return false;
+            }
             
             return $candidate->last_name_normalized === $normalizedData['last_name_normalized']
                 && $candidate->first_name_normalized === $normalizedData['first_name_normalized']
@@ -35,7 +45,11 @@ class ExactMatchRule extends MatchRule
                 && $candidateBirthday === $normalizedData['birthday'];
         });
         
-        return $match ? ['record' => $match, 'rule' => $this->name()] : null;
+        return $match ? [
+            'record' => $match,
+            'rule' => $this->name(),
+            'confidence' => $this->confidence(),
+        ] : null;
     }
 }
 

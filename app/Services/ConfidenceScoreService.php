@@ -500,7 +500,7 @@ class ConfidenceScoreService
      * Map confidence score to match status
      *
      * @param int $confidence Confidence score (0-100)
-     * @return string Match status (MATCHED, POSSIBLE_DUPLICATE, NEW_RECORD)
+     * @return string Match status (MATCHED, POSSIBLE DUPLICATE, NEW RECORD)
      */
     public function mapConfidenceToStatus(int $confidence): string
     {
@@ -509,12 +509,12 @@ class ConfidenceScoreService
             return 'MATCHED';
         }
 
-        // 1-99% confidence = POSSIBLE_DUPLICATE
+        // 1-99% confidence = POSSIBLE DUPLICATE
         if ($confidence > 0) {
-            return 'POSSIBLE_DUPLICATE';
+            return 'POSSIBLE DUPLICATE';
         }
 
-        // 0% confidence = NEW_RECORD
-        return 'NEW_RECORD';
+        // 0% confidence = NEW RECORD
+        return 'NEW RECORD';
     }
 }

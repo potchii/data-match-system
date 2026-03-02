@@ -29,7 +29,11 @@ class FullNameMatchRule extends MatchRule
                 && $candidate->middle_name_normalized === $normalizedData['middle_name_normalized'];
         });
         
-        return $match ? ['record' => $match, 'rule' => $this->name()] : null;
+        return $match ? [
+            'record' => $match,
+            'rule' => $this->name(),
+            'confidence' => $this->confidence(),
+        ] : null;
     }
 }
 
