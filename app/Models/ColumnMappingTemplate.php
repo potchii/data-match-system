@@ -58,18 +58,35 @@ class ColumnMappingTemplate extends Model
     {
         $remapped = [];
         
+        // Create case-insensitive lookup for row keys
+        $rowKeysLower = array_change_key_case($row, CASE_LOWER);
+        
         // Apply core field mappings from template
         foreach ($this->mappings as $excelColumn => $systemField) {
+            $excelColumnLower = strtolower($excelColumn);
+            
+            // Try exact match first
             if (array_key_exists($excelColumn, $row)) {
                 $remapped[$systemField] = $row[$excelColumn];
+            } 
+            // Try case-insensitive match
+            elseif (array_key_exists($excelColumnLower, $rowKeysLower)) {
+                $remapped[$systemField] = $rowKeysLower[$excelColumnLower];
             }
         }
         
         // Preserve template fields (custom fields) that are in the row
         $templateFieldNames = $this->fields->pluck('field_name')->toArray();
         foreach ($templateFieldNames as $fieldName) {
+            $fieldNameLower = strtolower($fieldName);
+            
+            // Try exact match first
             if (array_key_exists($fieldName, $row)) {
                 $remapped[$fieldName] = $row[$fieldName];
+            }
+            // Try case-insensitive match
+            elseif (array_key_exists($fieldNameLower, $rowKeysLower)) {
+                $remapped[$fieldName] = $rowKeysLower[$fieldNameLower];
             }
         }
         
@@ -140,17 +157,29 @@ class ColumnMappingTemplate extends Model
         $expectedLower = array_map('strtolower', $expected);
         $fileLower = array_map('strtolower', $fileColumns);
         
-        $missing = array_diff($expectedLower, $fileLower);
-        $extra = array_diff($fileLower, $expectedLower);
+        // Use case-insensitive comparison
+        $missing = [];
+        foreach ($expectedLower as $exp) {
+            if (!in_array($exp, $fileLower)) {
+                $missing[] = $exp;
+            }
+        }
+        
+        $extra = [];
+        foreach ($fileLower as $file) {
+            if (!in_array($file, $expectedLower)) {
+                $extra[] = $file;
+            }
+        }
         
         $errors = [];
         
         foreach ($missing as $col) {
-            $errors[] = "Required column '{$col}' is missing from your file. Please add this column to proceed.";
+            $errors[] = "Missing required column: {$col}";
         }
         
         foreach ($extra as $col) {
-            $errors[] = "Column '{$col}' is not expected in this template. Please remove it or update your template.";
+            $errors[] = "Unexpected column: {$col}";
         }
         
         return [

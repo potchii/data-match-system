@@ -24,7 +24,7 @@
                             <form method="GET" action="{{ route('main-system.index') }}" class="form-inline">
                                 <div class="input-group input-group-sm" style="width: 250px;">
                                     <input type="text" name="search" class="form-control" 
-                                           placeholder="Search by name or UID" 
+                                           placeholder="Search by name or Regs No" 
                                            value="{{ request('search') }}">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -39,22 +39,21 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>UID</th>
+                                    <th>Regs No</th>
                                     <th>Name</th>
                                     <th>Birthday</th>
                                     <th>Gender</th>
-                                    <th>Address</th>
-                                    <th>Origin Batch</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                    <th>Registration Date</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($records as $record)
                                 <tr>
-                                    <td>{{ $record->id }}</td>
                                     <td>
-                                        @if($record->uid)
-                                            <span class="badge badge-info">{{ $record->uid }}</span>
+                                        @if($record->regs_no)
+                                            <span class="badge badge-primary">{{ $record->regs_no }}</span>
                                         @else
                                             <span class="text-muted">N/A</span>
                                         @endif
@@ -77,24 +76,18 @@
                                     </td>
                                     <td>{{ $record->gender ?? 'N/A' }}</td>
                                     <td>
-                                        @if($record->street || $record->barangay || $record->city)
-                                            <small>
-                                                @if($record->street_no) {{ $record->street_no }} @endif
-                                                @if($record->street) {{ $record->street }}, @endif
-                                                @if($record->barangay) {{ $record->barangay }}, @endif
-                                                @if($record->city) {{ $record->city }} @endif
-                                                @if($record->province) {{ $record->province }} @endif
-                                            </small>
+                                        @if($record->status)
+                                            <span class="badge badge-{{ $record->status === 'active' ? 'success' : ($record->status === 'inactive' ? 'warning' : 'secondary') }}">
+                                                {{ ucfirst($record->status) }}
+                                            </span>
                                         @else
                                             <span class="text-muted">N/A</span>
                                         @endif
                                     </td>
+                                    <td>{{ $record->category ?? 'N/A' }}</td>
                                     <td>
-                                        @if($record->originBatch)
-                                            <small>
-                                                Batch #{{ $record->origin_batch_id }}<br>
-                                                <span class="text-muted">{{ $record->originBatch->file_name }}</span>
-                                            </small>
+                                        @if($record->registration_date)
+                                            {{ $record->registration_date->format('Y-m-d') }}
                                         @else
                                             <span class="text-muted">N/A</span>
                                         @endif

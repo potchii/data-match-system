@@ -11,29 +11,180 @@
 
 <section class="content">
     <div class="container-fluid">
-        @if(session('column_mapping'))
+        @if($columnMapping)
+        @php
+            $mappedCount = count($columnMapping['core_fields_mapped']);
+            $skippedCount = count($columnMapping['skipped_columns']);
+            $totalColumns = $mappedCount + $skippedCount;
+            $mappedPercentage = $totalColumns > 0 ? round(($mappedCount / $totalColumns) * 100, 1) : 0;
+            $skippedPercentage = $totalColumns > 0 ? round(($skippedCount / $totalColumns) * 100, 1) : 0;
+        @endphp
         <div class="row">
             <div class="col-12">
-                <div class="card card-outline card-info collapsed-card">
+                <div class="card card-outline card-info {{ $isFromUpload ? '' : 'collapsed-card' }}">
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="fas fa-columns"></i> Column Mapping Summary
                         </h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-plus"></i>
+                                <i class="fas fa-{{ $isFromUpload ? 'minus' : 'plus' }}"></i>
                             </button>
                         </div>
                     </div>
                     <div class="card-body">
+                        <!-- Percentage Calculations Section -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="info-box bg-success">
+                                    <span class="info-box-icon"><i class="fas fa-check-circle"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Mapped Columns</span>
+                                        <span class="info-box-number">{{ $mappedCount }} <small>({{ $mappedPercentage }}%)</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box bg-secondary">
+                                    <span class="info-box-icon"><i class="fas fa-minus-circle"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Skipped Columns</span>
+                                        <span class="info-box-number">{{ $skippedCount }} <small>({{ $skippedPercentage }}%)</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <p><strong>Total Columns:</strong> {{ $totalColumns }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Batch Statistics Section -->
+                        @if($batchStats)
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5><i class="fas fa-chart-bar"></i> Batch Statistics</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>{{ $batchStats['total_rows'] }}</h3>
+                                        <p>Total Rows Processed</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <h3>{{ $batchStats['matched'] }}</h3>
+                                        <p>Matched ({{ $batchStats['total_rows'] > 0 ? round(($batchStats['matched'] / $batchStats['total_rows']) * 100, 1) : 0 }}%)</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="small-box bg-warning">
+                                    <div class="inner">
+                                        <h3>{{ $batchStats['possible_duplicates'] }}</h3>
+                                        <p>Possible Duplicates ({{ $batchStats['total_rows'] > 0 ? round(($batchStats['possible_duplicates'] / $batchStats['total_rows']) * 100, 1) : 0 }}%)</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="small-box bg-primary">
+                                    <div class="inner">
+                                        <h3>{{ $batchStats['new_records'] }}</h3>
+                                        <p>New Records ({{ $batchStats['total_rows'] > 0 ? round(($batchStats['new_records'] / $batchStats['total_rows']) * 100, 1) : 0 }}%)</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analytics Data Container (loaded via AJAX) -->
+                        <div id="analytics-container" data-batch-id="{{ request('batch_id') }}">
+                            <div class="text-center py-3">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading analytics...</span>
+                                </div>
+                                <p class="mt-2 text-muted">Loading detailed analytics...</p>
+                            </div>
+                        </div>
+                        @endif
+
+                        <!-- Chart Containers -->
+                        <div class="row mb-4" id="chart-section" style="display: none;">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title"><i class="fas fa-chart-pie"></i> Column Mapping Distribution</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart-container" style="position: relative; height: 300px;">
+                                            <canvas id="mappingPieChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title"><i class="fas fa-chart-bar"></i> Field Population Rates</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart-container" style="position: relative; height: 300px;">
+                                            <canvas id="populationBarChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Field Statistics Table -->
+                        <div class="row" id="field-stats-section" style="display: none;">
+                            <div class="col-12">
+                                <h5><i class="fas fa-table"></i> Field Statistics</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" id="field-stats-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Field Name</th>
+                                                <th>Category</th>
+                                                <th>Population Count</th>
+                                                <th>Population Rate</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="field-stats-body">
+                                            <!-- Populated via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- Original Column Mapping Details -->
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <h5 class="text-success">
                                     <i class="fas fa-check-circle"></i> Core Fields Mapped
                                 </h5>
                                 <div class="mb-3">
-                                    @if(count(session('column_mapping')['core_fields_mapped']) > 0)
-                                        @foreach(session('column_mapping')['core_fields_mapped'] as $field)
+                                    @if(count($columnMapping['core_fields_mapped']) > 0)
+                                        @foreach($columnMapping['core_fields_mapped'] as $field)
                                             <span class="badge badge-success mr-1 mb-1">{{ $field }}</span>
                                         @endforeach
                                     @else
@@ -41,48 +192,33 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <h5 class="text-secondary">
-                                    <i class="fas fa-minus-circle"></i> Skipped Columns
+                            <div class="col-md-3">
+                                <h5 class="text-info">
+                                    <i class="fas fa-plus-circle"></i> Dynamic Fields Captured
                                 </h5>
                                 <div class="mb-3">
-                                    @if(count(session('column_mapping')['skipped_columns']) > 0)
-                                        @foreach(session('column_mapping')['skipped_columns'] as $field)
-                                            <span class="badge badge-secondary mr-1 mb-1">{{ $field }}</span>
+                                    @if(isset($columnMapping['dynamic_fields_captured']) && count($columnMapping['dynamic_fields_captured']) > 0)
+                                        @foreach($columnMapping['dynamic_fields_captured'] as $field)
+                                            <span class="badge badge-info mr-1 mb-1">{{ $field }}</span>
                                         @endforeach
                                     @else
                                         <span class="text-muted">None</span>
                                     @endif
                                 </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="mb-2">
-                                    <strong>Total Columns:</strong> 
-                                    {{ count(session('column_mapping')['core_fields_mapped']) + count(session('column_mapping')['skipped_columns']) }}
-                                    <span class="ml-3">
-                                        <strong>Core:</strong> {{ count(session('column_mapping')['core_fields_mapped']) }}
-                                    </span>
-                                    <span class="ml-3">
-                                        <strong>Skipped:</strong> {{ count(session('column_mapping')['skipped_columns']) }}
-                                    </span>
-                                </p>
-                                @if($batchStats)
-                                <p class="mb-0">
-                                    <strong>Total Rows Processed:</strong> {{ $batchStats['total_rows'] }}
-                                    <span class="ml-3">
-                                        <strong>New Records:</strong> <span class="text-info">{{ $batchStats['new_records'] }}</span>
-                                    </span>
-                                    <span class="ml-3">
-                                        <strong>Matched:</strong> <span class="text-success">{{ $batchStats['matched'] }}</span>
-                                    </span>
-                                    <span class="ml-3">
-                                        <strong>Possible Duplicates:</strong> <span class="text-warning">{{ $batchStats['possible_duplicates'] }}</span>
-                                    </span>
-                                </p>
-                                @endif
+                            <div class="col-md-3">
+                                <h5 class="text-secondary">
+                                    <i class="fas fa-minus-circle"></i> Skipped Columns
+                                </h5>
+                                <div class="mb-3">
+                                    @if(count($columnMapping['skipped_columns']) > 0)
+                                        @foreach($columnMapping['skipped_columns'] as $field)
+                                            <span class="badge badge-secondary mr-1 mb-1">{{ $field }}</span>
+                                        @endforeach
+                                    @else
+                                        <span class="text-muted">None</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -206,16 +342,17 @@
 <!-- Field Breakdown Modals -->
 @foreach($results as $result)
     @if($result->field_breakdown && $result->match_status !== 'NEW RECORD')
-    <div class="modal fade" id="breakdownModal{{ $result->id }}" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="breakdownModal{{ $result->id }}" tabindex="-1" role="dialog" aria-labelledby="breakdownModalLabel{{ $result->id }}">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Field Breakdown - Match Result #{{ $result->id }}</h5>
+                    <h5 class="modal-title" id="breakdownModalLabel{{ $result->id }}">Field Breakdown - Match Result #{{ $result->id }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <!-- Match Summary -->
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <h6>Match Summary</h6>
@@ -223,56 +360,109 @@
                                 <strong>Confidence Score:</strong> 
                                 <span class="badge badge-primary">{{ number_format($result->confidence_score, 1) }}%</span>
                                 <span class="ml-3">
-                                    <strong>Matched Fields:</strong> {{ $result->field_breakdown['matched_fields'] ?? 0 }}
+                                    <strong>Matched Fields:</strong> <span id="matched-count-{{ $result->id }}">{{ $result->field_breakdown['matched_fields'] ?? 0 }}</span>
                                 </span>
                                 <span class="ml-3">
-                                    <strong>Total Fields:</strong> {{ $result->field_breakdown['total_fields'] ?? 0 }}
+                                    <strong>Total Fields:</strong> <span id="total-count-{{ $result->id }}">{{ $result->field_breakdown['total_fields'] ?? 0 }}</span>
                                 </span>
                             </p>
                         </div>
                     </div>
 
-                    @if(isset($result->field_breakdown['core_fields']) && count($result->field_breakdown['core_fields']) > 0)
-                    <div class="mb-4">
-                        <h6><i class="fas fa-database"></i> Core Fields</h6>
-                        <table class="table table-sm table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Field</th>
-                                    <th>Status</th>
-                                    <th>Uploaded Value</th>
-                                    <th>Existing Value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($result->field_breakdown['core_fields'] as $fieldName => $fieldData)
-                                <tr>
-                                    <td><strong>{{ $fieldName }}</strong></td>
-                                    <td>
-                                        @if($fieldData['status'] === 'match')
-                                            <span class="badge badge-success"><i class="fas fa-check"></i> Match</span>
-                                        @elseif($fieldData['status'] === 'mismatch')
-                                            <span class="badge badge-danger"><i class="fas fa-times"></i> Mismatch</span>
-                                        @else
-                                            <span class="badge badge-info"><i class="fas fa-plus"></i> New</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <span class="{{ $fieldData['status'] === 'match' ? 'text-success' : ($fieldData['status'] === 'mismatch' ? 'text-danger' : 'text-info') }}">
-                                            {{ $fieldData['uploaded'] ?? 'N/A' }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="{{ $fieldData['status'] === 'match' ? 'text-success' : 'text-muted' }}">
-                                            {{ $fieldData['existing'] ?? 'N/A' }}
-                                        </span>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <!-- Filter Buttons and Export -->
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Field filter buttons">
+                                <button type="button" class="btn btn-outline-primary active" data-filter="all" data-result-id="{{ $result->id }}">
+                                    All <span class="badge badge-light" id="filter-all-count-{{ $result->id }}">0</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-success" data-filter="matched" data-result-id="{{ $result->id }}">
+                                    Matched <span class="badge badge-light" id="filter-matched-count-{{ $result->id }}">0</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger" data-filter="mismatched" data-result-id="{{ $result->id }}">
+                                    Mismatched <span class="badge badge-light" id="filter-mismatched-count-{{ $result->id }}">0</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-info" data-filter="new" data-result-id="{{ $result->id }}">
+                                    New <span class="badge badge-light" id="filter-new-count-{{ $result->id }}">0</span>
+                                </button>
+                            </div>
+                            <small class="text-muted ml-2">
+                                Showing <span id="visible-count-{{ $result->id }}">0</span> fields
+                            </small>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button type="button" class="btn btn-sm btn-success" id="export-csv-{{ $result->id }}" data-result-id="{{ $result->id }}">
+                                <i class="fas fa-download"></i> Export to CSV
+                            </button>
+                        </div>
                     </div>
-                    @endif
+
+                    <!-- Loading Indicator -->
+                    <div id="breakdown-loading-{{ $result->id }}" class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading field breakdown...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Loading detailed field comparison...</p>
+                    </div>
+
+                    <!-- Field Breakdown Container -->
+                    <div id="breakdown-container-{{ $result->id }}" style="display: none;">
+                        <!-- Core Fields Section -->
+                        <div class="mb-4" id="core-fields-section-{{ $result->id }}">
+                            <h6><i class="fas fa-database"></i> Core Fields</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered table-hover">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th style="width: 15%;">Field Name</th>
+                                            <th style="width: 10%;">Status</th>
+                                            <th style="width: 18%;">Uploaded Value</th>
+                                            <th style="width: 18%;">Existing Value</th>
+                                            <th style="width: 15%;">Normalized (Uploaded)</th>
+                                            <th style="width: 15%;">Normalized (Existing)</th>
+                                            <th style="width: 9%;">Confidence</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="core-fields-body-{{ $result->id }}">
+                                        <!-- Populated via JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Template Fields Section -->
+                        <div class="mb-4" id="template-fields-section-{{ $result->id }}" style="display: none;">
+                            <h6><i class="fas fa-cog"></i> Template Fields</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered table-hover">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th style="width: 15%;">Field Name</th>
+                                            <th style="width: 10%;">Status</th>
+                                            <th style="width: 18%;">Uploaded Value</th>
+                                            <th style="width: 18%;">Existing Value</th>
+                                            <th style="width: 15%;">Normalized (Uploaded)</th>
+                                            <th style="width: 15%;">Normalized (Existing)</th>
+                                            <th style="width: 9%;">Confidence</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="template-fields-body-{{ $result->id }}">
+                                        <!-- Populated via JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- No Results Message -->
+                        <div id="no-results-{{ $result->id }}" class="alert alert-info" style="display: none;">
+                            <i class="fas fa-info-circle"></i> No fields match the selected filter.
+                        </div>
+                    </div>
+
+                    <!-- Error Container -->
+                    <div id="breakdown-error-{{ $result->id }}" class="alert alert-danger" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i> <span id="error-message-{{ $result->id }}"></span>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -283,3 +473,646 @@
     @endif
 @endforeach
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script>
+// Column Mapping Analytics Module
+class ColumnMappingAnalytics {
+    constructor() {
+        this.batchId = null;
+        this.mappingPieChart = null;
+        this.populationBarChart = null;
+    }
+
+    async initialize(batchId) {
+        if (!batchId) {
+            document.getElementById('analytics-container').innerHTML = 
+                '<div class="alert alert-info">Select a batch to view detailed analytics.</div>';
+            return;
+        }
+
+        this.batchId = batchId;
+
+        try {
+            const response = await fetch(`/api/batch-analytics/${batchId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const data = await response.json();
+            this.renderAnalytics(data);
+        } catch (error) {
+            console.error('Failed to load batch analytics:', error);
+            this.showError('Unable to load analytics. Please try again.', true);
+        }
+    }
+
+    renderAnalytics(data) {
+        // Hide loading spinner
+        document.getElementById('analytics-container').style.display = 'none';
+
+        // Show chart section
+        document.getElementById('chart-section').style.display = 'flex';
+        document.getElementById('field-stats-section').style.display = 'block';
+
+        // Update statistics display
+        this.updateStatistics(data);
+
+        // Render charts
+        this.renderMappingPieChart(data.chart_data.mapping_pie);
+        this.renderPopulationBarChart(data.chart_data.population_bar);
+
+        // Update field statistics table
+        this.updateFieldStatistics(data.field_population);
+    }
+
+    updateStatistics(data) {
+        const stats = data.statistics;
+        const quality = data.quality;
+
+        // Create quality badge HTML
+        const qualityBadgeColors = {
+            'excellent': 'success',
+            'good': 'primary',
+            'fair': 'warning',
+            'poor': 'danger'
+        };
+        const badgeColor = qualityBadgeColors[quality.level] || 'secondary';
+
+        // Add quality score and additional statistics
+        const analyticsHtml = `
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-${badgeColor}"><i class="fas fa-star"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Quality Score</span>
+                            <span class="info-box-number">${quality.score.toFixed(1)}% <small class="text-${badgeColor}">${quality.level.toUpperCase()}</small></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fas fa-percentage"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Avg Confidence</span>
+                            <span class="info-box-number">${stats.average_confidence.toFixed(1)}%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="fas fa-check-double"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Avg Matched Fields</span>
+                            <span class="info-box-number">${stats.average_matched_fields.toFixed(1)}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="fas fa-times"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Avg Mismatched Fields</span>
+                            <span class="info-box-number">${stats.average_mismatched_fields.toFixed(1)}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('analytics-container').innerHTML = analyticsHtml;
+        document.getElementById('analytics-container').style.display = 'block';
+    }
+
+    renderMappingPieChart(chartData) {
+        const ctx = document.getElementById('mappingPieChart').getContext('2d');
+        
+        if (this.mappingPieChart) {
+            this.mappingPieChart.destroy();
+        }
+
+        try {
+            this.mappingPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        data: chartData.data,
+                        backgroundColor: chartData.colors,
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Chart rendering failed:', error);
+            this.showChartError('mappingPieChart');
+        }
+    }
+
+    renderPopulationBarChart(chartData) {
+        const ctx = document.getElementById('populationBarChart').getContext('2d');
+        
+        if (this.populationBarChart) {
+            this.populationBarChart.destroy();
+        }
+
+        try {
+            this.populationBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Population Rate (%)',
+                        data: chartData.data,
+                        backgroundColor: chartData.colors,
+                        borderWidth: 1,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Population: ${context.parsed.y.toFixed(1)}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Chart rendering failed:', error);
+            this.showChartError('populationBarChart');
+        }
+    }
+
+    updateFieldStatistics(fieldPopulation) {
+        const tbody = document.getElementById('field-stats-body');
+        tbody.innerHTML = '';
+
+        // Process core fields
+        if (fieldPopulation.core_fields) {
+            Object.entries(fieldPopulation.core_fields).forEach(([fieldName, stats]) => {
+                const row = this.createFieldStatRow(fieldName, 'Core', stats);
+                tbody.appendChild(row);
+            });
+        }
+
+        // Process template fields
+        if (fieldPopulation.template_fields) {
+            Object.entries(fieldPopulation.template_fields).forEach(([fieldName, stats]) => {
+                const row = this.createFieldStatRow(fieldName, 'Template', stats);
+                tbody.appendChild(row);
+            });
+        }
+    }
+
+    createFieldStatRow(fieldName, category, stats) {
+        const row = document.createElement('tr');
+        const percentage = stats.percentage;
+        
+        // Determine status badge and icon
+        let statusBadge = '';
+        let statusIcon = '';
+        if (percentage >= 80) {
+            statusBadge = 'badge-success';
+            statusIcon = '<i class="fas fa-check-circle"></i>';
+        } else if (percentage >= 50) {
+            statusBadge = 'badge-warning';
+            statusIcon = '<i class="fas fa-exclamation-triangle"></i>';
+        } else {
+            statusBadge = 'badge-danger';
+            statusIcon = '<i class="fas fa-exclamation-circle"></i>';
+        }
+
+        row.innerHTML = `
+            <td><strong>${fieldName}</strong></td>
+            <td><span class="badge badge-${category === 'Core' ? 'primary' : 'info'}">${category}</span></td>
+            <td>${stats.count}</td>
+            <td>
+                <div class="progress" style="height: 20px;">
+                    <div class="progress-bar bg-${percentage >= 80 ? 'success' : (percentage >= 50 ? 'warning' : 'danger')}" 
+                         role="progressbar" 
+                         style="width: ${percentage}%"
+                         aria-valuenow="${percentage}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                        ${percentage.toFixed(1)}%
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span class="badge ${statusBadge}">
+                    ${statusIcon} ${percentage >= 80 ? 'Good' : (percentage >= 50 ? 'Fair' : 'Low')}
+                </span>
+            </td>
+        `;
+
+        return row;
+    }
+
+    showError(message, showRetry = false) {
+        const errorHtml = `
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle"></i> ${message}
+                ${showRetry ? '<button class="btn btn-sm btn-primary ml-3" onclick="retryAnalytics()">Retry</button>' : ''}
+            </div>
+        `;
+        document.getElementById('analytics-container').innerHTML = errorHtml;
+        document.getElementById('analytics-container').style.display = 'block';
+    }
+
+    showChartError(chartId) {
+        const container = document.getElementById(chartId).parentElement;
+        container.innerHTML = '<div class="alert alert-warning">Chart visualization unavailable.</div>';
+    }
+}
+
+// Initialize analytics when page loads
+let analyticsModule = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+    analyticsModule = new ColumnMappingAnalytics();
+    
+    // Load analytics if batch is selected
+    const analyticsContainer = document.getElementById('analytics-container');
+    if (analyticsContainer) {
+        const batchId = analyticsContainer.dataset.batchId;
+        if (batchId) {
+            analyticsModule.initialize(batchId);
+        }
+    }
+});
+
+// Retry function for error handling
+function retryAnalytics() {
+    const analyticsContainer = document.getElementById('analytics-container');
+    if (analyticsContainer && analyticsModule) {
+        const batchId = analyticsContainer.dataset.batchId;
+        analyticsModule.initialize(batchId);
+    }
+}
+
+// Field Breakdown Modal Module
+class FieldBreakdownModal {
+    constructor() {
+        this.currentResultId = null;
+        this.currentFilter = 'all';
+        this.breakdownData = null;
+    }
+
+    async loadBreakdown(resultId) {
+        this.currentResultId = resultId;
+        this.currentFilter = 'all';
+
+        const loadingEl = document.getElementById(`breakdown-loading-${resultId}`);
+        const containerEl = document.getElementById(`breakdown-container-${resultId}`);
+        const errorEl = document.getElementById(`breakdown-error-${resultId}`);
+
+        loadingEl.style.display = 'block';
+        containerEl.style.display = 'none';
+        errorEl.style.display = 'none';
+
+        try {
+            const response = await fetch(`/api/field-breakdown/${resultId}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+
+            if (!data || !data.core_fields || Object.keys(data.core_fields).length === 0) {
+                this.showEmptyState(resultId);
+                return;
+            }
+
+            this.breakdownData = data;
+            this.renderFieldTable(resultId, data);
+            this.updateFilterCounts(resultId, data);
+
+            loadingEl.style.display = 'none';
+            containerEl.style.display = 'block';
+
+            document.getElementById(`export-csv-${resultId}`).disabled = false;
+        } catch (error) {
+            console.error('Failed to load field breakdown:', error);
+            this.showError(resultId, 'Unable to load field breakdown. Please try again.');
+            loadingEl.style.display = 'none';
+            document.getElementById(`export-csv-${resultId}`).disabled = true;
+        }
+    }
+
+    renderFieldTable(resultId, data) {
+        const coreFieldsBody = document.getElementById(`core-fields-body-${resultId}`);
+        const templateFieldsBody = document.getElementById(`template-fields-body-${resultId}`);
+        const templateFieldsSection = document.getElementById(`template-fields-section-${resultId}`);
+
+        coreFieldsBody.innerHTML = '';
+        templateFieldsBody.innerHTML = '';
+
+        if (data.core_fields) {
+            Object.entries(data.core_fields).forEach(([fieldName, fieldData]) => {
+                const row = this.createFieldRow(fieldName, fieldData);
+                coreFieldsBody.appendChild(row);
+            });
+        }
+
+        if (data.template_fields && Object.keys(data.template_fields).length > 0) {
+            templateFieldsSection.style.display = 'block';
+            Object.entries(data.template_fields).forEach(([fieldName, fieldData]) => {
+                const row = this.createFieldRow(fieldName, fieldData);
+                templateFieldsBody.appendChild(row);
+            });
+        } else {
+            templateFieldsSection.style.display = 'none';
+        }
+
+        this.applyFilter(resultId, this.currentFilter);
+    }
+
+    createFieldRow(fieldName, fieldData) {
+        const row = document.createElement('tr');
+        row.dataset.status = fieldData.status;
+
+        const statusBadge = this.getStatusBadge(fieldData.status);
+        const confidenceDisplay = fieldData.confidence !== null && fieldData.confidence !== undefined
+            ? `<span class="badge badge-${this.getConfidenceBadgeColor(fieldData.confidence)}">${fieldData.confidence.toFixed(1)}%</span>`
+            : '<span class="text-muted">N/A</span>';
+
+        const uploadedClass = this.getValueClass(fieldData.status, true);
+        const existingClass = this.getValueClass(fieldData.status, false);
+
+        row.innerHTML = `
+            <td><strong>${this.escapeHtml(fieldName)}</strong></td>
+            <td>${statusBadge}</td>
+            <td class="${uploadedClass}">${this.escapeHtml(fieldData.uploaded ?? 'N/A')}</td>
+            <td class="${existingClass}">${this.escapeHtml(fieldData.existing ?? 'N/A')}</td>
+            <td class="text-muted small">${this.escapeHtml(fieldData.uploaded_normalized ?? '-')}</td>
+            <td class="text-muted small">${this.escapeHtml(fieldData.existing_normalized ?? '-')}</td>
+            <td class="text-center">${confidenceDisplay}</td>
+        `;
+
+        return row;
+    }
+
+    getStatusBadge(status) {
+        const badges = {
+            'match': '<span class="badge badge-success"><i class="fas fa-check"></i> Match</span>',
+            'mismatch': '<span class="badge badge-danger"><i class="fas fa-times"></i> Mismatch</span>',
+            'new': '<span class="badge badge-info"><i class="fas fa-plus"></i> New</span>'
+        };
+        return badges[status] || '<span class="badge badge-secondary">Unknown</span>';
+    }
+
+    getValueClass(status, isUploaded) {
+        if (status === 'match') return 'text-success';
+        if (status === 'mismatch') return isUploaded ? 'text-danger font-weight-bold' : 'text-muted';
+        if (status === 'new') return 'text-info';
+        return '';
+    }
+
+    getConfidenceBadgeColor(confidence) {
+        if (confidence >= 90) return 'success';
+        if (confidence >= 75) return 'primary';
+        if (confidence >= 60) return 'warning';
+        return 'danger';
+    }
+
+    updateFilterCounts(resultId, data) {
+        let allCount = 0;
+        let matchedCount = 0;
+        let mismatchedCount = 0;
+        let newCount = 0;
+
+        const countFields = (fields) => {
+            Object.values(fields).forEach(field => {
+                allCount++;
+                if (field.status === 'match') matchedCount++;
+                else if (field.status === 'mismatch') mismatchedCount++;
+                else if (field.status === 'new') newCount++;
+            });
+        };
+
+        if (data.core_fields) countFields(data.core_fields);
+        if (data.template_fields) countFields(data.template_fields);
+
+        document.getElementById(`filter-all-count-${resultId}`).textContent = allCount;
+        document.getElementById(`filter-matched-count-${resultId}`).textContent = matchedCount;
+        document.getElementById(`filter-mismatched-count-${resultId}`).textContent = mismatchedCount;
+        document.getElementById(`filter-new-count-${resultId}`).textContent = newCount;
+        document.getElementById(`matched-count-${resultId}`).textContent = matchedCount;
+        document.getElementById(`total-count-${resultId}`).textContent = allCount;
+    }
+
+    applyFilter(resultId, filterType) {
+        this.currentFilter = filterType;
+
+        const coreFieldsBody = document.getElementById(`core-fields-body-${resultId}`);
+        const templateFieldsBody = document.getElementById(`template-fields-body-${resultId}`);
+        const noResultsEl = document.getElementById(`no-results-${resultId}`);
+
+        let visibleCount = 0;
+
+        const filterRows = (tbody) => {
+            if (!tbody) return;
+            const rows = tbody.querySelectorAll('tr');
+            rows.forEach(row => {
+                const status = row.dataset.status;
+                const shouldShow = filterType === 'all' ||
+                    (filterType === 'matched' && status === 'match') ||
+                    (filterType === 'mismatched' && status === 'mismatch') ||
+                    (filterType === 'new' && status === 'new');
+
+                row.style.display = shouldShow ? '' : 'none';
+                if (shouldShow) visibleCount++;
+            });
+        };
+
+        filterRows(coreFieldsBody);
+        filterRows(templateFieldsBody);
+
+        document.getElementById(`visible-count-${resultId}`).textContent = visibleCount;
+
+        if (visibleCount === 0) {
+            noResultsEl.style.display = 'block';
+        } else {
+            noResultsEl.style.display = 'none';
+        }
+
+        const filterButtons = document.querySelectorAll(`button[data-result-id="${resultId}"][data-filter]`);
+        filterButtons.forEach(btn => {
+            if (btn.dataset.filter === filterType) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    exportToCSV(resultId) {
+        if (!this.breakdownData) {
+            alert('No data available to export.');
+            return;
+        }
+
+        try {
+            const csv = this.generateCSV(this.breakdownData);
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = this.getFilename(resultId);
+            link.click();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('CSV export failed:', error);
+            alert('Export failed. Please try again.');
+        }
+    }
+
+    generateCSV(data) {
+        const headers = [
+            'Field Name',
+            'Category',
+            'Status',
+            'Uploaded Value',
+            'Existing Value',
+            'Uploaded Normalized',
+            'Existing Normalized',
+            'Confidence Score'
+        ];
+
+        let csv = headers.map(h => this.escapeCsvValue(h)).join(',') + '\n';
+
+        const addRows = (fields, category) => {
+            Object.entries(fields).forEach(([fieldName, fieldData]) => {
+                const row = [
+                    fieldName,
+                    category,
+                    fieldData.status,
+                    fieldData.uploaded ?? '',
+                    fieldData.existing ?? '',
+                    fieldData.uploaded_normalized ?? '',
+                    fieldData.existing_normalized ?? '',
+                    fieldData.confidence !== null && fieldData.confidence !== undefined ? fieldData.confidence.toFixed(1) : ''
+                ];
+                csv += row.map(v => this.escapeCsvValue(v)).join(',') + '\n';
+            });
+        };
+
+        if (data.core_fields) addRows(data.core_fields, 'core');
+        if (data.template_fields) addRows(data.template_fields, 'template');
+
+        return csv;
+    }
+
+    escapeCsvValue(value) {
+        const stringValue = String(value);
+        if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
+            return '"' + stringValue.replace(/"/g, '""') + '"';
+        }
+        return stringValue;
+    }
+
+    getFilename(resultId) {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+        return `field-breakdown-${resultId}-${timestamp}.csv`;
+    }
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    showEmptyState(resultId) {
+        const loadingEl = document.getElementById(`breakdown-loading-${resultId}`);
+        const errorEl = document.getElementById(`breakdown-error-${resultId}`);
+        const errorMessageEl = document.getElementById(`error-message-${resultId}`);
+
+        loadingEl.style.display = 'none';
+        errorEl.style.display = 'block';
+        errorMessageEl.textContent = 'No field comparison data available for this match result.';
+        document.getElementById(`export-csv-${resultId}`).disabled = true;
+    }
+
+    showError(resultId, message) {
+        const errorEl = document.getElementById(`breakdown-error-${resultId}`);
+        const errorMessageEl = document.getElementById(`error-message-${resultId}`);
+
+        errorEl.style.display = 'block';
+        errorMessageEl.textContent = message;
+    }
+}
+
+// Initialize field breakdown modal
+const fieldBreakdownModal = new FieldBreakdownModal();
+
+// Event listeners for modal open
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-toggle="modal"][data-target^="#breakdownModal"]').forEach(button => {
+        button.addEventListener('click', function() {
+            const modalId = this.dataset.target.replace('#breakdownModal', '');
+            fieldBreakdownModal.loadBreakdown(modalId);
+        });
+    });
+
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('button[data-filter]')) {
+            const resultId = e.target.dataset.resultId;
+            const filter = e.target.dataset.filter;
+            fieldBreakdownModal.applyFilter(resultId, filter);
+        }
+
+        if (e.target.matches('button[id^="export-csv-"]') || e.target.closest('button[id^="export-csv-"]')) {
+            const button = e.target.matches('button[id^="export-csv-"]') ? e.target : e.target.closest('button[id^="export-csv-"]');
+            const resultId = button.dataset.resultId;
+            fieldBreakdownModal.exportToCSV(resultId);
+        }
+    });
+});
+
+</script>
+@endpush

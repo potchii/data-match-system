@@ -209,7 +209,7 @@ class FileValidationService
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            $errors[] = "Unable to read the file columns. Please ensure the file is not corrupted. Error: " . $e->getMessage();
+            $errors[] = "File reading error: " . $e->getMessage();
         }
         
         $isValid = empty($errors);
@@ -268,8 +268,7 @@ class FileValidationService
             }
             
             if (!$found) {
-                $variationsList = implode("', '", $variations);
-                $errors[] = "Required column for '{$required}' is missing. Please include one of: '{$variationsList}'.";
+                $errors[] = "Missing required column: {$required}";
                 $missing[] = $required;
             }
         }
@@ -277,7 +276,7 @@ class FileValidationService
         // Check for extra columns
         foreach ($fileColumns as $col) {
             if (!in_array(strtolower($col), $coreLower)) {
-                $errors[] = "Column '{$col}' is not a recognized core field. If this is a custom field, please create a template that includes it.";
+                $errors[] = "Unexpected column: {$col}";
                 $extra[] = $col;
             }
         }

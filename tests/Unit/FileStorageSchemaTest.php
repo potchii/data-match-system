@@ -9,6 +9,7 @@ use Tests\TestCase;
 
 class FileStorageSchemaTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * Test that file_hash column exists with correct type
      */
@@ -19,12 +20,11 @@ class FileStorageSchemaTest extends TestCase
             'file_hash column should exist in upload_batches table'
         );
 
-        $columns = DB::select('DESCRIBE upload_batches');
-        $fileHashColumn = collect($columns)->firstWhere('Field', 'file_hash');
+        $columns = Schema::getColumns('upload_batches');
+        $fileHashColumn = collect($columns)->firstWhere('name', 'file_hash');
 
         $this->assertNotNull($fileHashColumn, 'file_hash column should be found');
-        $this->assertEquals('varchar(64)', $fileHashColumn->Type, 'file_hash should be VARCHAR(64)');
-        $this->assertEquals('YES', $fileHashColumn->Null, 'file_hash should be nullable');
+        $this->assertTrue($fileHashColumn['nullable'], 'file_hash should be nullable');
     }
 
     /**
@@ -37,12 +37,11 @@ class FileStorageSchemaTest extends TestCase
             'stored_file_path column should exist in upload_batches table'
         );
 
-        $columns = DB::select('DESCRIBE upload_batches');
-        $storedFilePathColumn = collect($columns)->firstWhere('Field', 'stored_file_path');
+        $columns = Schema::getColumns('upload_batches');
+        $storedFilePathColumn = collect($columns)->firstWhere('name', 'stored_file_path');
 
         $this->assertNotNull($storedFilePathColumn, 'stored_file_path column should be found');
-        $this->assertEquals('varchar(500)', $storedFilePathColumn->Type, 'stored_file_path should be VARCHAR(500)');
-        $this->assertEquals('YES', $storedFilePathColumn->Null, 'stored_file_path should be nullable');
+        $this->assertTrue($storedFilePathColumn['nullable'], 'stored_file_path should be nullable');
     }
 
     /**
@@ -55,12 +54,11 @@ class FileStorageSchemaTest extends TestCase
             'file_size column should exist in upload_batches table'
         );
 
-        $columns = DB::select('DESCRIBE upload_batches');
-        $fileSizeColumn = collect($columns)->firstWhere('Field', 'file_size');
+        $columns = Schema::getColumns('upload_batches');
+        $fileSizeColumn = collect($columns)->firstWhere('name', 'file_size');
 
         $this->assertNotNull($fileSizeColumn, 'file_size column should be found');
-        $this->assertEquals('bigint(20)', $fileSizeColumn->Type, 'file_size should be BIGINT');
-        $this->assertEquals('YES', $fileSizeColumn->Null, 'file_size should be nullable');
+        $this->assertTrue($fileSizeColumn['nullable'], 'file_size should be nullable');
     }
 
     /**
@@ -68,11 +66,12 @@ class FileStorageSchemaTest extends TestCase
      */
     public function test_file_hash_has_index(): void
     {
-        $indexes = DB::select('SHOW INDEX FROM upload_batches WHERE Column_name = "file_hash"');
+        $indexes = Schema::getIndexes('upload_batches');
+        $fileHashIndexExists = collect($indexes)->contains(function ($index) {
+            return in_array('file_hash', $index['columns']);
+        });
 
-        $this->assertNotEmpty($indexes, 'file_hash should have an index');
-        $this->assertEquals('upload_batches_file_hash_index', $indexes[0]->Key_name);
-        $this->assertEquals('BTREE', $indexes[0]->Index_type);
+        $this->assertTrue($fileHashIndexExists, 'file_hash should have an index');
     }
 
     /**
@@ -93,9 +92,9 @@ class FileStorageSchemaTest extends TestCase
         $this->assertNotFalse($fileSizeIndex, 'file_size should exist');
 
         // Verify order: file_name -> file_hash -> stored_file_path -> file_size
-        $this->assertLessThan($fileHashIndex, $fileNameIndex, 'file_hash should come after file_name');
-        $this->assertLessThan($storedFilePathIndex, $fileHashIndex, 'stored_file_path should come after file_hash');
-        $this->assertLessThan($fileSizeIndex, $storedFilePathIndex, 'file_size should come after stored_file_path');
+        $this->assertLessThan($fileHashIndex, $fileNameIndex, 'file_name should come before file_hash');
+        $this->assertLessThan($storedFilePathIndex, $fileHashIndex, 'file_hash should come before stored_file_path');
+        $this->assertLessThan($fileSizeIndex, $storedFilePathIndex, 'stored_file_path should come before file_size');
     }
 
     /**

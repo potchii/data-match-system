@@ -1,629 +1,2643 @@
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_core_field_identification(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_includes_template_fields_in_breakdown(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_dynamic_field_identification(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_sets_category_property_for_core_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_dynamic_key_normalization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_sets_category_property_for_template_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_core_field_priority(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_includes_normalized_values_for_name_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_json_size_validation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_only_includes_normalized_values_when_available(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_structured_mapping_output(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_calculates_confidence_score_for_exact_match(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_empty_value_exclusion(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_calculates_confidence_score_for_fuzzy_match(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServicePropertyTest::test_property_key_sanitization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_returns_null_confidence_for_new_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-   PASS  Tests\Unit\DataMappingServicePropertyTest
-  ✓ property core field identification with data set "iteration 0…  0.24s  
-  ✓ property core field identification with data set "iteration 1…  0.02s  
-  ✓ property core field identification with data set "iteration 2…  0.02s  
-  ✓ property core field identification with data set "iteration 3…  0.02s  
-  ✓ property core field identification with data set "iteration 4…  0.02s  
-  ✓ property core field identification with data set "iteration 5…  0.02s  
-  ✓ property core field identification with data set "iteration 6…  0.02s  
-  ✓ property core field identification with data set "iteration 7…  0.02s  
-  ✓ property core field identification with data set "iteration 8…  0.02s  
-  ✓ property core field identification with data set "iteration 9…  0.02s  
-  ✓ property core field identification with data set "iteration 10… 0.02s  
-  ✓ property core field identification with data set "iteration 11… 0.02s  
-  ✓ property core field identification with data set "iteration 12… 0.02s  
-  ✓ property core field identification with data set "iteration 13… 0.02s  
-  ✓ property core field identification with data set "iteration 14… 0.02s  
-  ✓ property core field identification with data set "iteration 15… 0.02s  
-  ✓ property core field identification with data set "iteration 16… 0.02s  
-  ✓ property core field identification with data set "iteration 17… 0.02s  
-  ✓ property core field identification with data set "iteration 18… 0.02s  
-  ✓ property core field identification with data set "iteration 19… 0.02s  
-  ✓ property core field identification with data set "iteration 20… 0.03s  
-  ✓ property core field identification with data set "iteration 21… 0.02s  
-  ✓ property core field identification with data set "iteration 22… 0.02s  
-  ✓ property core field identification with data set "iteration 23… 0.02s  
-  ✓ property core field identification with data set "iteration 24… 0.02s  
-  ✓ property core field identification with data set "iteration 25… 0.02s  
-  ✓ property core field identification with data set "iteration 26… 0.02s  
-  ✓ property core field identification with data set "iteration 27… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.03s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.03s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.03s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic field identification with data set "iteration… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 0"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 1"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 2"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 3"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 4"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 5"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 6"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 7"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 8"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 9"  0.02s  
-  ✓ property dynamic key normalization with data set "iteration 10… 0.03s  
-  ✓ property dynamic key normalization with data set "iteration 11… 0.03s  
-  ✓ property dynamic key normalization with data set "iteration 12… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 13… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 14… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 15… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 16… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 17… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 18… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 19… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 20… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 21… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 22… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 23… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 24… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 25… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 26… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 27… 0.03s  
-  ✓ property dynamic key normalization with data set "iteration 28… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 29… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 30… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 31… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 32… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 33… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 34… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 35… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 36… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 37… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 38… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 39… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 40… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 41… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 42… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 43… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 44… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 45… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 46… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 47… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 48… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 49… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 50… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 51… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 52… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 53… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 54… 0.03s  
-  ✓ property dynamic key normalization with data set "iteration 55… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 56… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 57… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 58… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 59… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 60… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 61… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 62… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 63… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 64… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 65… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 66… 0.03s  
-  ✓ property dynamic key normalization with data set "iteration 67… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 68… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 69… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 70… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 71… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 72… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 73… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 74… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 75… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 76… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 77… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 78… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 79… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 80… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 81… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 82… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 83… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 84… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 85… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 86… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 87… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 88… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 89… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 90… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 91… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 92… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 93… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 94… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 95… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 96… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 97… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 98… 0.02s  
-  ✓ property dynamic key normalization with data set "iteration 99… 0.02s  
-  ✓ property core field priority with data set "iteration 0 surnam… 0.02s  
-  ✓ property core field priority with data set "iteration 1 surnam… 0.02s  
-  ✓ property core field priority with data set "iteration 2 lastna… 0.02s  
-  ✓ property core field priority with data set "iteration 3 firstn… 0.02s  
-  ✓ property core field priority with data set "iteration 4 first…  0.02s  
-  ✓ property core field priority with data set "iteration 5 dob"    0.03s  
-  ✓ property core field priority with data set "iteration 6 d o b"  0.02s  
-  ✓ property core field priority with data set "iteration 7 birthd… 0.02s  
-  ✓ property core field priority with data set "iteration 8 sex"    0.02s  
-  ✓ property core field priority with data set "iteration 9 gender… 0.02s  
-  ✓ property core field priority with data set "iteration 10 statu… 0.02s  
-  ✓ property core field priority with data set "iteration 11 addre… 0.02s  
-  ✓ property core field priority with data set "iteration 12 city"  0.02s  
-  ✓ property core field priority with data set "iteration 13 baran… 0.02s  
-  ✓ property json size validation with data set "pass iteration 0"  0.02s  
-  ✓ property json size validation with data set "pass iteration 1"  0.02s  
-  ✓ property json size validation with data set "pass iteration 2"  0.02s  
-  ✓ property json size validation with data set "pass iteration 3"  0.02s  
-  ✓ property json size validation with data set "pass iteration 4"  0.02s  
-  ✓ property json size validation with data set "pass iteration 5"  0.02s  
-  ✓ property json size validation with data set "pass iteration 6"  0.02s  
-  ✓ property json size validation with data set "pass iteration 7"  0.02s  
-  ✓ property json size validation with data set "pass iteration 8"  0.02s  
-  ✓ property json size validation with data set "pass iteration 9"  0.03s  
-  ✓ property json size validation with data set "pass iteration 10… 0.05s  
-  ✓ property json size validation with data set "pass iteration 11… 0.03s  
-  ✓ property json size validation with data set "pass iteration 12… 0.04s  
-  ✓ property json size validation with data set "pass iteration 13… 0.04s  
-  ✓ property json size validation with data set "pass iteration 14… 0.03s  
-  ✓ property json size validation with data set "pass iteration 15… 0.03s  
-  ✓ property json size validation with data set "pass iteration 16… 0.02s  
-  ✓ property json size validation with data set "pass iteration 17… 0.03s  
-  ✓ property json size validation with data set "pass iteration 18… 0.07s  
-  ✓ property json size validation with data set "pass iteration 19… 0.02s  
-  ✓ property json size validation with data set "pass iteration 20… 0.03s  
-  ✓ property json size validation with data set "pass iteration 21… 0.03s  
-  ✓ property json size validation with data set "pass iteration 22… 0.02s  
-  ✓ property json size validation with data set "pass iteration 23… 0.02s  
-  ✓ property json size validation with data set "pass iteration 24… 0.02s  
-  ✓ property json size validation with data set "pass iteration 25… 0.02s  
-  ✓ property json size validation with data set "pass iteration 26… 0.02s  
-  ✓ property json size validation with data set "pass iteration 27… 0.02s  
-  ✓ property json size validation with data set "pass iteration 28… 0.02s  
-  ✓ property json size validation with data set "pass iteration 29… 0.02s  
-  ✓ property json size validation with data set "pass iteration 30… 0.03s  
-  ✓ property json size validation with data set "pass iteration 31… 0.02s  
-  ✓ property json size validation with data set "pass iteration 32… 0.02s  
-  ✓ property json size validation with data set "pass iteration 33… 0.02s  
-  ✓ property json size validation with data set "pass iteration 34… 0.02s  
-  ✓ property json size validation with data set "pass iteration 35… 0.02s  
-  ✓ property json size validation with data set "pass iteration 36… 0.02s  
-  ✓ property json size validation with data set "pass iteration 37… 0.02s  
-  ✓ property json size validation with data set "pass iteration 38… 0.02s  
-  ✓ property json size validation with data set "pass iteration 39… 0.02s  
-  ✓ property json size validation with data set "pass iteration 40… 0.02s  
-  ✓ property json size validation with data set "pass iteration 41… 0.02s  
-  ✓ property json size validation with data set "pass iteration 42… 0.02s  
-  ✓ property json size validation with data set "pass iteration 43… 0.03s  
-  ✓ property json size validation with data set "pass iteration 44… 0.02s  
-  ✓ property json size validation with data set "pass iteration 45… 0.02s  
-  ✓ property json size validation with data set "pass iteration 46… 0.02s  
-  ✓ property json size validation with data set "pass iteration 47… 0.02s  
-  ✓ property json size validation with data set "pass iteration 48… 0.02s  
-  ✓ property json size validation with data set "pass iteration 49… 0.02s  
-  ✓ property json size validation with data set "fail iteration 0"  0.03s  
-  ✓ property json size validation with data set "fail iteration 1"  0.03s  
-  ✓ property json size validation with data set "fail iteration 2"  0.03s  
-  ✓ property json size validation with data set "fail iteration 3"  0.03s  
-  ✓ property json size validation with data set "fail iteration 4"  0.03s  
-  ✓ property json size validation with data set "fail iteration 5"  0.03s  
-  ✓ property json size validation with data set "fail iteration 6"  0.03s  
-  ✓ property json size validation with data set "fail iteration 7"  0.03s  
-  ✓ property json size validation with data set "fail iteration 8"  0.03s  
-  ✓ property json size validation with data set "fail iteration 9"  0.03s  
-  ✓ property json size validation with data set "fail iteration 10… 0.03s  
-  ✓ property json size validation with data set "fail iteration 11… 0.03s  
-  ✓ property json size validation with data set "fail iteration 12… 0.03s  
-  ✓ property json size validation with data set "fail iteration 13… 0.03s  
-  ✓ property json size validation with data set "fail iteration 14… 0.03s  
-  ✓ property json size validation with data set "fail iteration 15… 0.03s  
-  ✓ property json size validation with data set "fail iteration 16… 0.03s  
-  ✓ property json size validation with data set "fail iteration 17… 0.03s  
-  ✓ property json size validation with data set "fail iteration 18… 0.03s  
-  ✓ property json size validation with data set "fail iteration 19… 0.04s  
-  ✓ property json size validation with data set "fail iteration 20… 0.03s  
-  ✓ property json size validation with data set "fail iteration 21… 0.03s  
-  ✓ property json size validation with data set "fail iteration 22… 0.03s  
-  ✓ property json size validation with data set "fail iteration 23… 0.03s  
-  ✓ property json size validation with data set "fail iteration 24… 0.03s  
-  ✓ property json size validation with data set "fail iteration 25… 0.03s  
-  ✓ property json size validation with data set "fail iteration 26… 0.03s  
-  ✓ property json size validation with data set "fail iteration 27… 0.03s  
-  ✓ property json size validation with data set "fail iteration 28… 0.03s  
-  ✓ property json size validation with data set "fail iteration 29… 0.03s  
-  ✓ property json size validation with data set "fail iteration 30… 0.03s  
-  ✓ property json size validation with data set "fail iteration 31… 0.03s  
-  ✓ property json size validation with data set "fail iteration 32… 0.03s  
-  ✓ property json size validation with data set "fail iteration 33… 0.03s  
-  ✓ property json size validation with data set "fail iteration 34… 0.03s  
-  ✓ property json size validation with data set "fail iteration 35… 0.03s  
-  ✓ property json size validation with data set "fail iteration 36… 0.03s  
-  ✓ property json size validation with data set "fail iteration 37… 0.03s  
-  ✓ property json size validation with data set "fail iteration 38… 0.03s  
-  ✓ property json size validation with data set "fail iteration 39… 0.03s  
-  ✓ property json size validation with data set "fail iteration 40… 0.03s  
-  ✓ property json size validation with data set "fail iteration 41… 0.03s  
-  ✓ property json size validation with data set "fail iteration 42… 0.03s  
-  ✓ property json size validation with data set "fail iteration 43… 0.03s  
-  ✓ property json size validation with data set "fail iteration 44… 0.03s  
-  ✓ property json size validation with data set "fail iteration 45… 0.03s  
-  ✓ property json size validation with data set "fail iteration 46… 0.03s  
-  ✓ property json size validation with data set "fail iteration 47… 0.03s  
-  ✓ property json size validation with data set "fail iteration 48… 0.04s  
-  ✓ property json size validation with data set "fail iteration 49… 0.04s  
-  ✓ property structured mapping output with data set "iteration 0"  0.02s  
-  ✓ property structured mapping output with data set "iteration 1"  0.02s  
-  ✓ property structured mapping output with data set "iteration 2"  0.02s  
-  ✓ property structured mapping output with data set "iteration 3"  0.02s  
-  ✓ property structured mapping output with data set "iteration 4"  0.02s  
-  ✓ property structured mapping output with data set "iteration 5"  0.02s  
-  ✓ property structured mapping output with data set "iteration 6"  0.02s  
-  ✓ property structured mapping output with data set "iteration 7"  0.03s  
-  ✓ property structured mapping output with data set "iteration 8"  0.02s  
-  ✓ property structured mapping output with data set "iteration 9"  0.02s  
-  ✓ property structured mapping output with data set "iteration 10… 0.02s  
-  ✓ property structured mapping output with data set "iteration 11… 0.02s  
-  ✓ property structured mapping output with data set "iteration 12… 0.02s  
-  ✓ property structured mapping output with data set "iteration 13… 0.02s  
-  ✓ property structured mapping output with data set "iteration 14… 0.02s  
-  ✓ property structured mapping output with data set "iteration 15… 0.02s  
-  ✓ property structured mapping output with data set "iteration 16… 0.02s  
-  ✓ property structured mapping output with data set "iteration 17… 0.02s  
-  ✓ property structured mapping output with data set "iteration 18… 0.02s  
-  ✓ property structured mapping output with data set "iteration 19… 0.02s  
-  ✓ property structured mapping output with data set "iteration 20… 0.02s  
-  ✓ property structured mapping output with data set "iteration 21… 0.02s  
-  ✓ property structured mapping output with data set "iteration 22… 0.02s  
-  ✓ property structured mapping output with data set "iteration 23… 0.02s  
-  ✓ property structured mapping output with data set "iteration 24… 0.02s  
-  ✓ property structured mapping output with data set "iteration 25… 0.02s  
-  ✓ property structured mapping output with data set "iteration 26… 0.02s  
-  ✓ property structured mapping output with data set "iteration 27… 0.02s  
-  ✓ property structured mapping output with data set "iteration 28… 0.02s  
-  ✓ property structured mapping output with data set "iteration 29… 0.02s  
-  ✓ property structured mapping output with data set "iteration 30… 0.02s  
-  ✓ property structured mapping output with data set "iteration 31… 0.02s  
-  ✓ property structured mapping output with data set "iteration 32… 0.02s  
-  ✓ property structured mapping output with data set "iteration 33… 0.02s  
-  ✓ property structured mapping output with data set "iteration 34… 0.02s  
-  ✓ property structured mapping output with data set "iteration 35… 0.02s  
-  ✓ property structured mapping output with data set "iteration 36… 0.02s  
-  ✓ property structured mapping output with data set "iteration 37… 0.02s  
-  ✓ property structured mapping output with data set "iteration 38… 0.02s  
-  ✓ property structured mapping output with data set "iteration 39… 0.02s  
-  ✓ property structured mapping output with data set "iteration 40… 0.02s  
-  ✓ property structured mapping output with data set "iteration 41… 0.02s  
-  ✓ property structured mapping output with data set "iteration 42… 0.02s  
-  ✓ property structured mapping output with data set "iteration 43… 0.02s  
-  ✓ property structured mapping output with data set "iteration 44… 0.02s  
-  ✓ property structured mapping output with data set "iteration 45… 0.02s  
-  ✓ property structured mapping output with data set "iteration 46… 0.03s  
-  ✓ property structured mapping output with data set "iteration 47… 0.02s  
-  ✓ property structured mapping output with data set "iteration 48… 0.02s  
-  ✓ property structured mapping output with data set "iteration 49… 0.02s  
-  ✓ property structured mapping output with data set "iteration 50… 0.02s  
-  ✓ property structured mapping output with data set "iteration 51… 0.02s  
-  ✓ property structured mapping output with data set "iteration 52… 0.02s  
-  ✓ property structured mapping output with data set "iteration 53… 0.02s  
-  ✓ property structured mapping output with data set "iteration 54… 0.02s  
-  ✓ property structured mapping output with data set "iteration 55… 0.02s  
-  ✓ property structured mapping output with data set "iteration 56… 0.02s  
-  ✓ property structured mapping output with data set "iteration 57… 0.02s  
-  ✓ property structured mapping output with data set "iteration 58… 0.02s  
-  ✓ property structured mapping output with data set "iteration 59… 0.02s  
-  ✓ property structured mapping output with data set "iteration 60… 0.02s  
-  ✓ property structured mapping output with data set "iteration 61… 0.02s  
-  ✓ property structured mapping output with data set "iteration 62… 0.02s  
-  ✓ property structured mapping output with data set "iteration 63… 0.02s  
-  ✓ property structured mapping output with data set "iteration 64… 0.02s  
-  ✓ property structured mapping output with data set "iteration 65… 0.02s  
-  ✓ property structured mapping output with data set "iteration 66… 0.02s  
-  ✓ property structured mapping output with data set "iteration 67… 0.02s  
-  ✓ property structured mapping output with data set "iteration 68… 0.02s  
-  ✓ property structured mapping output with data set "iteration 69… 0.02s  
-  ✓ property structured mapping output with data set "iteration 70… 0.02s  
-  ✓ property structured mapping output with data set "iteration 71… 0.02s  
-  ✓ property structured mapping output with data set "iteration 72… 0.02s  
-  ✓ property structured mapping output with data set "iteration 73… 0.02s  
-  ✓ property structured mapping output with data set "iteration 74… 0.02s  
-  ✓ property structured mapping output with data set "iteration 75… 0.02s  
-  ✓ property structured mapping output with data set "iteration 76… 0.02s  
-  ✓ property structured mapping output with data set "iteration 77… 0.02s  
-  ✓ property structured mapping output with data set "iteration 78… 0.02s  
-  ✓ property structured mapping output with data set "iteration 79… 0.02s  
-  ✓ property structured mapping output with data set "iteration 80… 0.02s  
-  ✓ property structured mapping output with data set "iteration 81… 0.02s  
-  ✓ property structured mapping output with data set "iteration 82… 0.02s  
-  ✓ property structured mapping output with data set "iteration 83… 0.02s  
-  ✓ property structured mapping output with data set "iteration 84… 0.02s  
-  ✓ property structured mapping output with data set "iteration 85… 0.03s  
-  ✓ property structured mapping output with data set "iteration 86… 0.02s  
-  ✓ property structured mapping output with data set "iteration 87… 0.02s  
-  ✓ property structured mapping output with data set "iteration 88… 0.02s  
-  ✓ property structured mapping output with data set "iteration 89… 0.02s  
-  ✓ property structured mapping output with data set "iteration 90… 0.02s  
-  ✓ property structured mapping output with data set "iteration 91… 0.02s  
-  ✓ property structured mapping output with data set "iteration 92… 0.02s  
-  ✓ property structured mapping output with data set "iteration 93… 0.02s  
-  ✓ property structured mapping output with data set "iteration 94… 0.02s  
-  ✓ property structured mapping output with data set "iteration 95… 0.02s  
-  ✓ property structured mapping output with data set "iteration 96… 0.02s  
-  ✓ property structured mapping output with data set "iteration 97… 0.02s  
-  ✓ property structured mapping output with data set "iteration 98… 0.02s  
-  ✓ property structured mapping output with data set "iteration 99… 0.02s  
-  ✓ property empty value exclusion with data set "iteration 0"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 1"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 2"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 3"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 4"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 5"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 6"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 7"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 8"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 9"      0.02s  
-  ✓ property empty value exclusion with data set "iteration 10"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 11"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 12"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 13"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 14"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 15"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 16"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 17"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 18"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 19"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 20"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 21"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 22"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 23"     0.03s  
-  ✓ property empty value exclusion with data set "iteration 24"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 25"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 26"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 27"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 28"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 29"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 30"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 31"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 32"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 33"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 34"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 35"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 36"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 37"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 38"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 39"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 40"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 41"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 42"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 43"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 44"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 45"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 46"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 47"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 48"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 49"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 50"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 51"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 52"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 53"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 54"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 55"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 56"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 57"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 58"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 59"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 60"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 61"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 62"     0.03s  
-  ✓ property empty value exclusion with data set "iteration 63"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 64"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 65"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 66"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 67"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 68"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 69"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 70"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 71"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 72"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 73"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 74"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 75"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 76"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 77"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 78"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 79"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 80"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 81"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 82"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 83"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 84"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 85"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 86"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 87"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 88"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 89"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 90"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 91"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 92"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 93"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 94"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 95"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 96"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 97"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 98"     0.02s  
-  ✓ property empty value exclusion with data set "iteration 99"     0.02s  
-  ✓ property key sanitization with data set "iteration 0 d84c26b1"  0.03s  
-  ✓ property key sanitization with data set "iteration 1 e8f0e31a"  0.02s  
-  ✓ property key sanitization with data set "iteration 2 111cdebc"  0.02s  
-  ✓ property key sanitization with data set "iteration 3 acc437c6"  0.02s  
-  ✓ property key sanitization with data set "iteration 4 1df37c15"  0.02s  
-  ✓ property key sanitization with data set "iteration 5 119acf87"  0.02s  
-  ✓ property key sanitization with data set "iteration 6 3c816354"  0.02s  
-  ✓ property key sanitization with data set "iteration 7 f1142cdb"  0.02s  
-  ✓ property key sanitization with data set "iteration 8 c1bb456e"  0.02s  
-  ✓ property key sanitization with data set "iteration 9 12292a91"  0.02s  
-  ✓ property key sanitization with data set "iteration 10 07a10727… 0.02s  
-  ✓ property key sanitization with data set "iteration 11 cf97b06c… 0.02s  
-  ✓ property key sanitization with data set "iteration 12 0ae03d28… 0.02s  
-  ✓ property key sanitization with data set "iteration 13 c7ff9067… 0.02s  
-  ✓ property key sanitization with data set "iteration 14 5bca0bba… 0.02s  
-  ✓ property key sanitization with data set "random iteration 0"    0.02s  
-  ✓ property key sanitization with data set "random iteration 1"    0.02s  
-  ✓ property key sanitization with data set "random iteration 2"    0.02s  
-  ✓ property key sanitization with data set "random iteration 3"    0.02s  
-  ✓ property key sanitization with data set "random iteration 4"    0.02s  
-  ✓ property key sanitization with data set "random iteration 5"    0.02s  
-  ✓ property key sanitization with data set "random iteration 6"    0.02s  
-  ✓ property key sanitization with data set "random iteration 7"    0.02s  
-  ✓ property key sanitization with data set "random iteration 8"    0.02s  
-  ✓ property key sanitization with data set "random iteration 9"    0.02s  
-  ✓ property key sanitization with data set "random iteration 10"   0.02s  
-  ✓ property key sanitization with data set "random iteration 11"   0.02s  
-  ✓ property key sanitization with data set "random iteration 12"   0.02s  
-  ✓ property key sanitization with data set "random iteration 13"   0.02s  
-  ✓ property key sanitization with data set "random iteration 14"   0.02s  
-  ✓ property key sanitization with data set "random iteration 15"   0.02s  
-  ✓ property key sanitization with data set "random iteration 16"   0.03s  
-  ✓ property key sanitization with data set "random iteration 17"   0.02s  
-  ✓ property key sanitization with data set "random iteration 18"   0.03s  
-  ✓ property key sanitization with data set "random iteration 19"   0.02s  
-  ✓ property key sanitization with data set "random iteration 20"   0.03s  
-  ✓ property key sanitization with data set "random iteration 21"   0.02s  
-  ✓ property key sanitization with data set "random iteration 22"   0.02s  
-  ✓ property key sanitization with data set "random iteration 23"   0.02s  
-  ✓ property key sanitization with data set "random iteration 24"   0.03s  
-  ✓ property key sanitization with data set "random iteration 25"   0.02s  
-  ✓ property key sanitization with data set "random iteration 26"   0.02s  
-  ✓ property key sanitization with data set "random iteration 27"   0.02s  
-  ✓ property key sanitization with data set "random iteration 28"   0.02s  
-  ✓ property key sanitization with data set "random iteration 29"   0.02s  
-  ✓ property key sanitization with data set "random iteration 30"   0.02s  
-  ✓ property key sanitization with data set "random iteration 31"   0.02s  
-  ✓ property key sanitization with data set "random iteration 32"   0.02s  
-  ✓ property key sanitization with data set "random iteration 33"   0.02s  
-  ✓ property key sanitization with data set "random iteration 34"   0.02s  
-  ✓ property key sanitization with data set "random iteration 35"   0.02s  
-  ✓ property key sanitization with data set "random iteration 36"   0.02s  
-  ✓ property key sanitization with data set "random iteration 37"   0.02s  
-  ✓ property key sanitization with data set "random iteration 38"   0.02s  
-  ✓ property key sanitization with data set "random iteration 39"   0.02s  
-  ✓ property key sanitization with data set "random iteration 40"   0.02s  
-  ✓ property key sanitization with data set "random iteration 41"   0.02s  
-  ✓ property key sanitization with data set "random iteration 42"   0.02s  
-  ✓ property key sanitization with data set "random iteration 43"   0.02s  
-  ✓ property key sanitization with data set "random iteration 44"   0.02s  
-  ✓ property key sanitization with data set "random iteration 45"   0.02s  
-  ✓ property key sanitization with data set "random iteration 46"   0.02s  
-  ✓ property key sanitization with data set "random iteration 47"   0.02s  
-  ✓ property key sanitization with data set "random iteration 48"   0.02s  
-  ✓ property key sanitization with data set "random iteration 49"   0.02s  
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_maintains_backward_compatibility_with_fields_key(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
-  Tests:    607 passed (6557 assertions)
-  Duration: 17.54s
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_handles_different_field_types_for_confidence_calculation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_returns_zero_confidence_for_non_string_mismatch(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_handles_missing_template_gracefully(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\ConfidenceScoreServiceTask4Test::it_includes_field_type_for_template_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask42Test::it_returns_structured_array_with_core_and_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask42Test::it_maps_known_columns_to_core_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask42Test::it_maps_unknown_columns_to_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask42Test::it_processes_compound_first_names_first(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask42Test::it_skips_empty_and_null_values_for_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask42Test::it_normalizes_dynamic_keys_to_snake_case(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask42Test::it_does_not_add_null_core_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_returns_row_unchanged_when_no_template_provided(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_accepts_template_and_applies_mappings(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_remaps_all_columns_present_in_template(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_remaps_only_columns_that_exist_in_row(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_ignores_template_mappings_for_missing_columns(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_handles_empty_row_gracefully(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_handles_row_with_no_matching_columns(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_preserves_null_values_in_remapped_columns(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_preserves_empty_string_values_in_remapped_columns(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask61Test::it_works_with_mapUploadedData_after_template_application(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62PropertyTest::test_preserves_template_field_values_and_data_types(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62PropertyTest::test_handles_no_template_fields_gracefully(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62PropertyTest::test_excludes_empty_template_field_values(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62PropertyTest::test_preserves_zero_and_false_template_field_values(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_generates_mappings_for_core_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_maps_various_column_name_variations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_handles_all_core_field_types(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_handles_compound_first_name_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_handles_first_name_without_second_name(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_handles_various_name_field_variations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_returns_array_with_excel_column_to_system_field_format(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_generates_mappings_for_all_columns_in_sample_row(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_handles_empty_sample_row(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_preserves_original_excel_column_names_as_keys(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_generates_mappings_compatible_with_column_mapping_template(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_handles_null_values_in_sample_row(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTask62Test::it_handles_empty_string_values_in_sample_row(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_surname_variations_to_last_name(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_firstname_variations_to_first_name(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_birthday_variations_to_birthday(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_gender_variations_to_gender(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_civil_status_variations_to_civil_status(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_address_variations_to_address(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_barangay_variations_to_barangay(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_uid_variations_to_uid(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_suffix_variations_to_suffix(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_multiple_core_fields_in_single_row(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_maps_unknown_columns_to_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_handles_row_with_only_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_handles_row_with_only_core_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_handles_mixed_core_and_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_excludes_empty_string_from_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_excludes_null_from_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_excludes_multiple_empty_values_from_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_preserves_zero_and_false_values_in_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_prioritizes_core_field_mapping_over_dynamic(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_does_not_duplicate_core_fields_in_dynamic_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\DataMappingServiceTest::it_handles_all_core_field_mappings_correctly(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::column_validation_completes_quickly_for_typical_file(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::column_validation_with_template_completes_quickly(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::template_field_lookup_uses_indexed_query(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::handles_moderately_large_file_efficiently(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::column_validation_only_reads_headers_not_entire_file(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::validation_with_multiple_columns_performs_well(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::template_with_many_fields_validates_efficiently(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::validation_memory_usage_remains_reasonable(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServicePerformanceTest::multiple_validations_perform_consistently(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_validates_file_with_valid_core_fields_only(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_detects_missing_required_first_name_column(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_detects_missing_required_last_name_column(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_detects_extra_columns_not_in_core_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_accepts_various_first_name_variations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_accepts_various_last_name_variations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_accepts_optional_core_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_validates_file_with_template_successfully(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_returns_structured_validation_result(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_handles_file_reading_errors_gracefully(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_accepts_all_birthday_field_variations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_accepts_all_gender_field_variations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_accepts_all_address_field_variations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_reports_all_validation_errors_at_once(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_trims_whitespace_from_headers(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\FileValidationServiceTask6Test::it_ignores_empty_header_cells(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\MainSystemTemplateFieldPropertyTest::test_main_system_template_field_access(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\MainSystemTemplateFieldPropertyTest::test_main_system_all_template_fields_retrieval(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\MainSystemTemplateFieldPropertyTest::test_main_system_conflict_filtering(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\MatchAnalyticsServicePropertyTest::test_average_confidence_excludes_new_records(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\MatchAnalyticsServicePropertyTest::test_match_status_distribution_sums_to_100_percent(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\MatchAnalyticsServicePropertyTest::test_field_population_rate_calculation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\MatchAnalyticsServicePropertyTest::test_quality_score_mapping_consistency(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\MatchAnalyticsServicePropertyTest::test_field_ranking_by_population_rate(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportFieldBreakdownTest::it_saves_field_breakdown_for_new_records(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportFieldBreakdownTest::it_saves_field_breakdown_for_matched_records(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportFieldBreakdownTest::field_breakdown_contains_field_details(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportRequiredFieldValidationTest::it_throws_error_when_required_custom_field_is_empty(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportRequiredFieldValidationTest::it_throws_error_with_multiple_missing_required_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportRequiredFieldValidationTest::it_allows_empty_optional_custom_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportRequiredFieldValidationTest::it_includes_row_number_in_error_message(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportRequiredFieldValidationTest::it_provides_descriptive_error_message(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_imports_records_with_core_fields_only(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_creates_match_result_for_new_records(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_handles_existing_record_matches_without_dynamic_updates(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_generates_mapping_summary(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_works_with_template_when_provided(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_skips_rows_with_missing_required_fields(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_handles_compound_first_names_correctly(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_normalizes_field_values_correctly(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\RecordImportTask84Test::it_links_new_records_to_match_results(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\ResultsControllerTest::test_csv_escapes_special_characters_property(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_new_record_creates_template_values(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_template_field_type_validation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_matched_record_creates_new_values(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_matched_record_updates_empty_values(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_matched_record_preserves_history(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_matched_record_idempotence(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_possible_duplicate_flags_for_review(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_possible_duplicate_links_conflicts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_persistence_service_transaction_atomicity(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_bulk_insert_performance(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldPersistenceServicePropertyTest::test_template_field_definition_caching(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldValuePropertyTest::test_model_relationship_integrity(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldValuePropertyTest::test_type_casting_correctness(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldValuePropertyTest::test_conflict_detection(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\TemplateFieldValuePropertyTest::test_history_retrieval(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   PASS  Tests\Unit\ColumnMappingTemplateTest
+  ✓ template has fillable fields                                 0.50s  
+  ✓ mappings are cast to array                                   0.03s  
+  ✓ template belongs to user                                     0.03s  
+  ✓ for user returns only user templates                         0.03s  
+  ✓ apply to remaps columns correctly                            0.03s  
+  ✓ apply to ignores missing columns                             0.02s  
+  ✓ validate mappings returns true for valid structure           0.02s  
+  ✓ validate mappings returns false for non array                0.02s  
+  ✓ validate mappings returns false for non string values        0.02s  
+  ✓ validation rules enforce unique name per user                0.03s  
+  ✓ validation rules allow same name for different users         0.03s  
+  ✓ validation rules exclude current template on update          0.02s  
+  ✓ user has column mapping templates relationship               0.03s  
+  ✓ template has fields relationship                             0.02s  
+  ✓ get expected columns returns core columns only               0.02s  
+  ✓ get expected columns includes template fields                0.03s  
+  ✓ get expected columns with empty mappings                     0.03s  
+  ✓ get expected columns with empty mappings but template field… 0.03s  
+  ✓ get expected columns merges core and template correctly      0.02s  
+  ✓ validate file columns passes with exact match                0.02s  
+  ✓ validate file columns detects missing columns                0.02s  
+  ✓ validate file columns detects extra columns                  0.02s  
+  ✓ validate file columns is case insensitive                    0.02s  
+  ✓ validate file columns with template fields                   0.02s  
+  ✓ validate file columns detects missing template field         0.02s  
+  ✓ validate file columns returns all errors                     0.02s  
+  ✓ validate file columns with empty array                       0.02s  
+  ✓ validate file columns returns correct structure              0.03s  
+
+   PASS  Tests\Unit\ConfidenceScoreServiceTask4Test
+  ✓ it includes template fields in breakdown                     0.07s  
+  ✓ it sets category property for core fields                    0.02s  
+  ✓ it sets category property for template fields                0.03s  
+  ✓ it includes normalized values for name fields                0.02s  
+  ✓ it only includes normalized values when available            0.02s  
+  ✓ it calculates confidence score for exact match               0.02s  
+  ✓ it calculates confidence score for fuzzy match               0.02s  
+  ✓ it returns null confidence for new fields                    0.02s  
+  ✓ it maintains backward compatibility with fields key          0.02s  
+  ✓ it handles different field types for confidence calculation  0.03s  
+  ✓ it returns zero confidence for non string mismatch           0.02s  
+  ✓ it handles missing template gracefully                       0.04s  
+  ✓ it includes field type for template fields                   0.03s  
+
+   PASS  Tests\Unit\DataMappingServiceTask42Test
+  ✓ it returns structured array with core and dynamic fields     0.03s  
+  ✓ it maps known columns to core fields                         0.02s  
+  ✓ it maps unknown columns to dynamic fields                    0.02s  
+  ✓ it processes compound first names first                      0.02s  
+  ✓ it skips empty and null values for dynamic fields            0.02s  
+  ✓ it normalizes dynamic keys to snake case                     0.02s  
+  ✓ it does not add null core fields                             0.02s  
+
+   PASS  Tests\Unit\DataMappingServiceTask61Test
+  ✓ it returns row unchanged when no template provided           0.03s  
+  ✓ it accepts template and applies mappings                     0.02s  
+  ✓ it remaps all columns present in template                    0.02s  
+  ✓ it remaps only columns that exist in row                     0.03s  
+  ✓ it ignores template mappings for missing columns             0.02s  
+  ✓ it handles empty row gracefully                              0.03s  
+  ✓ it handles row with no matching columns                      0.02s  
+  ✓ it preserves null values in remapped columns                 0.03s  
+  ✓ it preserves empty string values in remapped columns         0.02s  
+  ✓ it works with map uploaded data after template application   0.02s  
+
+   PASS  Tests\Unit\DataMappingServiceTask62PropertyTest
+  ✓ preserves template field values and data types               0.16s  
+  ✓ handles no template fields gracefully                        0.03s  
+  ✓ excludes empty template field values                         0.02s  
+  ✓ preserves zero and false template field values               0.02s  
+
+   PASS  Tests\Unit\DataMappingServiceTask62Test
+  ✓ it generates mappings for core fields                        0.03s  
+  ✓ it maps various column name variations                       0.02s  
+  ✓ it handles all core field types                              0.02s  
+  ✓ it handles compound first name fields                        0.02s  
+  ✓ it handles first name without second name                    0.02s  
+  ✓ it handles various name field variations                     0.02s  
+  ✓ it returns array with excel column to system field format    0.02s  
+  ✓ it generates mappings for all columns in sample row          0.02s  
+  ✓ it handles empty sample row                                  0.02s  
+  ✓ it preserves original excel column names as keys             0.02s  
+  ✓ it generates mappings compatible with column mapping templa… 0.02s  
+  ✓ it handles null values in sample row                         0.02s  
+  ✓ it handles empty string values in sample row                 0.02s  
+
+   PASS  Tests\Unit\DataMappingServiceTest
+  ✓ it maps surname variations to last name                      0.04s  
+  ✓ it maps firstname variations to first name                   0.02s  
+  ✓ it maps birthday variations to birthday                      0.02s  
+  ✓ it maps gender variations to gender                          0.02s  
+  ✓ it maps civil status variations to civil status              0.02s  
+  ✓ it maps address variations to address                        0.02s  
+  ✓ it maps barangay variations to barangay                      0.02s  
+  ✓ it maps uid variations to uid                                0.02s  
+  ✓ it maps suffix variations to suffix                          0.02s  
+  ✓ it maps multiple core fields in single row                   0.02s  
+  ✓ it maps unknown columns to dynamic fields                    0.03s  
+  ✓ it handles row with only dynamic fields                      0.02s  
+  ✓ it handles row with only core fields                         0.02s  
+  ✓ it handles mixed core and dynamic fields                     0.02s  
+  ✓ it excludes empty string from dynamic fields                 0.02s  
+  ✓ it excludes null from dynamic fields                         0.02s  
+  ✓ it excludes multiple empty values from dynamic fields        0.02s  
+  ✓ it preserves zero and false values in dynamic fields         0.02s  
+  ✓ it prioritizes core field mapping over dynamic               0.02s  
+  ✓ it does not duplicate core fields in dynamic fields          0.02s  
+  ✓ it handles all core field mappings correctly                 0.02s  
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                            0.05s  
+
+   PASS  Tests\Unit\FileHashIndexTest
+  ✓ file hash column exists                                      0.02s  
+  ✓ file hash column has index                                   0.02s  
+  ✓ stored file path column exists                               0.02s  
+  ✓ file size column exists                                      0.02s  
+
+   PASS  Tests\Unit\FileStorageMigrationTest
+  ✓ migration adds columns and index                             0.03s  
+  ✓ migration down removes columns and index                     0.03s  
+  ✓ columns are nullable                                         0.02s  
+
+   PASS  Tests\Unit\FileStorageSchemaTest
+  ✓ file hash column exists                                      0.03s  
+  ✓ stored file path column exists                               0.05s  
+  ✓ file size column exists                                      0.02s  
+  ✓ file hash has index                                          0.03s  
+  ✓ column order is correct                                      0.02s  
+  ✓ existing columns preserved                                   0.02s  
+
+   PASS  Tests\Unit\FileValidationServicePerformanceTest
+  ✓ column validation completes quickly for typical file         0.14s  
+  ✓ column validation with template completes quickly            0.07s  
+  ✓ template field lookup uses indexed query                     0.03s  
+  ✓ handles moderately large file efficiently                    0.20s  
+  ✓ column validation only reads headers not entire file         0.26s  
+  ✓ validation with multiple columns performs well               0.09s  
+  ✓ template with many fields validates efficiently              0.16s  
+  ✓ validation memory usage remains reasonable                   0.30s  
+  ✓ multiple validations perform consistently                    0.17s  
+
+   PASS  Tests\Unit\FileValidationServiceTask6Test
+  ✓ it validates file with valid core fields only                0.06s  
+  ✓ it detects missing required first name column                0.04s  
+  ✓ it detects missing required last name column                 0.04s  
+  ✓ it detects extra columns not in core fields                  0.04s  
+  ✓ it accepts various first name variations                     0.07s  
+  ✓ it accepts various last name variations                      0.08s  
+  ✓ it accepts optional core fields                              0.05s  
+  ✓ it validates file with template successfully                 0.04s  
+  ✓ it returns structured validation result                      0.04s  
+  ✓ it handles file reading errors gracefully                    0.04s  
+  ✓ it accepts all birthday field variations                     0.11s  
+  ✓ it accepts all gender field variations                       0.15s  
+  ✓ it accepts all address field variations                      0.12s  
+  ✓ it reports all validation errors at once                     0.04s  
+  ✓ it trims whitespace from headers                             0.04s  
+  ✓ it ignores empty header cells                                0.05s  
+
+   PASS  Tests\Unit\MainSystemTemplateFieldPropertyTest
+  ✓ main system template field access                            0.76s  
+  ✓ main system all template fields retrieval                    0.44s  
+  ✓ main system conflict filtering                               0.46s  
+
+   PASS  Tests\Unit\MatchAnalyticsServicePropertyTest
+  ✓ average confidence excludes new records                      2.49s  
+  ✓ match status distribution sums to 100 percent                4.39s  
+  ✓ field population rate calculation                            3.24s  
+  ✓ quality score mapping consistency                            0.02s  
+  ✓ field ranking by population rate                             3.69s  
+
+   PASS  Tests\Unit\RecordImportFieldBreakdownTest
+  ✓ it saves field breakdown for new records                     0.04s  
+  ✓ it saves field breakdown for matched records                 0.03s  
+  ✓ field breakdown contains field details                       0.03s  
+
+   PASS  Tests\Unit\RecordImportRequiredFieldValidationTest
+  ✓ it throws error when required custom field is empty          0.04s  
+  ✓ it throws error with multiple missing required fields        0.03s  
+  ✓ it allows empty optional custom fields                       0.04s  
+  ✓ it includes row number in error message                      0.03s  
+  ✓ it provides descriptive error message                        0.03s  
+
+   PASS  Tests\Unit\RecordImportTask84Test
+  ✓ it imports records with core fields only                     0.03s  
+  ✓ it creates match result for new records                      0.02s  
+  ✓ it handles existing record matches without dynamic updates   0.03s  
+  ✓ it generates mapping summary                                 0.03s  
+  ✓ it works with template when provided                         0.03s  
+  ✓ it skips rows with missing required fields                   0.03s  
+  ✓ it handles compound first names correctly                    0.03s  
+  ✓ it normalizes field values correctly                         0.03s  
+  ✓ it links new records to match results                        0.03s  
+
+   PASS  Tests\Unit\ResultsControllerTest
+  ✓ get batch analytics returns correct json structure           0.08s  
+  ✓ get batch analytics returns 404 for invalid batch            0.03s  
+  ✓ get batch analytics handles database errors                  0.08s  
+  ✓ get field breakdown returns correct data                     0.08s  
+  ✓ get field breakdown returns 404 for non existent result      0.02s  
+  ✓ get field breakdown returns 404 for empty breakdown          0.02s  
+  ✓ export field breakdown generates valid csv                   0.02s  
+  ✓ export field breakdown includes all columns                  0.03s  
+  ✓ export field breakdown handles missing result                0.02s  
+  ✓ export field breakdown handles empty breakdown               0.03s  
+  ✓ csv escapes special characters property                      0.22s  
+
+   PASS  Tests\Unit\TemplateFieldPersistenceServicePropertyTest
+  ✓ new record creates template values                           0.23s  
+  ✓ template field type validation                               0.18s  
+  ✓ matched record creates new values                            0.13s  
+  ✓ matched record updates empty values                          0.07s  
+  ✓ matched record preserves history                             0.18s  
+  ✓ matched record idempotence                                   0.21s  
+  ✓ possible duplicate flags for review                          0.21s  
+  ✓ possible duplicate links conflicts                           0.25s  
+  ✓ persistence service transaction atomicity                    0.14s  
+  ✓ bulk insert performance                                      1.08s  
+  ✓ template field definition caching                            0.04s  
+
+   PASS  Tests\Unit\TemplateFieldTest
+  ✓ template field has fillable fields                           0.07s  
+  ✓ is required is cast to boolean                               0.05s  
+  ✓ template field belongs to template                           0.06s  
+  ✓ validate value accepts valid string                          0.05s  
+  ✓ validate value accepts valid integer                         0.06s  
+  ✓ validate value rejects decimal for integer                   0.13s  
+  ✓ validate value accepts valid decimal                         0.08s  
+  ✓ validate value rejects non numeric decimal                   0.09s  
+  ✓ validate value accepts valid date                            0.04s  
+  ✓ validate value rejects invalid date                          0.05s  
+  ✓ validate value accepts boolean true variations               0.04s  
+  ✓ validate value accepts boolean false variations              0.04s  
+  ✓ validate value rejects invalid boolean                       0.04s  
+  ✓ validate value allows empty for optional field               0.16s  
+  ✓ validate value rejects empty for required field              0.12s  
+  ✓ validate value allows null for optional field                0.05s  
+  ✓ is valid field name accepts lowercase                        0.04s  
+  ✓ is valid field name accepts uppercase                        0.03s  
+  ✓ is valid field name accepts mixed case                       0.03s  
+  ✓ is valid field name accepts with underscores                 0.03s  
+  ✓ is valid field name accepts with numbers                     0.02s  
+  ✓ is valid field name rejects spaces                           0.02s  
+  ✓ is valid field name rejects hyphens                          0.02s  
+  ✓ is valid field name rejects special characters               0.02s  
+  ✓ is valid field name rejects empty string                     0.02s  
+  ✓ is valid field name accepts single character                 0.02s  
+  ✓ is valid field name accepts very long names                  0.02s  
+  ✓ is valid field name rejects unicode characters               0.02s  
+  ✓ is valid field name rejects newlines and tabs                0.02s  
+  ✓ template field cascade deletes with template                 0.03s  
+  ✓ unique constraint on template id and field name              0.03s  
+  ✓ same field name allowed for different templates              0.03s  
+  ✓ validate value string accepts empty string for optional      0.03s  
+  ✓ validate value string accepts special characters             0.03s  
+  ✓ validate value string accepts numbers                        0.02s  
+  ✓ validate value integer accepts zero                          0.03s  
+  ✓ validate value integer accepts negative                      0.02s  
+  ✓ validate value integer rejects non numeric                   0.03s  
+  ✓ validate value decimal accepts integer                       0.02s  
+  ✓ validate value decimal accepts zero                          0.03s  
+  ✓ validate value decimal accepts negative                      0.03s  
+  ✓ validate value date accepts various formats                  0.02s  
+  ✓ validate value date accepts edge dates                       0.03s  
+  ✓ validate value date rejects invalid dates                    0.03s  
+  ✓ validate value boolean accepts with whitespace               0.03s  
+  ✓ validate value boolean rejects partial matches               0.02s  
+  ✓ validate value required field rejects null                   0.03s  
+  ✓ validate value required integer rejects empty                0.02s  
+  ✓ validate value required date rejects empty                   0.03s  
+  ✓ validate value required boolean rejects empty                0.03s  
+  ✓ validate value optional fields accept null for all types     0.03s  
+
+   PASS  Tests\Unit\TemplateFieldValuePropertyTest
+  ✓ model relationship integrity                                 0.31s  
+  ✓ type casting correctness                                     0.15s  
+  ✓ conflict detection                                           0.25s  
+  ✓ history retrieval                                            0.25s  
+
+   PASS  Tests\Unit\TemplateFieldValueTest
+  ✓ template field value belongs to main system                  0.03s  
+  ✓ template field value belongs to template field               0.03s  
+  ✓ template field value belongs to batch                        0.03s  
+  ✓ template field value belongs to conflicting value            0.03s  
+  ✓ template field value batch relationship returns null when b… 0.03s  
+  ✓ needs review is cast to boolean                              0.03s  
+  ✓ needs review false is cast to boolean                        0.03s  
+  ✓ created at is cast to datetime                               0.03s  
+  ✓ updated at is cast to datetime                               0.03s  
+  ✓ has conflict returns true when conflict with is set          0.03s  
+  ✓ has conflict returns false when conflict with is null        0.03s  
+  ✓ get history returns current value                            0.03s  
+  ✓ get history returns previous value when set                  0.03s  
+  ✓ get history does not include previous when null              0.03s  
+  ✓ resolve conflict with keep existing deletes conflicting rec… 0.03s  
+  ✓ resolve conflict with use new updates existing record        0.03s  
+  ✓ resolve conflict with edit manually updates with custom val… 0.03s  
+  ✓ resolve conflict with invalid resolution throws exception    0.03s  
+  ✓ resolve conflict with edit manually without custom value th… 0.04s  
+  ✓ resolve conflict with invalid custom value throws exception  0.03s  
+  ✓ template field value has fillable fields                     0.03s  
+  ✓ template field value table name is correct                   0.03s  
+
+   PASS  Tests\Unit\TemplateFieldValuesMigrationTest
+  ✓ migration creates table with all columns                     0.05s  
+  ✓ foreign key constraints exist                                0.02s  
+  ✓ unique constraint exists                                     0.02s  
+  ✓ required indexes exist                                       0.02s  
+  ✓ column types are correct                                     0.02s  
+  ✓ migration is reversible                                      0.04s  
+  ✓ needs review has correct default                             0.02s  
+
+   WARN  Tests\Unit\UploadControllerTask121Test
+  - upload returns column mapping summary for json request → Ex… 0.04s  
+  ✓ column mapping identifies core fields                        0.03s  
+  ✓ column mapping identifies dynamic fields                     0.03s  
+  ✓ column mapping identifies skipped columns                    0.03s  
+  ✓ complete upload flow with mapping summary                    0.03s  
+
+   FAIL  Tests\Unit\UploadControllerTask122Test
+  ✓ results view displays column mapping section                 0.09s  
+  ✓ core fields displayed with success badges                    0.03s  
+  ✓ dynamic fields displayed with info badges                    0.03s  
+  ✓ skipped columns displayed with secondary badges              0.03s  
+  ✓ batch statistics displayed                                   0.04s  
+  ⨯ mapping section is collapsible                               0.04s  
+  ✓ mapping section hidden without session data                  0.03s  
+  ✓ complete mapping feedback display                            0.04s  
+
+   FAIL  Tests\Unit\UploadControllerTask91Test
+  ⨯ store accepts optional template id parameter                 0.05s  
+  ⨯ store works without template id                              0.03s  
+  ✓ store validates template id must be integer                  0.03s  
+  ✓ store validates template id exists                           0.04s  
+  ⨯ store rejects template from another user                     0.05s  
+  ⨯ store returns json error for unauthorized template api       0.04s  
+  ⨯ record import receives template                              0.03s  
+  ⨯ record import works without template                         0.03s  
+
+   PASS  Tests\Feature\Auth\AuthenticationTest
+  ✓ login screen can be rendered                                 0.04s  
+  ✓ users can authenticate using the login screen                0.04s  
+  ✓ users with two factor enabled are redirected to two factor…  0.03s  
+  ✓ users can not authenticate with invalid password             0.03s  
+  ✓ users can logout                                             0.03s  
+  ✓ users are rate limited                                       0.03s  
+
+   PASS  Tests\Feature\Auth\EmailVerificationTest
+  ✓ email verification screen can be rendered                    0.03s  
+  ✓ email can be verified                                        0.03s  
+  ✓ email is not verified with invalid hash                      0.04s  
+  ✓ email is not verified with invalid user id                   0.03s  
+  ✓ verified user is redirected to dashboard from verification…  0.03s  
+  ✓ already verified user visiting verification link is redirec… 0.03s  
+
+   PASS  Tests\Feature\Auth\PasswordConfirmationTest
+  ✓ confirm password screen can be rendered                      0.03s  
+  ✓ password confirmation requires authentication                0.03s  
+
+   PASS  Tests\Feature\Auth\PasswordResetTest
+  ✓ reset password link screen can be rendered                   0.03s  
+  ✓ reset password link can be requested                         0.25s  
+  ✓ reset password screen can be rendered                        0.22s  
+  ✓ password can be reset with valid token                       0.24s  
+  ✓ password cannot be reset with invalid token                  0.22s  
+
+   PASS  Tests\Feature\Auth\RegistrationTest
+  ✓ registration screen can be rendered                          0.04s  
+  ✓ new users can register                                       0.03s  
+
+   PASS  Tests\Feature\Auth\TwoFactorChallengeTest
+  ✓ two factor challenge redirects to login when not authentica… 0.03s  
+  ✓ two factor challenge can be rendered                         0.04s  
+
+   PASS  Tests\Feature\Auth\VerificationNotificationTest
+  ✓ sends verification notification                              0.06s  
+  ✓ does not send verification notification if email is verifie… 0.03s  
+
+   PASS  Tests\Feature\ColumnMappingPersistenceTest
+  ✓ column mapping is saved to batch                             0.03s  
+  ✓ results view shows column mapping from batch                 0.03s  
+  ✓ column mapping card is collapsed when not from upload        0.04s  
+  ✓ column mapping card is expanded when from upload             0.04s  
+
+   PASS  Tests\Feature\DashboardTest
+  ✓ guests are redirected to the login page                      0.03s  
+  ✓ authenticated users can visit the dashboard                  0.03s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ returns a successful response                                0.03s  
+
+   PASS  Tests\Feature\Settings\PasswordUpdateTest
+  ✓ password update page is displayed                            0.03s  
+  ✓ password can be updated                                      0.03s  
+  ✓ correct password must be provided to update password         0.04s  
+
+   PASS  Tests\Feature\Settings\ProfileUpdateTest
+  ✓ profile page is displayed                                    0.03s  
+  ✓ profile information can be updated                           0.03s  
+  ✓ email verification status is unchanged when the email addre… 0.03s  
+  ✓ user can delete their account                                0.03s  
+  ✓ correct password must be provided to delete account          0.03s  
+
+   PASS  Tests\Feature\Settings\TwoFactorAuthenticationTest
+  ✓ two factor settings page can be rendered                     0.06s  
+  ✓ two factor settings page requires password confirmation whe… 0.03s  
+  ✓ two factor settings page does not requires password confirm… 0.03s  
+  ✓ two factor settings page returns forbidden response when tw… 0.03s  
+
+   FAIL  Tests\Feature\TemplateControllerTest
+  ✓ index returns user templates                                 0.04s  
+  ✓ index requires authentication                                0.02s  
+  ✓ store creates template                                       0.04s  
+  ✓ store validates required fields                              0.03s  
+  ✓ store enforces unique name per user                          0.03s  
+  ✓ store allows same name for different users                   0.03s  
+  ✓ show returns template details                                0.03s  
+  ⨯ show returns 404 for nonexistent template                    0.03s  
+  ✓ show prevents access to other users templates                0.03s  
+  ✓ update modifies template                                     0.03s  
+  ✓ update returns 404 for nonexistent template                  0.03s  
+  ✓ update prevents modifying other users templates              0.03s  
+  ✓ update enforces unique name per user                         0.03s  
+  ✓ destroy deletes template                                     0.03s  
+  ✓ destroy returns 404 for nonexistent template                 0.03s  
+  ✓ destroy prevents deleting other users templates              0.03s  
+  ✓ store web creates template with custom fields                0.04s  
+  ✓ store web validates field name uniqueness                    0.03s  
+  ✓ store web validates field name format                        0.04s  
+  ✓ store web validates field type                               0.03s  
+  ✓ store web creates template without custom fields             0.03s  
+  ✓ update web with new custom fields added                      0.03s  
+  ✓ update web with existing custom fields modified              0.03s  
+  ✓ update web with custom fields removed                        0.03s  
+  ✓ update web removes all custom fields                         0.03s  
+  ✓ update web validates field name uniqueness during update     0.03s  
+  ✓ update web verifies field attributes are updated properly    0.04s  
+  ✓ deleting template cascades to fields                         0.03s  
+  ✓ database constraint prevents duplicate field names in same…  0.03s  
+  ✓ same field name allowed in different templates               0.03s  
+  ✓ web form handles duplicate field names gracefully            0.03s  
+  ⨯ api endpoint rejects duplicate field names                   0.03s  
+  ✓ case sensitivity in field name uniqueness                    0.03s  
+  ⨯ update field name to existing name in same template fails    0.04s  
+  ✓ store web rejects invalid field type                         0.03s  
+  ✓ store web accepts all valid field types                      0.05s  
+  ✓ store web rejects multiple invalid field types               0.03s  
+  ✓ store web rejects mixed valid and invalid field types        0.03s  
+  ✓ update web rejects invalid field type                        0.03s  
+  ✓ update web accepts all valid field types                     0.03s  
+  ✓ api endpoint rejects invalid field type                      0.03s  
+  ✓ api endpoint accepts all valid field types                   0.05s  
+  ✓ api endpoint update rejects invalid field type               0.03s  
+  ✓ field type case sensitivity                                  0.03s  
+
+   PASS  Tests\Feature\TemplateFieldControllerTest
+  ✓ index returns template fields                                0.07s  
+  ✓ index returns 404 for nonexistent template                   0.03s  
+  ✓ index denies access to other users template                  0.03s  
+  ✓ store creates template field                                 0.05s  
+  ✓ store validates field name format                            0.03s  
+  ✓ store validates field type                                   0.03s  
+  ✓ store prevents duplicate field names                         0.03s  
+  ✓ store denies access to other users template                  0.03s  
+  ✓ update modifies template field                               0.03s  
+  ✓ update prevents duplicate field names                        0.03s  
+  ✓ update returns 404 for nonexistent field                     0.03s  
+  ✓ destroy deletes template field                               0.03s  
+  ✓ destroy returns 404 for nonexistent field                    0.03s  
+  ✓ destroy denies access to other users template                0.03s  
+  ✓ requires authentication                                      0.03s  
+
+   FAIL  Tests\Feature\UploadTest
+  ✓ upload page can be rendered                                  0.05s  
+  ✓ file upload requires authentication                          0.03s  
+  ⨯ valid file can be uploaded                                   0.04s  
+  ✓ upload validates file is required                            0.03s  
+  ✓ upload validates file type                                   0.03s  
+  ✓ upload validates file size                                   0.03s  
+
+   FAIL  Tests\Feature\UploadValidationTest
+  ⨯ upload without template accepts valid core fields            0.04s  
+  ⨯ upload without template rejects missing required field       0.03s  
+  ⨯ upload without template rejects extra columns                0.03s  
+  ⨯ upload without template with extra column fails validation   0.03s  
+  ✓ upload with template validates against template columns      0.04s  
+  ⨯ upload with template rejects missing template field          0.04s  
+  ⨯ upload with template rejects extra columns not in template   0.04s  
+  ✓ validation errors are logged                                 0.04s  
+  ⨯ validation info is passed to view                            0.05s  
+  ✓ template not found returns error                             0.03s  
+  ⨯ user cannot use another users template                       0.04s  
+  ⨯ api upload returns json validation errors                    0.03s  
+  ✓ template with fields relationship is loaded                  0.03s  
+  ⨯ upload with template valid data processes successfully       0.04s  
+  ⨯ upload with template with extra column fails validation      0.04s  
+  ⨯ upload with template type mismatch validates field types     0.04s  
+  ⨯ complete workflow create template add fields upload file     0.04s  
+  ⨯ error handling missing columns displays clear errors         0.04s  
+  ⨯ error handling extra columns displays clear errors           0.03s  
+  ⨯ error handling misnamed columns displays clear errors        0.03s  
+  ⨯ error handling template missing fields displays clear error… 0.06s  
+  ⨯ error handling template extra columns displays clear errors  0.04s  
+  ⨯ error handling returns all validation errors at once         0.06s  
+  ⨯ error handling without template validates core fields only   0.04s  
+  ⨯ error handling provides actionable error messages            0.03s  
+  ⨯ backward compatibility legacy template without custom field… 0.04s  
+  ⨯ backward compatibility legacy template rejects extra column… 0.03s  
+  ⨯ backward compatibility legacy template rejects missing colu… 0.04s  
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\UploadControllerTask122Test > mapping section…    
+  Expected: <!DOCTYPE html>\n
+<html lang="en">\n
+<head>\n
+    <meta charset="utf-8">\n
+    <meta name="viewport" content="width=device-width, initial-scale=1">\n
+    <meta name="csrf-token" content="tJPchZrS6Y8UZjzXsRxP19hVI69EDNJXKbQ0AdEW">\n
+    <title>Match Results</title>\n
+    \n
+    <!-- AdminLTE CSS -->\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">\n
+    <!-- Font Awesome -->\n
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">\n
+    \n
+    </head>\n
+<body class="hold-transition sidebar-mini">\n
+    <div class="wrapper">\n
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">\n
+    <ul class="navbar-nav">\n
+        <li class="nav-item">\n
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>\n
+        </li>\n
+    </ul>\n
+    \n
+    <ul class="navbar-nav ml-auto">\n
+        <li class="nav-item dropdown">\n
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button">\n
+                <i class="far fa-user"></i> Cayla Crooks III\n
+            </a>\n
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">\n
+                <form method="POST" action="http://localhost/logout">\n
+                    <input type="hidden" name="_token" value="tJPchZrS6Y8UZjzXsRxP19hVI69EDNJXKbQ0AdEW" autocomplete="off">                    <button type="submit" class="dropdown-item">\n
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout\n
+                    </button>\n
+                </form>\n
+            </div>\n
+        </li>\n
+    </ul>\n
+</nav>\n
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">\n
+    <a href="http://localhost/dashboard" class="brand-link">\n
+        <span class="brand-text font-weight-light">Data Match System</span>\n
+    </a>\n
+    \n
+    <div class="sidebar">\n
+        <nav class="mt-2">\n
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">\n
+                <li class="nav-item">\n
+                    <a href="http://localhost/dashboard" class="nav-link ">\n
+                        <i class="nav-icon fas fa-tachometer-alt"></i>\n
+                        <p>Dashboard</p>\n
+                    </a>\n
+                </li>\n
+                <li class="nav-item">\n
+                    <a href="http://localhost/upload" class="nav-link ">\n
+                        <i class="nav-icon fas fa-upload"></i>\n
+                        <p>Upload</p>\n
+                    </a>\n
+                </li>\n
+                <li class="nav-item">\n
+                    <a href="http://localhost/templates" class="nav-link ">\n
+                        <i class="nav-icon fas fa-file-alt"></i>\n
+                        <p>Templates</p>\n
+                    </a>\n
+                </li>\n
+                <li class="nav-item">\n
+                    <a href="http://localhost/results" class="nav-link active">\n
+                        <i class="nav-icon fas fa-list"></i>\n
+                        <p>Match Results</p>\n
+                    </a>\n
+                </li>\n
+                <li class="nav-item">\n
+                    <a href="http://localhost/batches" class="nav-link ">\n
+                        <i class="nav-icon fas fa-history"></i>\n
+                        <p>Batch History</p>\n
+                    </a>\n
+                </li>\n
+                <li class="nav-item">\n
+                    <a href="http://localhost/main-system" class="nav-link ">\n
+                        <i class="nav-icon fas fa-database"></i>\n
+                        <p>Main System</p>\n
+                    </a>\n
+                </li>\n
+            </ul>\n
+        </nav>\n
+    </div>\n
+</aside>\n
+        \n
+        <div class="content-wrapper">\n
+                        <div class="content-header">\n
+    <div class="container-fluid">\n
+        <h1 class="m-0">Match Results</h1>\n
+    </div>\n
+</div>\n
+\n
+<section class="content">\n
+    <div class="container-fluid">\n
+                        <div class="row">\n
+            <div class="col-12">\n
+                <div class="card card-outline card-info ">\n
+                    <div class="card-header">\n
+                        <h3 class="card-title">\n
+                            <i class="fas fa-columns"></i> Column Mapping Summary\n
+                        </h3>\n
+                        <div class="card-tools">\n
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">\n
+                                <i class="fas fa-minus"></i>\n
+                            </button>\n
+                        </div>\n
+                    </div>\n
+                    <div class="card-body">\n
+                        <!-- Percentage Calculations Section -->\n
+                        <div class="row mb-4">\n
+                            <div class="col-md-6">\n
+                                <div class="info-box bg-success">\n
+                                    <span class="info-box-icon"><i class="fas fa-check-circle"></i></span>\n
+                                    <div class="info-box-content">\n
+                                        <span class="info-box-text">Mapped Columns</span>\n
+                                        <span class="info-box-number">1 <small>(100%)</small></span>\n
+                                    </div>\n
+                                </div>\n
+                            </div>\n
+                            <div class="col-md-6">\n
+                                <div class="info-box bg-secondary">\n
+                                    <span class="info-box-icon"><i class="fas fa-minus-circle"></i></span>\n
+                                    <div class="info-box-content">\n
+                                        <span class="info-box-text">Skipped Columns</span>\n
+                                        <span class="info-box-number">0 <small>(0%)</small></span>\n
+                                    </div>\n
+                                </div>\n
+                            </div>\n
+                        </div>\n
+                        <div class="row mb-4">\n
+                            <div class="col-md-6">\n
+                                <p><strong>Total Columns:</strong> 1</p>\n
+                            </div>\n
+                        </div>\n
+\n
+                        <!-- Batch Statistics Section -->\n
+                                                <div class="row mb-4">\n
+                            <div class="col-12">\n
+                                <h5><i class="fas fa-chart-bar"></i> Batch Statistics</h5>\n
+                            </div>\n
+                            <div class="col-md-3">\n
+                                <div class="small-box bg-info">\n
+                                    <div class="inner">\n
+                                        <h3>0</h3>\n
+                                        <p>Total Rows Processed</p>\n
+                                    </div>\n
+                                    <div class="icon">\n
+                                        <i class="fas fa-database"></i>\n
+                                    </div>\n
+                                </div>\n
+                            </div>\n
+                            <div class="col-md-3">\n
+                                <div class="small-box bg-success">\n
+                                    <div class="inner">\n
+                                        <h3>0</h3>\n
+                                        <p>Matched (0%)</p>\n
+                                    </div>\n
+                                    <div class="icon">\n
+                                        <i class="fas fa-check"></i>\n
+                                    </div>\n
+                                </div>\n
+                            </div>\n
+                            <div class="col-md-3">\n
+                                <div class="small-box bg-warning">\n
+                                    <div class="inner">\n
+                                        <h3>0</h3>\n
+                                        <p>Possible Duplicates (0%)</p>\n
+                                    </div>\n
+                                    <div class="icon">\n
+                                        <i class="fas fa-exclamation-triangle"></i>\n
+                                    </div>\n
+                                </div>\n
+                            </div>\n
+                            <div class="col-md-3">\n
+                                <div class="small-box bg-primary">\n
+                                    <div class="inner">\n
+                                        <h3>0</h3>\n
+                                        <p>New Records (0%)</p>\n
+                                    </div>\n
+                                    <div class="icon">\n
+                                        <i class="fas fa-plus"></i>\n
+                                    </div>\n
+                                </div>\n
+                            </div>\n
+                        </div>\n
+\n
+                        <!-- Analytics Data Container (loaded via AJAX) -->\n
+                        <div id="analytics-container" data-batch-id="1">\n
+                            <div class="text-center py-3">\n
+                                <div class="spinner-border text-primary" role="status">\n
+                                    <span class="sr-only">Loading analytics...</span>\n
+                                </div>\n
+                                <p class="mt-2 text-muted">Loading detailed analytics...</p>\n
+                            </div>\n
+                        </div>\n
+                        \n
+                        <!-- Chart Containers -->\n
+                        <div class="row mb-4" id="chart-section" style="display: none;">\n
+                            <div class="col-md-6">\n
+                                <div class="card">\n
+                                    <div class="card-header">\n
+                                        <h3 class="card-title"><i class="fas fa-chart-pie"></i> Column Mapping Distribution</h3>\n
+                                    </div>\n
+                                    <div class="card-body">\n
+                                        <div class="chart-container" style="position: relative; height: 300px;">\n
+                                            <canvas id="mappingPieChart"></canvas>\n
+                                        </div>\n
+                                    </div>\n
+                                </div>\n
+                            </div>\n
+                            <div class="col-md-6">\n
+                                <div class="card">\n
+                                    <div class="card-header">\n
+                                        <h3 class="card-title"><i class="fas fa-chart-bar"></i> Field Population Rates</h3>\n
+                                    </div>\n
+                                    <div class="card-body">\n
+                                        <div class="chart-container" style="position: relative; height: 300px;">\n
+                                            <canvas id="populationBarChart"></canvas>\n
+                                        </div>\n
+                                    </div>\n
+                                </div>\n
+                            </div>\n
+                        </div>\n
+\n
+                        <!-- Field Statistics Table -->\n
+                        <div class="row" id="field-stats-section" style="display: none;">\n
+                            <div class="col-12">\n
+                                <h5><i class="fas fa-table"></i> Field Statistics</h5>\n
+                                <div class="table-responsive">\n
+                                    <table class="table table-bordered table-striped" id="field-stats-table">\n
+                                        <thead>\n
+                                            <tr>\n
+                                                <th>Field Name</th>\n
+                                                <th>Category</th>\n
+                                                <th>Population Count</th>\n
+                                                <th>Population Rate</th>\n
+                                                <th>Status</th>\n
+                                            </tr>\n
+                                        </thead>\n
+                                        <tbody id="field-stats-body">\n
+                                            <!-- Populated via JavaScript -->\n
+                                        </tbody>\n
+                                    </table>\n
+                                </div>\n
+                            </div>\n
+                        </div>\n
+\n
+                        <hr>\n
+\n
+                        <!-- Original Column Mapping Details -->\n
+                        <div class="row">\n
+                            <div class="col-md-3">\n
+                                <h5 class="text-success">\n
+                                    <i class="fas fa-check-circle"></i> Core Fields Mapped\n
+                                </h5>\n
+                                <div class="mb-3">\n
+                                                                                                                        <span class="badge badge-success mr-1 mb-1">surname</span>\n
+                                                                                                            </div>\n
+                            </div>\n
+                            <div class="col-md-3">\n
+                                <h5 class="text-info">\n
+                                    <i class="fas fa-plus-circle"></i> Dynamic Fields Captured\n
+                                </h5>\n
+                                <div class="mb-3">\n
+                                                                            <span class="text-muted">None</span>\n
+                                                                    </div>\n
+                            </div>\n
+                            <div class="col-md-3">\n
+                                <h5 class="text-secondary">\n
+                                    <i class="fas fa-minus-circle"></i> Skipped Columns\n
+                                </h5>\n
+                                <div class="mb-3">\n
+                                                                            <span class="text-muted">None</span>\n
+                                                                    </div>\n
+                            </div>\n
+                        </div>\n
+                    </div>\n
+                </div>\n
+            </div>\n
+        </div>\n
+                <div class="row">\n
+            <div class="col-12">\n
+                <div class="card">\n
+                    <div class="card-header">\n
+                        <h3 class="card-title">All Match Results</h3>\n
+                        <div class="card-tools">\n
+                            <form method="GET" action="http://localhost/results" class="form-inline">\n
+                                <div class="form-group mr-2">\n
+                                    <select name="batch_id" class="form-control form-control-sm">\n
+                                        <option value="">All Batches</option>\n
+                                                                                    <option value="1" selected>\n
+                                                Batch #1\n
+                                            </option>\n
+                                                                            </select>\n
+                                </div>\n
+                                <div class="form-group mr-2">\n
+                                    <select name="status" class="form-control form-control-sm">\n
+                                        <option value="">All Statuses</option>\n
+                                        <option value="MATCHED" >Matched</option>\n
+                                        <option value="POSSIBLE DUPLICATE" >Possible Duplicate</option>\n
+                                        <option value="NEW RECORD" >New Record</option>\n
+                                    </select>\n
+                                </div>\n
+                                <button type="submit" class="btn btn-sm btn-primary">Filter</button>\n
+                            </form>\n
+                        </div>\n
+                    </div>\n
+                    <div class="card-body">\n
+                        <table class="table table-bordered table-striped">\n
+                            <thead>\n
+                                <tr>\n
+                                    <th>ID</th>\n
+                                    <th>Batch ID</th>\n
+                                    <th>Uploaded Record</th>\n
+                                    <th>Match Status</th>\n
+                                    <th>Confidence</th>\n
+                                    <th>Matched With</th>\n
+                                    <th>Details</th>\n
+                                </tr>\n
+                            </thead>\n
+                            <tbody>\n
+                                                                <tr>\n
+                                    <td colspan="7" class="text-center">No results found</td>\n
+                                </tr>\n
+                                                            </tbody>\n
+                        </table>\n
+                    </div>\n
+                    <div class="card-footer clearfix">\n
+                        <div class="float-right">\n
+                            \n
+                        </div>\n
+                    </div>\n
+                </div>\n
+            </div>\n
+        </div>\n
+    </div>\n
+</section>\n
+\n
+<!-- Field Breakdown Modals -->\n
+        </div>\n
+        \n
+        <footer class="main-footer">\n
+    <div class="float-right d-none d-sm-inline">\n
+        Version 1.0.0\n
+    </div>\n
+    <strong>Copyright &copy; 2026 Data Match System.</strong> All rights reserved.\n
+</footer>\n
+    </div>\n
+    \n
+    <!-- jQuery -->\n
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>\n
+    <!-- Bootstrap -->\n
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>\n
+    <!-- AdminLTE -->\n
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>\n
+    \n
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>\n
+<script>\n
+// Column Mapping Analytics Module\n
+class ColumnMappingAnalytics {\n
+    constructor() {\n
+        this.batchId = null;\n
+        this.mappingPieChart = null;\n
+        this.populationBarChart = null;\n
+    }\n
+\n
+    async initialize(batchId) {\n
+        if (!batchId) {\n
+            document.getElementById('analytics-container').innerHTML = \n
+                '<div class="alert alert-info">Select a batch to view detailed analytics.</div>';\n
+            return;\n
+        }\n
+\n
+        this.batchId = batchId;\n
+\n
+        try {\n
+            const response = await fetch(`/api/batch-analytics/${batchId}`);\n
+            \n
+            if (!response.ok) {\n
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);\n
+            }\n
+            \n
+            const data = await response.json();\n
+            this.renderAnalytics(data);\n
+        } catch (error) {\n
+            console.error('Failed to load batch analytics:', error);\n
+            this.showError('Unable to load analytics. Please try again.', true);\n
+        }\n
+    }\n
+\n
+    renderAnalytics(data) {\n
+        // Hide loading spinner\n
+        document.getElementById('analytics-container').style.display = 'none';\n
+\n
+        // Show chart section\n
+        document.getElementById('chart-section').style.display = 'flex';\n
+        document.getElementById('field-stats-section').style.display = 'block';\n
+\n
+        // Update statistics display\n
+        this.updateStatistics(data);\n
+\n
+        // Render charts\n
+        this.renderMappingPieChart(data.chart_data.mapping_pie);\n
+        this.renderPopulationBarChart(data.chart_data.population_bar);\n
+\n
+        // Update field statistics table\n
+        this.updateFieldStatistics(data.field_population);\n
+    }\n
+\n
+    updateStatistics(data) {\n
+        const stats = data.statistics;\n
+        const quality = data.quality;\n
+\n
+        // Create quality badge HTML\n
+        const qualityBadgeColors = {\n
+            'excellent': 'success',\n
+            'good': 'primary',\n
+            'fair': 'warning',\n
+            'poor': 'danger'\n
+        };\n
+        const badgeColor = qualityBadgeColors[quality.level] || 'secondary';\n
+\n
+        // Add quality score and additional statistics\n
+        const analyticsHtml = `\n
+            <div class="row mb-3">\n
+                <div class="col-md-3">\n
+                    <div class="info-box">\n
+                        <span class="info-box-icon bg-${badgeColor}"><i class="fas fa-star"></i></span>\n
+                        <div class="info-box-content">\n
+                            <span class="info-box-text">Quality Score</span>\n
+                            <span class="info-box-number">${quality.score.toFixed(1)}% <small class="text-${badgeColor}">${quality.level.toUpperCase()}</small></span>\n
+                        </div>\n
+                    </div>\n
+                </div>\n
+                <div class="col-md-3">\n
+                    <div class="info-box">\n
+                        <span class="info-box-icon bg-info"><i class="fas fa-percentage"></i></span>\n
+                        <div class="info-box-content">\n
+                            <span class="info-box-text">Avg Confidence</span>\n
+                            <span class="info-box-number">${stats.average_confidence.toFixed(1)}%</span>\n
+                        </div>\n
+                    </div>\n
+                </div>\n
+                <div class="col-md-3">\n
+                    <div class="info-box">\n
+                        <span class="info-box-icon bg-success"><i class="fas fa-check-double"></i></span>\n
+                        <div class="info-box-content">\n
+                            <span class="info-box-text">Avg Matched Fields</span>\n
+                            <span class="info-box-number">${stats.average_matched_fields.toFixed(1)}</span>\n
+                        </div>\n
+                    </div>\n
+                </div>\n
+                <div class="col-md-3">\n
+                    <div class="info-box">\n
+                        <span class="info-box-icon bg-warning"><i class="fas fa-times"></i></span>\n
+                        <div class="info-box-content">\n
+                            <span class="info-box-text">Avg Mismatched Fields</span>\n
+                            <span class="info-box-number">${stats.average_mismatched_fields.toFixed(1)}</span>\n
+                        </div>\n
+                    </div>\n
+                </div>\n
+            </div>\n
+        `;\n
+\n
+        document.getElementById('analytics-container').innerHTML = analyticsHtml;\n
+        document.getElementById('analytics-container').style.display = 'block';\n
+    }\n
+\n
+    renderMappingPieChart(chartData) {\n
+        const ctx = document.getElementById('mappingPieChart').getContext('2d');\n
+        \n
+        if (this.mappingPieChart) {\n
+            this.mappingPieChart.destroy();\n
+        }\n
+\n
+        try {\n
+            this.mappingPieChart = new Chart(ctx, {\n
+                type: 'pie',\n
+                data: {\n
+                    labels: chartData.labels,\n
+                    datasets: [{\n
+                        data: chartData.data,\n
+                        backgroundColor: chartData.colors,\n
+                        borderWidth: 2,\n
+                        borderColor: '#fff'\n
+                    }]\n
+                },\n
+                options: {\n
+                    responsive: true,\n
+                    maintainAspectRatio: false,\n
+                    plugins: {\n
+                        legend: {\n
+                            position: 'bottom'\n
+                        },\n
+                        tooltip: {\n
+                            callbacks: {\n
+                                label: function(context) {\n
+                                    const label = context.label || '';\n
+                                    const value = context.parsed || 0;\n
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);\n
+                                    const percentage = ((value / total) * 100).toFixed(1);\n
+                                    return `${label}: ${value} (${percentage}%)`;\n
+                                }\n
+                            }\n
+                        }\n
+                    }\n
+                }\n
+            });\n
+        } catch (error) {\n
+            console.error('Chart rendering failed:', error);\n
+            this.showChartError('mappingPieChart');\n
+        }\n
+    }\n
+\n
+    renderPopulationBarChart(chartData) {\n
+        const ctx = document.getElementById('populationBarChart').getContext('2d');\n
+        \n
+        if (this.populationBarChart) {\n
+            this.populationBarChart.destroy();\n
+        }\n
+\n
+        try {\n
+            this.populationBarChart = new Chart(ctx, {\n
+                type: 'bar',\n
+                data: {\n
+                    labels: chartData.labels,\n
+                    datasets: [{\n
+                        label: 'Population Rate (%)',\n
+                        data: chartData.data,\n
+                        backgroundColor: chartData.colors,\n
+                        borderWidth: 1,\n
+                        borderColor: '#fff'\n
+                    }]\n
+                },\n
+                options: {\n
+                    responsive: true,\n
+                    maintainAspectRatio: false,\n
+                    scales: {\n
+                        y: {\n
+                            beginAtZero: true,\n
+                            max: 100,\n
+                            ticks: {\n
+                                callback: function(value) {\n
+                                    return value + '%';\n
+                                }\n
+                            }\n
+                        }\n
+                    },\n
+                    plugins: {\n
+                        legend: {\n
+                            display: false\n
+                        },\n
+                        tooltip: {\n
+                            callbacks: {\n
+                                label: function(context) {\n
+                                    return `Population: ${context.parsed.y.toFixed(1)}%`;\n
+                                }\n
+                            }\n
+                        }\n
+                    }\n
+                }\n
+            });\n
+        } catch (error) {\n
+            console.error('Chart rendering failed:', error);\n
+            this.showChartError('populationBarChart');\n
+        }\n
+    }\n
+\n
+    updateFieldStatistics(fieldPopulation) {\n
+        const tbody = document.getElementById('field-stats-body');\n
+        tbody.innerHTML = '';\n
+\n
+        // Process core fields\n
+        if (fieldPopulation.core_fields) {\n
+            Object.entries(fieldPopulation.core_fields).forEach(([fieldName, stats]) => {\n
+                const row = this.createFieldStatRow(fieldName, 'Core', stats);\n
+                tbody.appendChild(row);\n
+            });\n
+        }\n
+\n
+        // Process template fields\n
+        if (fieldPopulation.template_fields) {\n
+            Object.entries(fieldPopulation.template_fields).forEach(([fieldName, stats]) => {\n
+                const row = this.createFieldStatRow(fieldName, 'Template', stats);\n
+                tbody.appendChild(row);\n
+            });\n
+        }\n
+    }\n
+\n
+    createFieldStatRow(fieldName, category, stats) {\n
+        const row = document.createElement('tr');\n
+        const percentage = stats.percentage;\n
+        \n
+        // Determine status badge and icon\n
+        let statusBadge = '';\n
+        let statusIcon = '';\n
+        if (percentage >= 80) {\n
+            statusBadge = 'badge-success';\n
+            statusIcon = '<i class="fas fa-check-circle"></i>';\n
+        } else if (percentage >= 50) {\n
+            statusBadge = 'badge-warning';\n
+            statusIcon = '<i class="fas fa-exclamation-triangle"></i>';\n
+        } else {\n
+            statusBadge = 'badge-danger';\n
+            statusIcon = '<i class="fas fa-exclamation-circle"></i>';\n
+        }\n
+\n
+        row.innerHTML = `\n
+            <td><strong>${fieldName}</strong></td>\n
+            <td><span class="badge badge-${category === 'Core' ? 'primary' : 'info'}">${category}</span></td>\n
+            <td>${stats.count}</td>\n
+            <td>\n
+                <div class="progress" style="height: 20px;">\n
+                    <div class="progress-bar bg-${percentage >= 80 ? 'success' : (percentage >= 50 ? 'warning' : 'danger')}" \n
+                         role="progressbar" \n
+                         style="width: ${percentage}%"\n
+                         aria-valuenow="${percentage}" \n
+                         aria-valuemin="0" \n
+                         aria-valuemax="100">\n
+                        ${percentage.toFixed(1)}%\n
+                    </div>\n
+                </div>\n
+            </td>\n
+            <td>\n
+                <span class="badge ${statusBadge}">\n
+                    ${statusIcon} ${percentage >= 80 ? 'Good' : (percentage >= 50 ? 'Fair' : 'Low')}\n
+                </span>\n
+            </td>\n
+        `;\n
+\n
+        return row;\n
+    }\n
+\n
+    showError(message, showRetry = false) {\n
+        const errorHtml = `\n
+            <div class="alert alert-danger">\n
+                <i class="fas fa-exclamation-triangle"></i> ${message}\n
+                ${showRetry ? '<button class="btn btn-sm btn-primary ml-3" onclick="retryAnalytics()">Retry</button>' : ''}\n
+            </div>\n
+        `;\n
+        document.getElementById('analytics-container').innerHTML = errorHtml;\n
+        document.getElementById('analytics-container').style.display = 'block';\n
+    }\n
+\n
+    showChartError(chartId) {\n
+        const container = document.getElementById(chartId).parentElement;\n
+        container.innerHTML = '<div class="alert alert-warning">Chart visualization unavailable.</div>';\n
+    }\n
+}\n
+\n
+// Initialize analytics when page loads\n
+let analyticsModule = null;\n
+\n
+document.addEventListener('DOMContentLoaded', function() {\n
+    analyticsModule = new ColumnMappingAnalytics();\n
+    \n
+    // Load analytics if batch is selected\n
+    const analyticsContainer = document.getElementById('analytics-container');\n
+    if (analyticsContainer) {\n
+        const batchId = analyticsContainer.dataset.batchId;\n
+        if (batchId) {\n
+            analyticsModule.initialize(batchId);\n
+        }\n
+    }\n
+});\n
+\n
+// Retry function for error handling\n
+function retryAnalytics() {\n
+    const analyticsContainer = document.getElementById('analytics-container');\n
+    if (analyticsContainer && analyticsModule) {\n
+        const batchId = analyticsContainer.dataset.batchId;\n
+        analyticsModule.initialize(batchId);\n
+    }\n
+}\n
+\n
+// Field Breakdown Modal Module\n
+class FieldBreakdownModal {\n
+    constructor() {\n
+        this.currentResultId = null;\n
+        this.currentFilter = 'all';\n
+        this.breakdownData = null;\n
+    }\n
+\n
+    async loadBreakdown(resultId) {\n
+        this.currentResultId = resultId;\n
+        this.currentFilter = 'all';\n
+\n
+        const loadingEl = document.getElementById(`breakdown-loading-${resultId}`);\n
+        const containerEl = document.getElementById(`breakdown-container-${resultId}`);\n
+        const errorEl = document.getElementById(`breakdown-error-${resultId}`);\n
+\n
+        loadingEl.style.display = 'block';\n
+        containerEl.style.display = 'none';\n
+        errorEl.style.display = 'none';\n
+\n
+        try {\n
+            const response = await fetch(`/api/field-breakdown/${resultId}`);\n
+\n
+            if (!response.ok) {\n
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);\n
+            }\n
+\n
+            const data = await response.json();\n
+\n
+            if (!data || !data.core_fields || Object.keys(data.core_fields).length === 0) {\n
+                this.showEmptyState(resultId);\n
+                return;\n
+            }\n
+\n
+            this.breakdownData = data;\n
+            this.renderFieldTable(resultId, data);\n
+            this.updateFilterCounts(resultId, data);\n
+\n
+            loadingEl.style.display = 'none';\n
+            containerEl.style.display = 'block';\n
+\n
+            document.getElementById(`export-csv-${resultId}`).disabled = false;\n
+        } catch (error) {\n
+            console.error('Failed to load field breakdown:', error);\n
+            this.showError(resultId, 'Unable to load field breakdown. Please try again.');\n
+            loadingEl.style.display = 'none';\n
+            document.getElementById(`export-csv-${resultId}`).disabled = true;\n
+        }\n
+    }\n
+\n
+    renderFieldTable(resultId, data) {\n
+        const coreFieldsBody = document.getElementById(`core-fields-body-${resultId}`);\n
+        const templateFieldsBody = document.getElementById(`template-fields-body-${resultId}`);\n
+        const templateFieldsSection = document.getElementById(`template-fields-section-${resultId}`);\n
+\n
+        coreFieldsBody.innerHTML = '';\n
+        templateFieldsBody.innerHTML = '';\n
+\n
+        if (data.core_fields) {\n
+            Object.entries(data.core_fields).forEach(([fieldName, fieldData]) => {\n
+                const row = this.createFieldRow(fieldName, fieldData);\n
+                coreFieldsBody.appendChild(row);\n
+            });\n
+        }\n
+\n
+        if (data.template_fields && Object.keys(data.template_fields).length > 0) {\n
+            templateFieldsSection.style.display = 'block';\n
+            Object.entries(data.template_fields).forEach(([fieldName, fieldData]) => {\n
+                const row = this.createFieldRow(fieldName, fieldData);\n
+                templateFieldsBody.appendChild(row);\n
+            });\n
+        } else {\n
+            templateFieldsSection.style.display = 'none';\n
+        }\n
+\n
+        this.applyFilter(resultId, this.currentFilter);\n
+    }\n
+\n
+    createFieldRow(fieldName, fieldData) {\n
+        const row = document.createElement('tr');\n
+        row.dataset.status = fieldData.status;\n
+\n
+        const statusBadge = this.getStatusBadge(fieldData.status);\n
+        const confidenceDisplay = fieldData.confidence !== null && fieldData.confidence !== undefined\n
+            ? `<span class="badge badge-${this.getConfidenceBadgeColor(fieldData.confidence)}">${fieldData.confidence.toFixed(1)}%</span>`\n
+            : '<span class="text-muted">N/A</span>';\n
+\n
+        const uploadedClass = this.getValueClass(fieldData.status, true);\n
+        const existingClass = this.getValueClass(fieldData.status, false);\n
+\n
+        row.innerHTML = `\n
+            <td><strong>${this.escapeHtml(fieldName)}</strong></td>\n
+            <td>${statusBadge}</td>\n
+            <td class="${uploadedClass}">${this.escapeHtml(fieldData.uploaded ?? 'N/A')}</td>\n
+            <td class="${existingClass}">${this.escapeHtml(fieldData.existing ?? 'N/A')}</td>\n
+            <td class="text-muted small">${this.escapeHtml(fieldData.uploaded_normalized ?? '-')}</td>\n
+            <td class="text-muted small">${this.escapeHtml(fieldData.existing_normalized ?? '-')}</td>\n
+            <td class="text-center">${confidenceDisplay}</td>\n
+        `;\n
+\n
+        return row;\n
+    }\n
+\n
+    getStatusBadge(status) {\n
+        const badges = {\n
+            'match': '<span class="badge badge-success"><i class="fas fa-check"></i> Match</span>',\n
+            'mismatch': '<span class="badge badge-danger"><i class="fas fa-times"></i> Mismatch</span>',\n
+            'new': '<span class="badge badge-info"><i class="fas fa-plus"></i> New</span>'\n
+        };\n
+        return badges[status] || '<span class="badge badge-secondary">Unknown</span>';\n
+    }\n
+\n
+    getValueClass(status, isUploaded) {\n
+        if (status === 'match') return 'text-success';\n
+        if (status === 'mismatch') return isUploaded ? 'text-danger font-weight-bold' : 'text-muted';\n
+        if (status === 'new') return 'text-info';\n
+        return '';\n
+    }\n
+\n
+    getConfidenceBadgeColor(confidence) {\n
+        if (confidence >= 90) return 'success';\n
+        if (confidence >= 75) return 'primary';\n
+        if (confidence >= 60) return 'warning';\n
+        return 'danger';\n
+    }\n
+\n
+    updateFilterCounts(resultId, data) {\n
+        let allCount = 0;\n
+        let matchedCount = 0;\n
+        let mismatchedCount = 0;\n
+        let newCount = 0;\n
+\n
+        const countFields = (fields) => {\n
+            Object.values(fields).forEach(field => {\n
+                allCount++;\n
+                if (field.status === 'match') matchedCount++;\n
+                else if (field.status === 'mismatch') mismatchedCount++;\n
+                else if (field.status === 'new') newCount++;\n
+            });\n
+        };\n
+\n
+        if (data.core_fields) countFields(data.core_fields);\n
+        if (data.template_fields) countFields(data.template_fields);\n
+\n
+        document.getElementById(`filter-all-count-${resultId}`).textContent = allCount;\n
+        document.getElementById(`filter-matched-count-${resultId}`).textContent = matchedCount;\n
+        document.getElementById(`filter-mismatched-count-${resultId}`).textContent = mismatchedCount;\n
+        document.getElementById(`filter-new-count-${resultId}`).textContent = newCount;\n
+        document.getElementById(`matched-count-${resultId}`).textContent = matchedCount;\n
+        document.getElementById(`total-count-${resultId}`).textContent = allCount;\n
+    }\n
+\n
+    applyFilter(resultId, filterType) {\n
+        this.currentFilter = filterType;\n
+\n
+        const coreFieldsBody = document.getElementById(`core-fields-body-${resultId}`);\n
+        const templateFieldsBody = document.getElementById(`template-fields-body-${resultId}`);\n
+        const noResultsEl = document.getElementById(`no-results-${resultId}`);\n
+\n
+        let visibleCount = 0;\n
+\n
+        const filterRows = (tbody) => {\n
+            if (!tbody) return;\n
+            const rows = tbody.querySelectorAll('tr');\n
+            rows.forEach(row => {\n
+                const status = row.dataset.status;\n
+                const shouldShow = filterType === 'all' ||\n
+                    (filterType === 'matched' && status === 'match') ||\n
+                    (filterType === 'mismatched' && status === 'mismatch') ||\n
+                    (filterType === 'new' && status === 'new');\n
+\n
+                row.style.display = shouldShow ? '' : 'none';\n
+                if (shouldShow) visibleCount++;\n
+            });\n
+        };\n
+\n
+        filterRows(coreFieldsBody);\n
+        filterRows(templateFieldsBody);\n
+\n
+        document.getElementById(`visible-count-${resultId}`).textContent = visibleCount;\n
+\n
+        if (visibleCount === 0) {\n
+            noResultsEl.style.display = 'block';\n
+        } else {\n
+            noResultsEl.style.display = 'none';\n
+        }\n
+\n
+        const filterButtons = document.querySelectorAll(`button[data-result-id="${resultId}"][data-filter]`);\n
+        filterButtons.forEach(btn => {\n
+            if (btn.dataset.filter === filterType) {\n
+                btn.classList.add('active');\n
+            } else {\n
+                btn.classList.remove('active');\n
+            }\n
+        });\n
+    }\n
+\n
+    exportToCSV(resultId) {\n
+        if (!this.breakdownData) {\n
+            alert('No data available to export.');\n
+            return;\n
+        }\n
+\n
+        try {\n
+            const csv = this.generateCSV(this.breakdownData);\n
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });\n
+            const url = window.URL.createObjectURL(blob);\n
+            const link = document.createElement('a');\n
+            link.href = url;\n
+            link.download = this.getFilename(resultId);\n
+            link.click();\n
+            window.URL.revokeObjectURL(url);\n
+        } catch (error) {\n
+            console.error('CSV export failed:', error);\n
+            alert('Export failed. Please try again.');\n
+        }\n
+    }\n
+\n
+    generateCSV(data) {\n
+        const headers = [\n
+            'Field Name',\n
+            'Category',\n
+            'Status',\n
+            'Uploaded Value',\n
+            'Existing Value',\n
+            'Uploaded Normalized',\n
+            'Existing Normalized',\n
+            'Confidence Score'\n
+        ];\n
+\n
+        let csv = headers.map(h => this.escapeCsvValue(h)).join(',') + '\n';\n
+\n
+        const addRows = (fields, category) => {\n
+            Object.entries(fields).forEach(([fieldName, fieldData]) => {\n
+                const row = [\n
+                    fieldName,\n
+                    category,\n
+                    fieldData.status,\n
+                    fieldData.uploaded ?? '',\n
+                    fieldData.existing ?? '',\n
+                    fieldData.uploaded_normalized ?? '',\n
+                    fieldData.existing_normalized ?? '',\n
+                    fieldData.confidence !== null && fieldData.confidence !== undefined ? fieldData.confidence.toFixed(1) : ''\n
+                ];\n
+                csv += row.map(v => this.escapeCsvValue(v)).join(',') + '\n';\n
+            });\n
+        };\n
+\n
+        if (data.core_fields) addRows(data.core_fields, 'core');\n
+        if (data.template_fields) addRows(data.template_fields, 'template');\n
+\n
+        return csv;\n
+    }\n
+\n
+    escapeCsvValue(value) {\n
+        const stringValue = String(value);\n
+        if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {\n
+            return '"' + stringValue.replace(/"/g, '""') + '"';\n
+        }\n
+        return stringValue;\n
+    }\n
+\n
+    getFilename(resultId) {\n
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);\n
+        return `field-breakdown-${resultId}-${timestamp}.csv`;\n
+    }\n
+\n
+    escapeHtml(text) {\n
+        const div = document.createElement('div');\n
+        div.textContent = text;\n
+        return div.innerHTML;\n
+    }\n
+\n
+    showEmptyState(resultId) {\n
+        const loadingEl = document.getElementById(`breakdown-loading-${resultId}`);\n
+        const errorEl = document.getElementById(`breakdown-error-${resultId}`);\n
+        const errorMessageEl = document.getElementById(`error-message-${resultId}`);\n
+\n
+        loadingEl.style.display = 'none';\n
+        errorEl.style.display = 'block';\n
+        errorMessageEl.textContent = 'No field comparison data available for this match result.';\n
+        document.getElementById(`export-csv-${resultId}`).disabled = true;\n
+    }\n
+\n
+    showError(resultId, message) {\n
+        const errorEl = document.getElementById(`breakdown-error-${resultId}`);\n
+        const errorMessageEl = document.getElementById(`error-message-${resultId}`);\n
+\n
+        errorEl.style.display = 'block';\n
+        errorMessageEl.textContent = message;\n
+    }\n
+}\n
+\n
+// Initialize field breakdown modal\n
+const fieldBreakdownModal = new FieldBreakdownModal();\n
+\n
+// Event listeners for modal open\n
+document.addEventListener('DOMContentLoaded', function() {\n
+    document.querySelectorAll('[data-toggle="modal"][data-target^="#breakdownModal"]').forEach(button => {\n
+        button.addEventListener('click', function() {\n
+            const modalId = this.dataset.target.replace('#breakdownModal', '');\n
+            fieldBreakdownModal.loadBreakdown(modalId);\n
+        });\n
+    });\n
+\n
+    document.addEventListener('click', function(e) {\n
+        if (e.target.matches('button[data-filter]')) {\n
+            const resultId = e.target.dataset.resultId;\n
+            const filter = e.target.dataset.filter;\n
+            fieldBreakdownModal.applyFilter(resultId, filter);\n
+        }\n
+\n
+        if (e.target.matches('button[id^="export-csv-"]') || e.target.closest('button[id^="export-csv-"]')) {\n
+            const button = e.target.matches('button[id^="export-csv-"]') ? e.target : e.target.closest('button[id^="export-csv-"]');\n
+            const resultId = button.dataset.resultId;\n
+            fieldBreakdownModal.exportToCSV(resultId);\n
+        }\n
+    });\n
+});\n
+\n
+</script>\n
+</body>\n
+</html>\n
+
+
+  To contain: collapsed-card
+
+  at tests\Unit\UploadControllerTask122Test.php:175
+    171▕         $response = $this->withSession(['column_mapping' => $mappingSummary])
+    172▕             ->get(route('results.index', ['batch_id' => $batch->id]));
+    173▕         
+    174▕         $response->assertStatus(200);
+  ➜ 175▕         $response->assertSee('collapsed-card');
+    176▕         $response->assertSee('data-card-widget', false);
+    177▕     }
+    178▕ 
+    179▕     /**
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\UploadControllerTask91Test > store accepts opt…   
+  Failed asserting that a row in the table [upload_batches] matches the attributes {
+    "file_name": "test.xlsx",
+    "uploaded_by": "Charlene Deckow"
+}.
+
+The table is empty.
+
+  at tests\Unit\UploadControllerTask91Test.php:82
+     78▕             'template_id' => $template->id,
+     79▕         ]);
+     80▕ 
+     81▕         $response->assertRedirect();
+  ➜  82▕         $this->assertDatabaseHas('upload_batches', [
+     83▕             'file_name' => 'test.xlsx',
+     84▕             'uploaded_by' => $this->user->name,
+     85▕         ]);
+     86▕     }
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\UploadControllerTask91Test > store works witho…   
+  Failed asserting that a row in the table [upload_batches] matches the attributes {
+    "file_name": "test.xlsx"
+}.
+
+The table is empty.
+
+  at tests\Unit\UploadControllerTask91Test.php:104
+    100▕             'file' => $file,
+    101▕         ]);
+    102▕ 
+    103▕         $response->assertRedirect();
+  ➜ 104▕         $this->assertDatabaseHas('upload_batches', [
+    105▕             'file_name' => 'test.xlsx',
+    106▕         ]);
+    107▕     }
+    108▕
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\UploadControllerTask91Test > store rejects tem…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Unit\UploadControllerTask91Test.php:170
+    166▕             'file' => $file,
+    167▕             'template_id' => $template->id,
+    168▕         ]);
+    169▕ 
+  ➜ 170▕         $response->assertRedirect(route('upload.index'));
+    171▕         $response->assertSessionHas('error', 'Template not found or you do not have permission to use it.');
+    172▕     }
+    173▕ 
+    174▕     /**
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\UploadControllerTask91Test > store returns jso…   
+  Expected response status code [404] but received 422.
+Failed asserting that 422 is identical to 404.
+
+The following errors occurred during the last request:
+
+{
+    "message": "The file failed to upload.",
+    "errors": {
+        "file": [
+            "The file failed to upload."
+        ]
+    }
+}
+
+  at tests\Unit\UploadControllerTask91Test.php:198
+    194▕                 'file' => $file,
+    195▕                 'template_id' => $template->id,
+    196▕             ]);
+    197▕ 
+  ➜ 198▕         $response->assertStatus(404);
+    199▕         $response->assertJson([
+    200▕             'success' => false,
+    201▕             'error' => 'Template not found or you do not have permission to use it.',
+    202▕         ]);
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\UploadControllerTask91Test > record import rec…   
+  Failed asserting that null is not null.
+
+  at tests\Unit\UploadControllerTask91Test.php:235
+    231▕         $response->assertRedirect();
+    232▕         
+    233▕         // Verify batch was created
+    234▕         $batch = UploadBatch::where('file_name', 'test.xlsx')->first();
+  ➜ 235▕         $this->assertNotNull($batch);
+    236▕     }
+    237▕ 
+    238▕     /**
+    239▕      * Test RecordImport works without template (null template)
+
+  1   tests\Unit\UploadControllerTask91Test.php:235
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\UploadControllerTask91Test > record import wor…   
+  Failed asserting that null is not null.
+
+  at tests\Unit\UploadControllerTask91Test.php:257
+    253▕         $response->assertRedirect();
+    254▕         
+    255▕         // Verify batch was created (status may be FAILED due to fake file, but that's OK)
+    256▕         $batch = UploadBatch::where('file_name', 'test.xlsx')->first();
+  ➜ 257▕         $this->assertNotNull($batch);
+    258▕     }
+    259▕ }
+    260▕
+
+  1   tests\Unit\UploadControllerTask91Test.php:257
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TemplateControllerTest > show returns 404 f…   
+  Unable to find JSON: 
+
+[{
+    "success": false,
+    "message": "Template not found"
+}]
+
+within response JSON:
+
+[{
+    "success": false,
+    "message": "Template not found or you do not have permission to access it."
+}].
+
+
+Failed asserting that an array has the subset Array &0 [
+    'success' => false,
+    'message' => 'Template not found',
+].
+--- Expected
++++ Actual
+@@ @@
+ array (
+   'success' => false,
+-  'message' => 'Template not found',
++  'message' => 'Template not found or you do not have permission to access it.',
+ )
+
+  at tests\Feature\TemplateControllerTest.php:173
+    169▕             ->actingAs($user)
+    170▕             ->getJson(route('api.templates.show', 999));
+    171▕ 
+    172▕         $response->assertNotFound()
+  ➜ 173▕             ->assertJson([
+    174▕                 'success' => false,
+    175▕                 'message' => 'Template not found',
+    176▕             ]);
+    177▕     }
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TemplateControllerTest > api endpoint rejec…   
+  Unable to find JSON: 
+
+[{
+    "success": false,
+    "message": "Field name already exists in this template"
+}]
+
+within response JSON:
+
+[{
+    "success": false,
+    "message": "A field named 'department' already exists in this template. Please use a different name."
+}].
+
+
+Failed asserting that an array has the subset Array &0 [
+    'success' => false,
+    'message' => 'Field name already exists in this template',
+].
+--- Expected
++++ Actual
+@@ @@
+ array (
+   'success' => false,
+-  'message' => 'Field name already exists in this template',
++  'message' => 'A field named \'department\' already exists in this template. Please use a different name.',
+ )
+
+  at tests\Feature\TemplateControllerTest.php:1064
+    1060▕             ]);
+    1061▕ 
+    1062▕         // Should return error
+    1063▕         $response2->assertStatus(422)
+  ➜ 1064▕             ->assertJson([
+    1065▕                 'success' => false,
+    1066▕                 'message' => 'Field name already exists in this template',
+    1067▕             ]);
+    1068▕
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TemplateControllerTest > update field name…    
+  Unable to find JSON: 
+
+[{
+    "success": false,
+    "message": "Field name already exists in this template"
+}]
+
+within response JSON:
+
+[{
+    "success": false,
+    "message": "A field named 'department' already exists in this template. Please use a different name."
+}].
+
+
+Failed asserting that an array has the subset Array &0 [
+    'success' => false,
+    'message' => 'Field name already exists in this template',
+].
+--- Expected
++++ Actual
+@@ @@
+ array (
+   'success' => false,
+-  'message' => 'Field name already exists in this template',
++  'message' => 'A field named \'department\' already exists in this template. Please use a different name.',
+ )
+
+  at tests\Feature\TemplateControllerTest.php:1156
+    1152▕             ]);
+    1153▕ 
+    1154▕         // Should return error
+    1155▕         $response->assertStatus(422)
+  ➜ 1156▕             ->assertJson([
+    1157▕                 'success' => false,
+    1158▕                 'message' => 'Field name already exists in this template',
+    1159▕             ]);
+    1160▕
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadTest > valid file can be uploaded        
+  Failed asserting that a row in the table [upload_batches] matches the attributes {
+    "file_name": "test.xlsx",
+    "uploaded_by": "Dalton Blanda IV"
+}.
+
+The table is empty.
+
+  at tests\Feature\UploadTest.php:51
+     47▕         // In a real scenario with valid Excel file, it would redirect to results
+     48▕         $response->assertRedirect();
+     49▕         
+     50▕         // Check that a batch was created
+  ➜  51▕         $this->assertDatabaseHas('upload_batches', [
+     52▕             'file_name' => 'test.xlsx',
+     53▕             'uploaded_by' => $user->name,
+     54▕         ]);
+     55▕     }
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload without templ…   
+  Batch was not created
+Failed asserting that null is not null.
+
+  at tests\Feature\UploadValidationTest.php:92
+     88▕         $response->assertSessionMissing('validation_errors');
+     89▕         
+     90▕         // Verify batch was created
+     91▕         $batch = \App\Models\UploadBatch::where('file_name', 'test.xlsx')->first();
+  ➜  92▕         $this->assertNotNull($batch, 'Batch was not created');
+     93▕         
+     94▕         // If batch failed, output the error for debugging
+     95▕         if ($batch->status === 'FAILED') {
+     96▕             // Check logs or provide more context
+
+  1   tests\Feature\UploadValidationTest.php:92
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload without templ…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:144
+    140▕                 'file' => $file,
+    141▕             ]);
+    142▕ 
+    143▕         // Verify validation fails - redirects back to upload page
+  ➜ 144▕         $response->assertRedirect(route('upload.index'));
+    145▕         $response->assertSessionHas('error', 'File validation failed');
+    146▕         $response->assertSessionHas('validation_errors');
+    147▕         
+    148▕         // Verify error message indicates missing required column
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload without templ…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:174
+    170▕             ->post(route('upload.store'), [
+    171▕                 'file' => $file,
+    172▕             ]);
+    173▕ 
+  ➜ 174▕         $response->assertRedirect(route('upload.index'));
+    175▕         $response->assertSessionHas('validation_errors');
+    176▕         
+    177▕         $errors = session('validation_errors');
+    178▕         $this->assertContains('Unexpected column: UnknownColumn', $errors);
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload without templ…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:208
+    204▕                 'file' => $file,
+    205▕             ]);
+    206▕ 
+    207▕         // Verify validation fails - redirects back to upload page
+  ➜ 208▕         $response->assertRedirect(route('upload.index'));
+    209▕         $response->assertSessionHas('error', 'File validation failed');
+    210▕         $response->assertSessionHas('validation_errors');
+    211▕         
+    212▕         // Verify error message indicates unexpected column
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload with template…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:354
+    350▕                 'template_id' => $template->id,
+    351▕             ]);
+    352▕ 
+    353▕         // Verify validation fails - redirects back to upload page
+  ➜ 354▕         $response->assertRedirect(route('upload.index'));
+    355▕         $response->assertSessionHas('error', 'File validation failed');
+    356▕         $response->assertSessionHas('validation_errors');
+    357▕         
+    358▕         // Verify error message indicates missing template fields
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload with template…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:433
+    429▕                 'file' => $file,
+    430▕                 'template_id' => $template->id,
+    431▕             ]);
+    432▕ 
+  ➜ 433▕         $response->assertRedirect(route('upload.index'));
+    434▕         $response->assertSessionHas('validation_errors');
+    435▕         
+    436▕         $errors = session('validation_errors');
+    437▕         // Case-insensitive check
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > validation info is p…   
+  Session is missing expected key [validation_info].
+Failed asserting that false is true.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+  at tests\Feature\UploadValidationTest.php:472
+    468▕             ->post(route('upload.store'), [
+    469▕                 'file' => $file,
+    470▕             ]);
+    471▕ 
+  ➜ 472▕         $response->assertSessionHas('validation_info');
+    473▕         
+    474▕         $info = session('validation_info');
+    475▕         $this->assertArrayHasKey('expected_columns', $info);
+    476▕         $this->assertArrayHasKey('found_columns', $info);
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > user cannot use anot…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:524
+    520▕                 'file' => $file,
+    521▕                 'template_id' => $template->id,
+    522▕             ]);
+    523▕ 
+  ➜ 524▕         $response->assertRedirect(route('upload.index'));
+    525▕         $response->assertSessionHas('error', 'Template not found or you do not have permission to use it.');
+    526▕     }
+    527▕ 
+    528▕     public function test_api_upload_returns_json_validation_errors()
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > api upload returns j…   
+  Unable to find JSON: 
+
+[{
+    "success": false,
+    "error": "File validation failed"
+}]
+
+within response JSON:
+
+[{
+    "message": "The file failed to upload.",
+    "errors": {
+        "file": [
+            "The file failed to upload."
+        ]
+    }
+}].
+
+
+Failed asserting that an array has the subset Array &0 [
+    'success' => false,
+    'error' => 'File validation failed',
+].
+--- Expected
++++ Actual
+@@ @@
+       0 => 'The file failed to upload.',
+     ),
+   ),
+-  'success' => false,
+-  'error' => 'File validation failed',
+ )
+
+  at tests\Feature\UploadValidationTest.php:542
+    538▕                 'file' => $file,
+    539▕             ]);
+    540▕ 
+    541▕         $response->assertStatus(422);
+  ➜ 542▕         $response->assertJson([
+    543▕             'success' => false,
+    544▕             'error' => 'File validation failed',
+    545▕         ]);
+    546▕         $response->assertJsonStructure([
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload with template…   
+  Batch should be created
+Failed asserting that null is not null.
+
+  at tests\Feature\UploadValidationTest.php:675
+    671▕         $response->assertSessionMissing('error');
+    672▕ 
+    673▕         // Verify file is processed successfully
+    674▕         $batch = \App\Models\UploadBatch::where('file_name', 'test.xlsx')->first();
+  ➜ 675▕         $this->assertNotNull($batch, 'Batch should be created');
+    676▕         $this->assertEquals('COMPLETED', $batch->status, 'Batch should complete successfully');
+    677▕ 
+    678▕         // Verify redirects to results page
+    679▕         $response->assertRedirect(route('results.index', ['batch_id' => $batch->id]));
+
+  1   tests\Feature\UploadValidationTest.php:675
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload with template…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:773
+    769▕                 'template_id' => $template->id,
+    770▕             ]);
+    771▕ 
+    772▕         // Verify validation fails - redirects back to upload page
+  ➜ 773▕         $response->assertRedirect(route('upload.index'));
+    774▕         $response->assertSessionHas('error', 'File validation failed');
+    775▕         $response->assertSessionHas('validation_errors');
+    776▕         
+    777▕         // Verify error message indicates unexpected columns
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > upload with template…   
+  Batch should be created
+Failed asserting that null is not null.
+
+  at tests\Feature\UploadValidationTest.php:925
+    921▕         $response->assertSessionMissing('validation_errors');
+    922▕ 
+    923▕         // Verify batch was created
+    924▕         $batch = \App\Models\UploadBatch::where('file_name', 'test.xlsx')->first();
+  ➜ 925▕         $this->assertNotNull($batch, 'Batch should be created');
+    926▕ 
+    927▕         // Verify template fields can validate values
+    928▕         $employeeIdField = $template->fields->where('field_name', 'employee_id')->first();
+    929▕         $hireDateField = $template->fields->where('field_name', 'hire_date')->first();
+
+  1   tests\Feature\UploadValidationTest.php:925
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > complete workflow cr…   
+  Batch should be created
+Failed asserting that null is not null.
+
+  at tests\Feature\UploadValidationTest.php:1074
+    1070▕         $response->assertSessionMissing('error', 'No error should be present');
+    1071▕ 
+    1072▕         // Step 6: Verify batch is created and processed
+    1073▕         $batch = \App\Models\UploadBatch::where('file_name', 'test.xlsx')->first();
+  ➜ 1074▕         $this->assertNotNull($batch, 'Batch should be created');
+    1075▕         $this->assertEquals('COMPLETED', $batch->status, 'Batch should complete successfully');
+    1076▕         $this->assertEquals($this->user->name, $batch->uploaded_by);
+    1077▕ 
+    1078▕         // Verify redirects to results page
+
+  1   tests\Feature\UploadValidationTest.php:1074
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > error handling missi…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1161
+    1157▕                 'file' => $file,
+    1158▕             ]);
+    1159▕ 
+    1160▕         // Verify redirects back with error
+  ➜ 1161▕         $response->assertRedirect(route('upload.index'));
+    1162▕         $response->assertSessionHas('error', 'File validation failed');
+    1163▕         
+    1164▕         // Verify validation errors are present and clear
+    1165▕         $response->assertSessionHas('validation_errors');
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > error handling extra…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1217
+    1213▕                 'file' => $file,
+    1214▕             ]);
+    1215▕ 
+    1216▕         // Verify redirects back with error
+  ➜ 1217▕         $response->assertRedirect(route('upload.index'));
+    1218▕         $response->assertSessionHas('error', 'File validation failed');
+    1219▕         
+    1220▕         // Verify validation errors list all extra columns
+    1221▕         $response->assertSessionHas('validation_errors');
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > error handling misna…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1269
+    1265▕                 'file' => $file,
+    1266▕             ]);
+    1267▕ 
+    1268▕         // Verify redirects back with error
+  ➜ 1269▕         $response->assertRedirect(route('upload.index'));
+    1270▕         $response->assertSessionHas('error', 'File validation failed');
+    1271▕         
+    1272▕         // Verify validation errors indicate unexpected columns
+    1273▕         $response->assertSessionHas('validation_errors');
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > error handling templ…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1352
+    1348▕                 'template_id' => $template->id,
+    1349▕             ]);
+    1350▕ 
+    1351▕         // Verify redirects back with error
+  ➜ 1352▕         $response->assertRedirect(route('upload.index'));
+    1353▕         $response->assertSessionHas('error', 'File validation failed');
+    1354▕         
+    1355▕         // Verify clear error messages for missing template fields
+    1356▕         $response->assertSessionHas('validation_errors');
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > error handling templ…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1424
+    1420▕                 'template_id' => $template->id,
+    1421▕             ]);
+    1422▕ 
+    1423▕         // Verify redirects back with error
+  ➜ 1424▕         $response->assertRedirect(route('upload.index'));
+    1425▕         $response->assertSessionHas('error', 'File validation failed');
+    1426▕         
+    1427▕         // Verify clear error messages for extra columns
+    1428▕         $response->assertSessionHas('validation_errors');
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > error handling retur…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1512
+    1508▕                 'template_id' => $template->id,
+    1509▕             ]);
+    1510▕ 
+    1511▕         // Verify redirects back with error
+  ➜ 1512▕         $response->assertRedirect(route('upload.index'));
+    1513▕         $response->assertSessionHas('error', 'File validation failed');
+    1514▕         
+    1515▕         // Verify ALL errors are returned at once
+    1516▕         $response->assertSessionHas('validation_errors');
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > error handling witho…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1583
+    1579▕                 // No template_id - should validate against core fields only
+    1580▕             ]);
+    1581▕ 
+    1582▕         // Verify redirects back with error
+  ➜ 1583▕         $response->assertRedirect(route('upload.index'));
+    1584▕         $response->assertSessionHas('error', 'File validation failed');
+    1585▕         
+    1586▕         // Verify validation errors for core fields
+    1587▕         $response->assertSessionHas('validation_errors');
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > error handling provi…   
+  Failed asserting that null matches expected 'File validation failed'.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+  at tests\Feature\UploadValidationTest.php:1641
+    1637▕                 'file' => $file,
+    1638▕             ]);
+    1639▕ 
+    1640▕         // Verify error message is clear
+  ➜ 1641▕         $response->assertSessionHas('error', 'File validation failed');
+    1642▕         
+    1643▕         // Verify validation errors are specific and actionable
+    1644▕         $errors = session('validation_errors');
+    1645▕
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > backward compatibili…   
+  Batch should be created for legacy template upload
+Failed asserting that null is not null.
+
+  at tests\Feature\UploadValidationTest.php:1813
+    1809▕             'Legacy template upload should have no errors');
+    1810▕ 
+    1811▕         // Verify batch was created and processed successfully
+    1812▕         $batch = \App\Models\UploadBatch::where('file_name', 'test.xlsx')->first();
+  ➜ 1813▕         $this->assertNotNull($batch, 
+    1814▕             'Batch should be created for legacy template upload');
+    1815▕         $this->assertEquals('COMPLETED', $batch->status, 
+    1816▕             'Batch should complete successfully with legacy template');
+    1817▕
+
+  1   tests\Feature\UploadValidationTest.php:1813
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > backward compatibili…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1908
+    1904▕                 'template_id' => $legacyTemplate->id,
+    1905▕             ]);
+    1906▕ 
+    1907▕         // Verify validation fails due to extra columns
+  ➜ 1908▕         $response->assertRedirect(route('upload.index'));
+    1909▕         $response->assertSessionHas('error', 'File validation failed');
+    1910▕         $response->assertSessionHas('validation_errors');
+    1911▕ 
+    1912▕         $errors = session('validation_errors');
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\UploadValidationTest > backward compatibili…   
+  Failed asserting that two strings are equal.
+
+The following errors occurred during the last request:
+
+The file failed to upload.
+
+--- Expected
++++ Actual
+@@ @@
+-'http://localhost/upload'
++'http://localhost'
+
+  at tests\Feature\UploadValidationTest.php:1987
+    1983▕                 'template_id' => $legacyTemplate->id,
+    1984▕             ]);
+    1985▕ 
+    1986▕         // Verify validation fails due to missing columns
+  ➜ 1987▕         $response->assertRedirect(route('upload.index'));
+    1988▕         $response->assertSessionHas('error', 'File validation failed');
+    1989▕         $response->assertSessionHas('validation_errors');
+    1990▕ 
+    1991▕         $errors = session('validation_errors');
+
+
+  Tests:    35 failed, 1 skipped, 388 passed (14176 assertions)
+  Duration: 35.96s
 

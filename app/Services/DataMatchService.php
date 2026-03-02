@@ -56,7 +56,7 @@ class DataMatchService
      * Find match for single uploaded record (legacy support)
      * Returns: ['status' => string, 'confidence' => float, 'matched_id' => ?string, 'field_breakdown' => ?array]
      */
-    public function findMatch(array $uploadedData): array
+    public function findMatch(array $uploadedData, ?int $templateId = null): array
     {
         // Support both old format (flat array) and new format (structured)
         if (isset($uploadedData['core_fields'])) {
@@ -72,14 +72,14 @@ class DataMatchService
         // but preserve newly inserted records from current batch
         $this->refreshCandidates(collect([$normalized]));
 
-        return $this->findMatchFromCache($normalized, $uploadedData);
+        return $this->findMatchFromCache($normalized, $uploadedData, $templateId);
     }
     
     /**
      * Find match from cached candidates using rule chain
      * Now uses unified scoring with field breakdown
      */
-    protected function findMatchFromCache(array $normalized, array $uploadedData): array
+    protected function findMatchFromCache(array $normalized, array $uploadedData, ?int $templateId = null): array
     {
         foreach ($this->rules as $rule) {
             $result = $rule->match($normalized, $this->candidateCache);
@@ -97,7 +97,7 @@ class DataMatchService
                     ];
                 }
                 
-                $scoreResult = $this->confidenceScoreService->calculateUnifiedScore($scoringData, $matchedRecord);
+                $scoreResult = $this->confidenceScoreService->calculateUnifiedScore($scoringData, $matchedRecord, $templateId);
                 
                 return [
                     'status' => $rule->status(),
@@ -109,13 +109,24 @@ class DataMatchService
             }
         }
         
-        // No match found
+        // No match found - generate field breakdown for NEW RECORD
+        $scoringData = $uploadedData;
+        if (!isset($uploadedData['core_fields'])) {
+            $scoringData = [
+                'core_fields' => $uploadedData,
+            ];
+        }
+        
+        // Create a temporary MainSystem record to generate breakdown
+        $tempRecord = new MainSystem();
+        $breakdown = $this->confidenceScoreService->generateBreakdown($scoringData, $tempRecord, $templateId);
+        
         return [
             'status' => 'NEW RECORD',
             'confidence' => 0.0,
             'matched_id' => null,
             'rule' => 'no_match',
-            'field_breakdown' => null,
+            'field_breakdown' => $breakdown,
         ];
     }
     

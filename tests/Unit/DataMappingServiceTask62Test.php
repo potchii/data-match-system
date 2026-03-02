@@ -161,18 +161,6 @@ class DataMappingServiceTask62Test extends TestCase
         $this->assertEquals('middle_name', $result['middle_name']);
     }
 
-        // Core fields
-        $this->assertEquals('uid', $result['regsno']);
-        $this->assertEquals('last_name', $result['surname']);
-        $this->assertEquals('first_name', $result['firstname']);
-        $this->assertEquals('birthday', $result['birthday']);
-        
-        // Dynamic fields
-        $this->assertEquals('department', $result['Department']);
-        $this->assertEquals('position', $result['Position']);
-        $this->assertEquals('employee_status', $result['EmployeeStatus']);
-    }
-
     // ========================================================================
     // Test generate template-ready mapping structure
     // Requirements: 3.1

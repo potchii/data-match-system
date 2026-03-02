@@ -51,11 +51,16 @@ class UploadValidationTest extends TestCase
             $row++;
         }
         
-        $tempFile = tempnam(sys_get_temp_dir(), 'test_excel_');
+        $tempDir = storage_path('app/temp');
+        if (!is_dir($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
+        
+        $tempFile = $tempDir . DIRECTORY_SEPARATOR . 'test_excel_' . uniqid() . '.xlsx';
         $writer = new Xlsx($spreadsheet);
         $writer->save($tempFile);
         
-        return new UploadedFile($tempFile, 'test.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', null, true);
+        return new UploadedFile($tempFile, 'test.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', null, false);
     }
 
     public function test_upload_without_template_accepts_valid_core_fields()
