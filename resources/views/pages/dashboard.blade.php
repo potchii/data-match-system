@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
+                <div class="small-box bg-secondary">
                     <div class="inner">
                         <h3>{{ $totalBatches }}</h3>
                         <p>Total Batches</p>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="col-lg-3 col-6">
-                <div class="small-box bg-primary">
+                <div class="small-box bg-danger">
                     <div class="inner">
                         <h3>{{ $newRecords }}</h3>
                         <p>New Records</p>

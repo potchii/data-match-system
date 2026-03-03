@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="small-box bg-primary">
+                                <div class="small-box bg-danger">
                                     <div class="inner">
                                         <h3>{{ $batchStats['new_records'] }}</h3>
                                         <p>New Records ({{ $batchStats['total_rows'] > 0 ? round(($batchStats['new_records'] / $batchStats['total_rows']) * 100, 1) : 0 }}%)</p>
@@ -284,7 +284,7 @@
                                         @elseif($result->match_status === 'POSSIBLE DUPLICATE')
                                             <span class="badge badge-warning">{{ $result->match_status }}</span>
                                         @else
-                                            <span class="badge badge-info">{{ $result->match_status }}</span>
+                                            <span class="badge badge-danger">{{ $result->match_status }}</span>
                                         @endif
                                     </td>
                                     <td>

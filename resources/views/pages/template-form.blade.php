@@ -52,7 +52,7 @@
                                 <div id="mappings-container">
                                     @php
                                         $coreFields = [
-                                            'uid' => 'uid',
+                                            'uid' => 'regs_no',
                                             'last_name' => 'last_name',
                                             'first_name' => 'first_name',
                                             'middle_name' => 'middle_name',
@@ -66,7 +66,7 @@
                                             'status' => 'status',
                                         ];
                                         
-                                        $requiredFields = ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
+                                        $requiredFields = ['regs_no', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
                                         
                                         if(isset($template) && $template->mappings) {
                                             $mappings = $template->mappings;
@@ -340,7 +340,7 @@ $(document).ready(function() {
 
     // Form validation
     $('#templateForm').on('submit', function(e) {
-        const requiredFields = ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
+        const requiredFields = ['regs_no', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
         
         // Get all system fields that are mapped
         const mappedSystemFields = [];

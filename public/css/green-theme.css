@@ -1,0 +1,434 @@
+/* Light Green Theme for Data Match System */
+
+:root {
+    --primary-green: #4CAF50;
+    --primary-green-dark: #388E3C;
+    --primary-green-light: #81C784;
+    --primary-green-lighter: #C8E6C9;
+    --accent-green: #66BB6A;
+    --white: #ffffff;
+    --light-gray: #f5f5f5;
+    --border-gray: #e0e0e0;
+    --text-dark: #212529;
+    --text-muted: #757575;
+}
+
+/* Body - Light background */
+body {
+    background-color: var(--light-gray) !important;
+    color: var(--text-dark) !important;
+}
+
+/* Navbar - Light green */
+.main-header.navbar {
+    background-color: var(--primary-green) !important;
+    border-bottom: none;
+}
+
+.main-header .navbar-nav .nav-link {
+    color: var(--white) !important;
+}
+
+.main-header .navbar-nav .nav-link:hover {
+    background-color: var(--primary-green-dark) !important;
+}
+
+/* Sidebar - White with green accents */
+.main-sidebar {
+    background-color: var(--white) !important;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar {
+    background-color: var(--white) !important;
+}
+
+/* Sidebar brand */
+.brand-link {
+    background-color: var(--primary-green) !important;
+    color: var(--white) !important;
+    border-bottom: 1px solid var(--primary-green-dark);
+}
+
+.brand-link:hover {
+    background-color: var(--primary-green-dark) !important;
+}
+
+/* Sidebar menu items */
+.nav-sidebar .nav-item .nav-link {
+    color: var(--text-dark) !important;
+}
+
+.nav-sidebar .nav-item .nav-link:hover {
+    background-color: var(--primary-green-lighter) !important;
+    color: var(--primary-green-dark) !important;
+}
+
+.nav-sidebar .nav-item .nav-link.active {
+    background-color: var(--primary-green) !important;
+    color: var(--white) !important;
+}
+
+.nav-sidebar .nav-item .nav-link .nav-icon {
+    color: var(--accent-green);
+}
+
+.nav-sidebar .nav-item .nav-link:hover .nav-icon {
+    color: var(--primary-green-dark);
+}
+
+.nav-sidebar .nav-item .nav-link.active .nav-icon {
+    color: var(--white) !important;
+}
+
+/* Content wrapper - Light background */
+.content-wrapper {
+    background-color: var(--light-gray) !important;
+}
+
+/* Cards - White with green accents */
+.card {
+    background-color: var(--white) !important;
+    border: 1px solid var(--border-gray);
+    border-top: 3px solid var(--primary-green);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    background-color: var(--white) !important;
+    border-bottom: 1px solid var(--border-gray);
+    color: var(--text-dark);
+}
+
+.card-outline.card-info {
+    border-top-color: var(--accent-green);
+}
+
+/* Buttons - Light green */
+.btn-primary {
+    background-color: var(--primary-green) !important;
+    border-color: var(--primary-green) !important;
+    color: var(--white) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--primary-green-dark) !important;
+    border-color: var(--primary-green-dark) !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary-green) !important;
+    border-color: var(--primary-green) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-green) !important;
+    color: var(--white) !important;
+}
+
+.btn-secondary {
+    background-color: #9E9E9E !important;
+    border-color: #9E9E9E !important;
+}
+
+/* Info boxes - Light green theme */
+.info-box.bg-info {
+    background-color: var(--accent-green) !important;
+}
+
+.small-box.bg-info {
+    background-color: var(--accent-green) !important;
+}
+
+.small-box.bg-primary {
+    background-color: var(--primary-green) !important;
+}
+
+/* Links */
+a {
+    color: var(--primary-green);
+}
+
+a:hover {
+    color: var(--primary-green-dark);
+}
+
+/* Pagination */
+.page-item.active .page-link {
+    background-color: var(--primary-green) !important;
+    border-color: var(--primary-green) !important;
+}
+
+.page-link {
+    color: var(--primary-green);
+}
+
+.page-link:hover {
+    color: var(--primary-green-dark);
+    background-color: var(--primary-green-lighter);
+}
+
+/* Form controls */
+.form-control {
+    background-color: var(--white);
+    border-color: var(--border-gray);
+    color: var(--text-dark);
+}
+
+.form-control:focus {
+    background-color: var(--white);
+    border-color: var(--primary-green);
+    color: var(--text-dark);
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+/* Input groups */
+.input-group-text {
+    background-color: var(--light-gray);
+    border-color: var(--border-gray);
+    color: var(--text-dark);
+}
+
+/* Spinners */
+.spinner-border.text-primary {
+    color: var(--primary-green) !important;
+}
+
+/* Tables - Light theme */
+.table {
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+
+.table thead th {
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+    border-color: var(--border-gray);
+}
+
+.table td,
+.table th {
+    border-color: var(--border-gray);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--primary-green-lighter);
+}
+
+.table-bordered {
+    border-color: var(--border-gray);
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--white);
+    border-top: 2px solid var(--primary-green);
+    color: var(--text-dark);
+}
+
+/* Badges - Status colors */
+.badge-primary {
+    background-color: var(--primary-green) !important;
+}
+
+.badge-success {
+    background-color: var(--primary-green) !important;
+}
+
+/* Progress bars */
+.progress-bar {
+    background-color: var(--primary-green);
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-green-dark);
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+    background-color: var(--white);
+    border: 1px solid var(--border-gray);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    color: var(--text-dark);
+}
+
+.dropdown-item:hover {
+    background-color: var(--primary-green-lighter);
+    color: var(--primary-green-dark);
+}
+
+/* Modal - Light theme */
+.modal-content {
+    background-color: var(--white);
+    border: 1px solid var(--border-gray);
+    color: var(--text-dark);
+}
+
+.modal-header {
+    background-color: var(--primary-green);
+    border-bottom: none;
+    color: var(--white);
+}
+
+.modal-header .close {
+    color: var(--white);
+    opacity: 0.9;
+    text-shadow: none;
+}
+
+.modal-header .close:hover {
+    opacity: 1;
+}
+
+.modal-footer {
+    background-color: var(--light-gray);
+    border-top: 1px solid var(--border-gray);
+}
+
+.modal-body {
+    background-color: var(--white);
+}
+
+/* Alerts - Light theme */
+.alert {
+    border: 1px solid var(--border-gray);
+}
+
+.alert-info {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-color: var(--accent-green);
+    color: var(--primary-green-dark);
+}
+
+.alert-success {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-color: var(--primary-green);
+    color: var(--primary-green-dark);
+}
+
+/* Chart containers */
+.chart-container {
+    background-color: var(--white);
+}
+
+/* Custom file input */
+.custom-file-label {
+    background-color: var(--white);
+    border-color: var(--border-gray);
+    color: var(--text-dark);
+}
+
+.custom-file-label::after {
+    background-color: var(--primary-green);
+    color: var(--white);
+}
+
+/* Text colors */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-dark);
+}
+
+/* Small boxes - Light theme */
+.small-box {
+    color: var(--white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.small-box .icon {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Info boxes - Light theme */
+.info-box {
+    background-color: var(--white);
+    color: var(--text-dark);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    background-color: var(--white);
+}
+
+.breadcrumb-item.active {
+    color: var(--text-muted);
+}
+
+/* Content header */
+.content-header {
+    color: var(--text-dark);
+}
+
+.content-header h1 {
+    color: var(--text-dark);
+}
+
+/* Card tools */
+.card-tools .btn {
+    color: var(--text-dark);
+}
+
+.card-tools .btn:hover {
+    color: var(--primary-green);
+}
+
+/* Select dropdowns */
+select.form-control {
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+
+select.form-control option {
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+
+/* Collapsed card indicator */
+.collapsed-card .card-header {
+    border-bottom: none;
+}
+
+
+/* Dashboard metric widgets - White text */
+.small-box .inner h3 {
+    color: var(--white) !important;
+}
+
+.small-box .inner p {
+    color: var(--white) !important;
+}

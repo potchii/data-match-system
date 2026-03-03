@@ -115,7 +115,7 @@ class TemplateController extends Controller
         }
 
         // Validate required core fields are present
-        $requiredFields = ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
+        $requiredFields = ['regs_no', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
         $mappedSystemFields = array_values($mappings);
         $missingRequired = array_diff($requiredFields, $mappedSystemFields);
         
@@ -259,7 +259,7 @@ class TemplateController extends Controller
         }
 
         // Validate required core fields are present
-        $requiredFields = ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
+        $requiredFields = ['regs_no', 'last_name', 'first_name', 'birthday', 'gender', 'barangay'];
         $mappedSystemFields = array_values($mappings);
         $missingRequired = array_diff($requiredFields, $mappedSystemFields);
         

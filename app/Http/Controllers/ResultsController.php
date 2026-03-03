@@ -36,7 +36,7 @@ class ResultsController extends Controller
             $query->where('match_status', $request->status);
         }
         
-        $results = $query->orderBy('created_at', 'desc')->paginate(20);
+        $results = $query->orderBy('id', 'asc')->paginate(20);
         $batches = UploadBatch::orderBy('id', 'desc')->get();
         
         // Calculate statistics for the current batch if filtering by batch_id

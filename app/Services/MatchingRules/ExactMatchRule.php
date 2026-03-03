@@ -52,4 +52,3 @@ class ExactMatchRule extends MatchRule
         ] : null;
     }
 }
-
