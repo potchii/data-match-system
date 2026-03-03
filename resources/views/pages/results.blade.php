@@ -269,9 +269,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($results as $result)
+                                @forelse($results as $index => $result)
                                 <tr>
-                                    <td>{{ $result->id }}</td>
+                                    <td>{{ $results->firstItem() + $index }}</td>
                                     <td>{{ $result->batch_id }}</td>
                                     <td>
                                         <strong>{{ $result->uploaded_first_name }} {{ $result->uploaded_middle_name }} {{ $result->uploaded_last_name }}</strong>
