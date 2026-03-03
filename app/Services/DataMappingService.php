@@ -204,6 +204,7 @@ class DataMappingService
 
     /**
      * Normalize string: trim whitespace and proper case
+     * Treats null-like strings (NULL, N/A, NA, etc.) as empty values
      */
     protected function normalizeString(?string $value): ?string
     {
@@ -211,7 +212,15 @@ class DataMappingService
             return null;
         }
 
-        return ucwords(strtolower(trim($value)));
+        $trimmed = trim($value);
+        
+        // Treat common null-like strings as empty
+        $nullLikeValues = ['null', 'NULL', 'Null', 'n/a', 'N/A', 'na', 'NA', 'none', 'NONE', 'None', '-', '--', '---'];
+        if (in_array($trimmed, $nullLikeValues, true)) {
+            return null;
+        }
+
+        return ucwords(strtolower($trimmed));
     }
 
     /**

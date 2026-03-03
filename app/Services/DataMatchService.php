@@ -24,7 +24,7 @@ class DataMatchService
         // Initialize matching rules in priority order
         $this->rules = [
             new ExactMatchRule(),           // 100% - First + Last + Middle + DOB
-            new PartialMatchWithDobRule(),  // 90%  - First + Last + DOB (no middle name)
+            new PartialMatchWithDobRule(),  // 100% - First + Last + DOB (no middle name)
             new FullNameMatchRule(),        // 80%  - First + Last + Middle (no DOB required)
             new FuzzyNameMatchRule(),       // 70%  - Similar name (fuzzy matching)
         ];
@@ -103,7 +103,8 @@ class DataMatchService
                 // Map confidence to status
                 $status = $this->confidenceScoreService->mapConfidenceToStatus((int) $confidence);
                 
-                // Generate field breakdown for display purposes only
+                // Generate field breakdown for display purposes
+                // Always use unified scoring breakdown for consistency in UI
                 $scoringData = $uploadedData;
                 if (!isset($uploadedData['core_fields'])) {
                     $scoringData = [
@@ -118,18 +119,31 @@ class DataMatchService
                     'confidence' => $confidence,
                     'matched_id' => $matchedRecord->uid,
                     'rule' => $result['rule'],
-                    'field_breakdown' => $result['field_breakdown'] ?? $scoreResult['breakdown'],
+                    'field_breakdown' => $scoreResult['breakdown'], // Always use unified breakdown
                 ];
             }
         }
         
-        // No match found - NEW RECORD has no comparison data
+        // No match found - generate field breakdown for NEW RECORD
+        // NEW RECORD still needs breakdown to show what data was uploaded
+        $scoringData = $uploadedData;
+        if (!isset($uploadedData['core_fields'])) {
+            $scoringData = [
+                'core_fields' => $uploadedData,
+            ];
+        }
+        
+        // Create a temporary empty MainSystem record to generate breakdown
+        // This shows all uploaded fields as "new" since there's no existing record
+        $tempRecord = new MainSystem();
+        $breakdown = $this->confidenceScoreService->generateBreakdown($scoringData, $tempRecord, $templateId);
+        
         return [
             'status' => 'NEW RECORD',
             'confidence' => 0.0,
             'matched_id' => null,
             'rule' => 'no_match',
-            'field_breakdown' => null, // No existing record to compare against
+            'field_breakdown' => $breakdown,
         ];
     }
     

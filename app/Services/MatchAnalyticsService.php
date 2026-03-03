@@ -104,9 +104,11 @@ class MatchAnalyticsService
         }
 
         // Core fields to check (from MainSystem model)
+        // Note: 'uid' is excluded as it's system-generated, never uploaded
         $coreFields = [
-            'uid', 'last_name', 'first_name', 'middle_name', 'suffix',
-            'birthday', 'gender', 'civil_status', 'address', 'barangay'
+            'regs_no', 'last_name', 'first_name', 'middle_name', 'suffix',
+            'birthday', 'gender', 'civil_status', 'address', 'barangay',
+            'registration_date', 'id_type', 'status', 'category'
         ];
 
         $coreFieldPopulation = [];
@@ -138,7 +140,9 @@ class MatchAnalyticsService
         $population = [];
 
         foreach ($coreFields as $field) {
-            // Count non-empty values from field_breakdown
+            // Count non-empty values from uploaded data in match results
+            // Include ALL records (matched, possible duplicates, and new records)
+            // All records now have field_breakdown generated (including NEW RECORD)
             $count = MatchResult::where('batch_id', $batchId)
                 ->whereNotNull('field_breakdown')
                 ->get(['field_breakdown'])

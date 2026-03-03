@@ -264,11 +264,20 @@ class RecordImport implements ToCollection, WithHeadingRow
         // Track which original columns were mapped
         $mappedOriginalColumns = [];
         
-        // Identify core fields mapped
+        // First, check ALL original columns to see if they match known core fields
+        // This ensures we don't skip columns just because they're empty in the first row
+        foreach ($originalColumns as $column) {
+            if (CoreFieldMappings::isCoreField($column)) {
+                $coreFieldsMapped[] = $column;
+                $mappedOriginalColumns[] = $column;
+            }
+        }
+        
+        // Also add any core fields that were actually populated in first row
+        // (in case they use non-standard column names)
         foreach ($coreFields as $systemField => $value) {
-            // Find original column name that mapped to this system field
             $originalColumn = $this->findOriginalColumnForCoreField($originalColumns, $systemField);
-            if ($originalColumn) {
+            if ($originalColumn && !in_array($originalColumn, $mappedOriginalColumns)) {
                 $coreFieldsMapped[] = $originalColumn;
                 $mappedOriginalColumns[] = $originalColumn;
             }
