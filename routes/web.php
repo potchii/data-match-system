@@ -31,9 +31,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/api/batch-analytics/{batchId}', [ResultsController::class, 'getBatchAnalytics'])->name('api.batch-analytics');
     Route::get('/api/field-breakdown/{resultId}', [ResultsController::class, 'getFieldBreakdown'])->name('api.field-breakdown');
     Route::get('/api/field-breakdown/{resultId}/export', [ResultsController::class, 'exportFieldBreakdown'])->name('api.field-breakdown.export');
+    Route::get('/results/export-duplicates', [ResultsController::class, 'exportDuplicates'])->name('results.export-duplicates');
     
     Route::get('/batches', [BatchController::class, 'index'])->name('batches.index');
     Route::get('/main-system', [MainSystemController::class, 'index'])->name('main-system.index');
+    Route::get('/main-system/export', [MainSystemController::class, 'export'])->name('main-system.export');
     
     // Template management routes (web views)
     Route::get('/templates', [TemplateController::class, 'indexView'])->name('templates.index');

@@ -35,7 +35,7 @@
                     <input type="hidden" name="email" value="{{ $email }}">
 
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="New Password" required autofocus>
+                        <input type="password" name="password" class="form-control" placeholder="New Password" data-toggle-password required autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" data-toggle-password required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -67,5 +67,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('js/password-visibility.js') }}"></script>
 </body>
 </html>

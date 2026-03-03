@@ -39,7 +39,7 @@ class MainSystemFactory extends Factory
             'last_name_normalized' => strtolower($lastName),
             'first_name_normalized' => strtolower($firstName),
             'middle_name_normalized' => strtolower($middleName),
-            'suffix' => null,
+            'suffix' => '',
             'birthday' => fake()->date('Y-m-d', '-18 years'),
             'gender' => fake()->randomElement(['Male', 'Female']),
             'civil_status' => fake()->randomElement(['Single', 'Married', 'Widowed', 'Divorced']),

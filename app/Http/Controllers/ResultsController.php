@@ -35,6 +35,17 @@ class ResultsController extends Controller
         if ($request->filled('status')) {
             $query->where('match_status', $request->status);
         }
+
+        // Search functionality
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('uploaded_first_name', 'like', "%{$search}%")
+                    ->orWhere('uploaded_middle_name', 'like', "%{$search}%")
+                    ->orWhere('uploaded_last_name', 'like', "%{$search}%")
+                    ->orWhere('uploaded_record_id', 'like', "%{$search}%");
+            });
+        }
         
         $results = $query->orderBy('id', 'asc')->paginate(20);
         $batches = UploadBatch::orderBy('id', 'desc')->get();
@@ -201,6 +212,144 @@ class ResultsController extends Controller
             
             abort(500, 'Unable to export field breakdown');
         }
+    }
+
+    /**
+     * Export all duplicates with their matched base records
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function exportDuplicates(Request $request): Response
+    {
+        try {
+            $query = MatchResult::query()->with([
+                'batch',
+                'matchedRecord.originBatch'
+            ]);
+            
+            // Apply filters
+            if ($request->filled('batch_id')) {
+                $query->where('batch_id', $request->batch_id);
+            }
+            
+            if ($request->filled('status')) {
+                $query->where('match_status', $request->status);
+            } else {
+                // By default, only export MATCHED and POSSIBLE DUPLICATE (exclude NEW RECORD)
+                $query->whereIn('match_status', ['MATCHED', 'POSSIBLE DUPLICATE']);
+            }
+            
+            $results = $query->orderBy('batch_id', 'asc')
+                            ->orderBy('id', 'asc')
+                            ->get();
+            
+            // Generate CSV content
+            $csv = $this->generateDuplicatesCSV($results);
+            
+            // Generate filename with timestamp and filters
+            $timestamp = now()->format('Y-m-d_His');
+            $batchSuffix = $request->filled('batch_id') ? "-batch{$request->batch_id}" : '-all-batches';
+            $statusSuffix = $request->filled('status') ? '-' . strtolower(str_replace(' ', '-', $request->status)) : '-duplicates';
+            $filename = "duplicates-report{$batchSuffix}{$statusSuffix}-{$timestamp}.csv";
+
+            return response($csv, 200)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', "attachment; filename=\"{$filename}\"");
+        } catch (\Exception $e) {
+            Log::error('Error exporting duplicates', [
+                'error' => $e->getMessage()
+            ]);
+            
+            abort(500, 'Unable to export duplicates report');
+        }
+    }
+
+    /**
+     * Generate CSV content for duplicates report
+     * 
+     * @param \Illuminate\Support\Collection $results
+     * @return string
+     */
+    protected function generateDuplicatesCSV($results): string
+    {
+        $output = fopen('php://temp', 'r+');
+        
+        // Write CSV header
+        fputcsv($output, [
+            'Row ID',
+            'Batch ID',
+            'Uploaded First Name',
+            'Uploaded Middle Name',
+            'Uploaded Last Name',
+            'Uploaded Record ID',
+            'Match Status',
+            'Confidence Score',
+            'Matched Base First Name',
+            'Matched Base Middle Name',
+            'Matched Base Last Name',
+            'Matched Base UID',
+            'Matched Base Row ID',
+            'Source Batch ID',
+            'Source Batch File',
+            'Matched Fields',
+            'Total Fields',
+            'Birthday Match',
+            'Gender Match',
+            'Address Match'
+        ]);
+
+        // Write data rows
+        $rowId = 1;
+        foreach ($results as $result) {
+            $fieldBreakdown = $result->field_breakdown ?? [];
+            
+            // Extract match details from field breakdown
+            $birthdayMatch = 'N/A';
+            $genderMatch = 'N/A';
+            $addressMatch = 'N/A';
+            
+            if (isset($fieldBreakdown['core_fields'])) {
+                if (isset($fieldBreakdown['core_fields']['birthday'])) {
+                    $birthdayMatch = $fieldBreakdown['core_fields']['birthday']['status'] === 'matched' ? 'Yes' : 'No';
+                }
+                if (isset($fieldBreakdown['core_fields']['gender'])) {
+                    $genderMatch = $fieldBreakdown['core_fields']['gender']['status'] === 'matched' ? 'Yes' : 'No';
+                }
+                if (isset($fieldBreakdown['core_fields']['address'])) {
+                    $addressMatch = $fieldBreakdown['core_fields']['address']['status'] === 'matched' ? 'Yes' : 'No';
+                }
+            }
+            
+            fputcsv($output, [
+                $rowId++,
+                $result->batch_id,
+                $result->uploaded_first_name ?? '',
+                $result->uploaded_middle_name ?? '',
+                $result->uploaded_last_name ?? '',
+                $result->uploaded_record_id ?? '',
+                $result->match_status,
+                number_format($result->confidence_score, 1),
+                $result->matchedRecord->first_name ?? '',
+                $result->matchedRecord->middle_name ?? '',
+                $result->matchedRecord->last_name ?? '',
+                $result->matchedRecord->uid ?? '',
+                $result->matchedRecord->origin_match_result_id ?? $result->matchedRecord->id ?? '',
+                $result->matchedRecord->origin_batch_id ?? '',
+                $result->matchedRecord->originBatch->file_name ?? '',
+                $fieldBreakdown['matched_fields'] ?? 0,
+                $fieldBreakdown['total_fields'] ?? 0,
+                $birthdayMatch,
+                $genderMatch,
+                $addressMatch
+            ]);
+        }
+
+        rewind($output);
+        $csv = stream_get_contents($output);
+        fclose($output);
+
+        return $csv;
     }
 
     /**
