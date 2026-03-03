@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Analytics API routes
     Route::get('/api/batch-analytics/{batchId}', [ResultsController::class, 'getBatchAnalytics'])->name('api.batch-analytics');
+    Route::get('/api/batch-trends/{batchId}', [ResultsController::class, 'getBatchTrends'])->name('api.batch-trends');
     Route::get('/api/field-breakdown/{resultId}', [ResultsController::class, 'getFieldBreakdown'])->name('api.field-breakdown');
     Route::get('/api/field-breakdown/{resultId}/export', [ResultsController::class, 'exportFieldBreakdown'])->name('api.field-breakdown.export');
     Route::get('/results/export-duplicates', [ResultsController::class, 'exportDuplicates'])->name('results.export-duplicates');

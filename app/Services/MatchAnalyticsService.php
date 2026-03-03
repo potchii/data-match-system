@@ -382,4 +382,141 @@ class MatchAnalyticsService
             }, $bottom5),
         ];
     }
+    /**
+     * Calculate trends across batch upload history
+     *
+     * @param int $batchId
+     * @return array Trends with quality score, avg confidence, avg matched fields, avg mismatched fields
+     */
+    public function calculateBatchTrends(int $batchId): array
+        {
+            $batch = UploadBatch::find($batchId);
+
+            if (!$batch) {
+                return [
+                    'quality_score' => 0,
+                    'avg_confidence' => 0,
+                    'avg_matched_fields' => 0,
+                    'avg_mismatched_fields' => 0,
+                    'quality_trend' => 'neutral',
+                    'confidence_trend' => 'neutral',
+                    'matched_fields_trend' => 'neutral',
+                    'mismatched_fields_trend' => 'neutral',
+                ];
+            }
+
+            // Get current batch statistics
+            $stats = $this->calculateBatchStatistics($batchId);
+            $quality = $this->calculateQualityScore($stats);
+
+            // Calculate trends by comparing with previous batch
+            $previousBatch = UploadBatch::where('id', '<', $batchId)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $trends = [
+                'quality_score' => $quality['score'],
+                'avg_confidence' => $stats['average_confidence'],
+                'avg_matched_fields' => $stats['average_matched_fields'],
+                'avg_mismatched_fields' => $stats['average_mismatched_fields'],
+            ];
+
+            if ($previousBatch) {
+                $prevStats = $this->calculateBatchStatistics($previousBatch->id);
+                $prevQuality = $this->calculateQualityScore($prevStats);
+
+                $trends['quality_trend'] = $this->calculateTrendDirection($prevQuality['score'], $quality['score']);
+                $trends['confidence_trend'] = $this->calculateTrendDirection($prevStats['average_confidence'], $stats['average_confidence']);
+                $trends['matched_fields_trend'] = $this->calculateTrendDirection($prevStats['average_matched_fields'], $stats['average_matched_fields']);
+                $trends['mismatched_fields_trend'] = $this->calculateTrendDirection($prevStats['average_mismatched_fields'], $stats['average_mismatched_fields'], true);
+            } else {
+                $trends['quality_trend'] = 'neutral';
+                $trends['confidence_trend'] = 'neutral';
+                $trends['matched_fields_trend'] = 'neutral';
+                $trends['mismatched_fields_trend'] = 'neutral';
+            }
+
+            return $trends;
+        }
+
+    /**
+     * Generate match status distribution chart data
+     *
+     * @param int $batchId
+     * @return array Pie chart data for match status distribution
+     */
+    public function generateMatchStatusChart(int $batchId): array
+    {
+        $statusDistribution = MatchResult::where('batch_id', $batchId)
+            ->select('match_status', DB::raw('count(*) as count'))
+            ->groupBy('match_status')
+            ->pluck('count', 'match_status')
+            ->toArray();
+
+        $matched = $statusDistribution['MATCHED'] ?? 0;
+        $possibleDuplicates = $statusDistribution['POSSIBLE DUPLICATE'] ?? 0;
+        $newRecords = $statusDistribution['NEW RECORD'] ?? 0;
+
+        return [
+            'labels' => ['Matched', 'Possible Duplicates', 'New Records'],
+            'data' => [$matched, $possibleDuplicates, $newRecords],
+            'colors' => ['#28a745', '#ffc107', '#dc3545'], // Green, Yellow, Red
+        ];
+    }
+    /**
+     * Calculate trend direction (up/down/neutral)
+     *
+     * @param float $previous Previous value
+     * @param float $current Current value
+     * @param bool $inverse Whether to invert the direction (for mismatched fields, lower is better)
+     * @return string 'up', 'down', or 'neutral'
+     */
+    protected function calculateTrendDirection(float $previous, float $current, bool $inverse = false): string
+    {
+        if ($previous == 0) {
+            return 'neutral';
+        }
+
+        $percentChange = (($current - $previous) / $previous) * 100;
+
+        if (abs($percentChange) < 1) {
+            return 'neutral';
+        }
+
+        $isUp = $percentChange > 0;
+
+        // For mismatched fields, invert the direction (down is good)
+        if ($inverse) {
+            return $isUp ? 'down' : 'up';
+        }
+
+        return $isUp ? 'up' : 'down';
+    }
+
+    /**
+     * Get template fields information for batch
+     *
+     * @param int $batchId
+     * @return array Core fields and custom template fields
+     */
+    public function getTemplateFieldsInfo(int $batchId): array
+    {
+        $batch = UploadBatch::find($batchId);
+
+        if (!$batch || !$batch->column_mapping) {
+            return [
+                'core_fields' => [],
+                'custom_fields' => [],
+            ];
+        }
+
+        $columnMapping = $batch->column_mapping;
+
+        return [
+            'core_fields' => $columnMapping['core_fields_mapped'] ?? [],
+            'custom_fields' => $columnMapping['dynamic_fields_captured'] ?? [],
+        ];
+    }
+
+
 }

@@ -130,6 +130,54 @@ class ResultsController extends Controller
             ], 500);
         }
     }
+    /**
+     * Get trends data for batch
+     *
+     * @param int $batchId
+     * @return JsonResponse
+     */
+    /**
+     * Get trends data for batch
+     * 
+     * @param int $batchId
+     * @return JsonResponse
+     */
+    public function getBatchTrends(int $batchId): JsonResponse
+    {
+        try {
+            $batch = UploadBatch::find($batchId);
+
+            if (!$batch) {
+                Log::warning('Trends requested for non-existent batch', ['batch_id' => $batchId]);
+                return response()->json([
+                    'error' => 'Batch not found',
+                    'message' => 'The requested batch does not exist.'
+                ], 404);
+            }
+
+            $trends = $this->matchAnalyticsService->calculateBatchTrends($batchId);
+            $matchStatusChart = $this->matchAnalyticsService->generateMatchStatusChart($batchId);
+            $templateFields = $this->matchAnalyticsService->getTemplateFieldsInfo($batchId);
+
+            return response()->json([
+                'batch_id' => $batchId,
+                'trends' => $trends,
+                'match_status_chart' => $matchStatusChart,
+                'template_fields' => $templateFields,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error calculating batch trends', [
+                'batch_id' => $batchId,
+                'error' => $e->getMessage()
+            ]);
+
+            return response()->json([
+                'error' => 'Server error',
+                'message' => 'An unexpected error occurred. Please try again.'
+            ], 500);
+        }
+    }
+
 
     /**
      * Get detailed field breakdown for match result
