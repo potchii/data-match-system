@@ -11,6 +11,10 @@
                 <i class="far fa-user"></i> {{ Auth::user()->name }}
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="{{ route('user-password.edit') }}" class="dropdown-item">
+                    <i class="fas fa-key mr-2"></i> Change Password
+                </a>
+                <div class="dropdown-divider"></div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="dropdown-item">

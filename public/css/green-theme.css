@@ -432,3 +432,47 @@ select.form-control option {
 .small-box .inner p {
     color: var(--white) !important;
 }
+
+
+/* Password Visibility Toggle */
+.password-toggle-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.5rem;
+    color: var(--text-muted);
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+    color: var(--primary-green);
+}
+
+.password-toggle-btn:focus {
+    outline: none;
+    color: var(--primary-green);
+}
+
+.password-toggle-btn i {
+    font-size: 1.1rem;
+}
+
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input[type="password"],
+.password-input-wrapper input[type="text"] {
+    padding-right: 40px;
+}

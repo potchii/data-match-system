@@ -20,11 +20,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">All Records ({{ $records->total() }})</h3>
-                        <div class="card-tools">
-                            <form method="GET" action="{{ route('main-system.index') }}" class="form-inline">
+                        <div class="card-tools d-flex align-items-center">
+                            <form method="GET" action="{{ route('main-system.index') }}" class="form-inline mr-2">
                                 <div class="input-group input-group-sm" style="width: 250px;">
                                     <input type="text" name="search" class="form-control" 
-                                           placeholder="Search by name or Regs No" 
+                                           placeholder="Search by name or UID" 
                                            value="{{ request('search') }}">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -33,6 +33,11 @@
                                     </div>
                                 </div>
                             </form>
+                            <a href="{{ route('main-system.export', request()->query()) }}" 
+                               class="btn btn-sm btn-success"
+                               title="Export all records">
+                                <i class="fas fa-file-download"></i> Export
+                            </a>
                         </div>
                     </div>
                     <div class="card-body table-responsive p-0">

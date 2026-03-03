@@ -28,26 +28,32 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="current_password">Current Password</label>
-                                <input type="password" class="form-control @error('current_password') is-invalid @enderror" 
-                                       id="current_password" name="current_password" required>
-                                @error('current_password')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
+                                <div style="position: relative;">
+                                    <input type="password" class="form-control @error('current_password') is-invalid @enderror" 
+                                           id="current_password" name="current_password" data-toggle-password required>
+                                    @error('current_password')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="password">New Password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                       id="password" name="password" required>
-                                @error('password')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
+                                <div style="position: relative;">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                                           id="password" name="password" data-toggle-password required>
+                                    @error('password')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" 
-                                       id="password_confirmation" name="password_confirmation" required>
+                                <div style="position: relative;">
+                                    <input type="password" class="form-control" 
+                                           id="password_confirmation" name="password_confirmation" data-toggle-password required>
+                                </div>
                             </div>
                         </div>
                         
@@ -60,4 +66,6 @@
         </div>
     </div>
 </section>
+
+<script src="{{ asset('js/password-visibility.js') }}"></script>
 @endsection

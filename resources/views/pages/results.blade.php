@@ -231,8 +231,20 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">All Match Results</h3>
-                        <div class="card-tools">
-                            <form method="GET" action="{{ route('results.index') }}" class="form-inline">
+                        <div class="card-tools d-flex align-items-center">
+                            <form method="GET" action="{{ route('results.index') }}" class="form-inline mr-2">
+                                <div class="form-group mr-2">
+                                    <div class="input-group input-group-sm" style="width: 220px;">
+                                        <input type="text" name="search" class="form-control" 
+                                               placeholder="Search by name or UID" 
+                                               value="{{ request('search') }}">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group mr-2">
                                     <select name="batch_id" class="form-control form-control-sm">
                                         <option value="">All Batches</option>
@@ -251,8 +263,15 @@
                                         <option value="NEW RECORD" {{ request('status') == 'NEW RECORD' ? 'selected' : '' }}>New Record</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-sm btn-primary">Filter</button>
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-filter"></i> Filter
+                                </button>
                             </form>
+                            <a href="{{ route('results.export-duplicates', request()->query()) }}" 
+                               class="btn btn-sm btn-success"
+                               title="Export all duplicates with their matched base records">
+                                <i class="fas fa-file-download"></i> Export Duplicates
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">

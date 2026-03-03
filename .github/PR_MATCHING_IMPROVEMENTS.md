@@ -1,8 +1,8 @@
-# PR: Matching Algorithm Improvements & UI Theme Update
+# PR: Matching Algorithm Improvements, Export Duplicates & UI Theme Update
 
 ## Overview
 
-This PR addresses critical matching accuracy issues and improves the user interface with a refreshed theme. The changes focus on preventing false-positive exact matches and removing unused matching logic.
+This PR addresses critical matching accuracy issues, adds bulk export functionality for duplicate records, and improves the user interface with a refreshed theme. The changes focus on preventing false-positive exact matches, providing better data analysis tools, and enhancing the overall user experience.
 
 ## Changes Summary
 
@@ -29,6 +29,39 @@ This PR addresses critical matching accuracy issues and improves the user interf
 **Change:** Deleted `RegsNoMatchRule` from the codebase as per requirement to exclude `regs_no` from matching logic.
 
 **Note:** This rule was not in the active matching chain, so no functional impact on current matching behavior.
+
+### 📊 Export Duplicates Feature
+
+#### Bulk CSV Export for Duplicate Records
+**Feature:** Added comprehensive export functionality to download all duplicate records with their matched base records in CSV format.
+
+**Use Case:** Users can now export a detailed report of all flagged duplicates (MATCHED and POSSIBLE DUPLICATE) along with their corresponding base records for external analysis, reporting, or manual review.
+
+**Key Features:**
+- **Smart Filtering:** Respects current page filters (batch_id, status)
+- **Default Behavior:** Excludes NEW RECORD entries by default (only exports MATCHED and POSSIBLE DUPLICATE)
+- **Dynamic Filename:** Includes timestamp, batch ID, and status in filename for easy organization
+- **Comprehensive Data:** 19 columns including:
+  - Row ID, Batch ID
+  - Uploaded record details (first, middle, last name, record ID)
+  - Match status and confidence score
+  - Matched base record details (first, middle, last name, UID, row ID)
+  - Source information (batch ID, file name)
+  - Field statistics (matched fields, total fields)
+  - Specific field matches (birthday, gender, address)
+
+**UI Integration:**
+- Green "Export Duplicates" button next to filter form in results page
+- Consistent with new light green theme
+- Accessible from main results view
+
+**Example Filename:**
+```
+duplicates-report-batch123-matched-2026-03-03_143022.csv
+duplicates-report-all-batches-duplicates-2026-03-03_143022.csv
+```
+
+**Route:** `GET /results/export-duplicates`
 
 ### 🎨 UI Theme Update
 
@@ -67,13 +100,22 @@ Updated the application theme to a clean, professional light green and white col
 - `app/Services/MatchingRules/ExactMatchRule.php` - Added single-letter middle name validation
 - `app/Services/MatchingRules/RegsNoMatchRule.php` - **DELETED**
 
+### Export Feature
+- `app/Http/Controllers/ResultsController.php` - Added `exportDuplicates()` and `generateDuplicatesCSV()` methods
+- `routes/web.php` - Added `GET /results/export-duplicates` route
+- `resources/views/pages/results.blade.php` - Added "Export Duplicates" button
+
 ### Tests
 - `tests/Unit/ExactMatchRuleSingleLetterTest.php` - **NEW** - 5 comprehensive tests
 - `tests/Unit/ExactMatchRuleBugTest.php` - Existing tests still passing
+- `tests/Feature/ExportDuplicatesTest.php` - **NEW** - 7 comprehensive tests
 
 ### UI/Theme
 - `public/css/green-theme.css` - **NEW** - Light green theme
-- `resources/views/pages/results.blade.php` - Row numbering fix
+- `resources/views/pages/results.blade.php` - Row numbering fix + export button
+
+### Database
+- `database/factories/MainSystemFactory.php` - Fixed `suffix` default to empty string instead of null
 
 ### Documentation
 - `docs/SINGLE_LETTER_MIDDLE_NAME_FIX.md` - **NEW** - Detailed fix documentation
@@ -93,9 +135,14 @@ php artisan test --filter=ExactMatchRuleSingleLetterTest
 
 php artisan test --filter=ExactMatchRuleBugTest
 # 5 passed (7 assertions)
+
+php artisan test --filter=ExportDuplicatesTest
+# 7 passed (20+ assertions)
 ```
 
 ### Test Coverage
+
+#### Matching Rules
 - ✅ Rejects single-letter middle names in uploaded data
 - ✅ Rejects single-letter middle names in candidate data
 - ✅ Rejects when both have single-letter middle names
@@ -104,11 +151,25 @@ php artisan test --filter=ExactMatchRuleBugTest
 - ✅ Handles whitespace-only middle names
 - ✅ Handles null birthdays correctly
 
+#### Export Duplicates
+- ✅ Exports duplicates as CSV with correct headers
+- ✅ Filters export by batch_id
+- ✅ Filters export by status
+- ✅ Excludes NEW RECORD entries by default
+- ✅ Includes field breakdown details (matched fields, birthday, gender, address)
+- ✅ Requires authentication
+- ✅ Generates dynamic filename with filters and timestamp
+
 ### Manual Testing Required
 1. Purge existing data: `php artisan data:purge --keep-users --keep-templates`
 2. Upload seed data (156 records)
 3. Upload test dataset (60 records)
 4. Verify expected results: 20 exact matches, 15 fuzzy matches, 25 new records
+5. Test export functionality:
+   - Click "Export Duplicates" button
+   - Verify CSV downloads with correct filename
+   - Check CSV contains all expected columns
+   - Apply filters (batch_id, status) and verify filtered export
 
 ## ExactMatchRule Requirements (Updated)
 
