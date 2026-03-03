@@ -11,20 +11,13 @@
 
 <section class="content">
     <div class="container-fluid">
-        @if($columnMapping)
-        @php
-            $mappedCount = count($columnMapping['core_fields_mapped']);
-            $skippedCount = count($columnMapping['skipped_columns']);
-            $totalColumns = $mappedCount + $skippedCount;
-            $mappedPercentage = $totalColumns > 0 ? round(($mappedCount / $totalColumns) * 100, 1) : 0;
-            $skippedPercentage = $totalColumns > 0 ? round(($skippedCount / $totalColumns) * 100, 1) : 0;
-        @endphp
+        @if($batchStats)
         <div class="row">
             <div class="col-12">
                 <div class="card card-outline card-info {{ $isFromUpload ? '' : 'collapsed-card' }}">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <i class="fas fa-columns"></i> Column Mapping Summary
+                            <i class="fas fa-chart-bar"></i> Batch Analytics
                         </h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -33,35 +26,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <!-- Percentage Calculations Section -->
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <div class="info-box bg-success">
-                                    <span class="info-box-icon"><i class="fas fa-check-circle"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Mapped Columns</span>
-                                        <span class="info-box-number">{{ $mappedCount }} <small>({{ $mappedPercentage }}%)</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box bg-secondary">
-                                    <span class="info-box-icon"><i class="fas fa-minus-circle"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Skipped Columns</span>
-                                        <span class="info-box-number">{{ $skippedCount }} <small>({{ $skippedPercentage }}%)</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <p><strong>Total Columns:</strong> {{ $totalColumns }}</p>
-                            </div>
-                        </div>
-
                         <!-- Batch Statistics Section -->
-                        @if($batchStats)
                         <div class="row mb-4">
                             <div class="col-12">
                                 <h5><i class="fas fa-chart-bar"></i> Batch Statistics</h5>
@@ -112,112 +77,30 @@
                             </div>
                         </div>
 
-                        <!-- Analytics Data Container (loaded via AJAX) -->
-                        <div id="analytics-container" data-batch-id="{{ request('batch_id') }}">
-                            <div class="text-center py-3">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="sr-only">Loading analytics...</span>
-                                </div>
-                                <p class="mt-2 text-muted">Loading detailed analytics...</p>
-                            </div>
-                        </div>
-                        @endif
-
-                        <!-- Chart Containers -->
-                        <div class="row mb-4" id="chart-section" style="display: none;">
+                        <!-- Match Status Distribution Pie Chart -->
+                        <div class="row mb-4">
                             <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title"><i class="fas fa-chart-pie"></i> Column Mapping Distribution</h3>
+                                        <h3 class="card-title"><i class="fas fa-chart-pie"></i> Match Status Distribution</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="chart-container" style="position: relative; height: 300px;">
-                                            <canvas id="mappingPieChart"></canvas>
+                                            <canvas id="matchStatusChart"></canvas>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Trends Section -->
                             <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title"><i class="fas fa-chart-bar"></i> Field Population Rates</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="chart-container" style="position: relative; height: 300px;">
-                                            <canvas id="populationBarChart"></canvas>
+                                <div id="trends-container" data-batch-id="{{ request('batch_id') }}">
+                                    <div class="text-center py-3">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="sr-only">Loading trends...</span>
                                         </div>
+                                        <p class="mt-2 text-muted">Loading trends...</p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Field Statistics Table -->
-                        <div class="row" id="field-stats-section" style="display: none;">
-                            <div class="col-12">
-                                <h5><i class="fas fa-table"></i> Field Statistics</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="field-stats-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Field Name</th>
-                                                <th>Category</th>
-                                                <th>Population Count</th>
-                                                <th>Population Rate</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="field-stats-body">
-                                            <!-- Populated via JavaScript -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <!-- Original Column Mapping Details -->
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5 class="text-success">
-                                    <i class="fas fa-check-circle"></i> Core Fields Mapped
-                                </h5>
-                                <div class="mb-3">
-                                    @if(count($columnMapping['core_fields_mapped']) > 0)
-                                        @foreach($columnMapping['core_fields_mapped'] as $field)
-                                            <span class="badge badge-success mr-1 mb-1">{{ $field }}</span>
-                                        @endforeach
-                                    @else
-                                        <span class="text-muted">None</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <h5 class="text-info">
-                                    <i class="fas fa-plus-circle"></i> Dynamic Fields Captured
-                                </h5>
-                                <div class="mb-3">
-                                    @if(isset($columnMapping['dynamic_fields_captured']) && count($columnMapping['dynamic_fields_captured']) > 0)
-                                        @foreach($columnMapping['dynamic_fields_captured'] as $field)
-                                            <span class="badge badge-info mr-1 mb-1">{{ $field }}</span>
-                                        @endforeach
-                                    @else
-                                        <span class="text-muted">None</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <h5 class="text-secondary">
-                                    <i class="fas fa-minus-circle"></i> Skipped Columns
-                                </h5>
-                                <div class="mb-3">
-                                    @if(count($columnMapping['skipped_columns']) > 0)
-                                        @foreach($columnMapping['skipped_columns'] as $field)
-                                            <span class="badge badge-secondary mr-1 mb-1">{{ $field }}</span>
-                                        @endforeach
-                                    @else
-                                        <span class="text-muted">None</span>
-                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -496,125 +379,47 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 <script>
-// Column Mapping Analytics Module
-class ColumnMappingAnalytics {
+// Match Status Analytics Module
+class MatchStatusAnalytics {
     constructor() {
         this.batchId = null;
-        this.mappingPieChart = null;
-        this.populationBarChart = null;
+        this.matchStatusChart = null;
     }
 
     async initialize(batchId) {
         if (!batchId) {
-            document.getElementById('analytics-container').innerHTML = 
-                '<div class="alert alert-info">Select a batch to view detailed analytics.</div>';
             return;
         }
 
         this.batchId = batchId;
 
         try {
-            const response = await fetch(`/api/batch-analytics/${batchId}`);
+            const response = await fetch(`/api/batch-trends/${batchId}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
             
             const data = await response.json();
-            this.renderAnalytics(data);
+            this.renderMatchStatusChart(data.match_status_chart);
+            this.renderTrends(data.trends, data.template_fields);
         } catch (error) {
-            console.error('Failed to load batch analytics:', error);
-            this.showError('Unable to load analytics. Please try again.', true);
+            console.error('Failed to load analytics:', error);
         }
     }
 
-    renderAnalytics(data) {
-        // Hide loading spinner
-        document.getElementById('analytics-container').style.display = 'none';
+    renderMatchStatusChart(chartData) {
+        const ctx = document.getElementById('matchStatusChart');
+        if (!ctx) return;
 
-        // Show chart section
-        document.getElementById('chart-section').style.display = 'flex';
-        document.getElementById('field-stats-section').style.display = 'block';
-
-        // Update statistics display
-        this.updateStatistics(data);
-
-        // Render charts
-        this.renderMappingPieChart(data.chart_data.mapping_pie);
-        this.renderPopulationBarChart(data.chart_data.population_bar);
-
-        // Update field statistics table
-        this.updateFieldStatistics(data.field_population);
-    }
-
-    updateStatistics(data) {
-        const stats = data.statistics;
-        const quality = data.quality;
-
-        // Create quality badge HTML
-        const qualityBadgeColors = {
-            'excellent': 'success',
-            'good': 'primary',
-            'fair': 'warning',
-            'poor': 'danger'
-        };
-        const badgeColor = qualityBadgeColors[quality.level] || 'secondary';
-
-        // Add quality score and additional statistics
-        const analyticsHtml = `
-            <div class="row mb-3">
-                <div class="col-md-3">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-${badgeColor}"><i class="fas fa-star"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Quality Score</span>
-                            <span class="info-box-number">${quality.score.toFixed(1)}% <small class="text-${badgeColor}">${quality.level.toUpperCase()}</small></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-info"><i class="fas fa-percentage"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Avg Confidence</span>
-                            <span class="info-box-number">${stats.average_confidence.toFixed(1)}%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-success"><i class="fas fa-check-double"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Avg Matched Fields</span>
-                            <span class="info-box-number">${stats.average_matched_fields.toFixed(1)}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-warning"><i class="fas fa-times"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Avg Mismatched Fields</span>
-                            <span class="info-box-number">${stats.average_mismatched_fields.toFixed(1)}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        document.getElementById('analytics-container').innerHTML = analyticsHtml;
-        document.getElementById('analytics-container').style.display = 'block';
-    }
-
-    renderMappingPieChart(chartData) {
-        const ctx = document.getElementById('mappingPieChart').getContext('2d');
+        const canvasCtx = ctx.getContext('2d');
         
-        if (this.mappingPieChart) {
-            this.mappingPieChart.destroy();
+        if (this.matchStatusChart) {
+            this.matchStatusChart.destroy();
         }
 
         try {
-            this.mappingPieChart = new Chart(ctx, {
+            this.matchStatusChart = new Chart(canvasCtx, {
                 type: 'pie',
                 data: {
                     labels: chartData.labels,
@@ -648,143 +453,89 @@ class ColumnMappingAnalytics {
             });
         } catch (error) {
             console.error('Chart rendering failed:', error);
-            this.showChartError('mappingPieChart');
         }
     }
 
-    renderPopulationBarChart(chartData) {
-        const ctx = document.getElementById('populationBarChart').getContext('2d');
-        
-        if (this.populationBarChart) {
-            this.populationBarChart.destroy();
-        }
+    renderTrends(trends, templateFields) {
+        const trendsContainer = document.getElementById('trends-container');
+        if (!trendsContainer) return;
 
-        try {
-            this.populationBarChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: chartData.labels,
-                    datasets: [{
-                        label: 'Population Rate (%)',
-                        data: chartData.data,
-                        backgroundColor: chartData.colors,
-                        borderWidth: 1,
-                        borderColor: '#fff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%';
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `Population: ${context.parsed.y.toFixed(1)}%`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        } catch (error) {
-            console.error('Chart rendering failed:', error);
-            this.showChartError('populationBarChart');
-        }
-    }
+        const getTrendIcon = (trend) => {
+            if (trend === 'up') return '<i class="fas fa-arrow-up text-success"></i>';
+            if (trend === 'down') return '<i class="fas fa-arrow-down text-danger"></i>';
+            return '<i class="fas fa-minus text-muted"></i>';
+        };
 
-    updateFieldStatistics(fieldPopulation) {
-        const tbody = document.getElementById('field-stats-body');
-        tbody.innerHTML = '';
+        const coreFieldsHtml = templateFields.core_fields.length > 0
+            ? templateFields.core_fields.map(f => `<span class="badge badge-primary mr-1 mb-1">${f}</span>`).join('')
+            : '<span class="text-muted">None</span>';
 
-        // Process core fields
-        if (fieldPopulation.core_fields) {
-            Object.entries(fieldPopulation.core_fields).forEach(([fieldName, stats]) => {
-                const row = this.createFieldStatRow(fieldName, 'Core', stats);
-                tbody.appendChild(row);
-            });
-        }
+        const customFieldsHtml = templateFields.custom_fields.length > 0
+            ? templateFields.custom_fields.map(f => `<span class="badge badge-info mr-1 mb-1">${f}</span>`).join('')
+            : '<span class="text-muted">None</span>';
 
-        // Process template fields
-        if (fieldPopulation.template_fields) {
-            Object.entries(fieldPopulation.template_fields).forEach(([fieldName, stats]) => {
-                const row = this.createFieldStatRow(fieldName, 'Template', stats);
-                tbody.appendChild(row);
-            });
-        }
-    }
-
-    createFieldStatRow(fieldName, category, stats) {
-        const row = document.createElement('tr');
-        const percentage = stats.percentage;
-        
-        // Determine status badge and icon
-        let statusBadge = '';
-        let statusIcon = '';
-        if (percentage >= 80) {
-            statusBadge = 'badge-success';
-            statusIcon = '<i class="fas fa-check-circle"></i>';
-        } else if (percentage >= 50) {
-            statusBadge = 'badge-warning';
-            statusIcon = '<i class="fas fa-exclamation-triangle"></i>';
-        } else {
-            statusBadge = 'badge-danger';
-            statusIcon = '<i class="fas fa-exclamation-circle"></i>';
-        }
-
-        row.innerHTML = `
-            <td><strong>${fieldName}</strong></td>
-            <td><span class="badge badge-${category === 'Core' ? 'primary' : 'info'}">${category}</span></td>
-            <td>${stats.count}</td>
-            <td>
-                <div class="progress" style="height: 20px;">
-                    <div class="progress-bar bg-${percentage >= 80 ? 'success' : (percentage >= 50 ? 'warning' : 'danger')}" 
-                         role="progressbar" 
-                         style="width: ${percentage}%"
-                         aria-valuenow="${percentage}" 
-                         aria-valuemin="0" 
-                         aria-valuemax="100">
-                        ${percentage.toFixed(1)}%
+        const trendsHtml = `
+            <div class="row">
+                <div class="col-12">
+                    <h5><i class="fas fa-chart-line"></i> Batch Trends</h5>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-primary"><i class="fas fa-star"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Quality Score</span>
+                            <span class="info-box-number">${trends.quality_score.toFixed(1)}% ${getTrendIcon(trends.quality_trend)}</span>
+                        </div>
                     </div>
                 </div>
-            </td>
-            <td>
-                <span class="badge ${statusBadge}">
-                    ${statusIcon} ${percentage >= 80 ? 'Good' : (percentage >= 50 ? 'Fair' : 'Low')}
-                </span>
-            </td>
-        `;
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fas fa-percentage"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Avg Confidence</span>
+                            <span class="info-box-number">${trends.avg_confidence.toFixed(1)}% ${getTrendIcon(trends.confidence_trend)}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="fas fa-check-double"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Avg Matched Fields</span>
+                            <span class="info-box-number">${trends.avg_matched_fields.toFixed(1)} ${getTrendIcon(trends.matched_fields_trend)}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="fas fa-times"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Avg Mismatched Fields</span>
+                            <span class="info-box-number">${trends.avg_mismatched_fields.toFixed(1)} ${getTrendIcon(trends.mismatched_fields_trend)}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        return row;
-    }
+            <hr class="my-3">
 
-    showError(message, showRetry = false) {
-        const errorHtml = `
-            <div class="alert alert-danger">
-                <i class="fas fa-exclamation-triangle"></i> ${message}
-                ${showRetry ? '<button class="btn btn-sm btn-primary ml-3" onclick="retryAnalytics()">Retry</button>' : ''}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><i class="fas fa-database"></i> Core Fields Used</h6>
+                    <div class="mb-2">
+                        ${coreFieldsHtml}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h6><i class="fas fa-cog"></i> Custom Fields Used</h6>
+                    <div class="mb-2">
+                        ${customFieldsHtml}
+                    </div>
+                </div>
             </div>
         `;
-        document.getElementById('analytics-container').innerHTML = errorHtml;
-        document.getElementById('analytics-container').style.display = 'block';
-    }
 
-    showChartError(chartId) {
-        const container = document.getElementById(chartId).parentElement;
-        container.innerHTML = '<div class="alert alert-warning">Chart visualization unavailable.</div>';
+        trendsContainer.innerHTML = trendsHtml;
     }
 }
 
@@ -792,26 +543,17 @@ class ColumnMappingAnalytics {
 let analyticsModule = null;
 
 document.addEventListener('DOMContentLoaded', function() {
-    analyticsModule = new ColumnMappingAnalytics();
+    analyticsModule = new MatchStatusAnalytics();
     
     // Load analytics if batch is selected
-    const analyticsContainer = document.getElementById('analytics-container');
-    if (analyticsContainer) {
-        const batchId = analyticsContainer.dataset.batchId;
+    const trendsContainer = document.getElementById('trends-container');
+    if (trendsContainer) {
+        const batchId = trendsContainer.dataset.batchId;
         if (batchId) {
             analyticsModule.initialize(batchId);
         }
     }
 });
-
-// Retry function for error handling
-function retryAnalytics() {
-    const analyticsContainer = document.getElementById('analytics-container');
-    if (analyticsContainer && analyticsModule) {
-        const batchId = analyticsContainer.dataset.batchId;
-        analyticsModule.initialize(batchId);
-    }
-}
 
 // Field Breakdown Modal Module
 class FieldBreakdownModal {
