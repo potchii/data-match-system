@@ -67,10 +67,21 @@ class ConfidenceScoreService
         $coreFieldDetails = [];
         $templateFieldDetails = [];
         
-        // Process core fields
-        foreach ($coreFields as $field => $uploadedValue) {
-            $totalFields++;
+        // Define all core fields that should be included in breakdown
+        $allCoreFields = ['uid', 'last_name', 'first_name', 'middle_name', 'suffix', 'birthday', 'gender', 'civil_status', 'address', 'barangay', 'regs_no', 'id_type', 'status', 'category', 'registration_date'];
+        
+        // Process all core fields (including those with null/empty values)
+        foreach ($allCoreFields as $field) {
+            // Only include fields that were in the uploaded data or exist in the existing record
+            $uploadedValue = $coreFields[$field] ?? null;
             $existingValue = $existingRecord->$field ?? null;
+            
+            // Skip if field wasn't uploaded and doesn't exist in existing record
+            if ($uploadedValue === null && $existingValue === null) {
+                continue;
+            }
+            
+            $totalFields++;
             
             $fieldData = [
                 'status' => $this->valuesMatch($uploadedValue, $existingValue) ? 'match' : 'mismatch',
@@ -84,7 +95,7 @@ class ConfidenceScoreService
                 $normalizedField = $field . '_normalized';
                 
                 // Get uploaded normalized value from uploadedData if available
-                $uploadedNormalized = $uploadedData['core_fields'][$normalizedField] ?? null;
+                $uploadedNormalized = $coreFields[$normalizedField] ?? null;
                 
                 // Get existing normalized value from database
                 $existingNormalized = $existingRecord->$normalizedField ?? null;
