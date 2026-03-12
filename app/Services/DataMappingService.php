@@ -55,8 +55,8 @@ class DataMappingService
 
             // Check if this is a template field
             if ($templateFieldNames && in_array($key, $templateFieldNames)) {
-                // Preserve template field data types from uploaded file
-                $templateFields[$key] = $value;
+                // Preserve template field data types from uploaded file, but ensure JSON serializable
+                $templateFields[$key] = $this->ensureJsonSerializable($value);
                 continue;
             }
 
@@ -74,7 +74,7 @@ class DataMappingService
             } else {
                 // Unknown fields become dynamic fields (normalized to snake_case)
                 $snakeCaseKey = $this->toSnakeCase($key);
-                $dynamicFields[$snakeCaseKey] = $value;
+                $dynamicFields[$snakeCaseKey] = $this->ensureJsonSerializable($value);
             }
         }
 
@@ -288,5 +288,33 @@ class DataMappingService
         
         // Convert to lowercase
         return strtolower($str);
+    }
+
+    /**
+     * Ensure a value is JSON-serializable
+     * Converts objects, DateTime, and other non-serializable types to strings
+     */
+    protected function ensureJsonSerializable($value)
+    {
+        if ($value === null || is_bool($value) || is_numeric($value) || is_string($value)) {
+            return $value;
+        }
+
+        if (is_array($value)) {
+            return array_map([$this, 'ensureJsonSerializable'], $value);
+        }
+
+        if ($value instanceof \DateTime) {
+            return $value->format('Y-m-d H:i:s');
+        }
+
+        if (is_object($value)) {
+            if (method_exists($value, '__toString')) {
+                return (string)$value;
+            }
+            return json_encode((array)$value) ?: '';
+        }
+
+        return (string)$value;
     }
 }

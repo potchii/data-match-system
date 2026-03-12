@@ -66,7 +66,8 @@ class AuditTrail extends Model
      */
     public function scopeForModel($query, string $modelType, int $modelId)
     {
-        return $query->where('model_type', $modelType)
+        $modelTypeShort = class_basename($modelType);
+        return $query->where('model_type', $modelTypeShort)
             ->where('model_id', $modelId);
     }
 

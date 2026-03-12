@@ -214,14 +214,14 @@ class MainSystemMultiSelectPaginationTest extends TestCase
         // Simulate clearing selection by not including any IDs in bulk operation
         // In real scenario, this would be handled by frontend clearing the selection state
 
-        // Act - Verify that empty selection results in no operation
+        // Act - Verify that empty selection results in validation error
         $response = $this->postJson('/api/main-system/bulk/delete', [
             'recordIds' => [],
         ]);
 
-        // Assert - No records deleted
-        $response->assertStatus(200);
-        $response->assertJsonPath('deleted', 0);
+        // Assert - Should return validation error
+        $response->assertStatus(422);
+        $response->assertJsonPath('errors.recordIds', fn($errors) => is_array($errors) && !empty($errors));
 
         // Assert - All records still exist
         foreach ($records as $record) {

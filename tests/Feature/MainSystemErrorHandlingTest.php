@@ -96,7 +96,8 @@ class MainSystemErrorHandlingTest extends TestCase
 
         // Assert - Validation error returned
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.first_name', true);
+        $this->assertIsArray($response->json('errors.first_name'));
+        $this->assertNotEmpty($response->json('errors.first_name'));
 
         // Assert - Only invalid field has error
         $this->assertNull($response->json('errors.last_name'));
@@ -137,7 +138,8 @@ class MainSystemErrorHandlingTest extends TestCase
 
         // Assert - Unique constraint violation error
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.uid', true);
+        $this->assertIsArray($response->json('errors.uid'));
+        $this->assertNotEmpty($response->json('errors.uid'));
 
         // Assert - Error message indicates duplicate
         $errors = $response->json('errors.uid');
@@ -210,8 +212,10 @@ class MainSystemErrorHandlingTest extends TestCase
 
         // Assert - Validation error returned
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.first_name', true);
-        $response->assertJsonPath('errors.birthday', true);
+        $this->assertIsArray($response->json('errors.first_name'));
+        $this->assertNotEmpty($response->json('errors.first_name'));
+        $this->assertIsArray($response->json('errors.birthday'));
+        $this->assertNotEmpty($response->json('errors.birthday'));
 
         // Assert - Record not modified
         $this->assertDatabaseHas('main_system', [
@@ -280,7 +284,8 @@ class MainSystemErrorHandlingTest extends TestCase
 
         // Assert - Validation error for birthday
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.birthday', true);
+        $this->assertIsArray($response->json('errors.birthday'));
+        $this->assertNotEmpty($response->json('errors.birthday'));
 
         // Assert - Record not persisted
         $this->assertDatabaseMissing('main_system', [
@@ -309,8 +314,10 @@ class MainSystemErrorHandlingTest extends TestCase
 
         // Assert - Validation errors for enum fields
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.gender', true);
-        $response->assertJsonPath('errors.status', true);
+        $this->assertIsArray($response->json('errors.gender'));
+        $this->assertNotEmpty($response->json('errors.gender'));
+        $this->assertIsArray($response->json('errors.status'));
+        $this->assertNotEmpty($response->json('errors.status'));
 
         // Assert - Record not persisted
         $this->assertDatabaseMissing('main_system', [

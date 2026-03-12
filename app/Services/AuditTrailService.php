@@ -19,10 +19,13 @@ class AuditTrailService
      */
     public function logCreate(string $modelType, int $modelId, array $newValues, ?string $reason = null): AuditTrail
     {
+        // Extract just the class name from fully qualified class name
+        $modelTypeShort = class_basename($modelType);
+        
         return AuditTrail::create([
             'user_id' => Auth::id(),
             'action_type' => 'create',
-            'model_type' => $modelType,
+            'model_type' => $modelTypeShort,
             'model_id' => $modelId,
             'old_values' => null,
             'new_values' => $newValues,
@@ -58,10 +61,13 @@ class AuditTrailService
             }
         }
 
+        // Extract just the class name from fully qualified class name
+        $modelTypeShort = class_basename($modelType);
+
         return AuditTrail::create([
             'user_id' => Auth::id(),
             'action_type' => 'update',
-            'model_type' => $modelType,
+            'model_type' => $modelTypeShort,
             'model_id' => $modelId,
             'old_values' => $oldValues,
             'new_values' => $newValues,
@@ -87,13 +93,16 @@ class AuditTrailService
         array $deletedValues,
         ?string $reason = null
     ): AuditTrail {
+        // Extract just the class name from fully qualified class name
+        $modelTypeShort = class_basename($modelType);
+        
         return AuditTrail::create([
             'user_id' => Auth::id(),
             'action_type' => 'delete',
-            'model_type' => $modelType,
+            'model_type' => $modelTypeShort,
             'model_id' => $modelId,
-            'old_values' => $deletedValues,
-            'new_values' => null,
+            'old_values' => null,
+            'new_values' => $deletedValues,
             'changed_fields' => null,
             'reason' => $reason,
             'ip_address' => Request::ip(),

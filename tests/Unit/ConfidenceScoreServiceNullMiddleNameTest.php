@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\MainSystem;
 use App\Services\ConfidenceScoreService;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class ConfidenceScoreServiceNullMiddleNameTest extends TestCase
 {
