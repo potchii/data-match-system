@@ -46,6 +46,15 @@ class MainSystem extends Model
     }
 
     /**
+     * Get all audit trail entries for this record
+     */
+    public function auditTrail(): HasMany
+    {
+        return $this->hasMany(AuditTrail::class, 'model_id')
+            ->where('model_type', self::class);
+    }
+
+    /**
      * Get all template field values for this MainSystem record
      */
     public function templateFieldValues(): HasMany

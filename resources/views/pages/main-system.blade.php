@@ -2,6 +2,10 @@
 
 @section('title', 'Main System Records')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/bulk-action-toolbar.css') }}">
+@endpush
+
 @section('content')
 <div class="content-header">
     <div class="container-fluid">
@@ -21,6 +25,9 @@
                     <div class="card-header">
                         <h3 class="card-title">All Records ({{ $records->total() }})</h3>
                         <div class="card-tools d-flex align-items-center">
+                            <a href="{{ route('main-system.create') }}" class="btn btn-sm btn-primary mr-2" title="Create new record">
+                                <i class="fas fa-plus"></i> Create Record
+                            </a>
                             <form method="GET" action="{{ route('main-system.index') }}" class="form-inline mr-2">
                                 <div class="input-group input-group-sm" style="width: 250px;">
                                     <input type="text" name="search" class="form-control" 
@@ -41,9 +48,12 @@
                         </div>
                     </div>
                     <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
+                        <table class="table table-hover text-nowrap" id="recordsTable">
                             <thead>
                                 <tr>
+                                    <th style="width: 30px;">
+                                        <input type="checkbox" id="selectAll" title="Select all records">
+                                    </th>
                                     <th>Regs No</th>
                                     <th>Name</th>
                                     <th>Birthday</th>
@@ -51,11 +61,15 @@
                                     <th>Status</th>
                                     <th>Category</th>
                                     <th>Registration Date</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($records as $record)
                                 <tr>
+                                    <td>
+                                        <input type="checkbox" class="record-checkbox" value="{{ $record->id }}" data-record-id="{{ $record->id }}">
+                                    </td>
                                     <td>
                                         @if($record->regs_no)
                                             <span class="badge badge-primary">{{ $record->regs_no }}</span>
@@ -97,10 +111,22 @@
                                             <span class="text-muted">N/A</span>
                                         @endif
                                     </td>
+                                    <td>
+                                        <a href="{{ route('main-system.edit', $record->id) }}" class="btn btn-xs btn-info" title="Edit record">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form method="POST" action="{{ route('main-system.destroy', $record->id) }}" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-xs btn-danger" title="Delete record" onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">
+                                    <td colspan="8" class="text-center">
                                         @if(request('search'))
                                             No records found matching "{{ request('search') }}"
                                         @else
@@ -124,5 +150,30 @@
         </div>
     </div>
 </section>
+
 @endsection
 
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const selectAllCheckbox = document.getElementById('selectAll');
+  const recordCheckboxes = document.querySelectorAll('.record-checkbox');
+
+  selectAllCheckbox.addEventListener('change', function() {
+    recordCheckboxes.forEach(checkbox => {
+      checkbox.checked = this.checked;
+    });
+  });
+
+  recordCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const allChecked = Array.from(recordCheckboxes).every(cb => cb.checked);
+      const someChecked = Array.from(recordCheckboxes).some(cb => cb.checked);
+      selectAllCheckbox.checked = allChecked;
+      selectAllCheckbox.indeterminate = someChecked && !allChecked;
+    });
+  });
+});
+</script>
+@endpush

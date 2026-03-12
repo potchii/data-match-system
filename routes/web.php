@@ -36,6 +36,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     Route::get('/batches', [BatchController::class, 'index'])->name('batches.index');
     Route::get('/main-system', [MainSystemController::class, 'index'])->name('main-system.index');
+    Route::get('/main-system/create', [MainSystemController::class, 'create'])->name('main-system.create');
+    Route::post('/main-system', [MainSystemController::class, 'store'])->name('main-system.store');
+    Route::get('/main-system/{record}/edit', [MainSystemController::class, 'edit'])->name('main-system.edit');
+    Route::put('/main-system/{record}', [MainSystemController::class, 'update'])->name('main-system.update');
+    Route::delete('/main-system/{record}', [MainSystemController::class, 'destroy'])->name('main-system.destroy');
     Route::get('/main-system/export', [MainSystemController::class, 'export'])->name('main-system.export');
     
     // Template management routes (web views)
