@@ -1,126 +1,287 @@
-# 📌 PROJECT: Data Match System
+# Data Match System
 
-## Objective
-* Match uploaded records (Excel/File) with existing database records.
-* If no match is found → automatically insert as new record.
+A Laravel-based system for matching uploaded records (Excel/CSV) with existing database records. Unmatched records are automatically inserted as new entries with intelligent duplicate detection and confidence scoring.
 
----
+## Overview
 
-## 👥 TEAM STRUCTURE
+The Data Match System provides:
+- **File Upload Processing**: Support for Excel and CSV formats with flexible column mapping
+- **Intelligent Matching**: Multi-stage matching algorithm with confidence scoring
+- **Template Support**: Define custom fields and validation rules for different data sources
+- **Batch Tracking**: Complete audit trail of all imported data with origin tracking
+- **Duplicate Detection**: Automatic identification of potential duplicate records
+- **Admin Dashboard**: User-friendly interface for managing records and viewing results
 
-### 🔹 Mason – Backend Lead (System Architect)
-**Primary Focus:** Laravel setup, repository, matching logic, database structure
+## Tech Stack
 
-### 🔹 Ernest – Frontend & UI Developer
-**Primary Focus:** AdminLTE design, upload interface, dashboard, user interaction
+- **Backend**: Laravel 11
+- **Frontend**: AdminLTE 3
+- **Database**: MySQL/MariaDB
+- **File Processing**: Laravel Excel (Maatwebsite)
+- **Authentication**: Laravel Fortify
 
----
+## Installation
 
-## 🚀 PHASE 1 – PROJECT SETUP (Week 1)
+### Prerequisites
+- PHP 8.2+
+- Composer
+- MySQL 8.0+
+- Node.js 18+ (for frontend assets)
 
-### 🧑‍💻 Mason Tasks (Backend Lead)
-1. **Create GitHub Repository**
-   * Create private repository: `data-match-system`
-   * Initialize: `README.md`, `.gitignore` (Laravel default)
-   * Add Ernest as collaborator
-2. **Setup Laravel Project (Local – XAMPP)**
-   * Install Laravel
-   * Configure: `.env`, Database connection (MySQL via phpMyAdmin)
-   * Push initial commit: Laravel base install, Clean folder structure
-3. **Database Planning**
-   * **Main System Table** (id, uid, last_name, first_name, middle_name, suffix, birthday, gender, civil_status, street_no, street, city, province, ...)
-   * **Upload Logs Table** (`upload_batches`): id, file_name, uploaded_by, uploaded_at, status
-   * **Match Results Table** (`match_results`): id, batch_id, uploaded_record_id, matched_system_id, match_status (matched / new / possible_duplicate), confidence_score
+### Setup
 
-### 🎨 Ernest Tasks (Frontend)
-1. **Install AdminLTE in Laravel**
-   * Integrate AdminLTE template
-   * Create: Sidebar, Dashboard layout, Navigation menu
-2. **Create Pages**
-   * 📂 Upload Page
-   * 📊 Match Results Page
-   * 📑 Batch History Page
-3. **Create Upload Form**
-   * Fields: File Upload (Excel / CSV), Submit Button
-   * Validation messages
-
----
-
-## 🚀 PHASE 2 – FILE PROCESSING (Week 2)
-
-### 🧑‍💻 Mason – Data Processing
-1. **Install Laravel Excel** (`maatwebsite/excel`)
-2. **Map Uploaded Columns**
-   * **Mapping Logic:**
-     | Uploaded File | System DB |
-     | :--- | :--- |
-     | Surname | last_name |
-     | FirstName | first_name |
-     | MiddleName | middle_name |
-     | Extension | suffix |
-     | DOB | birthday |
-     | Sex | gender |
-     | Status | civil_status |
-     | Address | street |
-     | BrgyDescription | city or barangay |
-     | RegsNo | uid |
-   * Create Mapping Service: `App\Services\DataMappingService.php`
-
-### 🧠 Core Logic: Matching Algorithm
-* **Step 1 – Exact Match:** Match by last_name, first_name, middle_name, birthday.
-* **Step 2 – Partial Match:** (If no exact) Match by last_name, first_name, birthday.
-* **Step 3 – If No Match:** Insert new record.
-* Create Service: `App\Services\DataMatchService.php`
-
----
-
-## 🚀 PHASE 3 – MATCH ENGINE (Week 3)
-
-### 🧑‍💻 Mason – Matching Rules
-* **Confidence Scoring:**
-  * Exact full name + DOB: **100%**
-  * Full name only: **80%**
-  * First + Last + DOB: **90%**
-  * Similar name: **60–75%**
-* **Statuses:** `MATCHED`, `POSSIBLE DUPLICATE`, `NEW RECORD`
-
-### 🎨 Ernest – UI Enhancements
-1. **Results Table**
-   * Display: Uploaded Name, Matched Name, Confidence %, Status Badge
-   * UI Colors: Green (Matched), Yellow (Possible Duplicate), Red (New Record)
-2. **Batch Summary Widget**
-   * Counters for: Total Uploaded, Total Matched, Total New, Total Duplicates
-
----
-
-## 🚀 PHASE 4 – AUTO INSERT SYSTEM
-
-### 🧑‍💻 Mason
-* **Auto-insertion Logic:** If `match_status = NEW`, automatically insert into system database.
-* **Cleanup:** Generate new UID, Normalize name casing, Trim whitespace, Validate DOB format.
-
----
-
-## 🔐 VERSION CONTROL RULES
-
-* **Mason:** Backend, Database migrations, Services, Core logic.
-* **Ernest:** Blade files, AdminLTE layout, JS interactions, Frontend validations.
-* **Rules:** * Create feature branches (e.g., `feature/match-engine`).
-  * Pull Request required before merge to `main`.
-
----
-
-## 📁 RECOMMENDED FOLDER STRUCTURE
-```text
-app/
- ├── Services/
- │    ├── DataMappingService.php
- │    └── DataMatchService.php
- ├── Imports/
- │    └── RecordImport.php
- └── Console/Commands/
-      └── BackfillOriginBatchData.php
+1. Clone the repository
+```bash
+git clone <repository-url>
+cd data-match-system
 ```
+
+2. Install dependencies
+```bash
+composer install
+npm install
+```
+
+3. Configure environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. Setup database
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+5. Build assets
+```bash
+npm run build
+```
+
+6. Start development server
+```bash
+php artisan serve
+```
+
+## Core Features
+
+### File Upload & Processing
+- Upload Excel (.xlsx, .xls) or CSV files
+- Automatic column mapping with flexible naming conventions
+- Support for core fields and custom template fields
+- File size limit: 10MB
+- Batch tracking with upload history
+
+### Matching Algorithm
+The system uses a multi-stage matching approach:
+
+1. **Exact Match**: Full name + date of birth
+2. **Partial Match**: Last name + first name + date of birth
+3. **New Record**: If no match found, insert as new
+
+Confidence scoring ranges from 60% to 100% based on match quality.
+
+### Template System
+Create reusable templates to define:
+- Core field mappings (first_name, last_name, birthday, etc.)
+- Custom fields with type validation (string, integer, decimal, date, boolean)
+- Required vs optional fields
+- Field-specific validation rules
+
+### Main System Records
+Manage individual records with:
+- Auto-generated unique identifiers (UID)
+- Complete personal information (name, DOB, gender, civil status)
+- Address information
+- Registration tracking
+- Audit trail of all changes
+
+### Batch Management
+Track all file uploads with:
+- Batch history and status
+- Match result summaries
+- Origin tracking for each record
+- Duplicate detection reports
+
+## Database Schema
+
+### Main Tables
+
+**main_system**
+- Core record storage with personal information
+- Tracks origin batch and match result references
+- Supports audit trail logging
+
+**upload_batches**
+- File upload history and metadata
+- Batch status and processing results
+- File deduplication tracking
+
+**match_results**
+- Individual match records from each batch
+- Confidence scores and match status
+- Uploaded record details for audit trail
+
+**template_field_values**
+- Custom field values for records
+- Supports dynamic schema per template
+- Tracks field changes and conflicts
+
+## API Endpoints
+
+### Records
+- `GET /api/main-system` - List records
+- `POST /api/main-system` - Create record
+- `GET /api/main-system/{id}` - Get record
+- `PUT /api/main-system/{id}` - Update record
+- `DELETE /api/main-system/{id}` - Delete record
+
+### Templates
+- `GET /api/templates` - List templates
+- `POST /api/templates` - Create template
+- `GET /api/templates/{id}` - Get template
+- `PUT /api/templates/{id}` - Update template
+- `DELETE /api/templates/{id}` - Delete template
+
+### Batch Operations
+- `POST /api/bulk-action` - Perform bulk actions on records
+- `GET /api/batch-analytics/{batchId}` - Get batch statistics
+- `GET /api/field-breakdown/{resultId}` - Get field-level match details
+
+## Artisan Commands
+
+### Data Management
+
+**Backfill Origin Batch Data**
+```bash
+php artisan data:backfill-origin-batch
+```
+Retroactively links existing records to their source batch files.
+
+**Remove Duplicate Records**
+```bash
+php artisan duplicates:remove [--dry-run]
+```
+Identifies and removes duplicate records based on name and DOB.
+
+**Purge Database Data**
+```bash
+php artisan data:purge [--keep-users]
+```
+Clears all data while preserving table structure.
+
+## Usage Guide
+
+### Uploading Records
+
+1. Navigate to the Upload page
+2. Select a file (Excel or CSV)
+3. Optionally choose a template for custom field mapping
+4. Click Upload
+5. System processes the file and displays match results
+
+### Creating Templates
+
+1. Go to Templates section
+2. Click "Create New Template"
+3. Map core fields to your file columns
+4. Add custom fields with appropriate types
+5. Save template for reuse
+
+### Managing Records
+
+- **View**: Browse all records with search and filtering
+- **Create**: Add new records manually
+- **Edit**: Update existing record information
+- **Delete**: Remove records with confirmation
+- **Export**: Download records as CSV
+
+### Viewing Match Results
+
+- Access batch history to see all uploads
+- View detailed match results with confidence scores
+- See field-level breakdowns for each match
+- Track origin of each record
+
+## Configuration
+
+### File Upload Settings
+Edit `.env` to configure:
+```
+UPLOAD_MAX_FILE_SIZE=10240  # in KB
+UPLOAD_ALLOWED_EXTENSIONS=xlsx,xls,csv
+```
+
+### Matching Thresholds
+Configure confidence score thresholds in `config/app.php`:
+```php
+'matching' => [
+    'exact_match_threshold' => 100,
+    'partial_match_threshold' => 90,
+    'possible_duplicate_threshold' => 60,
+]
+```
+
+## Testing
+
+Run the test suite:
+```bash
+php artisan test
+```
+
+Run specific test file:
+```bash
+php artisan test tests/Feature/UploadControllerTest.php
+```
+
+## Project Structure
+
+```
+app/
+├── Console/Commands/          # Artisan commands
+├── Http/
+│   ├── Controllers/           # Request handlers
+│   └── Requests/              # Form validation
+├── Models/                    # Database models
+├── Services/                  # Business logic
+│   ├── DataMappingService.php
+│   ├── DataMatchService.php
+│   └── MatchAnalyticsService.php
+└── Imports/                   # Excel import handlers
+
+resources/
+├── views/
+│   ├── pages/                 # Page templates
+│   └── layouts/               # Layout templates
+└── js/
+    └── components/            # Vue/JS components
+
+database/
+├── migrations/                # Schema changes
+└── factories/                 # Test data factories
+```
+
+## Contributing
+
+1. Create a feature branch: `git checkout -b feature/your-feature`
+2. Make your changes following the coding standards
+3. Write tests for new functionality
+4. Commit with clear messages: `git commit -m "feat: add new feature"`
+5. Push to branch: `git push origin feature/your-feature`
+6. Open a Pull Request with detailed description
+
+## Coding Standards
+
+- Follow PSR-12 for PHP code style
+- Use type hints for all function parameters and returns
+- Write meaningful commit messages
+- Maintain minimum 80% test coverage
+- Document complex business logic
+
+## License
+
+This project is proprietary and confidential.
 
 ---
 
