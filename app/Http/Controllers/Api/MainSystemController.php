@@ -18,6 +18,29 @@ class MainSystemController extends Controller
     }
 
     /**
+     * Get all Main System records with pagination
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $perPage = $request->input('per_page', 15);
+        $records = MainSystem::paginate($perPage);
+
+        return response()->json([
+            'success' => true,
+            'data' => $records->items(),
+            'pagination' => [
+                'total' => $records->total(),
+                'per_page' => $records->perPage(),
+                'current_page' => $records->currentPage(),
+                'last_page' => $records->lastPage(),
+            ],
+        ]);
+    }
+
+    /**
      * Create a new Main System record
      *
      * @param Request $request

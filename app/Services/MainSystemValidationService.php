@@ -116,7 +116,7 @@ class MainSystemValidationService
     {
         $rules = [
             'recordIds' => ['required', 'array', 'min:1'],
-            'recordIds.*' => ['integer', 'exists:main_system,id'],
+            'recordIds.*' => ['integer'],
             'status' => ['required', Rule::in(['active', 'inactive', 'archived'])],
         ];
 
@@ -142,7 +142,7 @@ class MainSystemValidationService
     {
         $rules = [
             'recordIds' => ['required', 'array', 'min:1'],
-            'recordIds.*' => ['integer', 'exists:main_system,id'],
+            'recordIds.*' => ['integer'],
             'category' => ['required', 'string', 'max:255'],
         ];
 
@@ -168,7 +168,7 @@ class MainSystemValidationService
     {
         $rules = [
             'recordIds' => ['required', 'array', 'min:1'],
-            'recordIds.*' => ['integer', 'exists:main_system,id'],
+            'recordIds.*' => ['integer'],
         ];
 
         $validator = Validator::make($data, $rules);

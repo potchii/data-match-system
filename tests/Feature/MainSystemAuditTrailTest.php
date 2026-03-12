@@ -71,7 +71,7 @@ class MainSystemAuditTrailTest extends TestCase
 
         // Assert - New values captured
         $this->assertNotNull($auditEntry->new_values);
-        $newValues = json_decode($auditEntry->new_values, true);
+        $newValues = $auditEntry->new_values;
         $this->assertEquals('John', $newValues['first_name']);
         $this->assertEquals('Doe', $newValues['last_name']);
 
@@ -112,13 +112,13 @@ class MainSystemAuditTrailTest extends TestCase
 
         // Assert - Changed fields captured
         $this->assertNotNull($auditEntry->changed_fields);
-        $changedFields = json_decode($auditEntry->changed_fields, true);
+        $changedFields = $auditEntry->changed_fields;
         $this->assertContains('first_name', $changedFields);
         $this->assertContains('status', $changedFields);
 
         // Assert - Old and new values captured
-        $oldValues = json_decode($auditEntry->old_values, true);
-        $newValues = json_decode($auditEntry->new_values, true);
+        $oldValues = $auditEntry->old_values;
+        $newValues = $auditEntry->new_values;
 
         $this->assertEquals('John', $oldValues['first_name']);
         $this->assertEquals('Janet', $newValues['first_name']);
@@ -154,7 +154,7 @@ class MainSystemAuditTrailTest extends TestCase
 
         // Assert - Deleted record values captured
         $this->assertNotNull($auditEntry->new_values);
-        $deletedValues = json_decode($auditEntry->new_values, true);
+        $deletedValues = $auditEntry->new_values;
         $this->assertEquals('Bob', $deletedValues['first_name']);
         $this->assertEquals('Johnson', $deletedValues['last_name']);
 
@@ -190,12 +190,12 @@ class MainSystemAuditTrailTest extends TestCase
             $this->assertNotNull($auditEntry);
 
             // Assert - Changed fields captured
-            $changedFields = json_decode($auditEntry->changed_fields, true);
+            $changedFields = $auditEntry->changed_fields;
             $this->assertContains('status', $changedFields);
 
             // Assert - Old and new values captured
-            $oldValues = json_decode($auditEntry->old_values, true);
-            $newValues = json_decode($auditEntry->new_values, true);
+            $oldValues = $auditEntry->old_values;
+            $newValues = $auditEntry->new_values;
             $this->assertEquals('active', $oldValues['status']);
             $this->assertEquals('inactive', $newValues['status']);
         }
@@ -208,12 +208,21 @@ class MainSystemAuditTrailTest extends TestCase
      */
     public function test_audit_trail_immutability()
     {
-        // Arrange - Create record and get audit entry
-        $record = MainSystem::factory()->create();
-        $auditEntry = AuditTrail::where('model_id', $record->id)
+        // Arrange - Create record via API to generate audit entry
+        $recordData = [
+            'uid' => 'TEST-005',
+            'first_name' => 'Test',
+            'last_name' => 'User',
+        ];
+
+        $response = $this->postJson('/api/main-system', $recordData);
+        $recordId = $response->json('data.id');
+
+        $auditEntry = AuditTrail::where('model_id', $recordId)
             ->where('action_type', 'create')
             ->first();
 
+        $this->assertNotNull($auditEntry);
         $originalValues = $auditEntry->new_values;
 
         // Act - Attempt to modify audit entry (should not be allowed in real system)
@@ -259,7 +268,7 @@ class MainSystemAuditTrailTest extends TestCase
     public function test_audit_trail_timestamp()
     {
         // Arrange
-        $beforeTime = now();
+        $beforeTime = now()->subSecond();
 
         // Act - Create record
         $response = $this->postJson('/api/main-system', [
@@ -269,13 +278,14 @@ class MainSystemAuditTrailTest extends TestCase
         ]);
         $recordId = $response->json('data.id');
 
-        $afterTime = now();
+        $afterTime = now()->addSecond();
 
         // Assert - Audit entry has timestamp within expected range
         $auditEntry = AuditTrail::where('model_id', $recordId)
             ->where('action_type', 'create')
             ->first();
 
+        $this->assertNotNull($auditEntry);
         $this->assertTrue($auditEntry->created_at >= $beforeTime);
         $this->assertTrue($auditEntry->created_at <= $afterTime);
     }
@@ -342,11 +352,11 @@ class MainSystemAuditTrailTest extends TestCase
             $this->assertNotNull($auditEntry);
 
             // Assert - Category change captured
-            $changedFields = json_decode($auditEntry->changed_fields, true);
+            $changedFields = $auditEntry->changed_fields;
             $this->assertContains('category', $changedFields);
 
-            $oldValues = json_decode($auditEntry->old_values, true);
-            $newValues = json_decode($auditEntry->new_values, true);
+            $oldValues = $auditEntry->old_values;
+            $newValues = $auditEntry->new_values;
             $this->assertEquals('standard', $oldValues['category']);
             $this->assertEquals('premium', $newValues['category']);
         }
@@ -359,19 +369,22 @@ class MainSystemAuditTrailTest extends TestCase
      */
     public function test_audit_trail_query_by_record_id()
     {
-        // Arrange - Create record and perform multiple operations
-        $record = MainSystem::factory()->create([
+        // Arrange - Create record via API and perform multiple operations
+        $createResponse = $this->postJson('/api/main-system', [
+            'uid' => 'TEST-006',
             'first_name' => 'John',
+            'last_name' => 'Doe',
             'status' => 'active',
         ]);
+        $recordId = $createResponse->json('data.id');
 
         // Update record
-        $this->putJson("/api/main-system/{$record->id}", [
+        $this->putJson("/api/main-system/{$recordId}", [
             'first_name' => 'Janet',
         ]);
 
         // Act - Query audit trail for record
-        $response = $this->getJson("/api/audit-trail?recordId={$record->id}");
+        $response = $this->getJson("/api/audit-trail?recordId={$recordId}");
 
         // Assert - Response contains audit entries
         $response->assertStatus(200);

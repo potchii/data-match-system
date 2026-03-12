@@ -341,8 +341,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'HR Import with Custom Fields',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['department', 'position', 'salary'],
             'field_types' => ['string', 'string', 'decimal'],
             'field_required' => [0, 1], // department and position are required
@@ -409,8 +409,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'Template with Duplicate Fields',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['department', 'department'], // Duplicate field name
             'field_types' => ['string', 'string'],
             'field_required' => [],
@@ -477,8 +477,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'Simple Template',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
         ];
 
         $response = $this
@@ -509,8 +509,8 @@ class TemplateControllerTest extends TestCase
         // Update template with new custom fields
         $updateData = [
             'name' => 'Updated Template',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['department', 'position', 'salary'],
             'field_types' => ['string', 'string', 'decimal'],
             'field_required' => [0, 2], // department and salary are required
@@ -581,8 +581,8 @@ class TemplateControllerTest extends TestCase
         // Update template with modified custom fields
         $updateData = [
             'name' => 'Template with Fields',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['department', 'salary'],
             'field_types' => ['string', 'decimal'], // Changed salary from integer to decimal
             'field_required' => [0, 1], // Both now required
@@ -644,8 +644,8 @@ class TemplateControllerTest extends TestCase
         // Update template with only one field (removing two fields)
         $updateData = [
             'name' => 'Template with Fields',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['department'], // Only keep department
             'field_types' => ['string'],
             'field_required' => [0],
@@ -706,8 +706,8 @@ class TemplateControllerTest extends TestCase
         // Update template without any custom fields
         $updateData = [
             'name' => 'Template with Fields',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             // No field_names, field_types, or field_required
         ];
 
@@ -740,8 +740,8 @@ class TemplateControllerTest extends TestCase
         // Try to update with duplicate field names
         $updateData = [
             'name' => 'Template',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['department', 'department'], // Duplicate
             'field_types' => ['string', 'string'],
             'field_required' => [],
@@ -780,8 +780,8 @@ class TemplateControllerTest extends TestCase
         // Update with different attributes
         $updateData = [
             'name' => 'Template',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['status', 'active', 'score'],
             'field_types' => ['boolean', 'boolean', 'integer'], // Changed status to boolean, added new fields
             'field_required' => [0, 1], // status and active are required
@@ -996,8 +996,8 @@ class TemplateControllerTest extends TestCase
         // Attempt to create template with duplicate field names via web form
         $templateData = [
             'name' => 'Template with Duplicates',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['department', 'position', 'department', 'salary'], // 'department' appears twice
             'field_types' => ['string', 'string', 'string', 'decimal'],
             'field_required' => [0, 1], // department and position are required
@@ -1194,8 +1194,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'Template with All Valid Types',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Department', 'Employee Count', 'Hire Date', 'Is Active', 'Salary'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No', 'Department', 'Employee Count', 'Hire Date', 'Is Active', 'Salary'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['department', 'employee_count', 'hire_date', 'is_active', 'salary'],
             'field_types' => $validTypes,
             'field_required' => [],
@@ -1326,8 +1326,8 @@ class TemplateControllerTest extends TestCase
 
         $updateData = [
             'name' => 'Test Template',
-            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['Employee No', 'Surname', 'Given Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => ['text_field', 'int_field', 'date_field', 'bool_field', 'decimal_field'],
             'field_types' => ['string', 'integer', 'date', 'boolean', 'decimal'],
             'field_required' => [],
@@ -1491,8 +1491,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'Complete Template',
-            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => [],
             'field_types' => [],
             'field_required' => [],
@@ -1565,8 +1565,8 @@ class TemplateControllerTest extends TestCase
 
         $templateData = [
             'name' => 'Updated Template',
-            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => [],
             'field_types' => [],
             'field_required' => [],
@@ -1590,8 +1590,8 @@ class TemplateControllerTest extends TestCase
         // Only required fields, no optional fields (middle_name, suffix)
         $templateData = [
             'name' => 'Template Without Optional Fields',
-            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay'],
-            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay'],
+            'excel_columns' => ['ID', 'Last Name', 'First Name', 'Birthday', 'Gender', 'Address', 'Barangay', 'Reg No'],
+            'system_fields' => ['uid', 'last_name', 'first_name', 'birthday', 'gender', 'address', 'barangay', 'regs_no'],
             'field_names' => [],
             'field_types' => [],
             'field_required' => [],

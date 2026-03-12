@@ -484,486 +484,486 @@
    WARN  Metadata found in doc-comment for method Tests\Feature\ExportDuplicatesTest::it_generates_filename_with_filters(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
 
    PASS  Tests\Unit\AuditTrailImmutabilityPropertyTest
-  ✓ audit trail entries cannot be modified                       1.15s  
-  ✓ audit trail entries cannot be deleted                        0.07s  
-  ✓ multiple audit entries maintain independent integrity        0.07s  
-  ✓ audit trail preserves all original data                      0.06s  
+  ✓ audit trail entries cannot be modified                       0.54s  
+  ✓ audit trail entries cannot be deleted                        0.03s  
+  ✓ multiple audit entries maintain independent integrity        0.03s  
+  ✓ audit trail preserves all original data                      0.03s  
 
    FAIL  Tests\Unit\AuditTrailLoggingPropertyTest
-  ⨯ audit trail logs create operation                            0.12s  
-  ⨯ audit trail logs update operation                            0.11s  
-  ⨯ audit trail logs delete operation                            0.18s  
-  ✓ audit trail includes user id                                 0.06s  
-  ✓ audit trail includes ip address                              0.06s  
-  ✓ audit trail includes user agent                              0.05s  
-  ✓ audit trail tracks changed fields on update                  0.06s  
-  ✓ audit trail includes all changed fields                      0.06s  
-  ✓ audit trail can include reason                               0.05s  
-  ⨯ audit trail retrieval by model                               0.06s  
-  ⨯ audit trail retrieval by action type                         0.06s  
-  ⨯ audit trail respects limit                                   0.12s  
-  ✓ audit trail retrieval by user                                0.14s  
-  ✓ audit trail preserves json data                              0.09s  
+  ✓ audit trail logs create operation                            0.05s  
+  ✓ audit trail logs update operation                            0.03s  
+  ✓ audit trail logs delete operation                            0.03s  
+  ✓ audit trail includes user id                                 0.03s  
+  ✓ audit trail includes ip address                              0.03s  
+  ✓ audit trail includes user agent                              0.03s  
+  ✓ audit trail tracks changed fields on update                  0.03s  
+  ✓ audit trail includes all changed fields                      0.03s  
+  ✓ audit trail can include reason                               0.03s  
+  ⨯ audit trail retrieval by model                               0.04s  
+  ⨯ audit trail retrieval by action type                         0.03s  
+  ⨯ audit trail respects limit                                   0.03s  
+  ✓ audit trail retrieval by user                                0.03s  
+  ✓ audit trail preserves json data                              0.04s  
 
    FAIL  Tests\Unit\BulkActionPropertyTest
-  ✓ bulk delete processes all selected records                   0.17s  
-  ✓ bulk status update processes all selected records            0.12s  
-  ✓ bulk category update processes all selected records          0.12s  
-  ✓ bulk delete with single record                               0.12s  
-  ✓ bulk delete with large number of records                     0.80s  
-  ✓ bulk delete handles nonexistent records                      0.06s  
-  ✓ bulk status update handles nonexistent records               0.06s  
-  ✓ bulk category update handles nonexistent records             0.19s  
-  ⨯ bulk delete creates audit entries for each record            0.16s  
-  ⨯ bulk status update creates audit entries for each record     0.09s  
-  ⨯ bulk category update creates audit entries for each record   0.09s  
-  ✓ bulk delete returns success flag                             0.09s  
-  ✓ bulk status update returns success flag                      0.10s  
-  ✓ bulk category update returns success flag                    0.09s  
-  ✓ bulk delete with mixed valid and invalid records             0.06s  
+  ✓ bulk delete processes all selected records                   0.07s  
+  ✓ bulk status update processes all selected records            0.06s  
+  ✓ bulk category update processes all selected records          0.06s  
+  ✓ bulk delete with single record                               0.03s  
+  ✓ bulk delete with large number of records                     0.30s  
+  ✓ bulk delete handles nonexistent records                      0.03s  
+  ✓ bulk status update handles nonexistent records               0.03s  
+  ✓ bulk category update handles nonexistent records             0.03s  
+  ⨯ bulk delete creates audit entries for each record            0.05s  
+  ⨯ bulk status update creates audit entries for each record     0.04s  
+  ⨯ bulk category update creates audit entries for each record   0.04s  
+  ✓ bulk delete returns success flag                             0.04s  
+  ✓ bulk status update returns success flag                      0.04s  
+  ✓ bulk category update returns success flag                    0.05s  
+  ✓ bulk delete with mixed valid and invalid records             0.04s  
 
    PASS  Tests\Unit\ColumnMappingTemplateTest
-  ✓ template has fillable fields                                 0.19s  
-  ✓ mappings are cast to array                                   0.11s  
-  ✓ template belongs to user                                     0.07s  
-  ✓ for user returns only user templates                         0.06s  
-  ✓ apply to remaps columns correctly                            0.06s  
-  ✓ apply to ignores missing columns                             0.05s  
-  ✓ validate mappings returns true for valid structure           0.06s  
-  ✓ validate mappings returns false for non array                0.06s  
-  ✓ validate mappings returns false for non string values        0.06s  
-  ✓ validation rules enforce unique name per user                0.06s  
-  ✓ validation rules allow same name for different users         0.07s  
-  ✓ validation rules exclude current template on update          0.16s  
-  ✓ user has column mapping templates relationship               0.11s  
-  ✓ template has fields relationship                             0.06s  
-  ✓ get expected columns returns core columns only               0.07s  
-  ✓ get expected columns includes template fields                0.07s  
-  ✓ get expected columns with empty mappings                     0.06s  
-  ✓ get expected columns with empty mappings but template field… 0.06s  
-  ✓ get expected columns merges core and template correctly      0.06s  
-  ✓ validate file columns passes with exact match                0.06s  
-  ✓ validate file columns detects missing columns                0.30s  
-  ✓ validate file columns detects extra columns                  0.11s  
-  ✓ validate file columns is case insensitive                    0.06s  
-  ✓ validate file columns with template fields                   0.06s  
-  ✓ validate file columns detects missing template field         0.05s  
-  ✓ validate file columns returns all errors                     0.05s  
-  ✓ validate file columns with empty array                       0.06s  
-  ✓ validate file columns returns correct structure              0.06s  
+  ✓ template has fillable fields                                 0.05s  
+  ✓ mappings are cast to array                                   0.03s  
+  ✓ template belongs to user                                     0.03s  
+  ✓ for user returns only user templates                         0.03s  
+  ✓ apply to remaps columns correctly                            0.03s  
+  ✓ apply to ignores missing columns                             0.03s  
+  ✓ validate mappings returns true for valid structure           0.03s  
+  ✓ validate mappings returns false for non array                0.03s  
+  ✓ validate mappings returns false for non string values        0.03s  
+  ✓ validation rules enforce unique name per user                0.05s  
+  ✓ validation rules allow same name for different users         0.03s  
+  ✓ validation rules exclude current template on update          0.03s  
+  ✓ user has column mapping templates relationship               0.03s  
+  ✓ template has fields relationship                             0.03s  
+  ✓ get expected columns returns core columns only               0.03s  
+  ✓ get expected columns includes template fields                0.03s  
+  ✓ get expected columns with empty mappings                     0.04s  
+  ✓ get expected columns with empty mappings but template field… 0.03s  
+  ✓ get expected columns merges core and template correctly      0.03s  
+  ✓ validate file columns passes with exact match                0.03s  
+  ✓ validate file columns detects missing columns                0.03s  
+  ✓ validate file columns detects extra columns                  0.04s  
+  ✓ validate file columns is case insensitive                    0.03s  
+  ✓ validate file columns with template fields                   0.03s  
+  ✓ validate file columns detects missing template field         0.03s  
+  ✓ validate file columns returns all errors                     0.03s  
+  ✓ validate file columns with empty array                       0.03s  
+  ✓ validate file columns returns correct structure              0.03s  
 
    PASS  Tests\Unit\ConfidenceScoreServiceNullMiddleNameTest
-  ✓ breakdown includes middle name when uploaded value is null   0.12s  
-  ✓ breakdown includes middle name when both values are null     0.05s  
-  ✓ breakdown includes middle name when uploaded has value       0.05s  
+  ✓ breakdown includes middle name when uploaded value is null   0.06s  
+  ✓ breakdown includes middle name when both values are null     0.02s  
+  ✓ breakdown includes middle name when uploaded has value       0.03s  
 
    PASS  Tests\Unit\ConfidenceScoreServiceTask4Test
-  ✓ it includes template fields in breakdown                     0.07s  
-  ✓ it sets category property for core fields                    0.07s  
-  ✓ it sets category property for template fields                0.06s  
-  ✓ it includes normalized values for name fields                0.05s  
-  ✓ it only includes normalized values when available            0.05s  
-  ✓ it calculates confidence score for exact match               0.05s  
-  ✓ it calculates confidence score for fuzzy match               0.07s  
-  ✓ it returns null confidence for new fields                    0.06s  
-  ✓ it maintains backward compatibility with fields key          0.06s  
-  ✓ it handles different field types for confidence calculation  0.06s  
-  ✓ it returns zero confidence for non string mismatch           0.05s  
-  ✓ it handles missing template gracefully                       0.08s  
-  ✓ it includes field type for template fields                   0.06s  
+  ✓ it includes template fields in breakdown                     0.04s  
+  ✓ it sets category property for core fields                    0.03s  
+  ✓ it sets category property for template fields                0.04s  
+  ✓ it includes normalized values for name fields                0.03s  
+  ✓ it only includes normalized values when available            0.03s  
+  ✓ it calculates confidence score for exact match               0.03s  
+  ✓ it calculates confidence score for fuzzy match               0.06s  
+  ✓ it returns null confidence for new fields                    0.03s  
+  ✓ it maintains backward compatibility with fields key          0.03s  
+  ✓ it handles different field types for confidence calculation  0.03s  
+  ✓ it returns zero confidence for non string mismatch           0.03s  
+  ✓ it handles missing template gracefully                       0.04s  
+  ✓ it includes field type for template fields                   0.03s  
 
    PASS  Tests\Unit\DataMappingServiceTask42Test
-  ✓ it returns structured array with core and dynamic fields     0.09s  
-  ✓ it maps known columns to core fields                         0.05s  
-  ✓ it maps unknown columns to dynamic fields                    0.05s  
-  ✓ it processes compound first names first                      0.06s  
-  ✓ it skips empty and null values for dynamic fields            0.05s  
-  ✓ it normalizes dynamic keys to snake case                     0.05s  
-  ✓ it does not add null core fields                             0.05s  
+  ✓ it returns structured array with core and dynamic fields     0.05s  
+  ✓ it maps known columns to core fields                         0.02s  
+  ✓ it maps unknown columns to dynamic fields                    0.03s  
+  ✓ it processes compound first names first                      0.02s  
+  ✓ it skips empty and null values for dynamic fields            0.03s  
+  ✓ it normalizes dynamic keys to snake case                     0.03s  
+  ✓ it does not add null core fields                             0.03s  
 
    PASS  Tests\Unit\DataMappingServiceTask61Test
-  ✓ it returns row unchanged when no template provided           0.08s  
-  ✓ it accepts template and applies mappings                     0.06s  
-  ✓ it remaps all columns present in template                    0.06s  
-  ✓ it remaps only columns that exist in row                     0.06s  
-  ✓ it ignores template mappings for missing columns             0.06s  
-  ✓ it handles empty row gracefully                              0.06s  
-  ✓ it handles row with no matching columns                      0.05s  
-  ✓ it preserves null values in remapped columns                 0.05s  
-  ✓ it preserves empty string values in remapped columns         0.05s  
-  ✓ it works with map uploaded data after template application   0.06s  
+  ✓ it returns row unchanged when no template provided           0.05s  
+  ✓ it accepts template and applies mappings                     0.03s  
+  ✓ it remaps all columns present in template                    0.03s  
+  ✓ it remaps only columns that exist in row                     0.03s  
+  ✓ it ignores template mappings for missing columns             0.03s  
+  ✓ it handles empty row gracefully                              0.03s  
+  ✓ it handles row with no matching columns                      0.03s  
+  ✓ it preserves null values in remapped columns                 0.03s  
+  ✓ it preserves empty string values in remapped columns         0.03s  
+  ✓ it works with map uploaded data after template application   0.03s  
 
    PASS  Tests\Unit\DataMappingServiceTask62PropertyTest
-  ✓ preserves template field values and data types               0.63s  
-  ✓ handles no template fields gracefully                        0.05s  
-  ✓ excludes empty template field values                         0.07s  
-  ✓ preserves zero and false template field values               0.06s  
+  ✓ preserves template field values and data types               0.20s  
+  ✓ handles no template fields gracefully                        0.03s  
+  ✓ excludes empty template field values                         0.03s  
+  ✓ preserves zero and false template field values               0.03s  
 
    PASS  Tests\Unit\DataMappingServiceTask62Test
-  ✓ it generates mappings for core fields                        0.06s  
-  ✓ it maps various column name variations                       0.03s  
-  ✓ it handles all core field types                              0.08s  
+  ✓ it generates mappings for core fields                        0.05s  
+  ✓ it maps various column name variations                       0.04s  
+  ✓ it handles all core field types                              0.04s  
   ✓ it handles compound first name fields                        0.05s  
   ✓ it handles first name without second name                    0.05s  
-  ✓ it handles various name field variations                     0.05s  
-  ✓ it returns array with excel column to system field format    0.07s  
-  ✓ it generates mappings for all columns in sample row          0.10s  
+  ✓ it handles various name field variations                     0.03s  
+  ✓ it returns array with excel column to system field format    0.03s  
+  ✓ it generates mappings for all columns in sample row          0.02s  
   ✓ it handles empty sample row                                  0.13s  
-  ✓ it preserves original excel column names as keys             0.08s  
-  ✓ it generates mappings compatible with column mapping templa… 0.05s  
-  ✓ it handles null values in sample row                         0.05s  
-  ✓ it handles empty string values in sample row                 0.05s  
+  ✓ it preserves original excel column names as keys             0.10s  
+  ✓ it generates mappings compatible with column mapping templa… 0.12s  
+  ✓ it handles null values in sample row                         0.03s  
+  ✓ it handles empty string values in sample row                 0.03s  
 
    PASS  Tests\Unit\DataMappingServiceTest
-  ✓ it maps surname variations to last name                      0.14s  
-  ✓ it maps firstname variations to first name                   0.05s  
-  ✓ it maps birthday variations to birthday                      0.05s  
-  ✓ it maps gender variations to gender                          0.05s  
-  ✓ it maps status variations to status                          0.05s  
-  ✓ it maps address variations to address                        0.05s  
-  ✓ it maps barangay variations to barangay                      0.05s  
-  ✓ it maps uid variations to uid                                0.10s  
-  ✓ it maps suffix variations to suffix                          0.11s  
-  ✓ it maps multiple core fields in single row                   0.11s  
-  ✓ it maps unknown columns to dynamic fields                    0.05s  
-  ✓ it handles row with only dynamic fields                      0.05s  
-  ✓ it handles row with only core fields                         0.05s  
-  ✓ it handles mixed core and dynamic fields                     0.05s  
-  ✓ it excludes empty string from dynamic fields                 0.05s  
-  ✓ it excludes null from dynamic fields                         0.05s  
-  ✓ it excludes multiple empty values from dynamic fields        0.06s  
-  ✓ it preserves zero and false values in dynamic fields         0.04s  
-  ✓ it prioritizes core field mapping over dynamic               0.04s  
-  ✓ it does not duplicate core fields in dynamic fields          0.05s  
-  ✓ it handles all core field mappings correctly                 0.05s  
+  ✓ it maps surname variations to last name                      0.04s  
+  ✓ it maps firstname variations to first name                   0.02s  
+  ✓ it maps birthday variations to birthday                      0.03s  
+  ✓ it maps gender variations to gender                          0.02s  
+  ✓ it maps status variations to status                          0.03s  
+  ✓ it maps address variations to address                        0.02s  
+  ✓ it maps barangay variations to barangay                      0.03s  
+  ✓ it maps uid variations to uid                                0.03s  
+  ✓ it maps suffix variations to suffix                          0.02s  
+  ✓ it maps multiple core fields in single row                   0.03s  
+  ✓ it maps unknown columns to dynamic fields                    0.03s  
+  ✓ it handles row with only dynamic fields                      0.03s  
+  ✓ it handles row with only core fields                         0.02s  
+  ✓ it handles mixed core and dynamic fields                     0.03s  
+  ✓ it excludes empty string from dynamic fields                 0.03s  
+  ✓ it excludes null from dynamic fields                         0.03s  
+  ✓ it excludes multiple empty values from dynamic fields        0.03s  
+  ✓ it preserves zero and false values in dynamic fields         0.03s  
+  ✓ it prioritizes core field mapping over dynamic               0.02s  
+  ✓ it does not duplicate core fields in dynamic fields          0.03s  
+  ✓ it handles all core field mappings correctly                 0.03s  
 
    PASS  Tests\Unit\DataMappingServiceValidationPropertyTest
-  ✓ property json well formedness with data set "iteration 0"    0.15s  
-  ✓ property json well formedness with data set "iteration 1"    0.13s  
-  ✓ property json well formedness with data set "iteration 2"    0.08s  
-  ✓ property json well formedness with data set "iteration 3"    0.05s  
-  ✓ property json well formedness with data set "iteration 4"    0.06s  
-  ✓ property json well formedness with data set "iteration 5"    0.05s  
-  ✓ property json well formedness with data set "iteration 6"    0.05s  
-  ✓ property json well formedness with data set "iteration 7"    0.05s  
-  ✓ property json well formedness with data set "iteration 8"    0.05s  
-  ✓ property json well formedness with data set "iteration 9"    0.08s  
-  ✓ property json well formedness with data set "iteration 10"   0.07s  
-  ✓ property json well formedness with data set "iteration 11"   0.07s  
-  ✓ property json well formedness with data set "iteration 12"   0.04s  
-  ✓ property json well formedness with data set "iteration 13"   0.30s  
-  ✓ property json well formedness with data set "iteration 14"   0.10s  
-  ✓ property json well formedness with data set "iteration 15"   0.08s  
-  ✓ property json well formedness with data set "iteration 16"   0.14s  
-  ✓ property json well formedness with data set "iteration 17"   0.08s  
-  ✓ property json well formedness with data set "iteration 18"   0.05s  
-  ✓ property json well formedness with data set "iteration 19"   0.04s  
-  ✓ property json well formedness with data set "iteration 20"   0.06s  
-  ✓ property json well formedness with data set "iteration 21"   0.05s  
-  ✓ property json well formedness with data set "iteration 22"   0.04s  
-  ✓ property json well formedness with data set "iteration 23"   0.05s  
-  ✓ property json well formedness with data set "iteration 24"   0.07s  
-  ✓ property json well formedness with data set "iteration 25"   0.05s  
-  ✓ property json well formedness with data set "iteration 26"   0.04s  
-  ✓ property json well formedness with data set "iteration 27"   0.10s  
-  ✓ property json well formedness with data set "iteration 28"   0.07s  
-  ✓ property json well formedness with data set "iteration 29"   0.06s  
-  ✓ property json well formedness with data set "iteration 30"   0.05s  
-  ✓ property json well formedness with data set "iteration 31"   0.05s  
-  ✓ property json well formedness with data set "iteration 32"   0.04s  
+  ✓ property json well formedness with data set "iteration 0"    0.05s  
+  ✓ property json well formedness with data set "iteration 1"    0.03s  
+  ✓ property json well formedness with data set "iteration 2"    0.03s  
+  ✓ property json well formedness with data set "iteration 3"    0.03s  
+  ✓ property json well formedness with data set "iteration 4"    0.03s  
+  ✓ property json well formedness with data set "iteration 5"    0.02s  
+  ✓ property json well formedness with data set "iteration 6"    0.03s  
+  ✓ property json well formedness with data set "iteration 7"    0.02s  
+  ✓ property json well formedness with data set "iteration 8"    0.03s  
+  ✓ property json well formedness with data set "iteration 9"    0.03s  
+  ✓ property json well formedness with data set "iteration 10"   0.03s  
+  ✓ property json well formedness with data set "iteration 11"   0.03s  
+  ✓ property json well formedness with data set "iteration 12"   0.03s  
+  ✓ property json well formedness with data set "iteration 13"   0.02s  
+  ✓ property json well formedness with data set "iteration 14"   0.03s  
+  ✓ property json well formedness with data set "iteration 15"   0.03s  
+  ✓ property json well formedness with data set "iteration 16"   0.04s  
+  ✓ property json well formedness with data set "iteration 17"   0.03s  
+  ✓ property json well formedness with data set "iteration 18"   0.03s  
+  ✓ property json well formedness with data set "iteration 19"   0.02s  
+  ✓ property json well formedness with data set "iteration 20"   0.03s  
+  ✓ property json well formedness with data set "iteration 21"   0.02s  
+  ✓ property json well formedness with data set "iteration 22"   0.03s  
+  ✓ property json well formedness with data set "iteration 23"   0.02s  
+  ✓ property json well formedness with data set "iteration 24"   0.03s  
+  ✓ property json well formedness with data set "iteration 25"   0.03s  
+  ✓ property json well formedness with data set "iteration 26"   0.03s  
+  ✓ property json well formedness with data set "iteration 27"   0.03s  
+  ✓ property json well formedness with data set "iteration 28"   0.02s  
+  ✓ property json well formedness with data set "iteration 29"   0.02s  
+  ✓ property json well formedness with data set "iteration 30"   0.03s  
+  ✓ property json well formedness with data set "iteration 31"   0.03s  
+  ✓ property json well formedness with data set "iteration 32"   0.02s  
   ✓ property json well formedness with data set "iteration 33"   0.03s  
-  ✓ property json well formedness with data set "iteration 34"   0.05s  
-  ✓ property json well formedness with data set "iteration 35"   0.15s  
-  ✓ property json well formedness with data set "iteration 36"   0.17s  
-  ✓ property json well formedness with data set "iteration 37"   0.11s  
-  ✓ property json well formedness with data set "iteration 38"   0.07s  
-  ✓ property json well formedness with data set "iteration 39"   0.08s  
-  ✓ property json well formedness with data set "iteration 40"   0.06s  
-  ✓ property json well formedness with data set "iteration 41"   0.05s  
-  ✓ property json well formedness with data set "iteration 42"   0.06s  
-  ✓ property json well formedness with data set "iteration 43"   0.05s  
-  ✓ property json well formedness with data set "iteration 44"   0.05s  
-  ✓ property json well formedness with data set "iteration 45"   0.11s  
-  ✓ property json well formedness with data set "iteration 46"   0.11s  
-  ✓ property json well formedness with data set "iteration 47"   0.12s  
-  ✓ property json well formedness with data set "iteration 48"   0.06s  
-  ✓ property json well formedness with data set "iteration 49"   0.05s  
-  ✓ property json well formedness with data set "iteration 50"   0.05s  
-  ✓ property json well formedness with data set "iteration 51"   0.05s  
-  ✓ property json well formedness with data set "iteration 52"   0.05s  
-  ✓ property json well formedness with data set "iteration 53"   0.05s  
-  ✓ property json well formedness with data set "iteration 54"   0.05s  
-  ✓ property json well formedness with data set "iteration 55"   0.05s  
-  ✓ property json well formedness with data set "iteration 56"   0.05s  
-  ✓ property json well formedness with data set "iteration 57"   0.05s  
-  ✓ property json well formedness with data set "iteration 58"   0.04s  
-  ✓ property json well formedness with data set "iteration 59"   0.05s  
-  ✓ property json well formedness with data set "iteration 60"   0.08s  
-  ✓ property json well formedness with data set "iteration 61"   0.16s  
-  ✓ property json well formedness with data set "iteration 62"   0.08s  
-  ✓ property json well formedness with data set "iteration 63"   0.04s  
-  ✓ property json well formedness with data set "iteration 64"   0.05s  
-  ✓ property json well formedness with data set "iteration 65"   0.05s  
-  ✓ property json well formedness with data set "iteration 66"   0.05s  
-  ✓ property json well formedness with data set "iteration 67"   0.05s  
-  ✓ property json well formedness with data set "iteration 68"   0.05s  
-  ✓ property json well formedness with data set "iteration 69"   0.07s  
-  ✓ property json well formedness with data set "iteration 70"   0.05s  
-  ✓ property json well formedness with data set "iteration 71"   0.05s  
-  ✓ property json well formedness with data set "iteration 72"   0.05s  
-  ✓ property json well formedness with data set "iteration 73"   0.06s  
-  ✓ property json well formedness with data set "iteration 74"   0.05s  
-  ✓ property json well formedness with data set "iteration 75"   0.19s  
-  ✓ property json well formedness with data set "iteration 76"   0.09s  
-  ✓ property json well formedness with data set "iteration 77"   0.06s  
-  ✓ property json well formedness with data set "iteration 78"   0.06s  
-  ✓ property json well formedness with data set "iteration 79"   0.05s  
-  ✓ property json well formedness with data set "iteration 80"   0.07s  
-  ✓ property json well formedness with data set "iteration 81"   0.05s  
-  ✓ property json well formedness with data set "iteration 82"   0.04s  
-  ✓ property json well formedness with data set "iteration 83"   0.04s  
-  ✓ property json well formedness with data set "iteration 84"   0.04s  
-  ✓ property json well formedness with data set "iteration 85"   0.04s  
-  ✓ property json well formedness with data set "iteration 86"   0.04s  
-  ✓ property json well formedness with data set "iteration 87"   0.04s  
-  ✓ property json well formedness with data set "iteration 88"   0.05s  
-  ✓ property json well formedness with data set "iteration 89"   0.18s  
-  ✓ property json well formedness with data set "iteration 90"   0.08s  
-  ✓ property json well formedness with data set "iteration 91"   0.08s  
+  ✓ property json well formedness with data set "iteration 34"   0.03s  
+  ✓ property json well formedness with data set "iteration 35"   0.03s  
+  ✓ property json well formedness with data set "iteration 36"   0.03s  
+  ✓ property json well formedness with data set "iteration 37"   0.03s  
+  ✓ property json well formedness with data set "iteration 38"   0.03s  
+  ✓ property json well formedness with data set "iteration 39"   0.03s  
+  ✓ property json well formedness with data set "iteration 40"   0.02s  
+  ✓ property json well formedness with data set "iteration 41"   0.03s  
+  ✓ property json well formedness with data set "iteration 42"   0.03s  
+  ✓ property json well formedness with data set "iteration 43"   0.03s  
+  ✓ property json well formedness with data set "iteration 44"   0.03s  
+  ✓ property json well formedness with data set "iteration 45"   0.03s  
+  ✓ property json well formedness with data set "iteration 46"   0.03s  
+  ✓ property json well formedness with data set "iteration 47"   0.03s  
+  ✓ property json well formedness with data set "iteration 48"   0.02s  
+  ✓ property json well formedness with data set "iteration 49"   0.03s  
+  ✓ property json well formedness with data set "iteration 50"   0.03s  
+  ✓ property json well formedness with data set "iteration 51"   0.03s  
+  ✓ property json well formedness with data set "iteration 52"   0.03s  
+  ✓ property json well formedness with data set "iteration 53"   0.02s  
+  ✓ property json well formedness with data set "iteration 54"   0.03s  
+  ✓ property json well formedness with data set "iteration 55"   0.02s  
+  ✓ property json well formedness with data set "iteration 56"   0.03s  
+  ✓ property json well formedness with data set "iteration 57"   0.02s  
+  ✓ property json well formedness with data set "iteration 58"   0.03s  
+  ✓ property json well formedness with data set "iteration 59"   0.03s  
+  ✓ property json well formedness with data set "iteration 60"   0.06s  
+  ✓ property json well formedness with data set "iteration 61"   0.05s  
+  ✓ property json well formedness with data set "iteration 62"   0.03s  
+  ✓ property json well formedness with data set "iteration 63"   0.02s  
+  ✓ property json well formedness with data set "iteration 64"   0.03s  
+  ✓ property json well formedness with data set "iteration 65"   0.03s  
+  ✓ property json well formedness with data set "iteration 66"   0.03s  
+  ✓ property json well formedness with data set "iteration 67"   0.03s  
+  ✓ property json well formedness with data set "iteration 68"   0.03s  
+  ✓ property json well formedness with data set "iteration 69"   0.04s  
+  ✓ property json well formedness with data set "iteration 70"   0.02s  
+  ✓ property json well formedness with data set "iteration 71"   0.03s  
+  ✓ property json well formedness with data set "iteration 72"   0.02s  
+  ✓ property json well formedness with data set "iteration 73"   0.03s  
+  ✓ property json well formedness with data set "iteration 74"   0.03s  
+  ✓ property json well formedness with data set "iteration 75"   0.02s  
+  ✓ property json well formedness with data set "iteration 76"   0.03s  
+  ✓ property json well formedness with data set "iteration 77"   0.02s  
+  ✓ property json well formedness with data set "iteration 78"   0.03s  
+  ✓ property json well formedness with data set "iteration 79"   0.02s  
+  ✓ property json well formedness with data set "iteration 80"   0.03s  
+  ✓ property json well formedness with data set "iteration 81"   0.03s  
+  ✓ property json well formedness with data set "iteration 82"   0.02s  
+  ✓ property json well formedness with data set "iteration 83"   0.03s  
+  ✓ property json well formedness with data set "iteration 84"   0.02s  
+  ✓ property json well formedness with data set "iteration 85"   0.03s  
+  ✓ property json well formedness with data set "iteration 86"   0.03s  
+  ✓ property json well formedness with data set "iteration 87"   0.09s  
+  ✓ property json well formedness with data set "iteration 88"   0.15s  
+  ✓ property json well formedness with data set "iteration 89"   0.09s  
+  ✓ property json well formedness with data set "iteration 90"   0.09s  
+  ✓ property json well formedness with data set "iteration 91"   0.04s  
   ✓ property json well formedness with data set "iteration 92"   0.05s  
   ✓ property json well formedness with data set "iteration 93"   0.05s  
-  ✓ property json well formedness with data set "iteration 94"   0.05s  
-  ✓ property json well formedness with data set "iteration 95"   0.06s  
-  ✓ property json well formedness with data set "iteration 96"   0.05s  
-  ✓ property json well formedness with data set "iteration 97"   0.05s  
-  ✓ property json well formedness with data set "iteration 98"   0.05s  
-  ✓ property json well formedness with data set "iteration 99"   0.05s  
-  ✓ property non serializable value handling with data set "obj… 0.06s  
-  ✓ property non serializable value handling with data set "std… 0.05s  
-  ✓ property non serializable value handling with data set "mix… 0.05s  
-  ✓ property non serializable value handling with data set "dat… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.18s  
-  ✓ property non serializable value handling with data set "ran… 0.07s  
+  ✓ property json well formedness with data set "iteration 94"   0.03s  
+  ✓ property json well formedness with data set "iteration 95"   0.04s  
+  ✓ property json well formedness with data set "iteration 96"   0.03s  
+  ✓ property json well formedness with data set "iteration 97"   0.02s  
+  ✓ property json well formedness with data set "iteration 98"   0.03s  
+  ✓ property json well formedness with data set "iteration 99"   0.03s  
+  ✓ property non serializable value handling with data set "obj… 0.02s  
+  ✓ property non serializable value handling with data set "std… 0.03s  
+  ✓ property non serializable value handling with data set "mix… 0.03s  
+  ✓ property non serializable value handling with data set "dat… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
   ✓ property non serializable value handling with data set "ran… 0.04s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
   ✓ property non serializable value handling with data set "ran… 0.04s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
   ✓ property non serializable value handling with data set "ran… 0.05s  
   ✓ property non serializable value handling with data set "ran… 0.05s  
   ✓ property non serializable value handling with data set "ran… 0.06s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.11s  
-  ✓ property non serializable value handling with data set "ran… 0.17s  
-  ✓ property non serializable value handling with data set "ran… 0.12s  
-  ✓ property non serializable value handling with data set "ran… 0.08s  
-  ✓ property non serializable value handling with data set "ran… 0.10s  
-  ✓ property non serializable value handling with data set "ran… 0.07s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
   ✓ property non serializable value handling with data set "ran… 0.04s  
-  ✓ property non serializable value handling with data set "ran… 0.09s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.20s  
-  ✓ property non serializable value handling with data set "ran… 0.12s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.05s  
-  ✓ property non serializable value handling with data set "ran… 0.17s  
-  ✓ property non serializable value handling with data set "ran… 0.09s  
-  ✓ property non serializable value handling with data set "ran… 0.08s  
-  ✓ property non serializable value handling with data set "ran… 0.06s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.02s  
   ✓ property non serializable value handling with data set "ran… 0.04s  
+  ✓ property non serializable value handling with data set "ran… 0.04s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
+  ✓ property non serializable value handling with data set "ran… 0.04s  
+  ✓ property non serializable value handling with data set "ran… 0.03s  
 
    PASS  Tests\Unit\ExactMatchRuleBugTest
-  ✓ it does not match initial with full middle name              0.55s  
-  ✓ it does not match when both birthdays are null               0.05s  
-  ✓ it does not match when middle name is whitespace only        0.05s  
-  ✓ it does not match when birthday is whitespace only           0.07s  
-  ✓ it matches when all fields are identical                     0.05s  
+  ✓ it does not match initial with full middle name              0.23s  
+  ✓ it does not match when both birthdays are null               0.03s  
+  ✓ it does not match when middle name is whitespace only        0.03s  
+  ✓ it does not match when birthday is whitespace only           0.03s  
+  ✓ it matches when all fields are identical                     0.03s  
 
    PASS  Tests\Unit\ExactMatchRuleSingleLetterTest
-  ✓ it rejects single letter middle names in uploaded data       0.21s  
-  ✓ it rejects single letter middle names in candidate data      0.14s  
-  ✓ it rejects when both have single letter middle names         0.17s  
-  ✓ it accepts two letter middle names                           0.09s  
-  ✓ it accepts full middle names                                 0.05s  
+  ✓ it rejects single letter middle names in uploaded data       0.05s  
+  ✓ it rejects single letter middle names in candidate data      0.03s  
+  ✓ it rejects when both have single letter middle names         0.03s  
+  ✓ it accepts two letter middle names                           0.03s  
+  ✓ it accepts full middle names                                 0.03s  
 
    PASS  Tests\Unit\ExampleTest
-  ✓ that true is true                                            0.07s  
+  ✓ that true is true                                            0.03s  
 
    PASS  Tests\Unit\FileHashIndexTest
-  ✓ file hash column exists                                      0.04s  
-  ✓ file hash column has index                                   0.04s  
-  ✓ stored file path column exists                               0.05s  
-  ✓ file size column exists                                      0.05s  
+  ✓ file hash column exists                                      0.02s  
+  ✓ file hash column has index                                   0.02s  
+  ✓ stored file path column exists                               0.03s  
+  ✓ file size column exists                                      0.02s  
 
    PASS  Tests\Unit\FileStorageMigrationTest
-  ✓ migration adds columns and index                             0.07s  
-  ✓ migration down removes columns and index                     0.07s  
-  ✓ columns are nullable                                         0.05s  
+  ✓ migration adds columns and index                             0.03s  
+  ✓ migration down removes columns and index                     0.03s  
+  ✓ columns are nullable                                         0.02s  
 
    PASS  Tests\Unit\FileStorageSchemaTest
-  ✓ file hash column exists                                      0.07s  
-  ✓ stored file path column exists                               0.04s  
-  ✓ file size column exists                                      0.04s  
-  ✓ file hash has index                                          0.11s  
-  ✓ column order is correct                                      0.15s  
-  ✓ existing columns preserved                                   0.10s  
+  ✓ file hash column exists                                      0.03s  
+  ✓ stored file path column exists                               0.03s  
+  ✓ file size column exists                                      0.03s  
+  ✓ file hash has index                                          0.02s  
+  ✓ column order is correct                                      0.03s  
+  ✓ existing columns preserved                                   0.03s  
 
    PASS  Tests\Unit\FileValidationServicePerformanceTest
-  ✓ column validation completes quickly for typical file         0.37s  
-  ✓ column validation with template completes quickly            0.14s  
-  ✓ template field lookup uses indexed query                     0.26s  
-  ✓ handles moderately large file efficiently                    0.48s  
-  ✓ column validation only reads headers not entire file         0.75s  
-  ✓ validation with multiple columns performs well               0.19s  
-  ✓ template with many fields validates efficiently              0.33s  
-  ✓ validation memory usage remains reasonable                   0.89s  
-  ✓ multiple validations perform consistently                    0.32s  
+  ✓ column validation completes quickly for typical file         0.18s  
+  ✓ column validation with template completes quickly            0.22s  
+  ✓ template field lookup uses indexed query                     0.05s  
+  ✓ handles moderately large file efficiently                    0.25s  
+  ✓ column validation only reads headers not entire file         0.31s  
+  ✓ validation with multiple columns performs well               0.12s  
+  ✓ template with many fields validates efficiently              0.18s  
+  ✓ validation memory usage remains reasonable                   0.37s  
+  ✓ multiple validations perform consistently                    0.19s  
 
    PASS  Tests\Unit\FileValidationServiceTask6Test
-  ✓ it validates file with valid core fields only                0.35s  
-  ✓ it detects missing required first name column                0.08s  
-  ✓ it detects missing required last name column                 0.08s  
-  ✓ it detects extra columns not in core fields                  0.08s  
-  ✓ it accepts various first name variations                     0.14s  
-  ✓ it accepts various last name variations                      0.15s  
-  ✓ it accepts optional core fields                              0.09s  
-  ✓ it validates file with template successfully                 0.18s  
-  ✓ it returns structured validation result                      0.15s  
-  ✓ it handles file reading errors gracefully                    0.08s  
-  ✓ it accepts all birthday field variations                     0.22s  
-  ✓ it accepts all gender field variations                       0.19s  
-  ✓ it accepts all address field variations                      0.16s  
-  ✓ it reports all validation errors at once                     0.08s  
-  ✓ it trims whitespace from headers                             0.08s  
-  ✓ it ignores empty header cells                                0.09s  
+  ✓ it validates file with valid core fields only                0.07s  
+  ✓ it detects missing required first name column                0.05s  
+  ✓ it detects missing required last name column                 0.05s  
+  ✓ it detects extra columns not in core fields                  0.05s  
+  ✓ it accepts various first name variations                     0.08s  
+  ✓ it accepts various last name variations                      0.13s  
+  ✓ it accepts optional core fields                              0.05s  
+  ✓ it validates file with template successfully                 0.05s  
+  ✓ it returns structured validation result                      0.05s  
+  ✓ it handles file reading errors gracefully                    0.04s  
+  ✓ it accepts all birthday field variations                     0.13s  
+  ✓ it accepts all gender field variations                       0.08s  
+  ✓ it accepts all address field variations                      0.08s  
+  ✓ it reports all validation errors at once                     0.04s  
+  ✓ it trims whitespace from headers                             0.05s  
+  ✓ it ignores empty header cells                                0.05s  
 
    FAIL  Tests\Unit\MainSystemCrudPropertyTest
-  ✓ record creation persists valid data                          0.18s  
-  ✓ record creation with all fields                              0.20s  
-  ✓ record creation rejects invalid data                         0.06s  
-  ✓ record deletion removes from database                        0.05s  
-  ⨯ record deletion creates audit entry                          0.06s  
-  ✓ record deletion of nonexistent record fails                  0.05s  
-  ✓ template field values persist with record                    0.07s  
-  ✓ template field values retrievable on edit                    0.07s  
-  ✓ template field values updated on record update               0.09s  
-  ⨯ record creation creates audit entry                          0.07s  
-  ✓ record update modifies only changed fields                   0.07s  
-  ⨯ record update creates audit entry with changed fields        0.07s  
+  ✓ record creation persists valid data                          0.07s  
+  ✓ record creation with all fields                              0.04s  
+  ✓ record creation rejects invalid data                         0.03s  
+  ✓ record deletion removes from database                        0.04s  
+  ⨯ record deletion creates audit entry                          0.03s  
+  ✓ record deletion of nonexistent record fails                  0.03s  
+  ✓ template field values persist with record                    0.04s  
+  ✓ template field values retrievable on edit                    0.04s  
+  ✓ template field values updated on record update               0.04s  
+  ⨯ record creation creates audit entry                          0.03s  
+  ✓ record update modifies only changed fields                   0.04s  
+  ⨯ record update creates audit entry with changed fields        0.04s  
 
    PASS  Tests\Unit\MainSystemFormDataPersistencePropertyTest
-  ✓ form data preserved when validation fails on single field    0.27s  
-  ✓ form data preserved when validation fails on multiple field… 0.15s  
-  ✓ form data retained when correcting invalid field             0.06s  
-  ✓ all form fields preserved including optional                 0.08s  
-  ✓ template fields preserved on validation error                0.11s  
-  ✓ form data preserved on update validation error               0.08s  
-  ✓ null values preserved on validation error                    0.05s  
-  ✓ empty optional fields preserved on validation error          0.05s  
-  ✓ all form data preserved with multiple errors                 0.06s  
+  ✓ form data preserved when validation fails on single field    0.04s  
+  ✓ form data preserved when validation fails on multiple field… 0.03s  
+  ✓ form data retained when correcting invalid field             0.03s  
+  ✓ all form fields preserved including optional                 0.03s  
+  ✓ template fields preserved on validation error                0.03s  
+  ✓ form data preserved on update validation error               0.05s  
+  ✓ null values preserved on validation error                    0.03s  
+  ✓ empty optional fields preserved on validation error          0.03s  
+  ✓ all form data preserved with multiple errors                 0.03s  
 
    PASS  Tests\Unit\MainSystemTemplateFieldPropertyTest
-  ✓ main system template field access                            2.68s  
-  ✓ main system all template fields retrieval                    1.33s  
-  ✓ main system conflict filtering                               1.64s  
+  ✓ main system template field access                            1.00s  
+  ✓ main system all template fields retrieval                    0.59s  
+  ✓ main system conflict filtering                               0.54s  
 
    PASS  Tests\Unit\MainSystemValidationErrorMessagesPropertyTest
-  ✓ validation error for missing uid                             0.09s  
-  ✓ validation error for missing first name                      0.06s  
-  ✓ validation error for missing last name                       0.04s  
-  ✓ validation error for invalid birthday format                 0.05s  
-  ✓ validation error for invalid gender                          0.05s  
-  ✓ validation error for invalid status                          0.05s  
-  ✓ validation error for duplicate uid                           0.05s  
-  ✓ validation only shows errors for invalid fields              0.05s  
-  ✓ validation includes multiple errors per field                0.08s  
-  ✓ validation has no errors for valid data                      0.06s  
-  ✓ validation update shows field specific errors                0.06s  
-  ✓ validation error for oversized fields                        0.05s  
-  ✓ validation error for future birthday                         0.06s  
+  ✓ validation error for missing uid                             0.03s  
+  ✓ validation error for missing first name                      0.03s  
+  ✓ validation error for missing last name                       0.03s  
+  ✓ validation error for invalid birthday format                 0.03s  
+  ✓ validation error for invalid gender                          0.03s  
+  ✓ validation error for invalid status                          0.03s  
+  ✓ validation error for duplicate uid                           0.03s  
+  ✓ validation only shows errors for invalid fields              0.03s  
+  ✓ validation includes multiple errors per field                0.04s  
+  ✓ validation has no errors for valid data                      0.07s  
+  ✓ validation update shows field specific errors                0.04s  
+  ✓ validation error for oversized fields                        0.03s  
+  ✓ validation error for future birthday                         0.03s  
 
    PASS  Tests\Unit\MainSystemValidationPropertyTest
-  ✓ validation rejects empty required fields                     0.17s  
-  ✓ validation rejects empty last name                           0.05s  
-  ✓ validation rejects missing uid                               0.05s  
-  ✓ validation rejects invalid date format                       0.05s  
-  ✓ validation rejects future birthday                           0.06s  
-  ✓ validation rejects invalid gender                            0.06s  
-  ✓ validation rejects invalid status                            0.05s  
-  ✓ validation rejects duplicate uid                             0.06s  
-  ✓ validation accepts valid gender values                       0.06s  
-  ✓ validation accepts valid status values                       0.05s  
-  ✓ validation accepts valid date format                         0.06s  
-  ✓ validation accepts nullable fields                           0.05s  
-  ✓ validation rejects oversized fields                          0.06s  
-  ✓ validation for update allows same uid                        0.05s  
-  ✓ validation for update rejects duplicate uid                  0.05s  
+  ✓ validation rejects empty required fields                     0.05s  
+  ✓ validation rejects empty last name                           0.03s  
+  ✓ validation rejects missing uid                               0.03s  
+  ✓ validation rejects invalid date format                       0.03s  
+  ✓ validation rejects future birthday                           0.03s  
+  ✓ validation rejects invalid gender                            0.03s  
+  ✓ validation rejects invalid status                            0.03s  
+  ✓ validation rejects duplicate uid                             0.03s  
+  ✓ validation accepts valid gender values                       0.03s  
+  ✓ validation accepts valid status values                       0.03s  
+  ✓ validation accepts valid date format                         0.03s  
+  ✓ validation accepts nullable fields                           0.03s  
+  ✓ validation rejects oversized fields                          0.03s  
+  ✓ validation for update allows same uid                        0.04s  
+  ✓ validation for update rejects duplicate uid                  0.03s  
 
    PASS  Tests\Unit\MatchAnalyticsServicePropertyTest
-  ✓ average confidence excludes new records                      7.23s  
-  ✓ match status distribution sums to 100 percent                8.86s  
-  ✓ field population rate calculation                            4.14s  
+  ✓ average confidence excludes new records                      4.04s  
+  ✓ match status distribution sums to 100 percent                5.21s  
+  ✓ field population rate calculation                            5.08s  
   ✓ quality score mapping consistency                            0.03s  
-  ✓ field ranking by population rate                             5.39s  
+  ✓ field ranking by population rate                             6.04s  
 
    PASS  Tests\Unit\RecordImportFieldBreakdownTest
-  ✓ it saves field breakdown for new records                     0.08s  
-  ✓ it saves field breakdown for matched records                 0.04s  
-  ✓ field breakdown contains field details                       0.04s  
+  ✓ it saves field breakdown for new records                     0.05s  
+  ✓ it saves field breakdown for matched records                 0.03s  
+  ✓ field breakdown contains field details                       0.03s  
 
    PASS  Tests\Unit\RecordImportNoTemplateTest
   ✓ it processes records without template                        0.04s  
-  ✓ it skips validation when no template                         0.04s  
-  ✓ it handles missing optional core fields without template     0.03s  
+  ✓ it skips validation when no template                         0.03s  
+  ✓ it handles missing optional core fields without template     0.04s  
 
    PASS  Tests\Unit\RecordImportRequiredFieldValidationTest
   ✓ it throws error when required custom field is empty          0.04s  
   ✓ it throws error with multiple missing required fields        0.03s  
   ✓ it allows empty optional custom fields                       0.04s  
   ✓ it includes row number in error message                      0.03s  
-  ✓ it provides descriptive error message                        0.03s  
+  ✓ it provides descriptive error message                        0.07s  
 
    PASS  Tests\Unit\RecordImportRequiredFieldsComprehensiveTest
-  ✓ it validates only required fields not optional               0.06s  
+  ✓ it validates only required fields not optional               0.09s  
   ✓ it validates multiple required fields independently          0.04s  
-  ✓ it fails when one of multiple required fields is empty       0.04s  
+  ✓ it fails when one of multiple required fields is empty       0.03s  
   ✓ it provides clear error when multiple required fields are e… 0.03s  
 
    PASS  Tests\Unit\RecordImportTask84Test
   ✓ it imports records with core fields only                     0.04s  
   ✓ it creates match result for new records                      0.03s  
-  ✓ it handles existing record matches without dynamic updates   0.04s  
-  ✓ it generates mapping summary                                 0.04s  
-  ✓ it works with template when provided                         0.04s  
+  ✓ it handles existing record matches without dynamic updates   0.03s  
+  ✓ it generates mapping summary                                 0.03s  
+  ✓ it works with template when provided                         0.03s  
   ✓ it skips rows with missing required fields                   0.03s  
-  ✓ it handles compound first names correctly                    0.04s  
+  ✓ it handles compound first names correctly                    0.03s  
   ✓ it normalizes field values correctly                         0.03s  
   ✓ it links new records to match results                        0.03s  
 
    PASS  Tests\Unit\ResultsControllerTest
   ✓ get batch analytics returns correct json structure           0.06s  
-  ✓ get batch analytics returns 404 for invalid batch            0.04s  
+  ✓ get batch analytics returns 404 for invalid batch            0.03s  
   ✓ get batch analytics handles database errors                  0.03s  
   ✓ get field breakdown returns correct data                     0.03s  
   ✓ get field breakdown returns 404 for non existent result      0.03s  
-  ✓ get field breakdown returns 404 for empty breakdown          0.05s  
+  ✓ get field breakdown returns 404 for empty breakdown          0.04s  
   ✓ export field breakdown generates valid csv                   0.03s  
   ✓ export field breakdown includes all columns                  0.03s  
   ✓ export field breakdown handles missing result                0.03s  
@@ -971,50 +971,50 @@
   ✓ csv escapes special characters property                      0.27s  
 
    PASS  Tests\Unit\TemplateFieldPersistenceServicePropertyTest
-  ✓ new record creates template values                           0.33s  
-  ✓ template field type validation                               0.22s  
-  ✓ matched record creates new values                            0.17s  
-  ✓ matched record updates empty values                          0.10s  
-  ✓ matched record preserves history                             0.21s  
-  ✓ matched record idempotence                                   0.17s  
+  ✓ new record creates template values                           0.30s  
+  ✓ template field type validation                               0.21s  
+  ✓ matched record creates new values                            0.16s  
+  ✓ matched record updates empty values                          0.09s  
+  ✓ matched record preserves history                             0.19s  
+  ✓ matched record idempotence                                   0.15s  
   ✓ possible duplicate flags for review                          0.16s  
-  ✓ possible duplicate links conflicts                           0.21s  
-  ✓ persistence service transaction atomicity                    0.14s  
-  ✓ bulk insert performance                                      1.31s  
-  ✓ template field definition caching                            0.12s  
+  ✓ possible duplicate links conflicts                           0.20s  
+  ✓ persistence service transaction atomicity                    0.13s  
+  ✓ bulk insert performance                                      0.98s  
+  ✓ template field definition caching                            0.05s  
 
    PASS  Tests\Unit\TemplateFieldTest
-  ✓ template field has fillable fields                           0.05s  
+  ✓ template field has fillable fields                           0.04s  
   ✓ is required is cast to boolean                               0.03s  
-  ✓ template field belongs to template                           0.06s  
+  ✓ template field belongs to template                           0.03s  
   ✓ validate value accepts valid string                          0.03s  
   ✓ validate value accepts valid integer                         0.03s  
   ✓ validate value rejects decimal for integer                   0.03s  
-  ✓ validate value accepts valid decimal                         0.04s  
-  ✓ validate value rejects non numeric decimal                   0.05s  
-  ✓ validate value accepts valid date                            0.05s  
+  ✓ validate value accepts valid decimal                         0.03s  
+  ✓ validate value rejects non numeric decimal                   0.03s  
+  ✓ validate value accepts valid date                            0.03s  
   ✓ validate value rejects invalid date                          0.03s  
   ✓ validate value accepts boolean true variations               0.03s  
   ✓ validate value accepts boolean false variations              0.03s  
-  ✓ validate value rejects invalid boolean                       0.04s  
-  ✓ validate value allows empty for optional field               0.04s  
+  ✓ validate value rejects invalid boolean                       0.03s  
+  ✓ validate value allows empty for optional field               0.03s  
   ✓ validate value rejects empty for required field              0.03s  
   ✓ validate value allows null for optional field                0.03s  
   ✓ is valid field name accepts lowercase                        0.03s  
   ✓ is valid field name accepts uppercase                        0.03s  
   ✓ is valid field name accepts mixed case                       0.04s  
-  ✓ is valid field name accepts with underscores                 0.02s  
+  ✓ is valid field name accepts with underscores                 0.03s  
   ✓ is valid field name accepts with numbers                     0.03s  
   ✓ is valid field name rejects spaces                           0.03s  
   ✓ is valid field name rejects hyphens                          0.03s  
-  ✓ is valid field name rejects special characters               0.04s  
+  ✓ is valid field name rejects special characters               0.03s  
   ✓ is valid field name rejects empty string                     0.03s  
-  ✓ is valid field name accepts single character                 0.02s  
+  ✓ is valid field name accepts single character                 0.03s  
   ✓ is valid field name accepts very long names                  0.03s  
   ✓ is valid field name rejects unicode characters               0.03s  
-  ✓ is valid field name rejects newlines and tabs                0.02s  
+  ✓ is valid field name rejects newlines and tabs                0.03s  
   ✓ template field cascade deletes with template                 0.03s  
-  ✓ unique constraint on template id and field name              0.04s  
+  ✓ unique constraint on template id and field name              0.03s  
   ✓ same field name allowed for different templates              0.03s  
   ✓ validate value string accepts empty string for optional      0.03s  
   ✓ validate value string accepts special characters             0.03s  
@@ -1023,72 +1023,72 @@
   ✓ validate value integer accepts negative                      0.03s  
   ✓ validate value integer rejects non numeric                   0.03s  
   ✓ validate value decimal accepts integer                       0.03s  
-  ✓ validate value decimal accepts zero                          0.03s  
-  ✓ validate value decimal accepts negative                      0.03s  
-  ✓ validate value date accepts various formats                  0.05s  
-  ✓ validate value date accepts edge dates                       0.03s  
+  ✓ validate value decimal accepts zero                          0.05s  
+  ✓ validate value decimal accepts negative                      0.05s  
+  ✓ validate value date accepts various formats                  0.08s  
+  ✓ validate value date accepts edge dates                       0.07s  
   ✓ validate value date rejects invalid dates                    0.03s  
   ✓ validate value boolean accepts with whitespace               0.03s  
-  ✓ validate value boolean rejects partial matches               0.03s  
+  ✓ validate value boolean rejects partial matches               0.04s  
   ✓ validate value required field rejects null                   0.03s  
-  ✓ validate value required integer rejects empty                0.04s  
+  ✓ validate value required integer rejects empty                0.03s  
   ✓ validate value required date rejects empty                   0.03s  
   ✓ validate value required boolean rejects empty                0.03s  
   ✓ validate value optional fields accept null for all types     0.03s  
 
    PASS  Tests\Unit\TemplateFieldValuePropertyTest
-  ✓ model relationship integrity                                 0.36s  
-  ✓ type casting correctness                                     0.20s  
+  ✓ model relationship integrity                                 0.38s  
+  ✓ type casting correctness                                     0.18s  
   ✓ conflict detection                                           0.30s  
-  ✓ history retrieval                                            0.34s  
+  ✓ history retrieval                                            0.27s  
 
    PASS  Tests\Unit\TemplateFieldValueTest
-  ✓ template field value belongs to main system                  0.06s  
-  ✓ template field value belongs to template field               0.04s  
+  ✓ template field value belongs to main system                  0.05s  
+  ✓ template field value belongs to template field               0.03s  
   ✓ template field value belongs to batch                        0.03s  
-  ✓ template field value belongs to conflicting value            0.03s  
-  ✓ template field value batch relationship returns null when b… 0.04s  
-  ✓ needs review is cast to boolean                              0.04s  
+  ✓ template field value belongs to conflicting value            0.04s  
+  ✓ template field value batch relationship returns null when b… 0.03s  
+  ✓ needs review is cast to boolean                              0.03s  
   ✓ needs review false is cast to boolean                        0.03s  
   ✓ created at is cast to datetime                               0.03s  
-  ✓ updated at is cast to datetime                               0.03s  
+  ✓ updated at is cast to datetime                               0.04s  
   ✓ has conflict returns true when conflict with is set          0.04s  
   ✓ has conflict returns false when conflict with is null        0.03s  
   ✓ get history returns current value                            0.03s  
-  ✓ get history returns previous value when set                  0.04s  
+  ✓ get history returns previous value when set                  0.03s  
   ✓ get history does not include previous when null              0.03s  
   ✓ resolve conflict with keep existing deletes conflicting rec… 0.04s  
   ✓ resolve conflict with use new updates existing record        0.04s  
   ✓ resolve conflict with edit manually updates with custom val… 0.04s  
-  ✓ resolve conflict with invalid resolution throws exception    0.04s  
+  ✓ resolve conflict with invalid resolution throws exception    0.03s  
   ✓ resolve conflict with edit manually without custom value th… 0.03s  
-  ✓ resolve conflict with invalid custom value throws exception  0.04s  
-  ✓ template field value has fillable fields                     0.03s  
-  ✓ template field value table name is correct                   0.04s  
+  ✓ resolve conflict with invalid custom value throws exception  0.03s  
+  ✓ template field value has fillable fields                     0.04s  
+  ✓ template field value table name is correct                   0.03s  
 
    PASS  Tests\Unit\TemplateFieldValuesMigrationTest
-  ✓ migration creates table with all columns                     0.10s  
+  ✓ migration creates table with all columns                     0.07s  
   ✓ foreign key constraints exist                                0.03s  
-  ✓ unique constraint exists                                     0.02s  
+  ✓ unique constraint exists                                     0.03s  
   ✓ required indexes exist                                       0.03s  
   ✓ column types are correct                                     0.03s  
-  ✓ migration is reversible                                      0.03s  
-  ✓ needs review has correct default                             0.02s  
+  ✓ migration is reversible                                      0.02s  
+  ✓ needs review has correct default                             0.03s  
 
    WARN  Tests\Unit\UploadControllerTask121Test
   - upload returns column mapping summary for json request → Ex… 0.04s  
   ✓ column mapping identifies core fields                        0.03s  
   ✓ column mapping identifies dynamic fields                     0.04s  
-  ✓ column mapping identifies skipped columns                    0.04s  
+  ✓ column mapping identifies skipped columns                    0.05s  
   ✓ complete upload flow with mapping summary                    0.04s  
 
    FAIL  Tests\Unit\UploadControllerTask122Test
   ✓ results view displays column mapping section                 0.09s  
-  ✓ core fields displayed with success badges                    0.06s  
+  ✓ core fields displayed with success badges                    0.05s  
   ✓ dynamic fields displayed with info badges                    0.04s  
   ✓ skipped columns displayed with secondary badges              0.04s  
-  ✓ batch statistics displayed                                   0.05s  
-  ✓ mapping section is collapsible                               0.05s  
+  ✓ batch statistics displayed                                   0.04s  
+  ✓ mapping section is collapsible                               0.04s  
   ⨯ mapping section hidden without session data                  0.04s  
   ✓ complete mapping feedback display                            0.05s  
 
@@ -1098,61 +1098,61 @@
   ✓ store validates template id must be integer                  0.05s  
   ✓ store validates template id exists                           0.06s  
   ✓ store rejects template from another user                     0.04s  
-  ✓ store returns json error for unauthorized template api       0.07s  
-  ✓ record import receives template                              0.12s  
-  ✓ record import works without template                         0.09s  
+  ✓ store returns json error for unauthorized template api       0.05s  
+  ✓ record import receives template                              0.08s  
+  ✓ record import works without template                         0.07s  
 
    PASS  Tests\Feature\Auth\AuthenticationTest
-  ✓ login screen can be rendered                                 0.07s  
+  ✓ login screen can be rendered                                 0.06s  
   ✓ users can authenticate using the login screen                0.05s  
   ✓ users with two factor enabled are redirected to two factor…  0.04s  
-  ✓ users can not authenticate with invalid password             0.03s  
-  ✓ users can logout                                             0.06s  
-  ✓ users are rate limited                                       0.05s  
+  ✓ users can not authenticate with invalid password             0.04s  
+  ✓ users can logout                                             0.05s  
+  ✓ users are rate limited                                       0.03s  
 
    PASS  Tests\Feature\Auth\EmailVerificationTest
   ✓ email verification screen can be rendered                    0.04s  
   ✓ email can be verified                                        0.04s  
   ✓ email is not verified with invalid hash                      0.04s  
-  ✓ email is not verified with invalid user id                   0.04s  
+  ✓ email is not verified with invalid user id                   0.07s  
   ✓ verified user is redirected to dashboard from verification…  0.03s  
   ✓ already verified user visiting verification link is redirec… 0.03s  
 
    PASS  Tests\Feature\Auth\PasswordConfirmationTest
-  ✓ confirm password screen can be rendered                      0.04s  
+  ✓ confirm password screen can be rendered                      0.05s  
   ✓ password confirmation requires authentication                0.03s  
 
    PASS  Tests\Feature\Auth\PasswordResetTest
-  ✓ reset password link screen can be rendered                   0.04s  
-  ✓ reset password link can be requested                         0.25s  
+  ✓ reset password link screen can be rendered                   0.03s  
+  ✓ reset password link can be requested                         0.24s  
   ✓ reset password screen can be rendered                        0.26s  
-  ✓ password can be reset with valid token                       0.26s  
-  ✓ password cannot be reset with invalid token                  0.24s  
+  ✓ password can be reset with valid token                       0.28s  
+  ✓ password cannot be reset with invalid token                  0.31s  
 
    PASS  Tests\Feature\Auth\RegistrationTest
-  ✓ registration screen can be rendered                          0.04s  
-  ✓ new users can register                                       0.03s  
+  ✓ registration screen can be rendered                          0.07s  
+  ✓ new users can register                                       0.08s  
 
    PASS  Tests\Feature\Auth\TwoFactorChallengeTest
-  ✓ two factor challenge redirects to login when not authentica… 0.03s  
-  ✓ two factor challenge can be rendered                         0.04s  
+  ✓ two factor challenge redirects to login when not authentica… 0.07s  
+  ✓ two factor challenge can be rendered                         0.06s  
 
    PASS  Tests\Feature\Auth\VerificationNotificationTest
-  ✓ sends verification notification                              0.03s  
-  ✓ does not send verification notification if email is verifie… 0.03s  
+  ✓ sends verification notification                              0.18s  
+  ✓ does not send verification notification if email is verifie… 0.05s  
 
    PASS  Tests\Feature\ColumnMappingPersistenceTest
-  ✓ column mapping is saved to batch                             0.03s  
-  ✓ results view shows column mapping from batch                 0.05s  
-  ✓ column mapping card is collapsed when not from upload        0.04s  
-  ✓ column mapping card is expanded when from upload             0.06s  
+  ✓ column mapping is saved to batch                             0.05s  
+  ✓ results view shows column mapping from batch                 0.19s  
+  ✓ column mapping card is collapsed when not from upload        0.32s  
+  ✓ column mapping card is expanded when from upload             0.15s  
 
    PASS  Tests\Feature\DashboardTest
-  ✓ guests are redirected to the login page                      0.04s  
-  ✓ authenticated users can visit the dashboard                  0.04s  
+  ✓ guests are redirected to the login page                      0.08s  
+  ✓ authenticated users can visit the dashboard                  0.05s  
 
    PASS  Tests\Feature\ExampleTest
-  ✓ returns a successful response                                0.03s  
+  ✓ returns a successful response                                0.06s  
 
    PASS  Tests\Feature\ExportDuplicatesTest
   ✓ it exports duplicates as csv                                 0.04s  
@@ -1160,107 +1160,107 @@
   ✓ it filters export by status                                  0.04s  
   ✓ it excludes new records by default                           0.04s  
   ✓ it includes field breakdown details                          0.04s  
-  ✓ it requires authentication                                   0.04s  
+  ✓ it requires authentication                                   0.03s  
   ✓ it generates filename with filters                           0.04s  
 
    PASS  Tests\Feature\MainSystemAccessibilityTest
   ✓ keyboard navigation support                                  0.06s  
-  ✓ screen reader support                                        0.04s  
-  ✓ focus management                                             0.04s  
-  ✓ validation error messages for accessibility                  0.03s  
+  ✓ screen reader support                                        0.03s  
+  ✓ focus management                                             0.03s  
+  ✓ validation error messages for accessibility                  0.04s  
   ✓ modal title indicates mode                                   0.03s  
-  ✓ form fields have associated labels                           0.04s  
-  ✓ buttons have descriptive labels                              0.04s  
+  ✓ form fields have associated labels                           0.03s  
+  ✓ buttons have descriptive labels                              0.03s  
   ✓ confirmation dialog accessibility                            0.03s  
   ✓ bulk action toolbar accessibility                            0.04s  
   ✓ multi select checkbox accessibility                          0.04s  
 
    FAIL  Tests\Feature\MainSystemAuditTrailTest
-  ⨯ audit trail for create operations                            0.06s  
+  ⨯ audit trail for create operations                            0.05s  
   ⨯ audit trail for update operations                            0.04s  
-  ⨯ audit trail for delete operations                            0.06s  
-  ⨯ audit trail for bulk operations                              0.05s  
-  ⨯ audit trail immutability                                     0.03s  
+  ⨯ audit trail for delete operations                            0.05s  
+  ⨯ audit trail for bulk operations                              0.04s  
+  ⨯ audit trail immutability                                     0.04s  
   ✓ audit trail user id tracking                                 0.04s  
   ⨯ audit trail timestamp                                        0.04s  
   ⨯ audit trail for bulk delete                                  0.05s  
-  ⨯ audit trail for bulk category update                         0.05s  
+  ⨯ audit trail for bulk category update                         0.04s  
   ⨯ audit trail query by record id                               0.04s  
 
-   FAIL  Tests\Feature\MainSystemCrudWorkflowTest
-  ⨯ create record workflow                                       0.07s  
-  ✓ edit record workflow                                         0.05s  
-  ⨯ delete record workflow                                       0.04s  
+   PASS  Tests\Feature\MainSystemCrudWorkflowTest
+  ✓ create record workflow                                       0.05s  
+  ✓ edit record workflow                                         0.04s  
+  ✓ delete record workflow                                       0.04s  
   ✓ bulk delete workflow                                         0.05s  
   ✓ bulk status update workflow                                  0.06s  
-  ✓ bulk category update workflow                                0.05s  
-  ✓ create record with validation error                          0.04s  
-  ✓ create record with duplicate uid                             0.04s  
-  ✓ edit record with validation error                            0.04s  
+  ✓ bulk category update workflow                                0.04s  
+  ✓ create record with validation error                          0.03s  
+  ✓ create record with duplicate uid                             0.03s  
+  ✓ edit record with validation error                            0.03s  
   ✓ delete nonexistent record                                    0.03s  
   ✓ bulk delete with mixed records                               0.04s  
 
-   FAIL  Tests\Feature\MainSystemErrorHandlingTest
-  ✓ validation error handling                                    0.05s  
-  ⨯ form data preservation on validation error                   0.04s  
-  ⨯ unique constraint violation                                  0.04s  
+   PASS  Tests\Feature\MainSystemErrorHandlingTest
+  ✓ validation error handling                                    0.06s  
+  ✓ form data preservation on validation error                   0.04s  
+  ✓ unique constraint violation                                  0.04s  
   ✓ database error handling on create                            0.04s  
-  ⨯ validation error on update                                   0.04s  
+  ✓ validation error on update                                   0.03s  
   ✓ retry after validation error                                 0.04s  
-  ⨯ invalid date format validation                               0.05s  
-  ⨯ invalid enum value validation                                0.04s  
+  ✓ invalid date format validation                               0.06s  
+  ✓ invalid enum value validation                                0.03s  
   ✓ bulk operation with partial failures                         0.04s  
   ✓ error response format                                        0.03s  
 
    FAIL  Tests\Feature\MainSystemFinalCheckpointTest
-  ✓ complete crud workflow end to end                            0.07s  
-  ✓ bulk operations workflow                                     0.07s  
-  ⨯ validation and error handling                                0.03s  
-  ⨯ audit trail logging                                          0.05s  
-  ✓ multi select and pagination                                  0.11s  
-  ⨯ form data preservation on error                              0.03s  
-  ✓ selection clearing after bulk operation                      0.08s  
+  ✓ complete crud workflow end to end                            0.06s  
+  ✓ bulk operations workflow                                     0.06s  
+  ✓ validation and error handling                                0.04s  
+  ⨯ audit trail logging                                          0.04s  
+  ✓ multi select and pagination                                  0.10s  
+  ✓ form data preservation on error                              0.03s  
+  ✓ selection clearing after bulk operation                      0.05s  
   ✓ search and filter preservation                               0.05s  
   ✓ bulk operation atomicity                                     0.06s  
-  ✓ confirmation dialogs for destructive actions                 0.05s  
-  ✓ view refresh after operations                                0.10s  
-  ✓ all requirements covered                                     0.06s  
+  ✓ confirmation dialogs for destructive actions                 0.04s  
+  ✓ view refresh after operations                                0.05s  
+  ✓ all requirements covered                                     0.03s  
 
    FAIL  Tests\Feature\MainSystemMultiSelectPaginationTest
-  ✓ selection persistence across pages                           0.16s  
+  ✓ selection persistence across pages                           0.13s  
   ✓ bulk operations across pages                                 0.10s  
   ✓ selection clearing on search                                 0.04s  
-  ✓ select all checkbox on page                                  0.11s  
-  ✓ individual record selection                                  0.05s  
-  ⨯ clear selection button                                       0.05s  
-  ✓ pagination state preservation                                0.11s  
-  ✓ large selection across many pages                            0.20s  
+  ✓ select all checkbox on page                                  0.08s  
+  ✓ individual record selection                                  0.04s  
+  ⨯ clear selection button                                       0.04s  
+  ✓ pagination state preservation                                0.10s  
+  ✓ large selection across many pages                            0.19s  
 
    PASS  Tests\Feature\MainSystemResponsiveDesignTest
-  ✓ desktop layout response                                      0.05s  
+  ✓ desktop layout response                                      0.04s  
   ✓ tablet layout response                                       0.03s  
   ✓ mobile layout response                                       0.03s  
-  ✓ form fields stack vertically on mobile                       0.04s  
-  ✓ buttons stack vertically on mobile                           0.04s  
-  ✓ modal padding and spacing                                    0.03s  
-  ✓ scrollable content area on small screens                     0.03s  
-  ✓ bulk action toolbar responsive layout                        0.05s  
+  ✓ form fields stack vertically on mobile                       0.03s  
+  ✓ buttons stack vertically on mobile                           0.03s  
+  ✓ modal padding and spacing                                    0.07s  
+  ✓ scrollable content area on small screens                     0.06s  
+  ✓ bulk action toolbar responsive layout                        0.07s  
   ✓ multi select table responsive layout                         0.05s  
-  ✓ confirmation dialog responsive layout                        0.03s  
-  ✓ form field width on different screen sizes                   0.03s  
-  ✓ modal width on desktop                                       0.05s  
-  ✓ modal width on tablet                                        0.03s  
+  ✓ confirmation dialog responsive layout                        0.04s  
+  ✓ form field width on different screen sizes                   0.04s  
+  ✓ modal width on desktop                                       0.06s  
+  ✓ modal width on tablet                                        0.04s  
   ✓ modal width on mobile                                        0.03s  
 
    PASS  Tests\Feature\Settings\PasswordUpdateTest
-  ✓ password update page is displayed                            0.06s  
+  ✓ password update page is displayed                            0.08s  
   ✓ password can be updated                                      0.04s  
   ✓ correct password must be provided to update password         0.04s  
 
    PASS  Tests\Feature\Settings\ProfileUpdateTest
-  ✓ profile page is displayed                                    0.04s  
-  ✓ profile information can be updated                           0.04s  
-  ✓ email verification status is unchanged when the email addre… 0.03s  
+  ✓ profile page is displayed                                    0.05s  
+  ✓ profile information can be updated                           0.03s  
+  ✓ email verification status is unchanged when the email addre… 0.04s  
   ✓ user can delete their account                                0.03s  
   ✓ correct password must be provided to delete account          0.04s  
 
@@ -1268,7 +1268,7 @@
   ✓ two factor settings page can be rendered                     0.07s  
   ✓ two factor settings page requires password confirmation whe… 0.03s  
   ✓ two factor settings page does not requires password confirm… 0.04s  
-  ✓ two factor settings page returns forbidden response when tw… 0.04s  
+  ✓ two factor settings page returns forbidden response when tw… 0.03s  
 
    FAIL  Tests\Feature\TemplateControllerTest
   ✓ index returns user templates                                 0.04s  
@@ -1277,16 +1277,16 @@
   ✓ store validates required fields                              0.03s  
   ✓ store enforces unique name per user                          0.04s  
   ✓ store allows same name for different users                   0.04s  
-  ✓ show returns template details                                0.04s  
-  ✓ show returns 404 for nonexistent template                    0.06s  
+  ✓ show returns template details                                0.03s  
+  ✓ show returns 404 for nonexistent template                    0.05s  
   ✓ show prevents access to other users templates                0.04s  
   ✓ update modifies template                                     0.04s  
   ✓ update returns 404 for nonexistent template                  0.03s  
-  ✓ update prevents modifying other users templates              0.04s  
-  ✓ update enforces unique name per user                         0.04s  
-  ✓ destroy deletes template                                     0.04s  
+  ✓ update prevents modifying other users templates              0.03s  
+  ✓ update enforces unique name per user                         0.03s  
+  ✓ destroy deletes template                                     0.03s  
   ✓ destroy returns 404 for nonexistent template                 0.03s  
-  ✓ destroy prevents deleting other users templates              0.04s  
+  ✓ destroy prevents deleting other users templates              0.03s  
   ⨯ store web creates template with custom fields                0.04s  
   ⨯ store web validates field name uniqueness                    0.03s  
   ✓ store web validates field name format                        0.03s  
@@ -1299,41 +1299,41 @@
   ⨯ update web validates field name uniqueness during update     0.04s  
   ⨯ update web verifies field attributes are updated properly    0.04s  
   ✓ deleting template cascades to fields                         0.04s  
-  ✓ database constraint prevents duplicate field names in same…  0.04s  
-  ✓ same field name allowed in different templates               0.04s  
+  ✓ database constraint prevents duplicate field names in same…  0.03s  
+  ✓ same field name allowed in different templates               0.03s  
   ⨯ web form handles duplicate field names gracefully            0.04s  
-  ✓ api endpoint rejects duplicate field names                   0.07s  
+  ✓ api endpoint rejects duplicate field names                   0.04s  
   ✓ case sensitivity in field name uniqueness                    0.03s  
   ✓ update field name to existing name in same template fails    0.04s  
-  ✓ store web rejects invalid field type                         0.04s  
+  ✓ store web rejects invalid field type                         0.03s  
   ⨯ store web accepts all valid field types                      0.04s  
-  ✓ store web rejects multiple invalid field types               0.06s  
+  ✓ store web rejects multiple invalid field types               0.04s  
   ✓ store web rejects mixed valid and invalid field types        0.06s  
-  ✓ update web rejects invalid field type                        0.03s  
+  ✓ update web rejects invalid field type                        0.04s  
   ⨯ update web accepts all valid field types                     0.04s  
   ✓ api endpoint rejects invalid field type                      0.04s  
-  ✓ api endpoint accepts all valid field types                   0.06s  
+  ✓ api endpoint accepts all valid field types                   0.05s  
   ✓ api endpoint update rejects invalid field type               0.04s  
-  ✓ field type case sensitivity                                  0.04s  
-  ✓ store web requires all required core fields                  0.03s  
-  ⨯ store web accepts all required core fields                   0.04s  
-  ✓ update web requires all required core fields                 0.04s  
-  ⨯ update web accepts all required core fields                  0.04s  
-  ⨯ store web allows optional core fields to be removed          0.04s  
+  ✓ field type case sensitivity                                  0.03s  
+  ✓ store web requires all required core fields                  0.04s  
+  ⨯ store web accepts all required core fields                   0.03s  
+  ✓ update web requires all required core fields                 0.03s  
+  ⨯ update web accepts all required core fields                  0.03s  
+  ⨯ store web allows optional core fields to be removed          0.03s  
 
    PASS  Tests\Feature\TemplateFieldControllerTest
-  ✓ index returns template fields                                0.12s  
-  ✓ index returns 404 for nonexistent template                   0.04s  
-  ✓ index denies access to other users template                  0.04s  
-  ✓ store creates template field                                 0.04s  
-  ✓ store validates field name format                            0.04s  
+  ✓ index returns template fields                                0.11s  
+  ✓ index returns 404 for nonexistent template                   0.03s  
+  ✓ index denies access to other users template                  0.03s  
+  ✓ store creates template field                                 0.03s  
+  ✓ store validates field name format                            0.03s  
   ✓ store validates field type                                   0.04s  
-  ✓ store prevents duplicate field names                         0.03s  
-  ✓ store denies access to other users template                  0.04s  
+  ✓ store prevents duplicate field names                         0.04s  
+  ✓ store denies access to other users template                  0.03s  
   ✓ update modifies template field                               0.04s  
   ✓ update prevents duplicate field names                        0.04s  
-  ✓ update returns 404 for nonexistent field                     0.05s  
-  ✓ destroy deletes template field                               0.05s  
+  ✓ update returns 404 for nonexistent field                     0.03s  
+  ✓ destroy deletes template field                               0.03s  
   ✓ destroy returns 404 for nonexistent field                    0.04s  
   ✓ destroy denies access to other users template                0.06s  
   ✓ requires authentication                                      0.04s  
@@ -1342,105 +1342,39 @@
   ✓ upload page can be rendered                                  0.06s  
   ✓ file upload requires authentication                          0.03s  
   ✓ valid file can be uploaded                                   0.06s  
-  ✓ upload validates file is required                            0.04s  
-  ✓ upload validates file type                                   0.04s  
+  ✓ upload validates file is required                            0.07s  
+  ✓ upload validates file type                                   0.03s  
   ✓ upload validates file size                                   0.04s  
 
    PASS  Tests\Feature\UploadValidationTest
-  ✓ upload without template accepts valid core fields            0.08s  
-  ✓ upload without template rejects missing required field       0.07s  
-  ✓ upload without template rejects extra columns                0.07s  
-  ✓ upload without template with extra column fails validation   0.10s  
-  ✓ upload with template validates against template columns      0.11s  
-  ✓ upload with template rejects missing template field          0.12s  
-  ✓ upload with template rejects extra columns not in template   0.17s  
-  ✓ validation errors are logged                                 0.08s  
+  ✓ upload without template accepts valid core fields            0.07s  
+  ✓ upload without template rejects missing required field       0.08s  
+  ✓ upload without template rejects extra columns                0.05s  
+  ✓ upload without template with extra column fails validation   0.05s  
+  ✓ upload with template validates against template columns      0.06s  
+  ✓ upload with template rejects missing template field          0.06s  
+  ✓ upload with template rejects extra columns not in template   0.05s  
+  ✓ validation errors are logged                                 0.05s  
   ✓ validation info is passed to view                            0.05s  
   ✓ template not found returns error                             0.04s  
   ✓ user cannot use another users template                       0.04s  
   ✓ api upload returns json validation errors                    0.05s  
-  ✓ template with fields relationship is loaded                  0.10s  
-  ✓ upload with template valid data processes successfully       0.09s  
-  ✓ upload with template with extra column fails validation      0.07s  
-  ✓ upload with template type mismatch validates field types     0.09s  
+  ✓ template with fields relationship is loaded                  0.08s  
+  ✓ upload with template valid data processes successfully       0.08s  
+  ✓ upload with template with extra column fails validation      0.05s  
+  ✓ upload with template type mismatch validates field types     0.08s  
   ✓ complete workflow create template add fields upload file     0.09s  
   ✓ error handling missing columns displays clear errors         0.05s  
   ✓ error handling extra columns displays clear errors           0.05s  
   ✓ error handling misnamed columns displays clear errors        0.05s  
   ✓ error handling template missing fields displays clear error… 0.05s  
-  ✓ error handling template extra columns displays clear errors  0.11s  
+  ✓ error handling template extra columns displays clear errors  0.07s  
   ✓ error handling returns all validation errors at once         0.05s  
   ✓ error handling without template validates core fields only   0.05s  
   ✓ error handling provides actionable error messages            0.05s  
   ✓ backward compatibility legacy template without custom field… 0.08s  
   ✓ backward compatibility legacy template rejects extra column… 0.06s  
-  ✓ backward compatibility legacy template rejects missing colu… 0.05s  
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Unit\AuditTrailLoggingPropertyTest > audit trail lo…   
-  Failed asserting that two strings are equal.
---- Expected
-+++ Actual
-@@ @@
--'App\Models\MainSystem'
-+'MainSystem'
-
-  at tests\Unit\AuditTrailLoggingPropertyTest.php:51
-     47▕         $auditEntry = $this->auditService->logCreate(MainSystem::class, 1, $newValues);
-     48▕ 
-     49▕         $this->assertNotNull($auditEntry);
-     50▕         $this->assertEquals('create', $auditEntry->action_type);
-  ➜  51▕         $this->assertEquals(MainSystem::class, $auditEntry->model_type);
-     52▕         $this->assertEquals(1, $auditEntry->model_id);
-     53▕         $this->assertEquals($user->id, $auditEntry->user_id);
-     54▕         $this->assertNull($auditEntry->old_values);
-     55▕         $this->assertEquals($newValues, $auditEntry->new_values);
-
-  1   tests\Unit\AuditTrailLoggingPropertyTest.php:51
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Unit\AuditTrailLoggingPropertyTest > audit trail lo…   
-  Failed asserting that two strings are equal.
---- Expected
-+++ Actual
-@@ @@
--'App\Models\MainSystem'
-+'MainSystem'
-
-  at tests\Unit\AuditTrailLoggingPropertyTest.php:83
-     79▕         $auditEntry = $this->auditService->logUpdate(MainSystem::class, 1, $oldValues, $newValues);
-     80▕ 
-     81▕         $this->assertNotNull($auditEntry);
-     82▕         $this->assertEquals('update', $auditEntry->action_type);
-  ➜  83▕         $this->assertEquals(MainSystem::class, $auditEntry->model_type);
-     84▕         $this->assertEquals(1, $auditEntry->model_id);
-     85▕         $this->assertEquals($user->id, $auditEntry->user_id);
-     86▕         $this->assertEquals($oldValues, $auditEntry->old_values);
-     87▕         $this->assertEquals($newValues, $auditEntry->new_values);
-
-  1   tests\Unit\AuditTrailLoggingPropertyTest.php:83
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Unit\AuditTrailLoggingPropertyTest > audit trail lo…   
-  Failed asserting that two strings are equal.
---- Expected
-+++ Actual
-@@ @@
--'App\Models\MainSystem'
-+'MainSystem'
-
-  at tests\Unit\AuditTrailLoggingPropertyTest.php:112
-    108▕         $auditEntry = $this->auditService->logDelete(MainSystem::class, 1, $deletedValues);
-    109▕ 
-    110▕         $this->assertNotNull($auditEntry);
-    111▕         $this->assertEquals('delete', $auditEntry->action_type);
-  ➜ 112▕         $this->assertEquals(MainSystem::class, $auditEntry->model_type);
-    113▕         $this->assertEquals(1, $auditEntry->model_id);
-    114▕         $this->assertEquals($user->id, $auditEntry->user_id);
-    115▕         $this->assertEquals($deletedValues, $auditEntry->old_values);
-    116▕         $this->assertNull($auditEntry->new_values);
-
-  1   tests\Unit\AuditTrailLoggingPropertyTest.php:112
-
+  ✓ backward compatibility legacy template rejects missing colu… 0.07s  
   ────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Unit\AuditTrailLoggingPropertyTest > audit trail re…   
   Failed asserting that actual size 0 matches expected size 3.
@@ -1601,7 +1535,7 @@
 <head>\n
     <meta charset="utf-8">\n
     <meta name="viewport" content="width=device-width, initial-scale=1">\n
-    <meta name="csrf-token" content="uRgzw0jmQ3btt6hPCByggww5M1RCgV3j2OzP8k2I">\n
+    <meta name="csrf-token" content="oMCrNppJ994foe3FiuYY0zT0MbyXzTsFhGummavj">\n
     <title>Match Results</title>\n
     \n
     <!-- AdminLTE CSS -->\n
@@ -1624,7 +1558,7 @@
     <ul class="navbar-nav ml-auto">\n
         <li class="nav-item dropdown">\n
             <a class="nav-link" data-toggle="dropdown" href="#" role="button">\n
-                <i class="far fa-user"></i> Madyson Effertz\n
+                <i class="far fa-user"></i> Isac Simonis\n
             </a>\n
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">\n
                 <a href="http://localhost/settings/password" class="dropdown-item">\n
@@ -1632,7 +1566,7 @@
                 </a>\n
                 <div class="dropdown-divider"></div>\n
                 <form method="POST" action="http://localhost/logout">\n
-                    <input type="hidden" name="_token" value="uRgzw0jmQ3btt6hPCByggww5M1RCgV3j2OzP8k2I" autocomplete="off">                    <button type="submit" class="dropdown-item">\n
+                    <input type="hidden" name="_token" value="oMCrNppJ994foe3FiuYY0zT0MbyXzTsFhGummavj" autocomplete="off">                    <button type="submit" class="dropdown-item">\n
                         <i class="fas fa-sign-out-alt mr-2"></i> Logout\n
                     </button>\n
                 </form>\n
@@ -2564,194 +2498,21 @@ document.addEventListener('DOMContentLoaded', function() {\n
   1   tests\Feature\MainSystemAuditTrailTest.php:393
 
   ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > create record…    
-  Failed asserting that a row in the table [audit_trail] matches the attributes {
-    "action_type": "create",
-    "model_type": "App\\Models\\MainSystem",
-    "model_id": 1
-}.
-
-Found similar results: [
-    {
-        "action_type": "create",
-        "model_type": "MainSystem",
-        "model_id": 1
-    }
-].
-
-  at tests\Feature\MainSystemCrudWorkflowTest.php:83
-     79▕             'last_name' => 'Doe',
-     80▕         ]);
-     81▕ 
-     82▕         // Assert - Audit trail entry created
-  ➜  83▕         $this->assertDatabaseHas('audit_trail', [
-     84▕             'action_type' => 'create',
-     85▕             'model_type' => 'App\\Models\\MainSystem',
-     86▕             'model_id' => $response->json('data.id'),
-     87▕         ]);
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > delete record…    
-  Failed asserting that a row in the table [audit_trail] matches the attributes {
-    "action_type": "delete",
-    "model_type": "App\\Models\\MainSystem",
-    "model_id": 1
-}.
-
-Found similar results: [
-    {
-        "action_type": "delete",
-        "model_type": "MainSystem",
-        "model_id": 1
-    }
-].
-
-  at tests\Feature\MainSystemCrudWorkflowTest.php:168
-    164▕             'id' => $recordId,
-    165▕         ]);
-    166▕ 
-    167▕         // Assert - Audit trail entry created
-  ➜ 168▕         $this->assertDatabaseHas('audit_trail', [
-    169▕             'action_type' => 'delete',
-    170▕             'model_type' => 'App\\Models\\MainSystem',
-    171▕             'model_id' => $recordId,
-    172▕         ]);
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemErrorHandlingTest > form data pre…   
-  Failed asserting that Array &0 [
-    0 => 'The first name field is required.',
-] is identical to true.
-
-  at tests\Feature\MainSystemErrorHandlingTest.php:99
-     95▕         $response = $this->postJson('/api/main-system', $data);
-     96▕ 
-     97▕         // Assert - Validation error returned
-     98▕         $response->assertStatus(422);
-  ➜  99▕         $response->assertJsonPath('errors.first_name', true);
-    100▕ 
-    101▕         // Assert - Only invalid field has error
-    102▕         $this->assertNull($response->json('errors.last_name'));
-    103▕         $this->assertNull($response->json('errors.birthday'));
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemErrorHandlingTest > unique constr…   
-  Failed asserting that Array &0 [
-    0 => 'The uid has already been taken.',
-] is identical to true.
-
-  at tests\Feature\MainSystemErrorHandlingTest.php:140
-    136▕         $response = $this->postJson('/api/main-system', $duplicateData);
-    137▕ 
-    138▕         // Assert - Unique constraint violation error
-    139▕         $response->assertStatus(422);
-  ➜ 140▕         $response->assertJsonPath('errors.uid', true);
-    141▕ 
-    142▕         // Assert - Error message indicates duplicate
-    143▕         $errors = $response->json('errors.uid');
-    144▕         $this->assertTrue(
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemErrorHandlingTest > validation er…   
-  Failed asserting that Array &0 [
-    0 => 'The first name field must be a string.',
-] is identical to true.
-
-  at tests\Feature\MainSystemErrorHandlingTest.php:213
-    209▕         $response = $this->putJson("/api/main-system/{$record->id}", $invalidData);
-    210▕ 
-    211▕         // Assert - Validation error returned
-    212▕         $response->assertStatus(422);
-  ➜ 213▕         $response->assertJsonPath('errors.first_name', true);
-    214▕         $response->assertJsonPath('errors.birthday', true);
-    215▕ 
-    216▕         // Assert - Record not modified
-    217▕         $this->assertDatabaseHas('main_system', [
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemErrorHandlingTest > invalid date…    
-  Failed asserting that Array &0 [
-    0 => 'The birthday field must match the format Y-m-d.',
-] is identical to true.
-
-  at tests\Feature\MainSystemErrorHandlingTest.php:283
-    279▕         $response = $this->postJson('/api/main-system', $invalidData);
-    280▕ 
-    281▕         // Assert - Validation error for birthday
-    282▕         $response->assertStatus(422);
-  ➜ 283▕         $response->assertJsonPath('errors.birthday', true);
-    284▕ 
-    285▕         // Assert - Record not persisted
-    286▕         $this->assertDatabaseMissing('main_system', [
-    287▕             'uid' => 'TEST-005',
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemErrorHandlingTest > invalid enum…    
-  Failed asserting that Array &0 [
-    0 => 'The selected gender is invalid.',
-] is identical to true.
-
-  at tests\Feature\MainSystemErrorHandlingTest.php:312
-    308▕         $response = $this->postJson('/api/main-system', $invalidData);
-    309▕ 
-    310▕         // Assert - Validation errors for enum fields
-    311▕         $response->assertStatus(422);
-  ➜ 312▕         $response->assertJsonPath('errors.gender', true);
-    313▕         $response->assertJsonPath('errors.status', true);
-    314▕ 
-    315▕         // Assert - Record not persisted
-    316▕         $this->assertDatabaseMissing('main_system', [
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemFinalCheckpointTest > validation…    
-  Failed asserting that Array &0 [
-    0 => 'The first name field is required.',
-] is identical to true.
-
-  at tests\Feature\MainSystemFinalCheckpointTest.php:152
-    148▕             'last_name' => 'Doe',
-    149▕         ]);
-    150▕ 
-    151▕         $response1->assertStatus(422);
-  ➜ 152▕         $response1->assertJsonPath('errors.first_name', true);
-    153▕ 
-    154▕         // Test unique constraint validation
-    155▕         MainSystem::factory()->create(['uid' => 'UNIQUE-001']);
-    156▕
-
-  ────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\MainSystemFinalCheckpointTest >…   TypeError   
   json_decode(): Argument #1 ($json) must be of type string, array given
 
-  at tests\Feature\MainSystemFinalCheckpointTest.php:213
-    209▕             ->where('action_type', 'update')
-    210▕             ->first();
-    211▕ 
-    212▕         $this->assertNotNull($updateAudit);
-  ➜ 213▕         $changedFields = json_decode($updateAudit->changed_fields, true);
-    214▕         $this->assertContains('first_name', $changedFields);
-    215▕ 
-    216▕         // Delete record
-    217▕         $this->deleteJson("/api/main-system/{$recordId}");
+  at tests\Feature\MainSystemFinalCheckpointTest.php:216
+    212▕             ->where('action_type', 'update')
+    213▕             ->first();
+    214▕ 
+    215▕         $this->assertNotNull($updateAudit);
+  ➜ 216▕         $changedFields = json_decode($updateAudit->changed_fields, true);
+    217▕         $this->assertContains('first_name', $changedFields);
+    218▕ 
+    219▕         // Delete record
+    220▕         $this->deleteJson("/api/main-system/{$recordId}");
 
-  1   tests\Feature\MainSystemFinalCheckpointTest.php:213
-
-  ────────────────────────────────────────────────────────────────────  
-   FAILED  Tests\Feature\MainSystemFinalCheckpointTest > form data p…   
-  Failed asserting that Array &0 [
-    0 => 'The first name field is required.',
-] is identical to true.
-
-  at tests\Feature\MainSystemFinalCheckpointTest.php:273
-    269▕             'birthday' => '1990-01-15', // Valid
-    270▕         ]);
-    271▕ 
-    272▕         $response->assertStatus(422);
-  ➜ 273▕         $response->assertJsonPath('errors.first_name', true);
-    274▕ 
-    275▕         // Verify only invalid field has error
-    276▕         $this->assertNull($response->json('errors.last_name'));
-    277▕         $this->assertNull($response->json('errors.birthday'));
+  1   tests\Feature\MainSystemFinalCheckpointTest.php:216
 
   ────────────────────────────────────────────────────────────────────  
    FAILED  Tests\Feature\MainSystemMultiSelectPaginationTest > clear…   
@@ -3156,6 +2917,6 @@ Missing required fields: regs_no. All required fields must be mapped.
     1608▕             'user_id' => $user->id,
 
 
-  Tests:    48 failed, 1 skipped, 714 passed (16363 assertions)
-  Duration: 90.87s
+  Tests:    36 failed, 1 skipped, 726 passed (16399 assertions)
+  Duration: 61.05s
 

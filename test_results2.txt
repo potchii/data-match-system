@@ -1,0 +1,181 @@
+
+   FAIL  Tests\Feature\MainSystemCrudWorkflowTest
+  ⨯ create record workflow                                       0.75s  
+  ✓ edit record workflow                                         0.05s  
+  ⨯ delete record workflow                                       0.04s  
+  ✓ bulk delete workflow                                         0.05s  
+  ⨯ bulk status update workflow                                  0.05s  
+  ⨯ bulk category update workflow                                0.05s  
+  ⨯ create record with validation error                          0.04s  
+  ⨯ create record with duplicate uid                             0.04s  
+  ⨯ edit record with validation error                            0.04s  
+  ✓ delete nonexistent record                                    0.03s  
+  ⨯ bulk delete with mixed records                               0.04s  
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > create record…    
+  Failed asserting that a row in the table [audit_trail] matches the attributes {
+    "action_type": "create",
+    "model_type": "MainSystem",
+    "model_id": 1
+}.
+
+Found similar results: [
+    {
+        "action_type": "create",
+        "model_type": "App\\Models\\MainSystem",
+        "model_id": 1
+    }
+].
+
+  at tests\Feature\MainSystemCrudWorkflowTest.php:83
+     79▕             'last_name' => 'Doe',
+     80▕         ]);
+     81▕ 
+     82▕         // Assert - Audit trail entry created
+  ➜  83▕         $this->assertDatabaseHas('audit_trail', [
+     84▕             'action_type' => 'create',
+     85▕             'model_type' => 'MainSystem',
+     86▕             'model_id' => $response->json('data.id'),
+     87▕         ]);
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > delete record…    
+  Failed asserting that a row in the table [audit_trail] matches the attributes {
+    "action_type": "delete",
+    "model_type": "MainSystem",
+    "model_id": 1
+}.
+
+Found similar results: [
+    {
+        "action_type": "delete",
+        "model_type": "App\\Models\\MainSystem",
+        "model_id": 1
+    }
+].
+
+  at tests\Feature\MainSystemCrudWorkflowTest.php:168
+    164▕             'id' => $recordId,
+    165▕         ]);
+    166▕ 
+    167▕         // Assert - Audit trail entry created
+  ➜ 168▕         $this->assertDatabaseHas('audit_trail', [
+    169▕             'action_type' => 'delete',
+    170▕             'model_type' => 'MainSystem',
+    171▕             'model_id' => $recordId,
+    172▕         ]);
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > bulk status up…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests\Feature\MainSystemCrudWorkflowTest.php:228
+    224▕             'status' => 'inactive',
+    225▕         ]);
+    226▕ 
+    227▕         // Assert - Bulk update successful
+  ➜ 228▕         $response->assertStatus(200);
+    229▕         $response->assertJsonPath('updated', 3);
+    230▕ 
+    231▕         // Assert - All records updated in database
+    232▕         foreach ($recordIds as $id) {
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > bulk category…    
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests\Feature\MainSystemCrudWorkflowTest.php:267
+    263▕             'category' => 'premium',
+    264▕         ]);
+    265▕ 
+    266▕         // Assert - Bulk update successful
+  ➜ 267▕         $response->assertStatus(200);
+    268▕         $response->assertJsonPath('updated', 4);
+    269▕ 
+    270▕         // Assert - All records updated in database
+    271▕         foreach ($recordIds as $id) {
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > create record…    
+  Failed asserting that Array &0 [
+    0 => 'The first name field is required.',
+] is identical to true.
+
+  at tests\Feature\MainSystemCrudWorkflowTest.php:305
+    301▕         $response = $this->postJson('/api/main-system', $invalidData);
+    302▕ 
+    303▕         // Assert - Validation error returned
+    304▕         $response->assertStatus(422);
+  ➜ 305▕         $response->assertJsonPath('errors.first_name', true);
+    306▕ 
+    307▕         // Assert - Record not persisted
+    308▕         $this->assertDatabaseMissing('main_system', [
+    309▕             'uid' => 'TEST-004',
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > create record…    
+  Failed asserting that Array &0 [
+    0 => 'The uid has already been taken.',
+] is identical to true.
+
+  at tests\Feature\MainSystemCrudWorkflowTest.php:334
+    330▕         $response = $this->postJson('/api/main-system', $duplicateData);
+    331▕ 
+    332▕         // Assert - Unique constraint violation error
+    333▕         $response->assertStatus(422);
+  ➜ 334▕         $response->assertJsonPath('errors.uid', true);
+    335▕     }
+    336▕ 
+    337▕     /**
+    338▕      * Test: Edit record with validation error
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > edit record wi…   
+  Failed asserting that Array &0 [
+    0 => 'The first name field must be a string.',
+] is identical to true.
+
+  at tests\Feature\MainSystemCrudWorkflowTest.php:356
+    352▕         $response = $this->putJson("/api/main-system/{$record->id}", $invalidData);
+    353▕ 
+    354▕         // Assert - Validation error returned
+    355▕         $response->assertStatus(422);
+  ➜ 356▕         $response->assertJsonPath('errors.first_name', true);
+    357▕ 
+    358▕         // Assert - Record not modified
+    359▕         $this->assertDatabaseHas('main_system', [
+    360▕             'id' => $record->id,
+
+  ────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MainSystemCrudWorkflowTest > bulk delete wi…   
+  Expected response status code [200] but received 422.
+Failed asserting that 422 is identical to 200.
+
+The following errors occurred during the last request:
+
+{
+    "success": false,
+    "errors": {
+        "recordIds.3": [
+            "The selected recordIds.3 is invalid."
+        ]
+    }
+}
+
+  at tests\Feature\MainSystemCrudWorkflowTest.php:397
+    393▕             'recordIds' => $recordIds,
+    394▕         ]);
+    395▕ 
+    396▕         // Assert - Partial success
+  ➜ 397▕         $response->assertStatus(200);
+    398▕         $response->assertJsonPath('deleted', 3);
+    399▕         $response->assertJsonPath('failed', 1);
+    400▕ 
+    401▕         // Assert - Valid records deleted
+
+
+  Tests:    8 failed, 3 passed (39 assertions)
+  Duration: 1.44s
+

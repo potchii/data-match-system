@@ -109,6 +109,106 @@
             </div>
         </div>
         @endif
+        
+        @if($columnMapping)
+        <!-- Column Mapping Summary Section -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-primary {{ $isFromUpload ? '' : 'collapsed-card' }}">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-columns"></i> Column Mapping Summary
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-{{ $isFromUpload ? 'minus' : 'plus' }}"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Core Fields Mapped -->
+                            @if(!empty($columnMapping['core_fields_mapped']))
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-database"></i> Core Fields Mapped</h6>
+                                <div class="mb-3">
+                                    @foreach($columnMapping['core_fields_mapped'] as $field)
+                                        <span class="badge badge-success mr-1 mb-1">{{ $field }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+
+                            <!-- Dynamic Fields Captured -->
+                            @if(!empty($columnMapping['dynamic_fields_captured']))
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-cog"></i> Dynamic Fields Captured</h6>
+                                <div class="mb-3">
+                                    @foreach($columnMapping['dynamic_fields_captured'] as $field)
+                                        <span class="badge badge-info mr-1 mb-1">{{ $field }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+
+                            <!-- Skipped Columns -->
+                            @if(!empty($columnMapping['skipped_columns']))
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-ban"></i> Skipped Columns</h6>
+                                <div class="mb-3">
+                                    @foreach($columnMapping['skipped_columns'] as $field)
+                                        <span class="badge badge-secondary mr-1 mb-1">{{ $field }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+
+                        <!-- Column Statistics -->
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-success"><i class="fas fa-check"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Core Fields</span>
+                                        <span class="info-box-number">{{ count($columnMapping['core_fields_mapped'] ?? []) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-info"><i class="fas fa-cog"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Dynamic Fields</span>
+                                        <span class="info-box-number">{{ count($columnMapping['dynamic_fields_captured'] ?? []) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-secondary"><i class="fas fa-ban"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Skipped Columns</span>
+                                        <span class="info-box-number">{{ count($columnMapping['skipped_columns'] ?? []) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-primary"><i class="fas fa-columns"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Total Columns</span>
+                                        <span class="info-box-number">{{ count(session('column_mapping.core_fields_mapped', [])) + count(session('column_mapping.dynamic_fields_captured', [])) + count(session('column_mapping.skipped_columns', [])) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        
         <div class="row">
             <div class="col-12">
                 <div class="card">

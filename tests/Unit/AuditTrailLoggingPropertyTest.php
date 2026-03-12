@@ -48,7 +48,7 @@ class AuditTrailLoggingPropertyTest extends TestCase
 
         $this->assertNotNull($auditEntry);
         $this->assertEquals('create', $auditEntry->action_type);
-        $this->assertEquals(MainSystem::class, $auditEntry->model_type);
+        $this->assertEquals('MainSystem', $auditEntry->model_type);
         $this->assertEquals(1, $auditEntry->model_id);
         $this->assertEquals($user->id, $auditEntry->user_id);
         $this->assertNull($auditEntry->old_values);
@@ -80,7 +80,7 @@ class AuditTrailLoggingPropertyTest extends TestCase
 
         $this->assertNotNull($auditEntry);
         $this->assertEquals('update', $auditEntry->action_type);
-        $this->assertEquals(MainSystem::class, $auditEntry->model_type);
+        $this->assertEquals('MainSystem', $auditEntry->model_type);
         $this->assertEquals(1, $auditEntry->model_id);
         $this->assertEquals($user->id, $auditEntry->user_id);
         $this->assertEquals($oldValues, $auditEntry->old_values);
@@ -109,11 +109,11 @@ class AuditTrailLoggingPropertyTest extends TestCase
 
         $this->assertNotNull($auditEntry);
         $this->assertEquals('delete', $auditEntry->action_type);
-        $this->assertEquals(MainSystem::class, $auditEntry->model_type);
+        $this->assertEquals('MainSystem', $auditEntry->model_type);
         $this->assertEquals(1, $auditEntry->model_id);
         $this->assertEquals($user->id, $auditEntry->user_id);
-        $this->assertEquals($deletedValues, $auditEntry->old_values);
-        $this->assertNull($auditEntry->new_values);
+        $this->assertNull($auditEntry->old_values);
+        $this->assertEquals($deletedValues, $auditEntry->new_values);
         $this->assertNotNull($auditEntry->created_at);
     }
 

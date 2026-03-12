@@ -149,7 +149,8 @@ class MainSystemFinalCheckpointTest extends TestCase
         ]);
 
         $response1->assertStatus(422);
-        $response1->assertJsonPath('errors.first_name', true);
+        $this->assertIsArray($response1->json('errors.first_name'));
+        $this->assertNotEmpty($response1->json('errors.first_name'));
 
         // Test unique constraint validation
         MainSystem::factory()->create(['uid' => 'UNIQUE-001']);
@@ -161,7 +162,8 @@ class MainSystemFinalCheckpointTest extends TestCase
         ]);
 
         $response2->assertStatus(422);
-        $response2->assertJsonPath('errors.uid', true);
+        $this->assertIsArray($response2->json('errors.uid'));
+        $this->assertNotEmpty($response2->json('errors.uid'));
 
         // Test invalid enum validation
         $response3 = $this->postJson('/api/main-system', [
@@ -172,7 +174,8 @@ class MainSystemFinalCheckpointTest extends TestCase
         ]);
 
         $response3->assertStatus(422);
-        $response3->assertJsonPath('errors.gender', true);
+        $this->assertIsArray($response3->json('errors.gender'));
+        $this->assertNotEmpty($response3->json('errors.gender'));
     }
 
     /**
@@ -210,7 +213,7 @@ class MainSystemFinalCheckpointTest extends TestCase
             ->first();
 
         $this->assertNotNull($updateAudit);
-        $changedFields = json_decode($updateAudit->changed_fields, true);
+        $changedFields = $updateAudit->changed_fields;
         $this->assertContains('first_name', $changedFields);
 
         // Delete record
@@ -270,7 +273,8 @@ class MainSystemFinalCheckpointTest extends TestCase
         ]);
 
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.first_name', true);
+        $this->assertIsArray($response->json('errors.first_name'));
+        $this->assertNotEmpty($response->json('errors.first_name'));
 
         // Verify only invalid field has error
         $this->assertNull($response->json('errors.last_name'));

@@ -302,7 +302,7 @@ class MainSystemCrudWorkflowTest extends TestCase
 
         // Assert - Validation error returned
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.first_name', true);
+        $this->assertIsArray($response->json('errors.first_name'));
 
         // Assert - Record not persisted
         $this->assertDatabaseMissing('main_system', [
@@ -331,7 +331,7 @@ class MainSystemCrudWorkflowTest extends TestCase
 
         // Assert - Unique constraint violation error
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.uid', true);
+        $this->assertIsArray($response->json('errors.uid'));
     }
 
     /**
@@ -353,7 +353,7 @@ class MainSystemCrudWorkflowTest extends TestCase
 
         // Assert - Validation error returned
         $response->assertStatus(422);
-        $response->assertJsonPath('errors.first_name', true);
+        $this->assertIsArray($response->json('errors.first_name'));
 
         // Assert - Record not modified
         $this->assertDatabaseHas('main_system', [
