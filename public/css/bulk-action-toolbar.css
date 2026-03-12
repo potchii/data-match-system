@@ -1,0 +1,136 @@
+/* Bulk Action Toolbar Styles */
+
+.bulk-action-toolbar {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.bulk-action-toolbar.visible {
+    display: block;
+}
+
+.bulk-action-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.bulk-action-info {
+    flex: 0 0 auto;
+}
+
+.selection-count {
+    font-size: 0.95rem;
+    color: #495057;
+}
+
+.bulk-action-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.bulk-action-controls .btn {
+    white-space: nowrap;
+}
+
+.bulk-action-controls .btn-group {
+    display: inline-flex;
+}
+
+.bulk-action-controls .dropdown-menu {
+    min-width: 150px;
+}
+
+.progress-indicator {
+    width: 100%;
+    margin-top: 1rem;
+    display: none;
+}
+
+.progress-indicator.visible {
+    display: block;
+}
+
+.progress-indicator .progress {
+    height: 1.5rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.progress-indicator .progress-bar {
+    background-color: #007bff;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.progress-text {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bulk-action-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bulk-action-info {
+        text-align: center;
+    }
+
+    .bulk-action-controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .bulk-action-controls .btn,
+    .bulk-action-controls .btn-group {
+        width: 100%;
+    }
+
+    .bulk-action-controls .dropdown-menu {
+        width: 100%;
+    }
+}
+
+/* Table Row Selection Highlight */
+table.table tbody tr.table-active {
+    background-color: #e7f3ff;
+}
+
+table.table tbody tr.table-active:hover {
+    background-color: #d0e8ff;
+}
+
+/* Checkbox Styling */
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.custom-control-input:focus~.custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-control-input:indeterminate~.custom-control-label::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}

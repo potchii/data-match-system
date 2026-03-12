@@ -33,6 +33,84 @@ class MainSystemController extends Controller
     }
 
     /**
+     * Show form for creating a new record
+     */
+    public function create()
+    {
+        return view('pages.main-system-form', ['record' => null]);
+    }
+
+    /**
+     * Show form for editing a record
+     */
+    public function edit(MainSystem $record)
+    {
+        return view('pages.main-system-form', compact('record'));
+    }
+
+    /**
+     * Store a newly created record
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'regs_no' => 'nullable|string',
+            'first_name' => 'required|string',
+            'middle_name' => 'nullable|string',
+            'last_name' => 'required|string',
+            'suffix' => 'nullable|string',
+            'birthday' => 'nullable|date',
+            'gender' => 'nullable|string',
+            'civil_status' => 'nullable|string',
+            'address' => 'nullable|string',
+            'status' => 'nullable|string',
+            'category' => 'nullable|string',
+            'registration_date' => 'nullable|date',
+        ]);
+
+        $validated['uid'] = $this->generateUid();
+        MainSystem::create($validated);
+
+        return redirect()->route('main-system.index')->with('success', 'Record created successfully');
+    }
+
+    /**
+     * Update a record
+     */
+    public function update(Request $request, MainSystem $record)
+    {
+        $validated = $request->validate([
+            'uid' => 'required|string|unique:main_system,uid,' . $record->id,
+            'regs_no' => 'nullable|string',
+            'first_name' => 'required|string',
+            'middle_name' => 'nullable|string',
+            'last_name' => 'required|string',
+            'suffix' => 'nullable|string',
+            'birthday' => 'nullable|date',
+            'gender' => 'nullable|string',
+            'civil_status' => 'nullable|string',
+            'address' => 'nullable|string',
+            'status' => 'nullable|string',
+            'category' => 'nullable|string',
+            'registration_date' => 'nullable|date',
+        ]);
+
+        $record->update($validated);
+
+        return redirect()->route('main-system.index')->with('success', 'Record updated successfully');
+    }
+
+    /**
+     * Delete a record
+     */
+    public function destroy(MainSystem $record)
+    {
+        $record->delete();
+
+        return redirect()->route('main-system.index')->with('success', 'Record deleted successfully');
+    }
+
+    /**
      * Export all main system records as CSV
      * 
      * @param Request $request
@@ -138,6 +216,18 @@ class MainSystemController extends Controller
         fclose($output);
 
         return $csv;
+    }
+
+    /**
+     * Generate a unique UID for a new record
+     */
+    private function generateUid(): string
+    {
+        do {
+            $uid = 'UID-' . strtoupper(bin2hex(random_bytes(8)));
+        } while (MainSystem::where('uid', $uid)->exists());
+
+        return $uid;
     }
 }
 

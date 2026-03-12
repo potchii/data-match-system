@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Helpers\CoreFieldMappings;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TemplateField extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'template_id',
         'field_name',
